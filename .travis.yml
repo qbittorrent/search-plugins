@@ -1,0 +1,18 @@
+language: python
+
+python:
+  - "3.2"
+  - "nightly"
+
+dist: trusty
+sudo: false
+
+cache: pip
+
+install:
+  - pip install pyflakes
+
+script:
+  - cd "$TRAVIS_BUILD_DIR"
+  - python -m compileall nova3/engines/*.py
+  - pyflakes nova3/engines/*.py

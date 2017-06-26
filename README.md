@@ -1,6 +1,8 @@
 search-plugins
 ===
 
+[![TravisCI Status](https://travis-ci.org/qbittorrent/search-plugins.svg?branch=master)](https://travis-ci.org/qbittorrent/search-plugins)
+
 This repository contains search plugins for the search feature in qBittorrent.
 
 This repository isn't managed by the core team directly. Its purpose is to allow a place where 3rd party contributors can gather and submit their plugins.
