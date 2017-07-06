@@ -1,18 +1,23 @@
 language: python
 
-python:
-  - "3.2"
-  - "nightly"
-
 dist: trusty
 sudo: false
 
 cache: pip
+
+matrix:
+  include:
+    - python: 2.7
+      env: NOVA_DIR=nova
+    - python: 3.2
+      env: NOVA_DIR=nova3
+    - python: nightly
+      env: NOVA_DIR=nova3
 
 install:
   - pip install pyflakes
 
 script:
   - cd "$TRAVIS_BUILD_DIR"
-  - python -m compileall nova3/engines/*.py
-  - pyflakes nova3/engines/*.py
+  - python -m compileall "$NOVA_DIR/engines/"*.py
+  - pyflakes "$NOVA_DIR/engines/"*.py
