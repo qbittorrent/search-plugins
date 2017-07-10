@@ -1,4 +1,4 @@
-#VERSION: 1.01
+#VERSION: 1.02
 #AUTHORS: Charles Worthing
 #CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -33,7 +33,7 @@ from helpers import download_file, retrieve_url
 
 class btdb(object):
     """ Search engine class """
-    url = 'https://btdb.in'
+    url = 'https://btdb.to'
     name = 'BTDB'
 
     def download_torrent(self, info):
@@ -120,16 +120,6 @@ class btdb(object):
             if self.meta_data_grabbing > 0:
                 self.meta_data_array.append(data)
                 self.meta_data_grabbing += 1
-
-        def handle_entityref(self, name):
-            c = unichr(name2codepoint[name])
-
-        def handle_charref(self, name):
-            if name.startswith('x'):
-                c = unichr(int(name[1:], 16))
-            else:
-                c = unichr(int(name))
-
 
     def search(self, what, cat='all'):
         """ Performs search """
