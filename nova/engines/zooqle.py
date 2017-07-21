@@ -1,4 +1,4 @@
-#VERSION: 1.11
+#VERSION: 1.12
 #AUTHORS: Kanishk Singh (https://github.com/ArionMiles/)
 #CONTRIBUTORS: affaff (https://github.com/affaff)
 
@@ -34,7 +34,7 @@ try:
     from urllib2 import urlopen, Request, URLError
 except ImportError:
     from urllib.request import urlopen, Request, URLError
-    
+
 
 def retrieve_url_nodecode(url):
     """ Return the content of the url page as a string """
@@ -67,8 +67,7 @@ class zooqle(object):
                             'games'     : 'Games',
                             'anime'     : 'Anime',
                             'software'  : 'Apps',
-                            'books'     : 'Books',
-                            'others'  : 'Other'}
+                            'books'     : 'Books'}
     def search(self, what, cat="all"):
         """ Performs search """
         page = 1
@@ -88,7 +87,7 @@ class zooqle(object):
                 if( zooqle_dict["size"]=='0'):
                     zooqle_dict["link"] = item.getElementsByTagName('torrent:magnetURI')[0].childNodes[0].data
                 else:
-                    zooqle_dict["link"] = item.getElementsByTagName('enclosure')[0].attributes['url'].value                    
+                    zooqle_dict["link"] = item.getElementsByTagName('enclosure')[0].attributes['url'].value
                 zooqle_dict["desc_link"] = item.getElementsByTagName('link')[0].childNodes[0].data
                 zooqle_dict["leech"] = item.getElementsByTagName('torrent:peers')[0].childNodes[0].data
                 if not zooqle_dict["leech"].isdigit():
