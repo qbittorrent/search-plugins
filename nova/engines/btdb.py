@@ -55,7 +55,7 @@ class btdb(object):
             self.torrent_no_files = 0
             self.torrent_date_added = 0
             self.torrent_popularity = 0
-            self.mangnet_link = ""
+            self.magnet_link = ""
             self.desc_link = ""
             self.torrent_name = ""
 
@@ -83,7 +83,7 @@ class btdb(object):
                             self.desc_link = "".join((self.url, link))
                             self.torrent_name = params["title"]
                         if link.startswith("magnet:"):
-                            self.mangnet_link = link
+                            self.magnet_link = link
 
         def handle_endtag(self, tag): 
             if tag == "script":
@@ -98,7 +98,7 @@ class btdb(object):
                     self.current_item["size"] = self.meta_data_array[0]
                     self.current_item["name"] = self.torrent_name
                     self.current_item["engine_url"] = self.url
-                    self.current_item["link"] = self.mangnet_link
+                    self.current_item["link"] = self.magnet_link
                     self.current_item["desc_link"] = self.desc_link
                     self.current_item["seeds"] = -1
                     self.current_item["leech"] = -1
@@ -109,7 +109,7 @@ class btdb(object):
 
                     self.meta_data_grabbing = 0
                     self.meta_data_array = []
-                    self.mangnet_link = ""
+                    self.magnet_link = ""
                     self.desc_link = ""
                     self.torrent_name = ""
 
