@@ -1,6 +1,7 @@
-#VERSION: 1.23
+#VERSION: 1.24
 #AUTHORS: Douman (custparasite@gmx.se)
 #CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
+#              hannsen (github.com/hannsen)
 
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -30,9 +31,10 @@ from HTMLParser import HTMLParser
 from re import compile as re_compile
 from re import DOTALL
 from itertools import islice
-#qBt
+# qBt
 from novaprinter import prettyPrinter
 from helpers import download_file, retrieve_url
+
 
 class demonoid(object):
     """ Search engine class """
@@ -53,6 +55,7 @@ class demonoid(object):
 
     class MyHtmlParseWithBlackJack(HTMLParser):
         """ Parser class """
+
         def __init__(self, url):
             HTMLParser.__init__(self)
             self.url = url
@@ -72,8 +75,8 @@ class demonoid(object):
                         self.current_item["desc_link"] = "".join((self.url, link))
                         self.current_item["engine_url"] = self.url
                         self.save_data = "name"
-                    elif link.startswith("/files/download"):
-                        self.current_item["link"] = "".join((self.url, link))
+                    elif link.startswith("https://www.hypercache.pw/metadata/"):
+                        self.current_item["link"] = link
 
             elif self.current_item:
                 if tag == "td":
@@ -94,7 +97,6 @@ class demonoid(object):
                                 self.save_data = "leech"
 
                     self.seeds_leech = False
-
 
         def handle_data(self, data):
             """ Parser's data handler """
@@ -119,15 +121,17 @@ class demonoid(object):
 
     def search(self, what, cat='all'):
         """ Performs search """
-        #prepare query
+        # prepare query
         cat = self.supported_categories[cat.lower()]
-        query = "".join((self.url, "/files/?category=", cat, "&subcategory=All&quality=All&seeded=2&external=2&query=", what, "&uid=0&sort=S"))
+        query = "".join((self.url, "/files/?category=", cat, "&subcategory=All&quality=All&seeded=2&external=2&query=",
+                         what, "&to=1&uid=0&sort=S"))
 
         data = retrieve_url(query)
 
         add_res_list = re_compile("/files.*page=[0-9]+")
-        torrent_list = re_compile("start torrent list -->(.*)<!-- end torrent", DOTALL)
+        torrent_list = re_compile("<tr align=\"right\" id=\"topppp\">(.*)<tr align=\"right\" id=\"topppp\">", DOTALL)
         data = torrent_list.search(data).group(0)
+
         list_results = add_res_list.findall(data)
 
         parser = self.MyHtmlParseWithBlackJack(self.url)
@@ -136,7 +140,8 @@ class demonoid(object):
         del data
 
         if list_results:
-            for search_query in islice((add_res_list.search(result).group(0) for result in list_results[1].split(" | ")), 0, 5):
+            for search_query in islice(
+                    (add_res_list.search(result).group(0) for result in list_results[1].split(" | ")), 0, 5):
                 response = retrieve_url(self.url + search_query)
                 parser.feed(torrent_list.search(response).group(0))
                 parser.close()
