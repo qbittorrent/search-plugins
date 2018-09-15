@@ -1,4 +1,4 @@
-btdb: 1.02
+btdb: 1.03
 legittorrents: 2.02
 piratebay: 2.15
 torlock: 2.0
