@@ -5,7 +5,10 @@ Search Plugins
 
 This repository contains search plugins for the search feature in qBittorrent.
 
-Most probably, you want to head over to the [wiki](https://github.com/qbittorrent/search-plugins/wiki).
+Most probably, you want to head over to the [wiki](https://github.com/qbittorrent/search-plugins/wiki):
+* [List of unofficial search plugins](https://github.com/qbittorrent/search-plugins/wiki/Unofficial-search-plugins)
+* [How to write a search plugin](https://github.com/qbittorrent/search-plugins/wiki/How-to-write-a-search-plugin)
+* [How to install search plugins](https://github.com/qbittorrent/search-plugins/wiki/Install-search-plugins)
 
 Everyone is welcome to submit PRs that fix problems or add new plugins.
 
