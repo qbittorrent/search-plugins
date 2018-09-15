@@ -1,4 +1,4 @@
-#VERSION: 1.02
+#VERSION: 1.03
 #AUTHORS: Charles Worthing
 #CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
