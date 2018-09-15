@@ -9,7 +9,7 @@ matrix:
   include:
     - python: 2.7
       env: NOVA_DIR=nova
-    - python: 3.2
+    - python: 3.3
       env: NOVA_DIR=nova3
     - python: nightly
       env: NOVA_DIR=nova3
