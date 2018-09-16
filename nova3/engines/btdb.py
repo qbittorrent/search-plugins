@@ -1,6 +1,6 @@
-#VERSION: 1.03
-#AUTHORS: Charles Worthing
-#CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
+#VERSION: 1.04
+# AUTHORS: Charles Worthing
+# CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -27,9 +27,10 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 from html.parser import HTMLParser
-#qBt
+# qBt
 from novaprinter import prettyPrinter
 from helpers import download_file, retrieve_url
+
 
 class btdb(object):
     """ Search engine class """
@@ -46,9 +47,9 @@ class btdb(object):
             HTMLParser.__init__(self)
             self.results = results
             self.url = url
-            self.current_item = {} # One torrent result
+            self.current_item = {}  # One torrent result
             self.add_query = True
-            self.torrent_info_index = 0 # Count of the meta data encountered
+            self.torrent_info_index = 0  # Count of the meta data encountered
             self.torrent_info_array = []
             self.meta_data_grabbing = 0
             self.meta_data_array = []
@@ -85,15 +86,14 @@ class btdb(object):
                         if link.startswith("magnet:"):
                             self.magnet_link = link
 
-        def handle_endtag(self, tag): 
+        def handle_endtag(self, tag):
             if tag == "script":
                 return
             if tag == "div":
                 if self.meta_data_grabbing > 0:
-                    
-                    self.torrent_no_files = self.meta_data_array[2] # Not used
-                    self.torrent_date_added = self.meta_data_array[4] # Not used
-                    self.torrent_popularity = self.meta_data_array[6] # Not used
+                    self.torrent_no_files = self.meta_data_array[2]  # Not used
+                    self.torrent_date_added = self.meta_data_array[4]  # Not used
+                    self.torrent_popularity = self.meta_data_array[6]  # Not used
 
                     self.current_item["size"] = self.meta_data_array[0]
                     self.current_item["name"] = self.torrent_name

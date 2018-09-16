@@ -1,8 +1,8 @@
-#VERSION: 2.15
-#AUTHORS: Fabien Devaux (fab@gnux.info)
-#CONTRIBUTORS: Christophe Dumez (chris@qbittorrent.org)
-#              Arthur (custparasite@gmx.se)
-#              Diego de las Heras (ngosang@hotmail.es)
+#VERSION: 2.16
+# AUTHORS: Fabien Devaux (fab@gnux.info)
+# CONTRIBUTORS: Christophe Dumez (chris@qbittorrent.org)
+#               Arthur (custparasite@gmx.se)
+#               Diego de las Heras (ngosang@hotmail.es)
 
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -29,15 +29,17 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 from html.parser import HTMLParser
-#qBt
+# qBt
 from novaprinter import prettyPrinter
 from helpers import download_file, retrieve_url
+
 
 class piratebay(object):
     """ Search engine class """
     url = 'https://thepiratebay.org'
     name = 'The Pirate Bay'
-    supported_categories = {'all': '0', 'music': '100', 'movies': '200', 'games': '400', 'software': '300'}
+    supported_categories = {'all': '0', 'music': '100', 'movies': '200',
+                            'games': '400', 'software': '300'}
 
     def download_torrent(self, info):
         """ Downloader """
@@ -51,7 +53,7 @@ class piratebay(object):
             self.url = url
             self.current_item = None
             self.save_item = None
-            self.result_table = False #table with results is found
+            self.result_table = False  # table with results is found
             self.result_tbody = False
             self.add_query = True
             self.result_query = False
@@ -93,12 +95,14 @@ class piratebay(object):
         def handle_starttag(self, tag, attrs):
             """ Parser's start tag handler """
             if self.current_item:
-                dispatcher = getattr(self, "_".join(("handle_start_tag", tag)), self.handle_start_tag_default)
+                dispatcher = getattr(self,
+                                     "_".join(("handle_start_tag", tag)),
+                                     self.handle_start_tag_default)
                 dispatcher(attrs)
 
             elif self.result_tbody:
                 if tag == "tr":
-                    self.current_item = {"engine_url" : self.url}
+                    self.current_item = {"engine_url": self.url}
 
             elif tag == "table":
                 self.result_table = "searchResult" == attrs[0][1]
@@ -141,7 +145,8 @@ class piratebay(object):
                     temp_data = data.split()
                     if "Size" in temp_data:
                         indx = temp_data.index("Size")
-                        self.current_item[self.save_item] = temp_data[indx + 1] + " " + temp_data[indx + 2]
+                        self.current_item[self.save_item] = (temp_data[indx + 1] + " "
+                                                             + temp_data[indx + 2])
 
                 elif self.save_item == "name":
                     # names with special characters like '&' are splitted in several pieces
@@ -153,10 +158,9 @@ class piratebay(object):
                     self.current_item[self.save_item] = data
                     self.save_item = None
 
-
     def search(self, what, cat='all'):
         """ Performs search """
-        #prepare query. 7 is filtering by seeders
+        # prepare query. 7 is filtering by seeders
         cat = cat.lower()
         query = "/".join((self.url, "search", what, "0", "7", self.supported_categories[cat]))
 

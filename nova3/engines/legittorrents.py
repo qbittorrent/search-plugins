@@ -1,6 +1,6 @@
-#VERSION: 2.02
-#AUTHORS: Christophe Dumez (chris@qbittorrent.org)
-#         Douman (custparasite@gmx.se)
+#VERSION: 2.03
+# AUTHORS: Christophe Dumez (chris@qbittorrent.org)
+#          Douman (custparasite@gmx.se)
 
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -26,16 +26,18 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-
 from novaprinter import prettyPrinter
 from helpers import retrieve_url, download_file
 from html.parser import HTMLParser
 from re import compile as re_compile
 
+
 class legittorrents(object):
     url = 'http://www.legittorrents.info'
     name = 'Legit Torrents'
-    supported_categories = {'all': '0', 'movies': '1', 'tv': '13', 'music': '2', 'games': '3', 'anime': '5', 'books': '6'}
+    supported_categories = {'all': '0', 'movies': '1', 'tv': '13',
+                            'music': '2', 'games': '3', 'anime': '5',
+                            'books': '6'}
 
     def download_torrent(self, info):
         print(download_file(info))
@@ -55,13 +57,14 @@ class legittorrents(object):
                 if tag == "a":
                     link = params["href"]
                     if link.startswith("index") and "title" in params:
-                        #description link
+                        # description link
                         self.current_item["name"] = params["title"][14:]
                         self.current_item["desc_link"] = "/".join((self.url, link))
                     elif link.startswith("download"):
                         self.current_item["link"] = "/".join((self.url, link))
                 elif tag == "td":
-                    if "width" in params and params["width"] == "30" and not "leech" in self.current_item:
+                    if ("width" in params
+                            and params["width"] == "30" and "leech" not in self.current_item):
                         self.save_item_key = "leech" if "seeds" in self.current_item else "seeds"
 
             elif tag == "tr":
@@ -84,11 +87,12 @@ class legittorrents(object):
 
     def search(self, what, cat='all'):
         """ Performs search """
-        query = "".join((self.url, "/index.php?page=torrents&search=", what, "&category=", self.supported_categories.get(cat, '0'), "&active=1"))
+        query = "".join((self.url, "/index.php?page=torrents&search=", what, "&category=",
+                         self.supported_categories.get(cat, '0'), "&active=1"))
 
-        get_table = re_compile('(?s)<table\sclass="lista".*>(.*)</table>')
+        get_table = re_compile(r'(?s)<table\sclass="lista".*>(.*)</table>')
         data = get_table.search(retrieve_url(query)).group(0)
-        #extract first ten pages of next results
+        # extract first ten pages of next results
         next_pages = re_compile('(?m)<option value="(.*)">[0-9]+</option>')
         next_pages = ["".join((self.url, page)) for page in next_pages.findall(data)[:10]]
 
