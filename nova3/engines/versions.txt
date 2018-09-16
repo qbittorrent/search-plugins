@@ -1,4 +1,4 @@
-btdb: 1.04
+btdb: 1.05
 eztv: 1.01
 jackett: 2.00
 leetx: 2.00
