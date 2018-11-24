@@ -7,6 +7,7 @@ This repository contains search plugins for the search feature in qBittorrent.
 
 Most probably, you want to head over to the [wiki](https://github.com/qbittorrent/search-plugins/wiki):
 * [List of unofficial search plugins](https://github.com/qbittorrent/search-plugins/wiki/Unofficial-search-plugins)
+* [How to configure Jackett plugin](https://github.com/qbittorrent/search-plugins/wiki/How-to-configure-Jackett-plugin)
 * [How to write a search plugin](https://github.com/qbittorrent/search-plugins/wiki/How-to-write-a-search-plugin)
 * [How to install search plugins](https://github.com/qbittorrent/search-plugins/wiki/Install-search-plugins)
 
