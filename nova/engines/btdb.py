@@ -1,4 +1,4 @@
-#VERSION: 1.04
+#VERSION: 1.05
 # AUTHORS: Charles Worthing
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -26,8 +26,14 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-from HTMLParser import HTMLParser
-# qBt
+try:
+    # python3
+    from html.parser import HTMLParser
+except ImportError:
+    # python2
+    from HTMLParser import HTMLParser
+
+#qBt
 from novaprinter import prettyPrinter
 from helpers import download_file, retrieve_url
 
