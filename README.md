@@ -22,7 +22,7 @@ This repository isn't managed by the core team directly. Its purpose is to allow
 
 **Developer**
 
-If you are planning to write a search plugin and if you have no idea of what site you would like to use, then you could start picking one in the list.
+If you would to write a search plugin but don't have a site in mind to write it for, you could start by picking one from the list. It would make the person who made the request very happy.
 
 **User**
 
