@@ -16,3 +16,24 @@ Everyone is welcome to submit PRs that fix problems or add new plugins.
 This repository isn't managed by the core team directly. Its purpose is to allow a place where 3rd party contributors can gather and submit their plugins.
 
 **Use the plugins and the websites they refer to at your own risk. You are personally responsible for following your country's copyright laws.**
+
+**Wanted search plugins**
+===
+
+**Developer**
+
+If you are planning to write a search plugin and if you have no idea of what site you would like to use, then you could start picking one in the list.
+
+**User**
+
+If you notice that some interesting torrent site is missing, feel free to make a search plugin request by adding the desired site to the list.
+
+
+**Please note:** sites signed with in progress are already being worked on by someone. It is advisable to contact them and offer to help if you really want to work on the same site.
+
+
+|      Site            |  In Progress? |  Dev   |             Notes              |  
+| :-------------------:|:-------------:| :-----:| :----------------------------: |
+|   WorldWide torrents |       NO      |   N/A  |                                |
+|   Cpasbien           |       NO      |   N/A  |    Already done, not working   |
+|   Archive.org        |       NO      |   N/A  |                                |
