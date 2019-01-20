@@ -1,4 +1,4 @@
-#VERSION: 2.16
+#VERSION: 2.17
 # AUTHORS: Fabien Devaux (fab@gnux.info)
 # CONTRIBUTORS: Christophe Dumez (chris@qbittorrent.org)
 #               Arthur (custparasite@gmx.se)
@@ -28,7 +28,13 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-from HTMLParser import HTMLParser
+try:
+    # python3
+    from html.parser import HTMLParser
+except ImportError:
+    # python2
+    from HTMLParser import HTMLParser
+
 # qBt
 from novaprinter import prettyPrinter
 from helpers import download_file, retrieve_url
@@ -36,7 +42,7 @@ from helpers import download_file, retrieve_url
 
 class piratebay(object):
     """ Search engine class """
-    url = 'https://thepiratebay.org'
+    url = 'https://pirateproxy.live'
     name = 'The Pirate Bay'
     supported_categories = {'all': '0', 'music': '100', 'movies': '200',
                             'games': '400', 'software': '300'}
@@ -45,11 +51,11 @@ class piratebay(object):
         """ Downloader """
         print(download_file(info))
 
-    class MyHtmlParseWithBlackJack(HTMLParser):
+    class MyHtmlParser(HTMLParser):
         """ Parser class """
-        def __init__(self, list_searches, url):
+        def __init__(self, results, url):
             HTMLParser.__init__(self)
-            self.list_searches = list_searches
+            self.results = results
             self.url = url
             self.current_item = None
             self.save_item = None
@@ -65,7 +71,7 @@ class piratebay(object):
         def handle_start_tag_a(self, attrs):
             """ Handler for start tag a """
             params = dict(attrs)
-            link = params["href"]
+            link = params["href"].replace(self.url, '')
             if link.startswith("/torrent"):
                 self.current_item["desc_link"] = "".join((self.url, link))
                 self.save_item = "name"
@@ -121,7 +127,9 @@ class piratebay(object):
             """ Parser's end tag handler """
             if self.result_tbody:
                 if tag == "tr":
-                    prettyPrinter(self.current_item)
+                    if 'size' in self.current_item:
+                        prettyPrinter(self.current_item)
+                        self.results.append('a')
                     self.current_item = None
                 elif tag == "font":
                     self.save_item = None
@@ -160,21 +168,19 @@ class piratebay(object):
 
     def search(self, what, cat='all'):
         """ Performs search """
-        # prepare query. 7 is filtering by seeders
         cat = cat.lower()
-        query = "/".join((self.url, "search", what, "0", "7", self.supported_categories[cat]))
-
-        response = retrieve_url(query)
-
-        list_searches = []
-        parser = self.MyHtmlParseWithBlackJack(list_searches, self.url)
-        parser.feed(response)
+        # try to get 10 pages (10 * 30 = 300 results) and stop when we don't found results
+        results_list = []
+        parser = self.MyHtmlParser(results_list, self.url)
+        page = 1
+        while page < 11:
+            # prepare query. 7 is filtering by seeders
+            page_url = "{0}/search/{1}/{2}/7/{3}".format(self.url, what, page,
+                                                         self.supported_categories[cat])
+            html = retrieve_url(page_url)
+            parser.feed(html)
+            if len(results_list) < 1:
+                break
+            del results_list[:]
+            page += 1
         parser.close()
-
-        parser.add_query = False
-        for search_query in list_searches:
-            response = retrieve_url(self.url + search_query)
-            parser.feed(response)
-            parser.close()
-
-        return

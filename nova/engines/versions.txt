@@ -3,7 +3,7 @@ jackett: 2.00
 leetx: 2.00
 legittorrents: 2.03
 limetorrents: 4.00
-piratebay: 2.16
+piratebay: 2.17
 rarbg: 2.00
 torlock: 2.1
 zooqle: 1.13
