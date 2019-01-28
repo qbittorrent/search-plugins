@@ -1,4 +1,4 @@
-#VERSION: 2.17
+#VERSION: 2.18
 # AUTHORS: Fabien Devaux (fab@gnux.info)
 # CONTRIBUTORS: Christophe Dumez (chris@qbittorrent.org)
 #               Arthur (custparasite@gmx.se)
@@ -38,6 +38,10 @@ except ImportError:
 # qBt
 from novaprinter import prettyPrinter
 from helpers import download_file, retrieve_url
+
+# Fix invalid certificate in Windows
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
 
 
 class piratebay(object):
