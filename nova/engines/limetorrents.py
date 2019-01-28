@@ -1,4 +1,4 @@
-#VERSION: 4.00
+#VERSION: 4.01
 # AUTHORS: Lima66
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -13,6 +13,10 @@ except ImportError:
 # qBt
 from novaprinter import prettyPrinter
 from helpers import retrieve_url
+
+# Fix invalid certificate in Windows
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
 
 
 class limetorrents(object):
