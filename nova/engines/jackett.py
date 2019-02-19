@@ -185,7 +185,7 @@ class jackett(object):
             # if the page returns a magnet redirect, used in download_torrent
             if e.code == 302:
                 response = e.url
-        except Exception as e:
+        except Exception:
             pass
         return response
 
