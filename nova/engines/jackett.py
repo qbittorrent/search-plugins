@@ -1,10 +1,11 @@
-#VERSION: 2.00
-# AUTHORS: ukharley
-#          hannsen (github.com/hannsen)
-# CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
+#VERSION: 3.00
+# AUTHORS: Diego de las Heras (ngosang@hotmail.es)
+# CONTRIBUTORS: ukharley
+#               hannsen (github.com/hannsen)
 
 import json
 import os
+import xml.etree.ElementTree
 try:
     # python3
     from urllib.parse import urlencode, unquote
@@ -18,6 +19,7 @@ except ImportError:
 
 # qBt
 from novaprinter import prettyPrinter
+from helpers import download_file
 
 
 ###############################################################################
@@ -56,7 +58,7 @@ load_configuration()
 
 class jackett(object):
     name = 'Jackett'
-    url = CONFIG_DATA['url']
+    url = CONFIG_DATA['url'] if CONFIG_DATA['url'][-1] != '/' else CONFIG_DATA['url'][:-1]
     api_key = CONFIG_DATA['api_key']
     supported_categories = {
         'all': None,
@@ -69,6 +71,16 @@ class jackett(object):
         'tv': ['5000'],
     }
 
+    def download_torrent(self, download_url):
+        # fix for some indexers with magnet link inside .torrent file
+        if download_url.startswith('magnet:?'):
+            print(download_url + " " + download_url)
+        response = self.get_response(download_url)
+        if response is not None and response.startswith('magnet:?'):
+            print(response + " " + download_url)
+        else:
+            print(download_file(download_url))
+
     def search(self, what, cat='all'):
         what = unquote(what)
         category = self.supported_categories[cat.lower()]
@@ -78,56 +90,89 @@ class jackett(object):
             self.handle_error("malformed configuration file", what)
             return
 
-        # user did not change api_key, trying to get from config
+        # check api_key
         if self.api_key == "YOUR_API_KEY_HERE":
-            response = self.get_response(self.url + "/api/v2.0/server/config")
-            if response is None:
-                self.handle_error("connection error", what)
-                return
-            try:
-                self.api_key = json.loads(response)['api_key']
-            except Exception:
-                # if login password is enabled we can't get the token
-                self.handle_error("api key error", what)
-                return
+            self.handle_error("api key error", what)
+            return
 
         # prepare jackett url
         params = [
             ('apikey', self.api_key),
-            ('Query', what)
+            ('q', what)
         ]
         if category is not None:
-            for cat_id in category:
-                params.append(('Category[]', cat_id))
+            params.append(('cat', ','.join(category)))
         params = urlencode(params)
-        jacket_url = self.url + "/api/v2.0/indexers/all/results?%s" % params
+        jacket_url = self.url + "/api/v2.0/indexers/all/results/torznab/api?%s" % params
         response = self.get_response(jacket_url)
         if response is None:
             self.handle_error("connection error", what)
             return
 
         # process search results
-        response_json = json.loads(response)
-        for result in response_json['Results']:
-            res = {
-                'size': '%d B' % result['Size'],
-                'seeds': result['Seeders'],
-                'leech': result['Peers'],
-                'engine_url': self.url,
-                'desc_link': result['Comments']
-            }
+        response_xml = xml.etree.ElementTree.fromstring(response)
+        for result in response_xml.find('channel').findall('item'):
+            res = {}
 
+            title = result.find('title')
+            if title is not None:
+                title = title.text
+            else:
+                continue
+
+            tracker = result.find('jackettindexer')
+            tracker = '' if tracker is None else tracker.text
             if CONFIG_DATA['tracker_first']:
-                res['name'] = '[%s] %s' % (result['Tracker'], result['Title'])
+                res['name'] = '[%s] %s' % (tracker, title)
             else:
-                res['name'] = '%s [%s]' % (result['Title'], result['Tracker'])
+                res['name'] = '%s [%s]' % (title, tracker)
 
-            if result['MagnetUri']:
-                res['link'] = result['MagnetUri']
+            res['link'] = result.find(self.generate_xpath('magneturl'))
+            if res['link'] is not None:
+                res['link'] = res['link'].attrib['value']
             else:
-                res['link'] = result['Link']
+                res['link'] = result.find('link')
+                if res['link'] is not None:
+                    res['link'] = res['link'].text
+                else:
+                    continue
+            # try to fix link due to jackett bug
+            if res['link'].startswith('http://localhost:8081'):
+                res['link'] = res['link'].replace('http://localhost:8081', self.url)
 
-            prettyPrinter(res)
+            res['size'] = result.find('size')
+            res['size'] = -1 if res['size'] is None else (res['size'].text + ' B')
+
+            res['seeds'] = result.find(self.generate_xpath('seeders'))
+            res['seeds'] = -1 if res['seeds'] is None else int(res['seeds'].attrib['value'])
+
+            res['leech'] = result.find(self.generate_xpath('peers'))
+            res['leech'] = -1 if res['leech'] is None else int(res['leech'].attrib['value'])
+
+            if res['seeds'] != -1 and res['leech'] != -1:
+                res['leech'] -= res['seeds']
+
+            res['desc_link'] = result.find('comments')
+            if res['desc_link'] is not None:
+                res['desc_link'] = res['desc_link'].text
+            else:
+                res['desc_link'] = result.find('guid')
+                res['desc_link'] = '' if res['desc_link'] is None else res['desc_link'].text
+
+            # note: engine_url can't be changed, torrent download stops working
+            res['engine_url'] = self.url
+
+            prettyPrinter(self.escape_pipe(res))
+
+    def generate_xpath(self, tag):
+        return './{http://torznab.com/schemas/2015/feed}attr[@name="%s"]' % tag
+
+    # Safety measure until it's fixed in prettyPrinter
+    def escape_pipe(self, dictionary):
+        for key in dictionary.keys():
+            if isinstance(dictionary[key], str):
+                dictionary[key] = dictionary[key].replace('|', '%7C')
+        return dictionary
 
     def get_response(self, query):
         response = None
@@ -136,6 +181,10 @@ class jackett(object):
             # we need the cookie processor to handle redirects
             opener = urllib_request.build_opener(urllib_request.HTTPCookieProcessor(CookieJar()))
             response = opener.open(query).read().decode('utf-8')
+        except urllib_request.HTTPError as e:
+            # if the page returns a magnet redirect, used in download_torrent
+            if e.code == 302:
+                response = e.url
         except Exception:
             pass
         return response
@@ -156,4 +205,4 @@ class jackett(object):
 
 if __name__ == "__main__":
     jackett_se = jackett()
-    jackett_se.search("harry potter", 'movies')
+    jackett_se.search("ubuntu server", 'software')
