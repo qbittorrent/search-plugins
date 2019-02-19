@@ -72,6 +72,7 @@ class jackett(object):
     }
 
     def download_torrent(self, download_url):
+        # fix for some indexers with magnet link inside .torrent file
         if download_url.startswith('magnet:?'):
             print(download_url + " " + download_url)
         response = self.get_response(download_url)
