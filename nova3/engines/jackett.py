@@ -1,4 +1,4 @@
-#VERSION: 3.01
+#VERSION: 3.02
 # AUTHORS: Diego de las Heras (ngosang@hotmail.es)
 # CONTRIBUTORS: ukharley
 #               hannsen (github.com/hannsen)
@@ -136,11 +136,6 @@ class jackett(object):
                     res['link'] = res['link'].text
                 else:
                     continue
-            # try to fix link due to jackett bug
-            if res['link'].startswith('http'):
-                splitter = res['link'].split('/jackett/dl/')
-                if splitter[0] != self.url:
-                    res['link'] = res['link'].replace(splitter[0], self.url)
 
             res['size'] = result.find('size')
             res['size'] = -1 if res['size'] is None else (res['size'].text + ' B')
