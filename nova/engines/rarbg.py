@@ -83,5 +83,7 @@ class rarbg(object):
                    'seeds': result['seeders'],
                    'leech': result['leechers'],
                    'engine_url': self.url,
-                   'desc_link': "%s&%s" % (result['info_page'], urlencode({'app_id': 'qbittorrent'}))}
+                   'desc_link': "%s&%s" %
+                       (result['info_page'], urlencode({'app_id': 'qbittorrent'}))
+                  }
             prettyPrinter(res)
