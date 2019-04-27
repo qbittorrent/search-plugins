@@ -1,4 +1,4 @@
-#VERSION: 2.18
+#VERSION: 2.20
 # AUTHORS: Fabien Devaux (fab@gnux.info)
 # CONTRIBUTORS: Christophe Dumez (chris@qbittorrent.org)
 #               Arthur (custparasite@gmx.se)
@@ -132,6 +132,15 @@ class piratebay(object):
             if self.result_tbody:
                 if tag == "tr":
                     if 'size' in self.current_item:
+                        # clean up size
+                        temp_data = self.current_item['size'].split()
+                        if "Size" in temp_data:
+                            indx = temp_data.index("Size")
+                            self.current_item['size'] = (temp_data[indx + 1] + " "
+                                                         + temp_data[indx + 2])
+                        else:
+                            self.current_item['size'] = -1
+                        # return result
                         prettyPrinter(self.current_item)
                         self.results.append('a')
                     self.current_item = None
@@ -153,18 +162,10 @@ class piratebay(object):
         def handle_data(self, data):
             """ Parser's data handler """
             if self.save_item:
-                if self.save_item == "size":
-                    temp_data = data.split()
-                    if "Size" in temp_data:
-                        indx = temp_data.index("Size")
-                        self.current_item[self.save_item] = (temp_data[indx + 1] + " "
-                                                             + temp_data[indx + 2])
-
-                elif self.save_item == "name":
-                    # names with special characters like '&' are splitted in several pieces
-                    if 'name' not in self.current_item:
-                        self.current_item['name'] = ''
-                    self.current_item['name'] += data
+                if (self.save_item == "size" or self.save_item == "name"):
+                    if self.save_item not in self.current_item:
+                        self.current_item[self.save_item] = ''
+                    self.current_item[self.save_item] += " " + data
 
                 else:
                     self.current_item[self.save_item] = data
