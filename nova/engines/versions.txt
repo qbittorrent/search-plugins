@@ -1,3 +1,4 @@
+btdb: 1.10
 eztv: 1.10
 jackett: 3.02
 leetx: 2.00
