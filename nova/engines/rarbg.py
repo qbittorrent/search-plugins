@@ -1,4 +1,4 @@
-#VERSION: 2.00
+#VERSION: 2.10
 # AUTHORS: b0nk
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -52,9 +52,10 @@ class rarbg(object):
 
     def search(self, what, cat='all'):
         base_url = "https://torrentapi.org/pubapi_v2.php?%s"
+        app_id = "qbittorrent"
 
         # get token
-        params = urlencode({'get_token': 'get_token', 'app_id': 'qbittorrent'})
+        params = urlencode({'get_token': 'get_token', 'app_id': app_id})
         response = retrieve_url(base_url % params)
         j = json.loads(response)
         token = j['token']
@@ -83,5 +84,5 @@ class rarbg(object):
                    'seeds': result['seeders'],
                    'leech': result['leechers'],
                    'engine_url': self.url,
-                   'desc_link': result['info_page']}
+                   'desc_link': result['info_page'] + "&app_id=" + app_id}
             prettyPrinter(res)
