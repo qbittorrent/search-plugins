@@ -4,6 +4,6 @@ leetx: 2.00
 legittorrents: 2.03
 limetorrents: 4.01
 piratebay: 2.18
-rarbg: 2.00
+rarbg: 2.10
 torlock: 2.1
 zooqle: 1.13
