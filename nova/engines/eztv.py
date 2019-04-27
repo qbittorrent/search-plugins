@@ -1,4 +1,4 @@
-#VERSION: 1.01
+#VERSION: 1.10
 # AUTHORS: nindogo
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -16,7 +16,7 @@ from helpers import retrieve_url
 
 class eztv(object):
     name = "EZTV"
-    url = 'https://eztv.ag'
+    url = 'https://eztv.io'
     supported_categories = {'all': 'all', 'tv': 'tv'}
 
     class MyHtmlParser(HTMLParser):
@@ -33,39 +33,36 @@ class eztv(object):
         def handle_starttag(self, tag, attrs):
             params = dict(attrs)
 
-            if (params.get('class') == 'forum_header_border' and params.get('name') == 'hover'):
+            if (params.get('class') == 'forum_header_border'
+                    and params.get('name') == 'hover'):
                 self.in_table_row = True
                 self.current_item = {}
+                self.current_item['seeds'] = -1
                 self.current_item['leech'] = -1
+                self.current_item['size'] = -1
                 self.current_item['engine_url'] = self.url
 
-            if tag == self.A and self.in_table_row and params.get('class') == 'magnet':
+            if (tag == self.A
+                    and self.in_table_row and params.get('class') == 'magnet'):
                 self.current_item['link'] = params.get('href')
 
-            if tag == self.A and self.in_table_row and params.get('class') == 'epinfo':
+            if (tag == self.A
+                    and self.in_table_row and params.get('class') == 'epinfo'):
                 self.current_item['desc_link'] = self.url + params.get('href')
                 self.current_item['name'] = params.get('title').split(' (')[0]
-
-            if (tag == self.TD
-                    and params.get('class') == 'forum_thread_post_end'
-                    and params.get('align') == 'center'):
-                prettyPrinter(self.current_item)
-                self.in_table_row = False
 
         def handle_data(self, data):
             data = data.replace(',', '')
             if (self.in_table_row
-                    and (data.endswith('MB') or data.endswith('GB') or data.endswith('KB'))):
+                    and (data.endswith(' KB') or data.endswith(' MB') or data.endswith(' GB'))):
                 self.current_item['size'] = data
 
-            if self.in_table_row and (data.isalnum() or data == '-'):
-                if data.isalnum():
-                    self.current_item['seeds'] = int(data)
-                else:
-                    self.current_item['seeds'] = 0
+            elif self.in_table_row and data.isnumeric():
+                self.current_item['seeds'] = int(data)
 
         def handle_endtag(self, tag):
             if self.in_table_row and tag == self.TR:
+                prettyPrinter(self.current_item)
                 self.in_table_row = False
 
     def search(self, what, cat='all'):
