@@ -1,4 +1,4 @@
-#VERSION: 1.10
+#VERSION: 1.20
 # AUTHORS: Charles Worthing
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -107,8 +107,8 @@ class btdb(object):
                     self.current_item["engine_url"] = self.url
                     self.current_item["link"] = self.magnet_link
                     self.current_item["desc_link"] = self.desc_link
-                    self.current_item["seeds"] = -1
-                    self.current_item["leech"] = -1
+                    self.current_item["seeds"] = self.meta_data_array[6]
+                    self.current_item["leech"] = self.meta_data_array[8]
 
                     prettyPrinter(self.current_item)
                     self.results.append('a')
