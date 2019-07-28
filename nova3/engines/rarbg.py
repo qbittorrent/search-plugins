@@ -1,4 +1,4 @@
-#VERSION: 2.10
+#VERSION: 2.11
 # AUTHORS: b0nk
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -43,7 +43,7 @@ from helpers import retrieve_url
 class rarbg(object):
     url = 'https://rarbg.to'
     name = 'RARBG'
-    supported_categories = {'all': '1;4;14;15;16;17;21;22;42;18;19;41;27;28;29;30;31;32;40;23;24;25;26;33;34;43;44;45;46;47;48',  # noqa
+    supported_categories = {'all': '1;4;14;15;16;17;21;22;42;18;19;41;27;28;29;30;31;32;40;23;24;25;26;33;34;43;44;45;46;47;48;49;50;51;52',  # noqa
                             'movies': 'movies',
                             'tv': 'tv',
                             'music': '1;23;24;25;26',
