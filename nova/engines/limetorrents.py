@@ -74,6 +74,7 @@ class limetorrents(object):
                     self.current_item["engine_url"] = self.url
                     self.item_name = "name"
                 elif link.endswith(".html"):
+                    link = link.replace(' ', '%20')
                     self.current_item["link"] = self.url + link
                     self.current_item["desc_link"] = self.url + link
 
