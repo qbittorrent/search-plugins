@@ -110,7 +110,7 @@ class jackett(object):
             return
 
         # process search results
-        response_xml = xml.etree.ElementTree.fromstring(response)
+        response_xml = xml.etree.ElementTree.fromstring(response.encode('utf-8'))
         for result in response_xml.find('channel').findall('item'):
             res = {}
 
