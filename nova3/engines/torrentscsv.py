@@ -38,10 +38,13 @@ except ImportError:
 from novaprinter import prettyPrinter
 from helpers import retrieve_url
 
+
 class torrentscsv(object):
     url = 'https://torrents-csv.ml'
     name = 'torrents-csv'
-    supported_categories = {'all': '1;4;14;15;16;17;21;22;42;18;19;41;27;28;29;30;31;32;40;23;24;25;26;33;34;43;44;45;46;47;48;49;50;51;52'}
+    supported_categories = {'all': '1;4;14;15;16;17;21;22;42;18;19;\
+            41;27;28;29;30;31;32;40;23;24;25;26;33;34;43;44;45;46;\
+            47;48;49;50;51;52'}
 
     def search(self, what, cat='all'):
         base_url = "https://torrents-csv.ml/service/search?%s"
@@ -56,7 +59,7 @@ class torrentscsv(object):
 
         # parse results
         for result in j:
-            res = { 'link': downloadLink(result),
+            res = {'link': downloadLink(result),
                     'name': result['name'],
                     'size': str(result['size_bytes']) + " B",
                     'seeds': result['seeders'],
@@ -67,4 +70,25 @@ class torrentscsv(object):
 
 
 def downloadLink(res):
-    return "magnet:?xt=urn:btih:{}&dn={}&tr=udp://tracker.coppersurfer.tk:6969/announce&tr=udp://tracker.open-internet.nl:6969/announce&tr=udp://tracker.leechers-paradise.org:6969/announce&tr=udp://tracker.internetwarriors.net:1337/announce&tr=udp://tracker.opentrackr.org:1337/announce&tr=udp://9.rarbg.to:2710/announce&tr=udp://9.rarbg.me:2710/announce&tr=http://tracker3.itzmx.com:6961/announce&tr=http://tracker1.itzmx.com:8080/announce&tr=udp://exodus.desync.com:6969/announce&tr=udp://explodie.org:6969/announce&tr=udp://ipv4.tracker.harry.lu:80/announce&tr=udp://denis.stalker.upeer.me:6969/announce&tr=udp://tracker.torrent.eu.org:451/announce&tr=udp://tracker.tiny-vps.com:6969/announce&tr=udp://thetracker.org:80/announce&tr=udp://open.demonii.si:1337/announce&tr=udp://tracker4.itzmx.com:2710/announce&tr=udp://tracker.cyberia.is:6969/announce&tr=udp://retracker.netbynet.ru:2710/announce".format(res['infohash'], res['name'])
+    return "magnet:?xt=urn:btih:{}&dn={}\
+            &tr=udp://tracker.coppersurfer.tk:6969/announce\
+            &tr=udp://tracker.open-internet.nl:6969/announce\
+            &tr=udp://tracker.leechers-paradise.org:6969/announce\
+            &tr=udp://tracker.internetwarriors.net:1337/announce\
+            &tr=udp://tracker.opentrackr.org:1337/announce\
+            &tr=udp://9.rarbg.to:2710/announce\
+            &tr=udp://9.rarbg.me:2710/announce\
+            &tr=http://tracker3.itzmx.com:6961/announce\
+            &tr=http://tracker1.itzmx.com:8080/announce\
+            &tr=udp://exodus.desync.com:6969/announce\
+            &tr=udp://explodie.org:6969/announce\
+            &tr=udp://ipv4.tracker.harry.lu:80/announce\
+            &tr=udp://denis.stalker.upeer.me:6969/announce\
+            &tr=udp://tracker.torrent.eu.org:451/announce\
+            &tr=udp://tracker.tiny-vps.com:6969/announce\
+            &tr=udp://thetracker.org:80/announce\
+            &tr=udp://open.demonii.si:1337/announce\
+            &tr=udp://tracker4.itzmx.com:2710/announce\
+            &tr=udp://tracker.cyberia.is:6969/announce\
+            &tr=udp://retracker.netbynet.ru:2710/announce"\
+            .format(res['infohash'], res['name'])
