@@ -60,12 +60,12 @@ class torrentscsv(object):
         # parse results
         for result in j:
             res = {'link': downloadLink(result),
-                    'name': result['name'],
-                    'size': str(result['size_bytes']) + " B",
-                    'seeds': result['seeders'],
-                    'leech': result['leechers'],
-                    'engine_url': self.url,
-                    'desc_link': fetch_url}
+                   'name': result['name'],
+                   'size': str(result['size_bytes']) + " B",
+                   'seeds': result['seeders'],
+                   'leech': result['leechers'],
+                   'engine_url': self.url,
+                   'desc_link': fetch_url}
             prettyPrinter(res)
 
 
