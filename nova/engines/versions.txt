@@ -1,7 +1,7 @@
 btbit: 1.00
 eztv: 1.10
 jackett: 3.02
-leetx: 2.00
+leetx: 2.01
 legittorrents: 2.03
 limetorrents: 4.03
 piratebay: 2.20
