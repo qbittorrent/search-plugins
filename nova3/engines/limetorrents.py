@@ -1,4 +1,4 @@
-#VERSION: 4.01
+#VERSION: 4.02
 # AUTHORS: Lima66
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -6,9 +6,11 @@ import re
 try:
     # python3
     from html.parser import HTMLParser
+    from urllib.parse import quote
 except ImportError:
     # python2
     from HTMLParser import HTMLParser
+    from urllib import quote
 
 # qBt
 from novaprinter import prettyPrinter
@@ -74,8 +76,9 @@ class limetorrents(object):
                     self.current_item["engine_url"] = self.url
                     self.item_name = "name"
                 elif link.endswith(".html"):
-                    self.current_item["link"] = self.url + link
-                    self.current_item["desc_link"] = self.url + link
+                    safe_link = quote(self.url + link, safe='/:')
+                    self.current_item["link"] = safe_link
+                    self.current_item["desc_link"] = safe_link
 
         def handle_data(self, data):
             if self.inside_tr and self.item_name:
