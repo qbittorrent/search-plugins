@@ -1,5 +1,4 @@
 btbit: 1.00
-btdb: 1.20
 eztv: 1.10
 jackett: 3.02
 leetx: 2.00
