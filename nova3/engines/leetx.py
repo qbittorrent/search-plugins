@@ -1,4 +1,4 @@
-#VERSION: 2.00
+#VERSION: 2.01
 #AUTHORS: Vikas Yadav (https://github.com/v1k45 | http://v1k45.com)
 #CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -126,7 +126,9 @@ class leetx(object):
             if self.current_result and tag == self.TR:
                 if 'size' in self.current_result:
                     self.current_result['size'] = self.current_result['size'].replace(',', '')
-                prettyPrinter(self.current_result)
+                # skip malformed names (eg. with @)
+                if 'name' in self.current_result:
+                    prettyPrinter(self.current_result)
                 self.results.append('a')
                 self.current_result = {}
                 self.current_item = None
