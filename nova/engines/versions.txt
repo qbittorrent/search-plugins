@@ -3,7 +3,7 @@ eztv: 1.10
 jackett: 3.02
 leetx: 2.00
 legittorrents: 2.03
-limetorrents: 4.02
+limetorrents: 4.03
 piratebay: 2.20
 rarbg: 2.11
 torlock: 2.1
