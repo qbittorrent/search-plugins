@@ -1,4 +1,4 @@
-#VERSION: 4.02
+#VERSION: 4.03
 # AUTHORS: Lima66
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -76,7 +76,10 @@ class limetorrents(object):
                     self.current_item["engine_url"] = self.url
                     self.item_name = "name"
                 elif link.endswith(".html"):
-                    safe_link = quote(self.url + link, safe='/:')
+                    try:
+                        safe_link = quote(self.url + link, safe='/:')
+                    except KeyError:
+                        safe_link = self.url + link
                     self.current_item["link"] = safe_link
                     self.current_item["desc_link"] = safe_link
 
