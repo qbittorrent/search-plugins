@@ -26,7 +26,6 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 import json
-import time
 try:
     # python3
     from urllib.parse import urlencode, unquote
