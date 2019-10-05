@@ -7,4 +7,5 @@ limetorrents: 4.03
 piratebay: 2.20
 rarbg: 2.11
 torlock: 2.1
+torrentscsv: 1.0
 zooqle: 1.13
