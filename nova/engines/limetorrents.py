@@ -1,4 +1,4 @@
-#VERSION: 4.03
+#VERSION: 4.04
 # AUTHORS: Lima66
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -22,7 +22,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 
 class limetorrents(object):
-    url = "https://www.limetorrents.info"
+    url = "https://limetor.com"
     name = "LimeTorrents"
     supported_categories = {'all': 'all',
                             'anime': 'anime',
@@ -123,7 +123,7 @@ class limetorrents(object):
         parser = self.MyHtmlParser(self.url)
         page = 1
         while True:
-            page_url = "{0}/search/{1}/{2}/seeds/{3}".format(self.url, category, query, page)
+            page_url = "{0}/search/{1}/{2}/seeds/{3}/".format(self.url, category, query, page)
             html = retrieve_url(page_url)
             lunghezza_html = len(html)
             if page > 6 or lunghezza_html <= parser.page_empty:
