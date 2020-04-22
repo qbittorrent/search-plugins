@@ -1,4 +1,4 @@
-#VERSION: 2.11
+#VERSION: 2.12
 # AUTHORS: b0nk
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -43,12 +43,14 @@ from helpers import retrieve_url
 class rarbg(object):
     url = 'https://rarbg.to'
     name = 'RARBG'
-    supported_categories = {'all': '1;4;14;15;16;17;21;22;42;18;19;41;27;28;29;30;31;32;40;23;24;25;26;33;34;43;44;45;46;47;48;49;50;51;52',  # noqa
-                            'movies': 'movies',
-                            'tv': 'tv',
-                            'music': '1;23;24;25;26',
-                            'games': '1;27;28;29;30;31;32;40',
-                            'software': '1;33;34;43'}
+    supported_categories = {
+        'all': '4;14;17;18;23;25;27;28;32;33;40;41;42;44;45;46;47;48;49;50;51;52;53;54',
+        'movies': '14;17;42;44;45;46;47;48;50;51;52;54',
+        'tv': '18;41;49',
+        'music': '23;25',
+        'games': '27;28;32;40;53',
+        'software': '33'
+    }
 
     def search(self, what, cat='all'):
         base_url = "https://torrentapi.org/pubapi_v2.php?%s"
