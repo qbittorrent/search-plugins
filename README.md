@@ -5,6 +5,8 @@ Search Plugins
 
 This repository contains search plugins for the search feature in qBittorrent.
 
+:warning: We are going to remove support for Python2 soon. Please upgrade to Python3 to be prepared and get a better experience.
+
 Most probably, you want to head over to the [wiki](https://github.com/qbittorrent/search-plugins/wiki):
 * [List of unofficial search plugins](https://github.com/qbittorrent/search-plugins/wiki/Unofficial-search-plugins)
 * [Request unofficial search plugin](https://github.com/qbittorrent/search-plugins/wiki/Request-unofficial-search-plugin)
