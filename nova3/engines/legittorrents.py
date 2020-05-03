@@ -1,4 +1,4 @@
-#VERSION: 2.03
+#VERSION: 2.4
 # AUTHORS: Christophe Dumez (chris@qbittorrent.org)
 #          Douman (custparasite@gmx.se)
 

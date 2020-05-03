@@ -1,4 +1,4 @@
-#VERSION: 3.03
+#VERSION: 3.4
 # AUTHORS: Diego de las Heras (ngosang@hotmail.es)
 # CONTRIBUTORS: ukharley
 #               hannsen (github.com/hannsen)

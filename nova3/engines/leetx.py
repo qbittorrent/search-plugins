@@ -1,4 +1,4 @@
-#VERSION: 2.01
+#VERSION: 2.2
 #AUTHORS: Vikas Yadav (https://github.com/v1k45 | http://v1k45.com)
 #CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
