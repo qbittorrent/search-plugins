@@ -3,9 +3,11 @@ Search Plugins
 
 [![TravisCI Status](https://travis-ci.org/qbittorrent/search-plugins.svg?branch=master)](https://travis-ci.org/qbittorrent/search-plugins)
 
-This repository contains search plugins for the search feature in qBittorrent.
+This repository contains search plugins for the search feature in [qBittorrent](https://github.com/qbittorrent/qBittorrent).
 
-:warning: We are going to remove support for Python2 soon. Please upgrade to Python3 to be prepared and get a better experience.
+:warning: We removed support for Python 2. Please, upgrade to Python 3 to continue using the search function.
+
+Jackett search plugin is enabled by default but you have to install an external program to make it work. You can disable the Jackett search plugin or [install Jackett](https://github.com/qbittorrent/search-plugins/wiki/How-to-configure-Jackett-plugin).
 
 Most probably, you want to head over to the [wiki](https://github.com/qbittorrent/search-plugins/wiki):
 * [List of unofficial search plugins](https://github.com/qbittorrent/search-plugins/wiki/Unofficial-search-plugins)
