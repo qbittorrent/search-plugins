@@ -1,24 +1,23 @@
 language: python
 
-dist: trusty
+dist: bionic
 sudo: false
 
 cache: pip
 
 matrix:
   include:
-    - python: 2.7
-      env: NOVA_DIR=nova
-    - python: 3.4
-      env: NOVA_DIR=nova3
+    - python: 3.5
+    - python: 3.6
+    - python: 3.7
+    - python: 3.8
     - python: nightly
-      env: NOVA_DIR=nova3
 
 install:
   - pip install pycodestyle pyflakes
 
 script:
-  - cd "$TRAVIS_BUILD_DIR/$NOVA_DIR/engines"
+  - cd "$TRAVIS_BUILD_DIR/nova3/engines"
   - python -m compileall *.py
   - pyflakes *.py
   # skipping E265, fixing it will break plugin usage on older qbt instances (< v4.1.2)
