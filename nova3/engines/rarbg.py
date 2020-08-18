@@ -1,4 +1,4 @@
-#VERSION: 2.12
+#VERSION: 2.13
 # AUTHORS: b0nk
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -77,6 +77,10 @@ class rarbg(object):
                             'app_id': 'qbittorrent'})
         response = retrieve_url(base_url % params)
         j = json.loads(response)
+
+        # check empty response
+        if 'torrent_results' not in j:
+            return
 
         # parse results
         for result in j['torrent_results']:
