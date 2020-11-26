@@ -1,4 +1,4 @@
-#VERSION: 1.10
+#VERSION: 1.11
 # AUTHORS: nindogo
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -16,7 +16,7 @@ from helpers import retrieve_url
 
 class eztv(object):
     name = "EZTV"
-    url = 'https://eztv.io'
+    url = 'https://eztv.it'
     supported_categories = {'all': 'all', 'tv': 'tv'}
 
     class MyHtmlParser(HTMLParser):
@@ -33,7 +33,7 @@ class eztv(object):
         def handle_starttag(self, tag, attrs):
             params = dict(attrs)
 
-            if (params.get('class') == 'forum_header_border'
+            if (params.get('class') == 'forum_header_border child'
                     and params.get('name') == 'hover'):
                 self.in_table_row = True
                 self.current_item = {}
