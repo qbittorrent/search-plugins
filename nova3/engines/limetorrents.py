@@ -1,18 +1,11 @@
-#VERSION: 4.5
+#VERSION: 4.6
 # AUTHORS: Lima66
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
 import re
-try:
-    # python3
-    from html.parser import HTMLParser
-    from urllib.parse import quote
-except ImportError:
-    # python2
-    from HTMLParser import HTMLParser
-    from urllib import quote
+from html.parser import HTMLParser
+from urllib.parse import quote
 
-# qBt
 from novaprinter import prettyPrinter
 from helpers import retrieve_url
 

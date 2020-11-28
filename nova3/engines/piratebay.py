@@ -1,4 +1,4 @@
-#VERSION: 2.20
+#VERSION: 2.21
 # AUTHORS: Fabien Devaux (fab@gnux.info)
 # CONTRIBUTORS: Christophe Dumez (chris@qbittorrent.org)
 #               Arthur (custparasite@gmx.se)
@@ -28,14 +28,8 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-try:
-    # python3
-    from html.parser import HTMLParser
-except ImportError:
-    # python2
-    from HTMLParser import HTMLParser
+from html.parser import HTMLParser
 
-# qBt
 from novaprinter import prettyPrinter
 from helpers import download_file, retrieve_url
 

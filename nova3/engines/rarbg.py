@@ -1,4 +1,4 @@
-#VERSION: 2.13
+#VERSION: 2.14
 # AUTHORS: b0nk
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -28,14 +28,8 @@
 
 import json
 import time
-try:
-    # python3
-    from urllib.parse import urlencode, unquote
-except ImportError:
-    # python2
-    from urllib import urlencode, unquote
+from urllib.parse import urlencode, unquote
 
-# qBt
 from novaprinter import prettyPrinter
 from helpers import retrieve_url
 

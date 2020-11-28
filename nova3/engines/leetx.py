@@ -1,4 +1,4 @@
-#VERSION: 2.2
+#VERSION: 2.3
 #AUTHORS: Vikas Yadav (https://github.com/v1k45 | http://v1k45.com)
 #CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -27,14 +27,8 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 import re
-try:
-    # python3
-    from html.parser import HTMLParser
-except ImportError:
-    # python2
-    from HTMLParser import HTMLParser
+from html.parser import HTMLParser
 
-# qBt
 from helpers import retrieve_url
 from novaprinter import prettyPrinter
 
