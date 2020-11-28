@@ -3,7 +3,7 @@ jackett: 3.5
 leetx: 2.3
 legittorrents: 2.5
 limetorrents: 4.6
-piratebay: 2.21
+piratebay: 3.0
 rarbg: 2.14
 torlock: 2.2
 torrentscsv: 1.1
