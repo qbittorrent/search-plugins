@@ -1,4 +1,4 @@
-#VERSION: 2.21
+#VERSION: 3.0
 # AUTHORS: Fabien Devaux (fab@gnux.info)
 # CONTRIBUTORS: Christophe Dumez (chris@qbittorrent.org)
 #               Arthur (custparasite@gmx.se)
@@ -28,158 +28,68 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-from html.parser import HTMLParser
+import json
+from urllib.parse import urlencode, unquote
 
 from novaprinter import prettyPrinter
-from helpers import download_file, retrieve_url
-
-# Fix invalid certificate in Windows
-import ssl
-ssl._create_default_https_context = ssl._create_unverified_context
+from helpers import retrieve_url
 
 
 class piratebay(object):
-    """ Search engine class """
-    url = 'https://pirateproxy.live'
+    url = 'https://thepiratebay.org'
     name = 'The Pirate Bay'
-    supported_categories = {'all': '0', 'music': '100', 'movies': '200',
-                            'games': '400', 'software': '300'}
+    supported_categories = {
+        'all': '0',
+        'music': '100',
+        'movies': '200',
+        'games': '400',
+        'software': '300'
+    }
 
-    def download_torrent(self, info):
-        """ Downloader """
-        print(download_file(info))
-
-    class MyHtmlParser(HTMLParser):
-        """ Parser class """
-        def __init__(self, results, url):
-            HTMLParser.__init__(self)
-            self.results = results
-            self.url = url
-            self.current_item = None
-            self.save_item = None
-            self.result_table = False  # table with results is found
-            self.result_tbody = False
-            self.add_query = True
-            self.result_query = False
-
-        def handle_start_tag_default(self, attrs):
-            """ Default handler for start tag dispatcher """
-            pass
-
-        def handle_start_tag_a(self, attrs):
-            """ Handler for start tag a """
-            params = dict(attrs)
-            link = params["href"].replace(self.url, '')
-            if link.startswith("/torrent"):
-                self.current_item["desc_link"] = "".join((self.url, link))
-                self.save_item = "name"
-            elif link.startswith("magnet"):
-                self.current_item["link"] = link
-                # end of the 'name' item
-                self.current_item['name'] = self.current_item['name'].strip()
-                self.save_item = None
-
-        def handle_start_tag_font(self, attrs):
-            """ Handler for start tag font """
-            for attr in attrs:
-                if attr[1] == "detDesc":
-                    self.save_item = "size"
-                    break
-
-        def handle_start_tag_td(self, attrs):
-            """ Handler for start tag td """
-            for attr in attrs:
-                if attr[1] == "right":
-                    if "seeds" in self.current_item.keys():
-                        self.save_item = "leech"
-                    else:
-                        self.save_item = "seeds"
-                    break
-
-        def handle_starttag(self, tag, attrs):
-            """ Parser's start tag handler """
-            if self.current_item:
-                dispatcher = getattr(self,
-                                     "_".join(("handle_start_tag", tag)),
-                                     self.handle_start_tag_default)
-                dispatcher(attrs)
-
-            elif self.result_tbody:
-                if tag == "tr":
-                    self.current_item = {"engine_url": self.url}
-
-            elif tag == "table":
-                self.result_table = "searchResult" == attrs[0][1]
-
-            elif self.add_query:
-                if self.result_query and tag == "a":
-                    if len(self.list_searches) < 10:
-                        self.list_searches.append(attrs[0][1])
-                    else:
-                        self.add_query = False
-                        self.result_query = False
-                elif tag == "div":
-                    self.result_query = "center" == attrs[0][1]
-
-        def handle_endtag(self, tag):
-            """ Parser's end tag handler """
-            if self.result_tbody:
-                if tag == "tr":
-                    if 'size' in self.current_item:
-                        # clean up size
-                        temp_data = self.current_item['size'].split()
-                        if "Size" in temp_data:
-                            indx = temp_data.index("Size")
-                            self.current_item['size'] = (temp_data[indx + 1] + " "
-                                                         + temp_data[indx + 2])
-                        else:
-                            self.current_item['size'] = -1
-                        # return result
-                        prettyPrinter(self.current_item)
-                        self.results.append('a')
-                    self.current_item = None
-                elif tag == "font":
-                    self.save_item = None
-                elif tag == "table":
-                    self.result_table = self.result_tbody = False
-
-            elif self.result_table:
-                if tag == "thead":
-                    self.result_tbody = True
-                elif tag == "table":
-                    self.result_table = self.result_tbody = False
-
-            elif self.add_query and self.result_query:
-                if tag == "div":
-                    self.add_query = self.result_query = False
-
-        def handle_data(self, data):
-            """ Parser's data handler """
-            if self.save_item:
-                if (self.save_item == "size" or self.save_item == "name"):
-                    if self.save_item not in self.current_item:
-                        self.current_item[self.save_item] = ''
-                    self.current_item[self.save_item] += " " + data
-
-                else:
-                    self.current_item[self.save_item] = data
-                    self.save_item = None
+    # initialize trackers for magnet links
+    trackers_list = [
+        'udp://tracker.coppersurfer.tk:6969/announce',
+        'udp://tracker.leechers-paradise.org:6969/announce',
+        'udp://tracker.opentrackr.org:1337/announce',
+        'udp://tracker.openbittorrent.com:80/announce',
+        'udp://exodus.desync.com:6969/announce',
+        'udp://9.rarbg.me:2710/announce',
+        'udp://9.rarbg.to:2710/announce',
+        'udp://tracker.tiny-vps.com:6969/announce',
+        'udp://retracker.lanta-net.ru:2710/announce',
+        'udp://open.demonii.si:1337/announce'
+    ]
+    trackers = '&'.join(urlencode({'tr': tracker}) for tracker in trackers_list)
 
     def search(self, what, cat='all'):
-        """ Performs search """
-        cat = cat.lower()
-        # try to get 10 pages (10 * 30 = 300 results) and stop when we don't found results
-        results_list = []
-        parser = self.MyHtmlParser(results_list, self.url)
-        page = 1
-        while page < 11:
-            # prepare query. 7 is filtering by seeders
-            page_url = "{0}/search/{1}/{2}/7/{3}".format(self.url, what, page,
-                                                         self.supported_categories[cat])
-            html = retrieve_url(page_url)
-            parser.feed(html)
-            if len(results_list) < 1:
-                break
-            del results_list[:]
-            page += 1
-        parser.close()
+        base_url = "https://apibay.org/q.php?%s"
+
+        # get response json
+        what = unquote(what)
+        category = self.supported_categories[cat]
+        params = {'q': what}
+        if category != '0':
+            params['cat'] = category
+        response = retrieve_url(base_url % urlencode(params))
+        response_json = json.loads(response)
+
+        # check empty response
+        if len(response_json) == 0:
+            return
+
+        # parse results
+        for result in response_json:
+            res = {
+                'link': self.download_link(result),
+                'name': result['name'],
+                'size': str(result['size']) + " B",
+                'seeds': result['seeders'],
+                'leech': result['leechers'],
+                'engine_url': self.url,
+                'desc_link': self.url + '/description.php?id=' + result['id']
+            }
+            prettyPrinter(res)
+
+    def download_link(self, result):
+        return "magnet:?xt=urn:btih:{}&{}&{}".format(
+            result['info_hash'], urlencode({'dn': result['name']}), self.trackers)
