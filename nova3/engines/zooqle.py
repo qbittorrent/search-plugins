@@ -1,4 +1,4 @@
-#VERSION: 1.13
+#VERSION: 1.14
 # AUTHORS: Kanishk Singh (https://github.com/ArionMiles/)
 # CONTRIBUTORS: affaff (https://github.com/affaff)
 
@@ -24,17 +24,14 @@
 
 
 from xml.dom import minidom
-from novaprinter import prettyPrinter
 from io import StringIO
 import gzip
+from urllib.request import urlopen, Request, URLError
+
+from novaprinter import prettyPrinter
 
 user_agent = 'Mozilla/5.0 (X11; Linux i686; rv:38.0) Gecko/20100101 Firefox/38.0'
 headers = {'User-Agent': user_agent}
-
-try:
-    from urllib2 import urlopen, Request, URLError
-except ImportError:
-    from urllib.request import urlopen, Request, URLError
 
 
 def retrieve_url_nodecode(url):

@@ -1,4 +1,4 @@
-#VERSION: 1.0
+#VERSION: 1.1
 # AUTHORS: Dessalines
 
 # Redistribution and use in source and binary forms, with or without
@@ -26,14 +26,8 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 import json
-try:
-    # python3
-    from urllib.parse import urlencode
-except ImportError:
-    # python2
-    from urllib import urlencode
+from urllib.parse import urlencode
 
-# qBt
 from novaprinter import prettyPrinter
 from helpers import retrieve_url
 

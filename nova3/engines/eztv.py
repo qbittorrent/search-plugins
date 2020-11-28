@@ -1,15 +1,9 @@
-#VERSION: 1.11
+#VERSION: 1.12
 # AUTHORS: nindogo
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
-try:
-    # python3
-    from html.parser import HTMLParser
-except ImportError:
-    # python2
-    from HTMLParser import HTMLParser
+from html.parser import HTMLParser
 
-# qBt
 from novaprinter import prettyPrinter
 from helpers import retrieve_url
 

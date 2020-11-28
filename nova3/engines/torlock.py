@@ -1,11 +1,12 @@
-#VERSION: 2.1
+#VERSION: 2.2
 # AUTHORS: Douman (custparasite@gmx.se)
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
-from novaprinter import prettyPrinter
-from helpers import retrieve_url, download_file
 from re import compile as re_compile
 from html.parser import HTMLParser
+
+from novaprinter import prettyPrinter
+from helpers import retrieve_url, download_file
 
 
 class torlock(object):

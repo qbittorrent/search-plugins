@@ -1,4 +1,4 @@
-#VERSION: 3.4
+#VERSION: 3.5
 # AUTHORS: Diego de las Heras (ngosang@hotmail.es)
 # CONTRIBUTORS: ukharley
 #               hannsen (github.com/hannsen)
@@ -6,18 +6,10 @@
 import json
 import os
 import xml.etree.ElementTree
-try:
-    # python3
-    from urllib.parse import urlencode, unquote
-    from urllib import request as urllib_request
-    from http.cookiejar import CookieJar
-except ImportError:
-    # python2
-    from urllib import urlencode, unquote
-    import urllib2 as urllib_request
-    from cookielib import CookieJar
+from urllib.parse import urlencode, unquote
+from urllib import request as urllib_request
+from http.cookiejar import CookieJar
 
-# qBt
 from novaprinter import prettyPrinter
 from helpers import download_file
 
