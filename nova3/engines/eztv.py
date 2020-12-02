@@ -1,4 +1,4 @@
-#VERSION: 1.12
+#VERSION: 1.13
 # AUTHORS: nindogo
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -27,7 +27,7 @@ class eztv(object):
         def handle_starttag(self, tag, attrs):
             params = dict(attrs)
 
-            if (params.get('class') == 'forum_header_border child'
+            if (params.get('class') == 'forum_header_border'
                     and params.get('name') == 'hover'):
                 self.in_table_row = True
                 self.current_item = {}
