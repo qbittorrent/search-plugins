@@ -8,3 +8,4 @@ rarbg: 2.14
 torlock: 2.2
 torrentscsv: 1.1
 zooqle: 1.14
+ilcorsaronero: 1.0
