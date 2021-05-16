@@ -4,6 +4,6 @@ legittorrents: 2.5
 limetorrents: 4.6
 piratebay: 3.0
 rarbg: 2.14
-torlock: 2.2
+torlock: 2.21
 torrentscsv: 1.1
 zooqle: 1.14
