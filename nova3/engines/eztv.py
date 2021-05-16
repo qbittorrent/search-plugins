@@ -1,4 +1,4 @@
-#VERSION: 1.13
+#VERSION: 1.14
 # AUTHORS: nindogo
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -10,7 +10,7 @@ from helpers import retrieve_url
 
 class eztv(object):
     name = "EZTV"
-    url = 'https://eztv.it'
+    url = 'https://eztv.re'
     supported_categories = {'all': 'all', 'tv': 'tv'}
 
     class MyHtmlParser(HTMLParser):
