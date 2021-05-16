@@ -1,4 +1,4 @@
-#VERSION: 3.0
+#VERSION: 3.1
 # AUTHORS: Fabien Devaux (fab@gnux.info)
 # CONTRIBUTORS: Christophe Dumez (chris@qbittorrent.org)
 #               Arthur (custparasite@gmx.se)
@@ -48,16 +48,16 @@ class piratebay(object):
 
     # initialize trackers for magnet links
     trackers_list = [
-        'udp://tracker.coppersurfer.tk:6969/announce',
-        'udp://tracker.leechers-paradise.org:6969/announce',
+        'udp://tracker.internetwarriors.net:1337/announce',
         'udp://tracker.opentrackr.org:1337/announce',
-        'udp://tracker.openbittorrent.com:80/announce',
-        'udp://exodus.desync.com:6969/announce',
-        'udp://9.rarbg.me:2710/announce',
-        'udp://9.rarbg.to:2710/announce',
-        'udp://tracker.tiny-vps.com:6969/announce',
+        'udp://p4p.arenabg.ch:1337/announce',
+        'udp://tracker.openbittorrent.com:6969/announce',
+        'udp://www.torrent.eu.org:451/announce',
+        'udp://tracker.torrent.eu.org:451/announce',
         'udp://retracker.lanta-net.ru:2710/announce',
-        'udp://open.demonii.si:1337/announce'
+        'udp://open.stealth.si:80/announce',
+        'udp://exodus.desync.com:6969/announce',
+        'udp://tracker.tiny-vps.com:6969/announce'
     ]
     trackers = '&'.join(urlencode({'tr': tracker}) for tracker in trackers_list)
 
