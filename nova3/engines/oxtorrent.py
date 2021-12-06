@@ -29,7 +29,7 @@
 import re
 import urllib.parse
 
-from helpers import retrieve_url, download_file
+from helpers import retrieve_url
 from novaprinter import prettyPrinter
 
 class oxtorrent(object):
