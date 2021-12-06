@@ -29,24 +29,27 @@
 import re
 import urllib.parse
 
-from helpers import retrieve_url
+from helpers import retrieve_url, download_file
 from novaprinter import prettyPrinter
+
 
 class oxtorrent(object):
     """ Search engine class """
     url = 'https://www.oxtorrent.vc'
     name = 'OxTorrent'
-    supported_categories = {'all': '','music': 'musique','movies': 'films','books': 'ebook','software': 'logiciels','tv': 'series'}
+    supported_categories = {'all': '', 'music': 'musique', 'movies': 'films',
+                            'books': 'ebook', 'software': 'logiciels', 'tv': 'series'}
 
-    # OxTorrent's search divided into results, so we are going to set a limit on how many results to read
+    # OxTorrent's search divided into results, so we are going to set a limit
+    # on how many results to read
     max_pages = 1000
-               
+
     class HTMLParser:
         def __init__(self, url):
             self.url = url
             self.pageResSize = 0
             self.page_empty = 20000
-                        
+
         def feed(self, html):
             self.pageResSize = 0
             torrents = self.__findTorrents(html)
@@ -66,19 +69,21 @@ class oxtorrent(object):
                     'desc_link': torrents[torrent][5]
                 }
                 prettyPrinter(data)
-                                
+
         def __findTorrents(self, html):
             torrents = []
-            trs = re.findall(r'<td .+i> <a href=\".+</a></div></td>\n<td .+\n<td .+\n<td .+</td>\n</tr>', html)
+            trs = re.findall(
+                r'<td .+i> <a href=\".+</a></div></td>\n<td .+\n<td .+\n<td .+</td>\n</tr>', html)
             for tr in trs:
                 # Extract from the A node all the needed information
-                url_titles = re.search(r'<td .+i> <a href=\"(.+)\" title=.+>(.+)</a></div></td>\n<td .+\"left\">([0-9\,\.]+ (TB|GB|MB|KB))</td>\n<td .+\"seeders\">.*([0-9,.]+).*</td>\n<td .+\"leechers\">.*([0-9,.]+).*</td>\n</tr>', tr)
+                url_titles = re.search(
+                    r'<td .+i> <a href=\"(.+)\" title=.+>(.+)</a></div></td>\n<td .+\"left\">'
+                    '([0-9,.]+ (TB|GB|MB|KB))</td>\n<td .+\"seeders\">.*([0-9,.]+).*</td>\n'
+                    '<td .+\"leechers\">.*([0-9,.]+).*</td>\n</tr>', tr)
                 if url_titles:
-#                    info_page = retrieve_url(self.url+url_titles.group(1))
-#                    file_link = re.search(r"window.location.href.*=.*\'(/telecharger/.+)\';", info_page)
-#                    torrent_url = self.url+file_link.group(1)
-#                    torrents.append([torrent_url, url_titles.group(2), url_titles.group(3), url_titles.group(5), url_titles.group(6), self.url+url_titles.group(1)])
-                    torrents.append([self.url+url_titles.group(1), url_titles.group(2), url_titles.group(3), url_titles.group(5), url_titles.group(6), self.url+url_titles.group(1)])
+                    torrents.append(
+                        [self.url + url_titles.group(1), url_titles.group(2), url_titles.group(3),
+                         url_titles.group(5), url_titles.group(6), self.url + url_titles.group(1)])
             return torrents
 
     def download_torrent(self, info):
@@ -106,7 +111,8 @@ class oxtorrent(object):
         and call the prettyPrint(your_dict) function.
 
         `what` is a string with the search tokens, already escaped (e.g. "Ubuntu+Linux")
-        `cat` is the name of a search category in ('all', 'movies', 'tv', 'music', 'games', 'anime', 'software', 'pictures', 'books')
+        `cat` is the name of a search category in ('all', 'movies', 'tv', 'music', 'games',
+        'anime', 'software', 'pictures', 'books')
         """
         #prepare query. 7 is filtering by seeders
         cat = cat.lower()
