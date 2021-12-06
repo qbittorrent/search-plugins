@@ -122,7 +122,6 @@ class oxtorrent(object):
         page = 1
         while True:
             page_url = "{0}/recherche/{1}/{2}".format(self.url, what, page)
-            print(page_url)
             html = retrieve_url(page_url)
             length_html = len(html)
             if page > 500 or length_html <= parser.page_empty:
