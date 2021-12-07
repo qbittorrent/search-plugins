@@ -1,4 +1,4 @@
-#VERSION: 1.1
+#VERSION: 1.2
 #AUTHORS:   Gandalf (github.com/erdoukki)
 #AUTHORS:   CravateRouge (github.com/CravateRouge)
 
@@ -42,13 +42,13 @@ class oxtorrent(object):
 
     # OxTorrent's search divided into results, so we are going to set a limit
     # on how many results to read
-    max_pages = 1000
+    max_pages = 10200
 
     class HTMLParser:
         def __init__(self, url):
             self.url = url
             self.pageResSize = 0
-            self.page_empty = 20000
+            self.page_empty = 10500
 
         def feed(self, html):
             self.pageResSize = 0
