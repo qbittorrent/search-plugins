@@ -15,6 +15,7 @@ Most probably, you want to head over to the [wiki](https://github.com/qbittorren
 * [How to configure Jackett plugin](https://github.com/qbittorrent/search-plugins/wiki/How-to-configure-Jackett-plugin)
 * [How to write a search plugin](https://github.com/qbittorrent/search-plugins/wiki/How-to-write-a-search-plugin)
 * [How to install search plugins](https://github.com/qbittorrent/search-plugins/wiki/Install-search-plugins)
+* [New Torznab search engine](https://github.com/qbittorrent/search-plugins/wiki/New-Torznab-search-engine)
 
 Everyone is welcome to submit PRs that fix problems or add new plugins.
 
