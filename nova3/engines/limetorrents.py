@@ -67,13 +67,14 @@ class limetorrents(object):
                 link = params["href"]
                 if link.startswith("http://itorrents.org/torrent/"):
                     self.current_item["engine_url"] = self.url
+                    self.current_item["link"] = link
                     self.item_name = "name"
                 elif link.endswith(".html"):
                     try:
                         safe_link = quote(self.url + link, safe='/:')
                     except KeyError:
                         safe_link = self.url + link
-                    self.current_item["link"] = safe_link
+                    #self.current_item["link"] = safe_link
                     self.current_item["desc_link"] = safe_link
 
         def handle_data(self, data):
