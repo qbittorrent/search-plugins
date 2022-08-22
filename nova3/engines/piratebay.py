@@ -1,4 +1,4 @@
-#VERSION: 3.1
+#VERSION: 3.2
 # AUTHORS: Fabien Devaux (fab@gnux.info)
 # CONTRIBUTORS: Christophe Dumez (chris@qbittorrent.org)
 #               Arthur (custparasite@gmx.se)
@@ -71,7 +71,8 @@ class piratebay(object):
         if category != '0':
             params['cat'] = category
         response = retrieve_url(base_url % urlencode(params))
-        response_json = json.loads(response)
+        response_json = list(filter(lambda res: res['info_hash'] != '0' * len(res['info_hash']),
+                                    json.loads(response)))
 
         # check empty response
         if len(response_json) == 0:
