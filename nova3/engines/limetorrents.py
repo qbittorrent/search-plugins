@@ -1,4 +1,4 @@
-#VERSION: 4.6
+#VERSION: 4.7
 # AUTHORS: Lima66
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -15,7 +15,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 
 class limetorrents(object):
-    url = "https://limetor.com"
+    url = "https://www.limetorrents.lol"
     name = "LimeTorrents"
     supported_categories = {'all': 'all',
                             'anime': 'anime',
