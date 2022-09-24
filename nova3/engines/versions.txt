@@ -6,4 +6,3 @@ piratebay: 3.1
 rarbg: 2.14
 torlock: 2.22
 torrentscsv: 1.2
-zooqle: 1.14
