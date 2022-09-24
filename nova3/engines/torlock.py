@@ -1,4 +1,4 @@
-#VERSION: 2.21
+#VERSION: 2.22
 # AUTHORS: Douman (custparasite@gmx.se)
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -10,7 +10,7 @@ from helpers import retrieve_url, download_file
 
 
 class torlock(object):
-    url = "https://www.torlock.icu"
+    url = "https://www.torlock2.com"
     name = "TorLock"
     supported_categories = {'all': 'all',
                             'anime': 'anime',
