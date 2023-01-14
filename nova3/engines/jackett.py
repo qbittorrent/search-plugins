@@ -1,7 +1,8 @@
-#VERSION: 3.5
+#VERSION: 3.6
 # AUTHORS: Diego de las Heras (ngosang@hotmail.es)
 # CONTRIBUTORS: ukharley
 #               hannsen (github.com/hannsen)
+#               Alexander Georgievskiy <galeksandrp@gmail.com>
 
 import json
 import os
@@ -9,10 +10,21 @@ import xml.etree.ElementTree
 from urllib.parse import urlencode, unquote
 from urllib import request as urllib_request
 from http.cookiejar import CookieJar
+from multiprocessing.dummy import Pool
+from multiprocessing import cpu_count
+from threading import Lock
 
 from novaprinter import prettyPrinter
 from helpers import download_file
 
+
+THREADED = True
+if THREADED:
+    prettyPrinterThreadLock = Lock()
+try:
+    MAX_THREADS = cpu_count()
+except NotImplementedError:
+    MAX_THREADS = 1
 
 ###############################################################################
 # load configuration from file
@@ -74,9 +86,6 @@ class jackett(object):
             print(download_file(download_url))
 
     def search(self, what, cat='all'):
-        what = unquote(what)
-        category = self.supported_categories[cat.lower()]
-
         # check for malformed configuration
         if 'malformed' in CONFIG_DATA:
             self.handle_error("malformed configuration file", what)
@@ -87,23 +96,66 @@ class jackett(object):
             self.handle_error("api key error", what)
             return
 
+        response = self.jackettAPIGetResponse('all', [
+            ('t', 'indexers'),
+            ('configured', 'true')
+        ])
+        if response is None:
+            self.handle_error("connection error", what)
+            return
+
+        arguments = []
+        for indexer in xml.etree.ElementTree.fromstring(response).findall('indexer'):
+            arguments.append({'what': what,
+                              'jackettIndexerName': indexer.attrib['id'],
+                              'cat': cat})
+
+        if THREADED:
+            with Pool(min(len(arguments), MAX_THREADS)) as pool:
+                pool.map(self.jackettSearch, arguments)
+        else:
+            list(map(self.jackettSearch, arguments))
+
+    def jackettAPIGetResponse(self, jackettIndexerName, params):
+        params.append(('apikey', self.api_key))
+        return self.get_response(self.url
+                                 + "/api/v2.0/indexers/"
+                                 + jackettIndexerName
+                                 + "/results/torznab/api?%s"
+                                 % urlencode(params))
+
+    def prettyPrinterThreadSafe(self, dictionary):
+        if THREADED:
+            with prettyPrinterThreadLock:
+                prettyPrinter(dictionary)
+        else:
+            prettyPrinter(dictionary)
+
+    def jackettSearch(self, arguments):
+        what = arguments['what']
+        jackettIndexerName = arguments['jackettIndexerName']
+        cat = arguments['cat']
+
+        what = unquote(what)
+        category = self.supported_categories[cat.lower()]
+
         # prepare jackett url
         params = [
-            ('apikey', self.api_key),
             ('q', what)
         ]
         if category is not None:
             params.append(('cat', ','.join(category)))
-        params = urlencode(params)
-        jacket_url = self.url + "/api/v2.0/indexers/all/results/torznab/api?%s" % params
-        response = self.get_response(jacket_url)
+        response = self.jackettAPIGetResponse(jackettIndexerName, params)
         if response is None:
             self.handle_error("connection error", what)
             return
 
         # process search results
         response_xml = xml.etree.ElementTree.fromstring(response)
-        for result in response_xml.find('channel').findall('item'):
+        channel = response_xml.find('channel')
+        if channel is None:
+            return
+        for result in channel.findall('item'):
             res = {}
 
             title = result.find('title')
@@ -151,7 +203,7 @@ class jackett(object):
             # note: engine_url can't be changed, torrent download stops working
             res['engine_url'] = self.url
 
-            prettyPrinter(self.escape_pipe(res))
+            self.prettyPrinterThreadSafe(self.escape_pipe(res))
 
     def generate_xpath(self, tag):
         return './{http://torznab.com/schemas/2015/feed}attr[@name="%s"]' % tag
@@ -181,7 +233,7 @@ class jackett(object):
     def handle_error(self, error_msg, what):
         # we need to print the search text to be displayed in qBittorrent when
         # 'Torrent names only' is enabled
-        prettyPrinter({
+        self.prettyPrinterThreadSafe({
             'seeds': -1,
             'size': -1,
             'leech': -1,
