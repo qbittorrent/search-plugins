@@ -1,7 +1,6 @@
 Search Plugins
 ===
-
-[![TravisCI Status](https://travis-ci.org/qbittorrent/search-plugins.svg?branch=master)](https://travis-ci.org/qbittorrent/search-plugins)
+[![GitHub Actions CI Status](https://github.com/qbittorrent/search-plugins/workflows/CI/badge.svg)](https://github.com/qbittorrent/search-plugins/actions)
 
 This repository contains search plugins for the search feature in [qBittorrent](https://github.com/qbittorrent/qBittorrent).
 
