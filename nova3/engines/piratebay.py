@@ -79,7 +79,7 @@ class piratebay(object):
 
         # parse results
         for result in response_json:
-            if result['name'] == 'No results returned':
+            if result['info_hash'] == '0000000000000000000000000000000000000000':
                 continue
             res = {
                 'link': self.download_link(result),
