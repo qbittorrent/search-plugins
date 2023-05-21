@@ -1,4 +1,4 @@
-#VERSION: 3.1
+#VERSION: 3.2
 # AUTHORS: Fabien Devaux (fab@gnux.info)
 # CONTRIBUTORS: Christophe Dumez (chris@qbittorrent.org)
 #               Arthur (custparasite@gmx.se)
@@ -79,6 +79,8 @@ class piratebay(object):
 
         # parse results
         for result in response_json:
+            if result['name'] == 'No results returned':
+                continue
             res = {
                 'link': self.download_link(result),
                 'name': result['name'],
