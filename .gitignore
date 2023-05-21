@@ -1,1 +1,9 @@
+# Editors
+.vscode/
+.idea/
+
+# Python
 *.pyc
+
+# Plugin config
+/nova3/engines/jackett.json
