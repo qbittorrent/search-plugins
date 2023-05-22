@@ -1,20 +1,20 @@
-#VERSION: 4.0
+#VERSION: 4.1
 # AUTHORS: Diego de las Heras (ngosang@hotmail.es)
 # CONTRIBUTORS: ukharley
 #               hannsen (github.com/hannsen)
 #               Alexander Georgievskiy <galeksandrp@gmail.com>
 
+import defusedxml.ElementTree
 import json
 import os
-import xml.etree.ElementTree
-from urllib.parse import urlencode, unquote
-from urllib import request as urllib_request
 from http.cookiejar import CookieJar
 from multiprocessing.dummy import Pool
 from threading import Lock
+from urllib import request as urllib_request
+from urllib.parse import urlencode, unquote
 
-from novaprinter import prettyPrinter
 from helpers import download_file
+from novaprinter import prettyPrinter
 
 
 ###############################################################################
@@ -127,7 +127,7 @@ class jackett(object):
             self.handle_error("connection error getting indexer list", what)
             return
         # process results
-        response_xml = xml.etree.ElementTree.fromstring(response)
+        response_xml = defusedxml.ElementTree.fromstring(response)
         indexers = []
         for indexer in response_xml.findall('indexer'):
             indexers.append(indexer.attrib['id'])
@@ -148,7 +148,7 @@ class jackett(object):
             self.handle_error("connection error for indexer: " + indexer_id, what)
             return
         # process search results
-        response_xml = xml.etree.ElementTree.fromstring(response)
+        response_xml = defusedxml.ElementTree.fromstring(response)
         for result in response_xml.find('channel').findall('item'):
             res = {}
 
