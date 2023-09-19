@@ -1,3 +1,9 @@
+# Version 1.0
+# This script retrieves all available public plugins from the webpage since there is no "download all" option.
+# It accomplishes this by parsing the webpage using BeautifulSoup to locate all .py URLs in the user-content-Plugins_for_Public_Sites table.
+# If a file with the same name already exists, a suffix is added with an increment.
+# Better execute this script in an empty download_directory
+
 import requests
 from bs4 import BeautifulSoup
 import os
@@ -64,6 +70,3 @@ if __name__ == "__main__":
     url = "https://github.com/qbittorrent/search-plugins/wiki/Unofficial-search-plugins"  # Replace with the URL of unofficial Plugins
     download_directory = "plugins"  # Replace with your desired download directory
     scrape_and_download(url, download_directory)
-
-    # If a file with the same name already exists, a suffix is added with an increment.
-    # Please ensure that you execute this script in an empty plugin directory.
