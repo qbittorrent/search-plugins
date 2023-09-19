@@ -1,6 +1,6 @@
 # Version 1.0
 # This script retrieves all available public plugins from the webpage since there is no "download all" option.
-# It accomplishes this by parsing the webpage using BeautifulSoup to locate all .py URLs in the user-content-Plugins_for_Public_Sites table.
+# It accomplishes this by parsing the webpage using beautifulsoup4 to locate all .py URLs in the user-content-Plugins_for_Public_Sites table.
 # If a file with the same name already exists, a suffix is added with an increment.
 # Better execute this script in an empty download_directory
 
