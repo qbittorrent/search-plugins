@@ -4,7 +4,7 @@
 
 from html.parser import HTMLParser
 
-import random
+import secrets
 import http.cookiejar
 import urllib.request
 import urllib.parse
@@ -56,7 +56,7 @@ def random_user_agent():
         '96.0.4664.93',
         '97.0.4692.20',
     )
-    return _USER_AGENT_TPL % random.choice(_CHROME_VERSIONS)
+    return _USER_AGENT_TPL % secrets.choice(_CHROME_VERSIONS)
 
 class eztv(object):
     name = "EZTV"
