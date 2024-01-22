@@ -14,8 +14,12 @@ from novaprinter import prettyPrinter
 policy = http.cookiejar.DefaultCookiePolicy()
 global_cookie_jar = http.cookiejar.CookieJar(policy)
 
+
 def random_user_agent():
-    _USER_AGENT_TPL = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/%s Safari/537.36'
+
+    _USER_AGENT_TPL = '''Mozilla/5.0 (Windows NT 10.0; Win64; x64)\
+                         AppleWebKit/537.36 (KHTML, like Gecko) Chrome/%s \
+                         Safari/537.36'''
     _CHROME_VERSIONS = (
         '90.0.4430.212',
         '90.0.4430.24',
@@ -57,6 +61,7 @@ def random_user_agent():
         '97.0.4692.20',
     )
     return _USER_AGENT_TPL % secrets.choice(_CHROME_VERSIONS)
+
 
 class eztv(object):
     name = "EZTV"
@@ -126,9 +131,9 @@ class eztv(object):
 
         _ = self.retrieve_url(self.url)
 
-        data = {'layout':'def_wlinks'}
+        data = {'layout': 'def_wlinks'}
         data = urllib.parse.urlencode(data).encode('utf-8')
-        
+
         query = self.url + '/search/' + what.replace('%20', '-')
         eztv_html = self.retrieve_url(query, data)
 
