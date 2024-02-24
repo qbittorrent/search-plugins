@@ -1,0 +1,56 @@
+import camelot
+
+def process_table_data(data):
+    """
+    Processes the table data to combine merged cells, handle empty values,
+    and create a well-formatted output.
+
+    Args:
+        data: A list of lists representing the table data.
+
+    Returns:
+        A list of lists containing the combined and formatted data.
+    """
+
+    result = []  # Initialize an empty list to store the output
+    row_index = 0  # Keep track of the current row index
+
+    while row_index < len(data):
+        current_row = data[row_index]
+
+        # Check if the first cell is merged and has multiple lines
+        if len(current_row[0].split('\n')) > 1:
+            # Combine the merged cell content into a single line
+            merged_content = '\n'.join(current_row[0].split('\n')[1:])
+
+            # Check if the next row's first cell is empty
+            if row_index + 1 < len(data) and not data[row_index + 1][0]:
+                # Append the merged content to the current row
+                current_row[0] = merged_content
+                row_index += 1  # Skip the empty row
+            else:
+                # Append the merged content to the next row's first cell
+                data[row_index + 1][0] = merged_content
+                row_index += 1  # Skip the empty row
+        else:
+            # Handle empty values in other columns
+            for i in range(1, len(current_row)):
+                if not current_row[i]:
+                    # If the previous row has a value, use it
+                    if row_index > 0 and data[row_index - 1][i]:
+                        current_row[i] = data[row_index - 1][i]
+                    else:
+                        # Otherwise, use an empty string
+                        current_row[i] = ''
+
+        result.append(current_row)
+        row_index += 1  # Move to the next row
+
+    return result
+
+# Example usage with Camelot:
+tables = camelot.read_pdf("your_file.pdf")  # Replace with your PDF filename
+table_data = tables[0].df.values.tolist()  # Extract data from the first table
+
+processed_data = process_table_data(table_data)
+print(processed_data)
