@@ -1,5 +1,5 @@
-# VERSION: 2.1
-# AUTHORS: nKlido
+# VERSION: 2.2
+# AUTHORS: nKlido, mod by WolfganP
 
 # LICENSING INFORMATION
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,7 +27,7 @@ import math
 
 
 class solidtorrents(object):
-    url = 'https://solidtorrents.net'
+    url = 'https://solidtorrents.to'
     name = 'Solid Torrents'
     supported_categories = {'all': 'all', 'music': 'Audio', 'books': 'eBook'}
 
