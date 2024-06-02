@@ -1,4 +1,4 @@
-#VERSION: 4.0
+#VERSION: 4.1
 # AUTHORS: Diego de las Heras (ngosang@hotmail.es)
 # CONTRIBUTORS: ukharley
 #               hannsen (github.com/hannsen)
@@ -20,10 +20,12 @@ from helpers import download_file
 ###############################################################################
 # load configuration from file
 CONFIG_FILE = 'jackett.json'
+if 'CONFIG_FILE' in os.environ:
+    CONFIG_FILE = os.environ['CONFIG_FILE']
 CONFIG_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), CONFIG_FILE)
 CONFIG_DATA = {
-    'api_key': 'YOUR_API_KEY_HERE',  # jackett api
-    'url': 'http://127.0.0.1:9117',  # jackett url
+    'api_key': 'YOUR_API_KEY_HERE',  # jackett / prowlarr api
+    'url': 'http://127.0.0.1:' + ('9696' if CONFIG_FILE == 'prowlarr.json' else '9117'),  # url
     'tracker_first': False,          # (False/True) add tracker name to beginning of search result
     'thread_count': 20,              # number of threads to use for http requests
 }
@@ -103,7 +105,7 @@ class jackett(object):
             self.handle_error("api key error", what)
             return
 
-        # search in Jackett API
+        # search in Jackett / Prowlarr API
         if self.thread_count > 1:
             args = []
             indexers = self.get_jackett_indexers(what)
@@ -120,13 +122,22 @@ class jackett(object):
             ('t', 'indexers'),
             ('configured', 'true')
         ]
+        if self.name == 'Prowlarr':
+            params = [params[0]]
         params = urlencode(params)
         jacket_url = self.url + "/api/v2.0/indexers/all/results/torznab/api?%s" % params
+        if self.name == 'Prowlarr':
+            jacket_url = self.url + "/api/v1/indexer?%s" % params
         response = self.get_response(jacket_url)
         if response is None:
             self.handle_error("connection error getting indexer list", what)
             return
         # process results
+        if self.name == 'Prowlarr':
+            indexers = []
+            for indexer in json.loads(response):
+                indexers.append(str(indexer['id']))
+            return indexers
         response_xml = xml.etree.ElementTree.fromstring(response)
         indexers = []
         for indexer in response_xml.findall('indexer'):
@@ -134,15 +145,17 @@ class jackett(object):
         return indexers
 
     def search_jackett_indexer(self, what, category, indexer_id):
-        # prepare jackett url
+        # prepare jackett / prowlarr url
         params = [
             ('apikey', self.api_key),
             ('q', what)
         ]
+        if self.name == 'Prowlarr':
+            params.append(('t', 'search'))
         if category is not None:
             params.append(('cat', ','.join(category)))
         params = urlencode(params)
-        jacket_url = self.url + "/api/v2.0/indexers/" + indexer_id + "/results/torznab/api?%s" % params  # noqa
+        jacket_url = self.url + ("/" + indexer_id + "/api?%s" if self.name == 'Prowlarr' else "/api/v2.0/indexers/" + indexer_id + "/results/torznab/api?%s") % params  # noqa
         response = self.get_response(jacket_url)
         if response is None:
             self.handle_error("connection error for indexer: " + indexer_id, what)
@@ -158,7 +171,7 @@ class jackett(object):
             else:
                 continue
 
-            tracker = result.find('jackettindexer')
+            tracker = result.find(self.name.lower() + 'indexer')
             tracker = '' if tracker is None else tracker.text
             if CONFIG_DATA['tracker_first']:
                 res['name'] = '[%s] %s' % (tracker, title)
@@ -227,7 +240,7 @@ class jackett(object):
             'engine_url': self.url,
             'link': self.url,
             'desc_link': 'https://github.com/qbittorrent/search-plugins/wiki/How-to-configure-Jackett-plugin',  # noqa
-            'name': "Jackett: %s! Right-click this row and select 'Open description page' to open help. Configuration file: '%s' Search: '%s'" % (error_msg, CONFIG_PATH, what)  # noqa
+            'name': self.name + ": %s! Right-click this row and select 'Open description page' to open help. Configuration file: '%s' Search: '%s'" % (error_msg, CONFIG_PATH, what)  # noqa
         })
 
     def pretty_printer_thread_safe(self, dictionary):
