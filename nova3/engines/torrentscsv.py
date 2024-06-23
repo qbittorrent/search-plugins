@@ -1,4 +1,4 @@
-#VERSION: 1.2
+#VERSION: 1.3
 # AUTHORS: Dessalines
 
 # Redistribution and use in source and binary forms, with or without
@@ -33,7 +33,7 @@ from helpers import retrieve_url
 
 
 class torrentscsv(object):
-    url = 'https://torrents-csv.ml'
+    url = 'https://torrents-csv.com'
     name = 'torrents-csv'
     supported_categories = {'all': ''}
 
@@ -61,7 +61,7 @@ class torrentscsv(object):
         response_json = json.loads(response)
 
         # parse results
-        for result in response_json:
+        for result in response_json["torrents"]:
             res = {'link': self.download_link(result),
                    'name': result['name'],
                    'size': str(result['size_bytes']) + " B",

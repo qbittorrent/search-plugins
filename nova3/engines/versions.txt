@@ -5,4 +5,4 @@ piratebay: 3.2
 solidtorrents: 2.1
 torlock: 2.22
 torrentproject: 1.2
-torrentscsv: 1.2
+torrentscsv: 1.3
