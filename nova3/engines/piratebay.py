@@ -1,4 +1,4 @@
-#VERSION: 3.2
+#VERSION: 3.3
 # AUTHORS: Fabien Devaux (fab@gnux.info)
 # CONTRIBUTORS: Christophe Dumez (chris@qbittorrent.org)
 #               Arthur (custparasite@gmx.se)
@@ -88,7 +88,8 @@ class piratebay(object):
                 'seeds': result['seeders'],
                 'leech': result['leechers'],
                 'engine_url': self.url,
-                'desc_link': self.url + '/description.php?id=' + result['id']
+                'desc_link': self.url + '/description.php?id=' + result['id'],
+                'pub_date': result['added'],
             }
             prettyPrinter(res)
 
