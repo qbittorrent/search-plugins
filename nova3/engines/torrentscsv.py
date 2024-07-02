@@ -1,4 +1,4 @@
-#VERSION: 1.3
+#VERSION: 1.4
 # AUTHORS: Dessalines
 
 # Redistribution and use in source and binary forms, with or without
@@ -68,7 +68,8 @@ class torrentscsv(object):
                    'seeds': result['seeders'],
                    'leech': result['leechers'],
                    'engine_url': self.url,
-                   'desc_link': desc_url}
+                   'desc_link': desc_url,
+                   'pub_date': result['created_unix']}
             prettyPrinter(res)
 
     def download_link(self, result):
