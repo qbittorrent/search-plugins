@@ -3,6 +3,6 @@ jackett: 4.0
 limetorrents: 4.7
 piratebay: 3.3
 solidtorrents: 2.2
-torlock: 2.22
+torlock: 2.23
 torrentproject: 1.3
 torrentscsv: 1.4
