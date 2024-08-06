@@ -1,9 +1,10 @@
-#VERSION: 2.22
+#VERSION: 2.23
 # AUTHORS: Douman (custparasite@gmx.se)
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
 from re import compile as re_compile
 from html.parser import HTMLParser
+from datetime import datetime, timedelta
 
 from novaprinter import prettyPrinter
 from helpers import retrieve_url, download_file
@@ -34,7 +35,8 @@ class torlock(object):
             self.item_bad = False  # set to True for malicious links
             self.current_item = None  # dict for found item
             self.item_name = None  # key's name in current_item dict
-            self.parser_class = {"ts": "size",
+            self.parser_class = {"td": "pub_date",
+                                 "ts": "size",
                                  "tul": "seeds",
                                  "tdl": "leech"}
 
@@ -76,6 +78,18 @@ class torlock(object):
             elif self.item_found and tag == "tr":
                 self.item_found = False
                 if not self.item_bad:
+                    try:
+                        # Date seems like it can be Today, Yesterday, or M/D/YYYY (Timezone unknown)
+                        if self.current_item["pub_date"] == "Today":
+                            date = datetime.now()
+                        elif self.current_item["pub_date"] == "Yesterday":
+                            date = datetime.now() - timedelta(days=1)
+                        else:
+                            date = datetime.strptime(self.current_item["pub_date"], '%m/%d/%Y')
+                        date = date.replace(hour=0, minute=0, second=0, microsecond=0)
+                        self.current_item["pub_date"] = int(date.timestamp())
+                    except Exception:
+                        self.current_item["pub_date"] = -1
                     prettyPrinter(self.current_item)
                 self.current_item = {}
 
