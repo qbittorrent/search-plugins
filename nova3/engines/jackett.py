@@ -1,4 +1,4 @@
-#VERSION: 4.0
+#VERSION: 4.1
 # AUTHORS: Diego de las Heras (ngosang@hotmail.es)
 # CONTRIBUTORS: ukharley
 #               hannsen (github.com/hannsen)
@@ -12,6 +12,7 @@ from urllib import request as urllib_request
 from http.cookiejar import CookieJar
 from multiprocessing.dummy import Pool
 from threading import Lock
+from datetime import datetime
 
 from novaprinter import prettyPrinter
 from helpers import download_file
@@ -196,6 +197,12 @@ class jackett(object):
 
             # note: engine_url can't be changed, torrent download stops working
             res['engine_url'] = self.url
+
+            try:
+                date = datetime.strptime(result.find('pubDate').text, '%a, %d %b %Y %H:%M:%S %z')
+                res['pub_date'] = int(date.timestamp())
+            except Exception:
+                res['pub_date'] = -1
 
             self.pretty_printer_thread_safe(res)
 
