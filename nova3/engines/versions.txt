@@ -2,7 +2,7 @@ eztv: 1.14
 jackett: 4.0
 limetorrents: 4.7
 piratebay: 3.3
-solidtorrents: 2.1
+solidtorrents: 2.2
 torlock: 2.22
 torrentproject: 1.2
 torrentscsv: 1.4
