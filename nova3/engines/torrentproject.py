@@ -1,4 +1,4 @@
-#VERSION: 1.2
+#VERSION: 1.3
 #AUTHORS: mauricci
 
 from helpers import retrieve_url
@@ -10,7 +10,7 @@ from urllib.parse import unquote
 
 
 class torrentproject(object):
-    url = 'https://torrentproject2.se'
+    url = 'https://torrentproject.cc'
     name = 'TorrentProject'
     supported_categories = {'all': '0'}
 
