@@ -1,4 +1,4 @@
-# VERSION: 2.2
+# VERSION: 2.3
 # AUTHORS: nKlido
 
 # LICENSING INFORMATION
@@ -23,6 +23,7 @@
 from helpers import retrieve_url
 from novaprinter import prettyPrinter
 from html.parser import HTMLParser
+from datetime import datetime
 import math
 
 
@@ -43,6 +44,7 @@ class solidtorrents(object):
             self.parseSeeders = False
             self.parseLeechers = False
             self.parseSize = False
+            self.parseDate = False
             self.column = 0
             self.torrentReady = False
             self.foundSearchStats = False
@@ -59,7 +61,8 @@ class solidtorrents(object):
                 'seeds': '-1',
                 'leech': '-1',
                 'engine_url': self.url,
-                'desc_link': ''
+                'desc_link': '',
+                'pub_date': -1,
             }
 
         def handle_starttag(self, tag, attrs):
@@ -99,6 +102,9 @@ class solidtorrents(object):
             if (self.foundStats and tag == 'font' and self.column == 4):
                 self.parseLeechers = True
 
+            if (self.foundStats and tag == 'div' and self.column == 5):
+                self.parseDate = True
+
             if (self.foundResult and 'dl-magnet' in params.get('class', '') and tag == 'a'):
                 self.torrent_info['link'] = params.get('href')
                 self.foundResult = False
@@ -133,6 +139,18 @@ class solidtorrents(object):
             if (self.parseLeechers):
                 self.torrent_info['leech'] = data
                 self.parseLeechers = False
+
+            if (self.parseDate):
+                try:
+                    # I chose not to use strptime here because it depends on user's locale
+                    months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun',
+                              'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
+                    [month, day, year] = data.replace(',', '').lower().split()
+                    date = datetime(int(year), int(months.index(month) + 1), int(day))
+                    self.torrent_info['pub_date'] = int(date.timestamp())
+                except Exception:
+                    self.torrent_info['pub_date'] = -1
+                self.parseDate = False
                 self.foundStats = False
 
     def request(self, searchTerm, category, page=1):
