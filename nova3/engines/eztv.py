@@ -1,4 +1,4 @@
-#VERSION: 1.14
+#VERSION: 1.15
 # AUTHORS: nindogo
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -10,7 +10,7 @@ from helpers import retrieve_url
 
 class eztv(object):
     name = "EZTV"
-    url = 'https://eztv.re'
+    url = 'https://eztvx.to/'
     supported_categories = {'all': 'all', 'tv': 'tv'}
 
     class MyHtmlParser(HTMLParser):
@@ -61,7 +61,7 @@ class eztv(object):
 
     def search(self, what, cat='all'):
         query = self.url + '/search/' + what.replace('%20', '-')
-        eztv_html = retrieve_url(query)
+        eztv_html = retrieve_url(query, post_data=b"layout=def_wlinks")
 
         eztv_parser = self.MyHtmlParser(self.url)
         eztv_parser.feed(eztv_html)
