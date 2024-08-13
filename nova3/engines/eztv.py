@@ -64,7 +64,7 @@ class eztv(object):
 
     def do_query(self, what):
         url = f"{self.url}/search/{what.replace('%20', '-')}"
-        data =b"layout=def_wlinks"
+        data = b"layout=def_wlinks"
         try:
             return retrieve_url(url, request_data=data)
         except TypeError:
@@ -73,7 +73,7 @@ class eztv(object):
             user_agent = 'Mozilla/5.0 (X11; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0'
             req = urllib.request.Request(url, data, {'User-Agent': user_agent})
             try:
-                response = urllib.request.urlopen(req)
+                response = urllib.request.urlopen(req)  # nosec B310
                 return response.read().decode('utf-8')
             except urllib.error.URLError as errno:
                 print(f"Connection error: {errno.reason}")
