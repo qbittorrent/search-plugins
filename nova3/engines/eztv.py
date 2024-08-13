@@ -2,47 +2,13 @@
 # AUTHORS: nindogo
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
-import io
-import gzip
 import urllib.error
 import urllib.parse
 import urllib.request
 from html.parser import HTMLParser
 
 from novaprinter import prettyPrinter
-from helpers import htmlentitydecode
-
-# Some sites blocks default python User-agent
-headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0'}
-
-# We must implement our own retrieve_url because helpers.py versions prior to 1.49 did not 
-# support POST requests. That version is taken from helpers.py 1.45
-def retrieve_url(url, data=None):
-    """ Return the content of the url page as a string """
-    req = urllib.request.Request(url, data, headers)
-    try:
-        response = urllib.request.urlopen(req)
-    except urllib.error.URLError as errno:
-        print(" ".join(("Connection error:", str(errno.reason))))
-        return ""
-    dat = response.read()
-    # Check if it is gzipped
-    if dat[:2] == b'\x1f\x8b':
-        # Data is gzip encoded, decode it
-        compressedstream = io.BytesIO(dat)
-        gzipper = gzip.GzipFile(fileobj=compressedstream)
-        extracted_data = gzipper.read()
-        dat = extracted_data
-    info = response.info()
-    charset = 'utf-8'
-    try:
-        ignore, charset = info['Content-Type'].split('charset=')
-    except Exception:
-        pass
-    dat = dat.decode(charset, 'replace')
-    dat = htmlentitydecode(dat)
-    # return dat.encode('utf-8', 'replace')
-    return dat
+from helpers import retrieve_url
 
 
 class eztv(object):
@@ -96,9 +62,24 @@ class eztv(object):
                 prettyPrinter(self.current_item)
                 self.in_table_row = False
 
+    def do_query(self, what):
+        url = f"{self.url}/search/{what.replace('%20', '-')}"
+        data =b"layout=def_wlinks"
+        try:
+            return retrieve_url(url, request_data=data)
+        except TypeError:
+            # Older versions of retrieve_url did not support request_data/POST, se we must do the
+            # request ourselves...
+            user_agent = 'Mozilla/5.0 (X11; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0'
+            req = urllib.request.Request(url, data, {'User-Agent': user_agent})
+            try:
+                return urllib.request.urlopen(req).read().decode('utf-8')
+            except urllib.error.URLError as errno:
+                print(f"Connection error: {errno.reason}")
+            return ""
+
     def search(self, what, cat='all'):
-        query = self.url + '/search/' + what.replace('%20', '-')
-        eztv_html = retrieve_url(query, b"layout=def_wlinks")
+        eztv_html = self.do_query(what)
 
         eztv_parser = self.MyHtmlParser(self.url)
         eztv_parser.feed(eztv_html)
