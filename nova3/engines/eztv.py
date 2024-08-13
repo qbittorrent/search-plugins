@@ -70,10 +70,13 @@ class eztv(object):
         except TypeError:
             # Older versions of retrieve_url did not support request_data/POST, se we must do the
             # request ourselves...
+            if not url.startswith("https://"): # Satisfy the linter
+                return ""
             user_agent = 'Mozilla/5.0 (X11; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0'
             req = urllib.request.Request(url, data, {'User-Agent': user_agent})
             try:
-                return urllib.request.urlopen(req).read().decode('utf-8')
+                response = urllib.request.urlopen(req)
+                return response.read().decode('utf-8')
             except urllib.error.URLError as errno:
                 print(f"Connection error: {errno.reason}")
             return ""
