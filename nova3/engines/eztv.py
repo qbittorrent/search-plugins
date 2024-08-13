@@ -1,7 +1,9 @@
-#VERSION: 1.14
+#VERSION: 1.16
 # AUTHORS: nindogo
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
+import re
+from datetime import datetime, timedelta
 from html.parser import HTMLParser
 
 from novaprinter import prettyPrinter
@@ -35,6 +37,7 @@ class eztv(object):
                 self.current_item['leech'] = -1
                 self.current_item['size'] = -1
                 self.current_item['engine_url'] = self.url
+                self.current_item['pub_date'] = -1
 
             if (tag == self.A
                     and self.in_table_row and params.get('class') == 'magnet'):
@@ -53,6 +56,23 @@ class eztv(object):
 
             elif self.in_table_row and data.isnumeric():
                 self.current_item['seeds'] = int(data)
+
+            elif self.in_table_row:  # Check for a relative time
+                if m := re.match(r'(\d+)h\s+(\d+)m', data):
+                    date = datetime.now() - timedelta(hours=int(m.group(1)), minutes=int(m.group(2)))
+                    self.current_item['pub_date'] = int(date.timestamp())
+                elif m := re.match(r'(\d+)d\s+(\d+)h', data):
+                    date = datetime.now() - timedelta(days=int(m.group(1)), hours=int(m.group(2)))
+                    self.current_item['pub_date'] = int(date.timestamp())
+                elif m := re.match(r'(\d+)\s+weeks?', data):
+                    date = datetime.now() - timedelta(weeks=int(m.group(1)))
+                    self.current_item['pub_date'] = int(date.timestamp())
+                elif m := re.match(r'(\d+)\s+mo', data):
+                    date = datetime.now() - timedelta(weeks=int(m.group(1)) * 4)
+                    self.current_item['pub_date'] = int(date.timestamp())
+                elif m := re.match(r'(\d+)\s+years?', data):
+                    date = datetime.now() - timedelta(weeks=int(m.group(1)) * 52)
+                    self.current_item['pub_date'] = int(date.timestamp())
 
         def handle_endtag(self, tag):
             if self.in_table_row and tag == self.TR:
