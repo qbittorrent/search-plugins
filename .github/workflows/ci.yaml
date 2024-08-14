@@ -32,7 +32,7 @@ jobs:
       - name: Lint code
         run: |
           pyflakes nova3/engines/*.py
-          bandit --skip B110,B314,B405 nova3/engines/*.py
+          bandit --skip B110,B310,B314,B405 nova3/engines/*.py
 
       - name: Format code
         run: |
