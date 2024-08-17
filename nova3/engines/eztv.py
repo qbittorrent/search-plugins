@@ -26,6 +26,13 @@ class eztv(object):
             HTMLParser.__init__(self)
             self.url = url
 
+            self.date_parsers = {
+                r"(\d+)h\s+(\d+)m": lambda m: timedelta(hours=int(m[1]), minutes=int(m[2])),
+                r"(\d+)d\s+(\d+)h": lambda m: timedelta(days=int(m[1]), hours=int(m[2])),
+                r"(\d+)\s+weeks?": lambda m: timedelta(weeks=int(m[1])),
+                r"(\d+)\s+mo": lambda m: timedelta(weeks=int(m[1]) * 4),
+                r"(\d+)\s+years?": lambda m: timedelta(weeks=int(m[1]) * 52),
+            }
             self.in_table_row = False
             self.current_item = {}
 
@@ -61,21 +68,11 @@ class eztv(object):
                 self.current_item['seeds'] = int(data)
 
             elif self.in_table_row:  # Check for a relative time
-                if m := re.match(r'(\d+)h\s+(\d+)m', data):
-                    date = datetime.now() - timedelta(hours=int(m[1]), minutes=int(m[2]))
-                    self.current_item['pub_date'] = int(date.timestamp())
-                elif m := re.match(r'(\d+)d\s+(\d+)h', data):
-                    date = datetime.now() - timedelta(days=int(m[1]), hours=int(m[2]))
-                    self.current_item['pub_date'] = int(date.timestamp())
-                elif m := re.match(r'(\d+)\s+weeks?', data):
-                    date = datetime.now() - timedelta(weeks=int(m[1]))
-                    self.current_item['pub_date'] = int(date.timestamp())
-                elif m := re.match(r'(\d+)\s+mo', data):
-                    date = datetime.now() - timedelta(weeks=int(m[1]) * 4)
-                    self.current_item['pub_date'] = int(date.timestamp())
-                elif m := re.match(r'(\d+)\s+years?', data):
-                    date = datetime.now() - timedelta(weeks=int(m[1]) * 52)
-                    self.current_item['pub_date'] = int(date.timestamp())
+                for pattern, delta in self.date_parsers.items():
+                    m = re.match(pattern, data)
+                    if m:
+                        self.current_item["pub_date"] = int((datetime.now() - delta(m)).timestamp())
+                        break
 
         def handle_endtag(self, tag):
             if self.in_table_row and tag == self.TR:
