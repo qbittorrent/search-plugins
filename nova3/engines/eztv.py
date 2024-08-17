@@ -26,12 +26,13 @@ class eztv(object):
             HTMLParser.__init__(self)
             self.url = url
 
+            now = datetime.now()
             self.date_parsers = {
-                r"(\d+)h\s+(\d+)m": lambda m: timedelta(hours=int(m[1]), minutes=int(m[2])),
-                r"(\d+)d\s+(\d+)h": lambda m: timedelta(days=int(m[1]), hours=int(m[2])),
-                r"(\d+)\s+weeks?": lambda m: timedelta(weeks=int(m[1])),
-                r"(\d+)\s+mo": lambda m: timedelta(weeks=int(m[1]) * 4),
-                r"(\d+)\s+years?": lambda m: timedelta(weeks=int(m[1]) * 52),
+                r"(\d+)h\s+(\d+)m": lambda m: now - timedelta(hours=int(m[1]), minutes=int(m[2])),
+                r"(\d+)d\s+(\d+)h": lambda m: now - timedelta(days=int(m[1]), hours=int(m[2])),
+                r"(\d+)\s+weeks?": lambda m: now - timedelta(weeks=int(m[1])),
+                r"(\d+)\s+mo": lambda m: now - timedelta(weeks=int(m[1]) * 4),
+                r"(\d+)\s+years?": lambda m: now - timedelta(weeks=int(m[1]) * 52),
             }
             self.in_table_row = False
             self.current_item = {}
@@ -68,10 +69,10 @@ class eztv(object):
                 self.current_item['seeds'] = int(data)
 
             elif self.in_table_row:  # Check for a relative time
-                for pattern, delta in self.date_parsers.items():
+                for pattern, calc in self.date_parsers.items():
                     m = re.match(pattern, data)
                     if m:
-                        self.current_item["pub_date"] = int((datetime.now() - delta(m)).timestamp())
+                        self.current_item["pub_date"] = int(calc(m).timestamp())
                         break
 
         def handle_endtag(self, tag):
