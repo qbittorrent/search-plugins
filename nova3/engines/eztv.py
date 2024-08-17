@@ -1,7 +1,10 @@
-#VERSION: 1.14
+#VERSION: 1.15
 # AUTHORS: nindogo
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
+import urllib.error
+import urllib.parse
+import urllib.request
 from html.parser import HTMLParser
 
 from novaprinter import prettyPrinter
@@ -10,7 +13,7 @@ from helpers import retrieve_url
 
 class eztv(object):
     name = "EZTV"
-    url = 'https://eztv.re'
+    url = 'https://eztvx.to/'
     supported_categories = {'all': 'all', 'tv': 'tv'}
 
     class MyHtmlParser(HTMLParser):
@@ -59,9 +62,25 @@ class eztv(object):
                 prettyPrinter(self.current_item)
                 self.in_table_row = False
 
+    def do_query(self, what):
+        url = f"{self.url}/search/{what.replace('%20', '-')}"
+        data = b"layout=def_wlinks"
+        try:
+            return retrieve_url(url, request_data=data)
+        except TypeError:
+            # Older versions of retrieve_url did not support request_data/POST, se we must do the
+            # request ourselves...
+            user_agent = 'Mozilla/5.0 (X11; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0'
+            req = urllib.request.Request(url, data, {'User-Agent': user_agent})
+            try:
+                response = urllib.request.urlopen(req)  # nosec B310
+                return response.read().decode('utf-8')
+            except urllib.error.URLError as errno:
+                print(f"Connection error: {errno.reason}")
+            return ""
+
     def search(self, what, cat='all'):
-        query = self.url + '/search/' + what.replace('%20', '-')
-        eztv_html = retrieve_url(query)
+        eztv_html = self.do_query(what)
 
         eztv_parser = self.MyHtmlParser(self.url)
         eztv_parser.feed(eztv_html)
