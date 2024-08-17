@@ -62,19 +62,19 @@ class eztv(object):
 
             elif self.in_table_row:  # Check for a relative time
                 if m := re.match(r'(\d+)h\s+(\d+)m', data):
-                    date = datetime.now() - timedelta(hours=int(m.group(1)), minutes=int(m.group(2)))
+                    date = datetime.now() - timedelta(hours=int(m[1]), minutes=int(m[2]))
                     self.current_item['pub_date'] = int(date.timestamp())
                 elif m := re.match(r'(\d+)d\s+(\d+)h', data):
-                    date = datetime.now() - timedelta(days=int(m.group(1)), hours=int(m.group(2)))
+                    date = datetime.now() - timedelta(days=int(m[1]), hours=int(m[2]))
                     self.current_item['pub_date'] = int(date.timestamp())
                 elif m := re.match(r'(\d+)\s+weeks?', data):
-                    date = datetime.now() - timedelta(weeks=int(m.group(1)))
+                    date = datetime.now() - timedelta(weeks=int(m[1]))
                     self.current_item['pub_date'] = int(date.timestamp())
                 elif m := re.match(r'(\d+)\s+mo', data):
-                    date = datetime.now() - timedelta(weeks=int(m.group(1)) * 4)
+                    date = datetime.now() - timedelta(weeks=int(m[1]) * 4)
                     self.current_item['pub_date'] = int(date.timestamp())
                 elif m := re.match(r'(\d+)\s+years?', data):
-                    date = datetime.now() - timedelta(weeks=int(m.group(1)) * 52)
+                    date = datetime.now() - timedelta(weeks=int(m[1]) * 52)
                     self.current_item['pub_date'] = int(date.timestamp())
 
         def handle_endtag(self, tag):
