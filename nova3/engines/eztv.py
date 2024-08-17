@@ -31,8 +31,8 @@ class eztv(object):
                 r"(\d+)h\s+(\d+)m": lambda m: now - timedelta(hours=int(m[1]), minutes=int(m[2])),
                 r"(\d+)d\s+(\d+)h": lambda m: now - timedelta(days=int(m[1]), hours=int(m[2])),
                 r"(\d+)\s+weeks?": lambda m: now - timedelta(weeks=int(m[1])),
-                r"(\d+)\s+mo": lambda m: now - timedelta(weeks=int(m[1]) * 4),
-                r"(\d+)\s+years?": lambda m: now - timedelta(weeks=int(m[1]) * 52),
+                r"(\d+)\s+mo": lambda m: now - timedelta(days=int(m[1]) * 30),
+                r"(\d+)\s+years?": lambda m: now - timedelta(days=int(m[1]) * 365),
             }
             self.in_table_row = False
             self.current_item = {}
