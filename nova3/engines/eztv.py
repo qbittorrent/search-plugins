@@ -1,10 +1,12 @@
-#VERSION: 1.15
+#VERSION: 1.16
 # AUTHORS: nindogo
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
+import re
 import urllib.error
 import urllib.parse
 import urllib.request
+from datetime import datetime, timedelta
 from html.parser import HTMLParser
 
 from novaprinter import prettyPrinter
@@ -24,6 +26,14 @@ class eztv(object):
             HTMLParser.__init__(self)
             self.url = url
 
+            now = datetime.now()
+            self.date_parsers = {
+                r"(\d+)h\s+(\d+)m": lambda m: now - timedelta(hours=int(m[1]), minutes=int(m[2])),
+                r"(\d+)d\s+(\d+)h": lambda m: now - timedelta(days=int(m[1]), hours=int(m[2])),
+                r"(\d+)\s+weeks?": lambda m: now - timedelta(weeks=int(m[1])),
+                r"(\d+)\s+mo": lambda m: now - timedelta(days=int(m[1]) * 30),
+                r"(\d+)\s+years?": lambda m: now - timedelta(days=int(m[1]) * 365),
+            }
             self.in_table_row = False
             self.current_item = {}
 
@@ -38,6 +48,7 @@ class eztv(object):
                 self.current_item['leech'] = -1
                 self.current_item['size'] = -1
                 self.current_item['engine_url'] = self.url
+                self.current_item['pub_date'] = -1
 
             if (tag == self.A
                     and self.in_table_row and params.get('class') == 'magnet'):
@@ -56,6 +67,13 @@ class eztv(object):
 
             elif self.in_table_row and data.isnumeric():
                 self.current_item['seeds'] = int(data)
+
+            elif self.in_table_row:  # Check for a relative time
+                for pattern, calc in self.date_parsers.items():
+                    m = re.match(pattern, data)
+                    if m:
+                        self.current_item["pub_date"] = int(calc(m).timestamp())
+                        break
 
         def handle_endtag(self, tag):
             if self.in_table_row and tag == self.TR:
