@@ -1,10 +1,11 @@
-#VERSION: 1.3
+#VERSION: 1.4
 #AUTHORS: mauricci
 
 from helpers import retrieve_url
 from novaprinter import prettyPrinter
 import re
 
+from datetime import datetime
 from html.parser import HTMLParser
 from urllib.parse import unquote
 
@@ -23,7 +24,14 @@ class torrentproject(object):
             self.insideDataDiv = False
             self.pageComplete = False
             self.spanCount = -1
-            self.infoMap = {'name': 0, 'torrLink': 0, 'size': 5, 'seeds': 2, 'leech': 3}
+            self.infoMap = {
+                "name": 0,
+                "torrLink": 0,
+                "seeds": 2,
+                "leech": 3,
+                "pub_date": 4,
+                "size": 5,
+            }
             self.fullResData = []
             self.pageRes = []
             self.singleResData = self.get_single_data()
@@ -36,7 +44,8 @@ class torrentproject(object):
                 'size': '-1',
                 'link': '-1',
                 'desc_link': '-1',
-                'engine_url': self.url
+                'engine_url': self.url,
+                'pub_date': '-1',
             }
 
         def handle_starttag(self, tag, attrs):
@@ -69,6 +78,12 @@ class torrentproject(object):
                             if self.singleResData['desc_link'] != '-1' \
                                     or self.singleResData['link'] != '-1':
                                 try:
+                                    date_string = self.singleResData['pub_date']
+                                    date = datetime.strptime(date_string, '%Y-%m-%d %H:%M:%S')
+                                    self.singleResData['pub_date'] = int(date.timestamp())
+                                except Exception:
+                                    pass
+                                try:
                                     prettyPrinter(self.singleResData)
                                 except Exception:
                                     print(self.singleResData)
@@ -100,7 +115,7 @@ class torrentproject(object):
         what = what.replace('%20', '+')
         # analyze first 5 pages of results
         for currPage in range(0, 5):
-            url = self.url + '?t={0}&p={1}'.format(what, currPage)
+            url = self.url + '/browse?t={0}&p={1}'.format(what, currPage)
             html = retrieve_url(url)
             parser.feed(html)
             if len(parser.pageRes) <= 0:
