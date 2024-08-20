@@ -4,5 +4,5 @@ limetorrents: 4.7
 piratebay: 3.3
 solidtorrents: 2.3
 torlock: 2.23
-torrentproject: 1.3
+torrentproject: 1.4
 torrentscsv: 1.4
