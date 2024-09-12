@@ -1,4 +1,4 @@
-#VERSION: 1.4
+#VERSION: 1.5
 #AUTHORS: mauricci
 
 from helpers import retrieve_url
@@ -102,26 +102,18 @@ class torrentproject(object):
                             elif curr_key != 'name':
                                 self.singleResData[curr_key] += data.strip()
 
-        def feed(self, html):
-            HTMLParser.feed(self, html)
-            self.pageComplete = False
-            self.insideResults = False
-            self.insideDataDiv = False
-            self.spanCount = -1
-
     def search(self, what, cat='all'):
         # curr_cat = self.supported_categories[cat]
-        parser = self.MyHTMLParser(self.url)
         what = what.replace('%20', '+')
         # analyze first 5 pages of results
         for currPage in range(0, 5):
             url = self.url + '/browse?t={0}&p={1}'.format(what, currPage)
             html = retrieve_url(url)
+            parser = self.MyHTMLParser(self.url)
             parser.feed(html)
-            if len(parser.pageRes) <= 0:
+            parser.close()
+            if len(parser.pageRes) < 20:
                 break
-            del parser.pageRes[:]
-        parser.close()
 
     def download_torrent(self, info):
         """ Downloader """

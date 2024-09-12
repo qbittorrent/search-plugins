@@ -1,4 +1,4 @@
-# VERSION: 2.3
+# VERSION: 2.4
 # AUTHORS: nKlido
 
 # LICENSING INFORMATION
@@ -24,7 +24,6 @@ from helpers import retrieve_url
 from novaprinter import prettyPrinter
 from html.parser import HTMLParser
 from datetime import datetime
-import math
 
 
 class solidtorrents(object):
@@ -47,8 +46,6 @@ class solidtorrents(object):
             self.parseDate = False
             self.column = 0
             self.torrentReady = False
-            self.foundSearchStats = False
-            self.parseTotalResults = False
             self.totalResults = 0
 
             self.torrent_info = self.empty_torrent_info()
@@ -67,13 +64,6 @@ class solidtorrents(object):
 
         def handle_starttag(self, tag, attrs):
             params = dict(attrs)
-
-            if 'search-stats' in params.get('class', ''):
-                self.foundSearchStats = True
-
-            if (self.foundSearchStats and tag == 'b'):
-                self.parseTotalResults = True
-                self.foundSearchStats = False
 
             if 'search-result' in params.get('class', ''):
                 self.foundResult = True
@@ -115,12 +105,9 @@ class solidtorrents(object):
                 prettyPrinter(self.torrent_info)
                 self.torrentReady = False
                 self.torrent_info = self.empty_torrent_info()
+                self.totalResults += 1
 
         def handle_data(self, data):
-
-            if (self.parseTotalResults):
-                self.totalResults = int(data.strip())
-                self.parseTotalResults = False
 
             if (self.parseTitle):
                 if (bool(data.strip()) and data != '\n'):
@@ -161,12 +148,9 @@ class solidtorrents(object):
     def search(self, what, cat='all'):
         category = self.supported_categories[cat]
 
-        parser = self.TorrentInfoParser(self.url)
-        parser.feed(self.request(what, category, 1))
-
-        totalPages = min(math.ceil(parser.totalResults / 20), 5)
-
-        for page in range(2, totalPages + 1):
+        for page in range(1, 5):
+            parser = self.TorrentInfoParser(self.url)
             parser.feed(self.request(what, category, page))
-
-        parser.close()
+            parser.close()
+            if parser.totalResults < 15:
+                break
