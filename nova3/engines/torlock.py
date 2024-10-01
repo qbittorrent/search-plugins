@@ -1,8 +1,7 @@
-#VERSION: 2.23
+#VERSION: 2.24
 # AUTHORS: Douman (custparasite@gmx.se)
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
-from re import compile as re_compile
 from html.parser import HTMLParser
 from datetime import datetime, timedelta
 
@@ -35,6 +34,7 @@ class torlock(object):
             self.item_bad = False  # set to True for malicious links
             self.current_item = None  # dict for found item
             self.item_name = None  # key's name in current_item dict
+            self.page_items = 0
             self.parser_class = {"td": "pub_date",
                                  "ts": "size",
                                  "tul": "seeds",
@@ -91,26 +91,19 @@ class torlock(object):
                     except Exception:
                         self.current_item["pub_date"] = -1
                     prettyPrinter(self.current_item)
+                    self.page_items += 1
                 self.current_item = {}
 
     def search(self, query, cat='all'):
         """ Performs search """
         query = query.replace("%20", "-")
+        category = self.supported_categories[cat]
 
-        parser = self.MyHtmlParser(self.url)
-        page = "".join((self.url, "/", self.supported_categories[cat],
-                        "/torrents/", query, ".html?sort=seeds&page=1"))
-        html = retrieve_url(page)
-        parser.feed(html)
-
-        counter = 1
-        additional_pages = re_compile(r"/{0}/torrents/{1}.html\?sort=seeds&page=[0-9]+"
-                                      .format(self.supported_categories[cat], query))
-        list_searches = additional_pages.findall(html)[:-1]  # last link is next(i.e. second)
-        for page in map(lambda link: "".join((self.url, link)), list_searches):
-            html = retrieve_url(page)
+        for page in range(1, 5):
+            parser = self.MyHtmlParser(self.url)
+            page_url = f"{self.url}/{category}/torrents/{query}.html?sort=seeds&page={page}"
+            html = retrieve_url(page_url)
             parser.feed(html)
-            counter += 1
-            if counter > 3:
+            parser.close()
+            if parser.page_items < 20:
                 break
-        parser.close()

@@ -1,4 +1,4 @@
-#VERSION: 4.8
+#VERSION: 4.9
 # AUTHORS: Lima66
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -38,7 +38,7 @@ class limetorrents(object):
             HTMLParser.__init__(self)
             self.url = url
             self.current_item = {}  # dict for found item
-            self.page_empty = 22000
+            self.page_items = 0
             self.inside_table = False
             self.inside_tr = False
             self.column_index = -1
@@ -112,6 +112,7 @@ class limetorrents(object):
                 self.column_name = None
                 if "link" in self.current_item:
                     prettyPrinter(self.current_item)
+                    self.page_items += 1
 
     def download_torrent(self, info):
         # since limetorrents provides torrent links in itorrent (cloudflare protected),
@@ -128,14 +129,11 @@ class limetorrents(object):
         query = query.replace("%20", "-")
         category = self.supported_categories[cat]
 
-        parser = self.MyHtmlParser(self.url)
-        page = 1
-        while True:
-            page_url = "{0}/search/{1}/{2}/seeds/{3}/".format(self.url, category, query, page)
+        for page in range(1, 5):
+            page_url = f"{self.url}/search/{category}/{query}/seeds/{page}/"
             html = retrieve_url(page_url)
-            lunghezza_html = len(html)
-            if page > 6 or lunghezza_html <= parser.page_empty:
-                return
+            parser = self.MyHtmlParser(self.url)
             parser.feed(html)
-            page += 1
-        parser.close()
+            parser.close()
+            if parser.page_items < 20:
+                break
