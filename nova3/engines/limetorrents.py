@@ -1,8 +1,9 @@
-#VERSION: 4.8
+#VERSION: 4.9
 # AUTHORS: Lima66
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
 import re
+from datetime import datetime, timedelta
 from html.parser import HTMLParser
 from urllib.parse import quote
 
@@ -37,38 +38,49 @@ class limetorrents(object):
             HTMLParser.__init__(self)
             self.url = url
             self.current_item = {}  # dict for found item
-            self.item_name = None  # key's name in current_item dict
             self.page_items = 0
+            self.inside_table = False
             self.inside_tr = False
-            self.findTable = False
-            self.parser_class = {"tdnormal": "size",  # class
-                                 "tdseed": "seeds",
-                                 "tdleech": "leech"}
+            self.column_index = -1
+            self.column_name = None  # key's name in current_item dict
+            self.columns = ["name", "pub_date", "size", "seeds", "leech"]
+
+            now = datetime.now()
+            self.date_parsers = {
+                r"yesterday": lambda m: now - timedelta(days=1),
+                r"last\s+month": lambda m: now - timedelta(days=30),
+                r"(\d+)\s+years?": lambda m: now - timedelta(days=int(m[1]) * 365),
+                r"(\d+)\s+months?": lambda m: now - timedelta(days=int(m[1]) * 30),
+                r"(\d+)\s+days?": lambda m: now - timedelta(days=int(m[1])),
+                r"(\d+)\s+hours?": lambda m: now - timedelta(hours=int(m[1])),
+                r"(\d+)\s+minutes?": lambda m: now - timedelta(minutes=int(m[1])),
+            }
 
         def handle_starttag(self, tag, attrs):
-
             params = dict(attrs)
-            if params.get('class') == 'table2':
-                self.findTable = True
 
-            if tag == self.TR and self.findTable and (params.get('bgcolor') == '#F4F4F4' or params.get('bgcolor') == '#FFFFFF'):  # noqa
-                self.inside_tr = True
-                self.current_item = {}
-            if not self.inside_tr:
+            if params.get('class') == 'table2':
+                self.inside_table = True
+            elif not self.inside_table:
                 return
 
-            if self.inside_tr and tag == self.TD:
-                if "class" in params:
-                    self.item_name = self.parser_class.get(params["class"], None)
-                    if self.item_name:
-                        self.current_item[self.item_name] = -1
+            if tag == self.TR and (params.get('bgcolor') == '#F4F4F4' or params.get('bgcolor') == '#FFFFFF'):  # noqa
+                self.inside_tr = True
+                self.column_index = -1
+                self.current_item = {"engine_url": self.url}
+            elif not self.inside_tr:
+                return
 
-            if self.inside_tr and tag == self.A and self.HREF in params:
+            if tag == self.TD:
+                self.column_index += 1
+                if self.column_index < len(self.columns):
+                    self.column_name = self.columns[self.column_index]
+                else:
+                    self.column_name = None
+
+            if self.column_name == "name" and tag == self.A and self.HREF in params:
                 link = params["href"]
-                if link.startswith("http://itorrents.org/torrent/"):
-                    self.current_item["engine_url"] = self.url
-                    self.item_name = "name"
-                elif link.endswith(".html"):
+                if link.endswith(".html"):
                     try:
                         safe_link = quote(self.url + link, safe='/:')
                     except KeyError:
@@ -77,26 +89,30 @@ class limetorrents(object):
                     self.current_item["desc_link"] = safe_link
 
         def handle_data(self, data):
-            if self.inside_tr and self.item_name:
-                if self.item_name == 'size' and (data.endswith('MB') or data.endswith('GB')):
-                    self.current_item[self.item_name] = data.strip().replace(',', '')
-                elif not self.item_name == 'size':
-                    self.current_item[self.item_name] = data.strip().replace(',', '')
-
-                self.item_name = None
+            if self.column_name:
+                if self.column_name in ["size", "seeds", "leech"]:
+                    data = data.replace(',', '')
+                elif self.column_name == "pub_date":
+                    timestamp = -1
+                    for pattern, calc in self.date_parsers.items():
+                        m = re.match(pattern, data, re.IGNORECASE)
+                        if m:
+                            timestamp = int(calc(m).timestamp())
+                            break
+                    data = str(timestamp)
+                self.current_item[self.column_name] = data.strip()
+                self.column_name = None
 
         def handle_endtag(self, tag):
             if tag == 'table':
-                self.findTable = False
+                self.inside_table = False
 
             if self.inside_tr and tag == self.TR:
                 self.inside_tr = False
-                self.item_name = None
-                array_length = len(self.current_item)
-                if array_length < 1:
-                    return
-                prettyPrinter(self.current_item)
-                self.current_item = {}
+                self.column_name = None
+                if "link" in self.current_item:
+                    prettyPrinter(self.current_item)
+                    self.page_items += 1
 
     def download_torrent(self, info):
         # since limetorrents provides torrent links in itorrent (cloudflare protected),
