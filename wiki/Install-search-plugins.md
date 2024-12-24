@@ -17,7 +17,7 @@
           1. The `Plugin source` window will open
                1. Click on `Local file` button
                1. Navigate to the `.py` file you downloaded in the step above. Select the `.py` file.
-               1. If successful the following message will be display 
+               1. If successful the following message will be display
                      > <PLUGIN.NAME> search engine plugin was successfully installed.
                1. If not successful the following message will be display
                      > <PLUGIN.NAME> search engine plugin could not be installed.

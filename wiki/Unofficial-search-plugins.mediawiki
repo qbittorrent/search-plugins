@@ -100,7 +100,7 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/BurningMop/qBittorrent-Search-Plugins/refs/heads/main/calidadtorrent.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
 | ✔ qbt 5.0.x / python 3.9.x
 |-
-| [[https://github.com/menegop/qbfrench/blob/master/cpasbien.png]] 
+| [[https://github.com/menegop/qbfrench/blob/master/cpasbien.png]]
 [http://www.cpasbien.moe  Cpasbien]
 | [https://github.com/MarcBresson/cpasbien MarcBresson]
 | 2.2
@@ -405,7 +405,7 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/BrunoReX/qBittorrent-Search-Plugin-TokyoToshokan/master/tokyotoshokan.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
 | ✔ qbt 4.0.x / python 3.5.0<br /> ❌qbt 4.6+ Will break the plugin system. [https://github.com/qbittorrent/search-plugins/issues/274#issuecomment-2312625898 #274] / [https://github.com/qbittorrent/search-plugins/issues/284#issuecomment-2312601684 #284]
 |-
-| [[https://github.com/menegop/qbfrench/blob/master/torrent9.png]] 
+| [[https://github.com/menegop/qbfrench/blob/master/torrent9.png]]
 [https://www.torrent9.fm  Torrent9]
 | [https://raw.githubusercontent.com/menegop/qbfrench menegop]
 | 2.0
@@ -425,7 +425,7 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | 2.0
 | 7/Sep<br />2022
 | [https://Scare.ca/dl/qBittorrent/torrentdownload.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
-| ✔ qbt 4.4.4 / python 3.8.10 
+| ✔ qbt 4.4.4 / python 3.8.10
 |-
 | [[https://www.google.com/s2/favicons?domain=torrentdownloads.pro#.png]] [https://torrentdownloads.pro/ Torrent Downloads Pro]
 | [https://github.com/BurningMop/qBittorrent-Search-Plugins BurningMop]
@@ -480,7 +480,7 @@ The minimum supported Python version (across all platforms) is specified at [htt
 |[https://github.com/khensolomon/leyts Lethil]
 |3.2
 |2/Nov<br />2018
-|[https://raw.githubusercontent.com/khensolomon/leyts/master/yts.py 
+|[https://raw.githubusercontent.com/khensolomon/leyts/master/yts.py
 [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 |✔ qbt 4.0.x / python 3.5.0
 |-
