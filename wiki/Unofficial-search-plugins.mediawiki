@@ -1,0 +1,655 @@
+Here you can find unofficial search engine plugins for qBittorrent that are made available by the community
+
+= Read First =
+* Note that python plugins/scripts are, by its nature, not considered to be safe. Therefore any use of the unofficial plugins is at your own risk. It is a good practice to audit/take a look at the plugin/script before you install.
+* To install search engine plugins, follow [[Install-search-plugins#steps-to-install-search-plugins-qbittorrent-version-3110-or-more-recent|this tutorial]].
+* To request search plugins not listed in this page, update [[Request-unofficial-search-plugin|this page]].
+* To write your own search plugins, please follow [[How-to-write-a-search-plugin|this tutorial]].
+* If you wrote one, you're welcome to add it to these tables. Please keep the list sorted by <code>Search Engine</code> name.
+* '''If you experience issues with any of the plugins posted here, please report to the author directly.''' In case the author is unresponsive, you can try to fix it yourself. Then you can edit this wiki page and update the link to your fixed plugin.
+* The plugins shown as ✖ or ❗ will result in the slowdown and malfunction of other plugins as well, hence the use of these plugins is strongly discouraged.
+
+⚠️ We removed support for Python 2. Please upgrade to Python 3 to continue using the search function.
+The minimum supported Python version (across all platforms) is specified at [https://github.com/qbittorrent/qBittorrent/blob/master/INSTALL#L21-L23 here].
+
+= Plugins for Public Sites =
+
+{|class="sortable"
+|-
+!  Search Engine
+!  Author (Repository)
+!  Version
+!  Last update
+!  Download link
+!  Comments
+|-
+| [[https://www.google.com/s2/favicons?domain=1337x.to#.png]] [http://1337x.to/ 1337x]
+| [https://github.com/sa3dany sa3dany], [https://github.com/Alyetama Alyetama], [https://github.com/BurningMop BurningMop], [https://github.com/scadams scadams]
+| 2.2
+| 20/Aug<br />2023
+| [https://gist.githubusercontent.com/scadams/56635407b8dfb8f5f7ede6873922ac8b/raw/f654c10468a0b9945bec9bf31e216993c9b7a961/one337x.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.4.x / python 3.6.0
+|-
+|[[https://www.google.com/s2/favicons?domain=academictorrents.com#.png]] [https://academictorrents.com/ Academic Torrents]
+|[https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
+|1.2
+|19/Mar<br />2023
+|[https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/academictorrents.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+|✔ qbt 4.3.x / python 3.8.5 <br />**READ REPOSITORY NOTES**
+|-
+|[[https://raw.githubusercontent.com/Cc050511/qBit-search-plugins/main/favicon.png]] [https://acg.rip/ acgrip]
+|[https://github.com/Cc050511/qBit-search-plugins Yun]
+|1.0
+|24/Apr<br />2023
+|[https://raw.githubusercontent.com/Cc050511/qBit-search-plugins/main/acgrip.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+|✔ qbt 4.5.2 / python 3.10 <br />
+|-
+| [[https://raw.githubusercontent.com/hannsen/qbittorrent_search_plugins/master/ali213.png]] [http://down.ali213.net/ ali213.net]
+| [https://github.com/hannsen/qbittorrent_search_plugins/ hannsen]
+| 1.00
+| 25/Dec<br />2017
+| [https://raw.githubusercontent.com/hannsen/qbittorrent_search_plugins/master/ali213.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/hannsen/qbittorrent_search_plugins#user-content-ali213net--ali213py [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
+| ✔ qbt 4.1.x / python 3.5.0 <br />❗ qbt 4.3.0.1 / python 3.9
+|-
+| [[https://www.google.com/s2/favicons?domain=anidex.info#.png]] [http://anidex.info/ anidex.info]
+| [https://github.com/nindogo Ni Ndogo]
+| 0.02
+| 06/Jul<br />2019
+| [https://raw.githubusercontent.com/nindogo/qbtSearchScripts/master/anidex.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.1.x / python 3.5.0
+|-
+| [[https://github.com/AlaaBrahim/qBitTorrent-animetosho-search-plugin/blob/main/screenshots/animetosho.png]] [http://animetosho.org/ animetosho.org]
+| [https://github.com/AlaaBrahim AlaaBrahim]
+| 1.1.0
+| 14/Nov<br />2024
+| [https://raw.githubusercontent.com/AlaaBrahim/qBitTorrent-animetosho-search-plugin/main/animetosho.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.5.x / python 3.x.x
+|-
+|[[https://raw.githubusercontent.com/nklido/qBittorrent_search_engines/master/engines/audiobookbay_icon_16x16.png]] [http://audiobookbay.fi AudioBook Bay (ABB) ]
+|[https://github.com/nklido/qBittorrent_search_engines nKlido]
+|0.0.2
+|21/May<br />2022
+|[https://raw.githubusercontent.com/nklido/qBittorrent_search_engines/master/engines/audiobookbay.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+|✔ qbt 4.3.x / python 3.8.10 <br />
+|-
+| [[https://www.google.com/s2/favicons?domain=bitsearch.to#.png]] [https://bitsearch.to/ Bit Search]
+| [https://github.com/BurningMop/qBittorrent-Search-Plugins BurningMop]
+| 1.1
+| 13/Apr/2024
+| [https://raw.githubusercontent.com/BurningMop/qBittorrent-Search-Plugins/refs/heads/main/bitsearch.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.6.x / python 3.9.x
+|-
+| [[https://www.google.com/s2/favicons?domain=bt4gprx.com#.png]] [https://bt4gprx.com/ bt4gprx]
+| [https://github.com/TuckerWarlock/qbittorrent-search-plugins TuckerWarlock]
+| 2.0
+| 27/Aug<br />2023
+| [https://raw.githubusercontent.com/TuckerWarlock/qbittorrent-search-plugins/main/bt4gprx.com/bt4gprx.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.5.x / python 3.10.x<br />❗ Working when DDOS cloudfare<br />protection is disabled
+|-
+| [[https://www.google.com/s2/favicons?domain=btdig.com#.png]] [https://btdig.com/ btdig]
+| [https://github.com/galaris/BTDigg-qBittorrent-plugin galaris]
+| 1.1
+| 24/Jul<br />2024
+| [https://raw.githubusercontent.com/galaris/BTDigg-qBittorrent-plugin/main/btdig.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.6.4 / python 3.9.x
+|-
+| [[https://www.google.com/s2/favicons?domain=calidadtorrent.com#.png]] [https://calidadtorrent.com/ CalidadTorrent]
+| [https://github.com/BurningMop/qBittorrent-Search-Plugins BurningMop]
+| 1.0
+| 24/Nov/2024
+| [https://raw.githubusercontent.com/BurningMop/qBittorrent-Search-Plugins/refs/heads/main/calidadtorrent.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 5.0.x / python 3.9.x
+|-
+| [[https://github.com/menegop/qbfrench/blob/master/cpasbien.png]] 
+[http://www.cpasbien.moe  Cpasbien]
+| [https://github.com/MarcBresson/cpasbien MarcBresson]
+| 2.2
+|24/Dec<br />2023
+| [https://raw.githubusercontent.com/MarcBresson/cpasbien/master/src/cpasbien.py [[https://github.com/MarcBresson/cpasbien/blob/master/assets/Download.gif]]]
+| ✔ qbt 4.5.x / python 3.11.x
+|-
+| [[https://github.com/bugsbringer/qbit-plugins/blob/master/darklibria.png]] [https://dark-libria.it/ dark-libria]
+| [https://github.com/bugsbringer/qbit-plugins Bugsbringer]
+| 0.10
+| 20/Jun<br />2020
+| [https://raw.githubusercontent.com/bugsbringer/qbit-plugins/master/darklibria.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/bugsbringer/qbit-plugins/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
+| ✔ qbt 4.2.x / python 3.5.0
+|-
+| [[https://www.google.com/s2/favicons?domain=divxtotal.wtf#.png]] [https://divxtotal.wtf/ divxtotal]
+| [https://github.com/BurningMop/qBittorrent-Search-Plugins BurningMop]
+| 1.0
+| 07/Nov/2024
+| [https://raw.githubusercontent.com/BurningMop/qBittorrent-Search-Plugins/refs/heads/main/divxtotal.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 5.0.x / python 3.9.x
+|-
+
+| [[https://i.imgur.com/2QEr3r0.png]] [https://share.dmhy.org/ DMHY]
+| [https://github.com/ZH1637/dmhy ZH]
+| 1.0
+| 25/Nov<br />2023
+| [https://raw.githubusercontent.com/ZH1637/dmhy/main/dmhy.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br />
+| ✔ qbt 4.6.x / python 3.10.0
+|-
+| [[https://i.imgur.com/2QEr3r0.png]] [https://share.dmhy.org/ DMHY]
+| [https://github.com/diazchika/dmhy dchika]
+| 1.0
+| 8/Jul<br />2024
+| [https://raw.githubusercontent.com/diazchika/dmhy/main/dmhy.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br />
+| ✔ qbt 4.6.x / python >= 3.7
+|-
+|-
+| [[https://github.com/Bioux1/qbtSearchPlugins/blob/main/dodi_repacks.png]] [https://dodi-repacks.site/ DODI Repacks]
+| [https://github.com/Bioux1/qbtSearchPlugins Bioux1]
+| 1.0
+| 27/Jun<br />2024
+| [https://raw.githubusercontent.com/Bioux1/qbtSearchPlugins/main/dodi_repacks.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br />
+| ✔ qbt 4.6.5 / python 3.12.4
+|-
+| [[https://github.com/dangar16/dontorrent-plugin/blob/main/icono%20dontorrent.png]] [https://dontorrent.cologne/ Dontorrent]
+| [https://github.com/dangar16/dontorrent-plugin dangar16]
+| 1.0
+| 24/Sep<br />2024
+| [https://raw.githubusercontent.com/dangar16/dontorrent-plugin/main/dontorrent.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br />
+| ✔ qbt 4.6.5 / python 3.9.7
+|-
+| [[https://www.google.com/s2/favicons?domain=dontorrent.equipment#.png]] [https://dontorrent.equipment/ dontorrent]
+| [https://github.com/BurningMop/qBittorrent-Search-Plugins BurningMop]
+| 1.0
+| 07/Nov/2024
+| [https://raw.githubusercontent.com/BurningMop/qBittorrent-Search-Plugins/refs/heads/main/dontorrent.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 5.0.x / python 3.9.x
+|-
+| [[https://github.com/iordic/qbittorrent-search-plugins/raw/master/images/icons/elitetorrent.png]] [https://www.elitetorrent.com/ Elitetorrent]
+| [https://github.com/iordic/qbittorrent-search-plugins iordic]
+| 1.5
+| 21/Sep<br />2024
+| [https://raw.githubusercontent.com/iordic/qbittorrent-search-plugins/master/engines/elitetorrent.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+|  ✔ qbt 4.6.7 / python 3.9.5
+|-
+| [[https://www.google.com/s2/favicons?domain=esmeraldatorrent.com#.png]] [https://esmeraldatorrent.com/ esmeraldatorrent]
+| [https://github.com/BurningMop/qBittorrent-Search-Plugins BurningMop]
+| 1.0
+| 07/Nov/2024
+| [https://raw.githubusercontent.com/BurningMop/qBittorrent-Search-Plugins/refs/heads/main/esmeraldatorrent.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 5.0.x / python 3.9.x
+|-
+| [[https://github.com/Bioux1/qbtSearchPlugins/blob/main/fitgirl_repacks.jpg]] [https://fitgirl-repacks.site/ FitGirl Repacks]
+| [https://github.com/Bioux1/qbtSearchPlugins Bioux1]
+| 1.0
+| 27/Jun<br />2024
+| [https://raw.githubusercontent.com/Bioux1/qbtSearchPlugins/main/fitgirl_repacks.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br />
+| ✔ qbt 4.6.5 / python 3.12.4
+|-
+| [[https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/glotorrents.png]] [https://glodls.to/  GloTorrents]
+| [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
+| 1.5
+| 28/Jul<br />2022
+| [https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/glotorrents.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.3.5 / python 3.8.5
+|-
+| [[https://github.com/LightDestory/qBittorrent-Search-Plugins/raw/master/src/engines/kickasstorrents.png]] [https://katcr.to/  Kickass Torrent]
+| [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
+| 1.0
+| 28/Jul<br />2022
+| [https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/kickasstorrents.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.3.x / python 3.8.5
+|-
+| [[https://www.google.com/s2/favicons?domain=linuxtracker.org#.png]] [http://linuxtracker.org/ Linux Tracker]
+| [https://github.com/MadeOfMagicAndWires/qBit-plugins Made Of Magic<br />And Wires]
+| 1.00
+| 12/Apr<br />2017
+| [https://raw.githubusercontent.com/MadeOfMagicAndWires/qBit-plugins/6074a7cccb90dfd5c81b7eaddd3138adec7f3377/engines/linuxtracker.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.1.x / python 3.5.0
+|-
+| [[https://raw.githubusercontent.com/hannsen/qbittorrent_search_plugins/00e876a51f2cb45ee22071c56fc7ba52dc117721/magnetdl.png]] [http://www.magnetdl.com/ MagnetDL]
+| [https://github.com/nindogo/qbtSearchScripts Ni Ndogo]
+| 1.3
+| 25/Jul<br />2018
+| [https://raw.githubusercontent.com/nindogo/qbtSearchScripts/master/magnetdl.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.0.x / python 3.5.0
+|-
+| [[https://raw.githubusercontent.com/hannsen/qbittorrent_search_plugins/00e876a51f2cb45ee22071c56fc7ba52dc117721/magnetdl.png]] [http://www.magnetdl.com/ MagnetDL with categories]
+| [https://Scare.ca/dl/qBittorrent/ Scare!]
+| 2.0
+| 8/Sep<br />2022
+| [https://Scare.ca/dl/qBittorrent/magnetdl.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.4.4 / python 3.8.10
+|-
+| [[https://www.google.com/s2/favicons?domain=anidex.info#.png]]
+[https://maxitorrent.com/ MaxiTorrent]
+| [https://github.com/joseeloren/qbittorrent-search-plugins joseeloren]
+| 1.25
+| 16/Apr<br />2021
+| [https://raw.githubusercontent.com/joseeloren/search-plugins/master/nova3/engines/maxitorrent.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.3.x / python 3.5.0
+|-
+| [[https://github.com/iordic/qbittorrent-search-plugins/raw/master/images/icons/mejortorrent.png]] [https://www21.mejortorrent.zip/ MejorTorrent]
+| [https://github.com/iordic/qbittorrent-search-plugins iordic]
+| 1.0
+| 27/Sep<br />2024
+| [https://raw.githubusercontent.com/iordic/qbittorrent-search-plugins/master/engines/mejortorrent.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+|  ✔ qbt 4.6.7 / python 3.9.5
+|-
+|[[https://raw.githubusercontent.com/Cc050511/qBit-search-plugins/main/mikan-pic.png]] [https://mikanani.me mikanani]
+|[https://github.com/Cc050511/qBit-search-plugins Yun]
+|1.2
+|11/Feb<br />2024
+|[https://raw.githubusercontent.com/Cc050511/qBit-search-plugins/main/mikanani.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+|✔ qbt 4.5.2 / python 3.10 <br />
+|-
+| [[https://www.google.com/s2/favicons?domain=myporn.club#.png]] [https://myporn.club/ My Porn Club]
+| [https://github.com/BurningMop/qBittorrent-Search-Plugins BurningMop]
+| 1.1
+| 09/Nov/2024
+| [https://raw.githubusercontent.com/BurningMop/qBittorrent-Search-Plugins/refs/heads/main/mypornclub.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.6.x / python 3.9.x
+|-
+| [[https://www.google.com/s2/favicons?domain=naranjatorrent.com#.png]] [https://naranjatorrent.com/ naranjatorrent]
+| [https://github.com/BurningMop/qBittorrent-Search-Plugins BurningMop]
+| 1.0
+| 07/Nov/2024
+| [https://raw.githubusercontent.com/BurningMop/qBittorrent-Search-Plugins/refs/heads/main/naranjatorrent.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 5.0.x / python 3.9.x
+|-
+| [[https://raw.githubusercontent.com/4chenz/pantsu-plugin/master/pantsu.png]] [https://nyaa.pantsu.cat/ Nyaa.Pantsu]
+| [https://github.com/4chenz/pantsu-plugin/ 4chenz]
+| 1.21
+| 02/Jan<br />2021
+| [https://raw.githubusercontent.com/libellula/qbt-plugins/main/pantsu.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.0.x / python 3.5.0 <br />✖ qbt 4.1.3 (intermittent failure)
+|-
+| [[https://raw.githubusercontent.com/MadeOfMagicAndWires/qBit-plugins/master/engines/nyaapantsu.png]] [https://nyaa.pantsu.cat/ Nyaa.pantsu]
+| [https://github.com/MadeOfMagicAndWires/qBit-plugins Made Of Magic<br />And Wires]
+| 1.3
+| 02/Jan<br />2021
+| [https://raw.githubusercontent.com/MadeOfMagicAndWires/qBit-plugins/refs/heads/main/engines/nyaapantsu.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.0.x / python 3.5.0
+|-
+| [[https://raw.githubusercontent.com/MadeOfMagicAndWires/qBit-plugins/master/engines/nyaasi.png]] [https://nyaa.si/ Nyaa.si]
+| [https://github.com/MadeOfMagicAndWires/qBit-plugins Made Of Magic<br />And Wires]
+| 1.1
+| 01/Mar<br />2019
+| [https://raw.githubusercontent.com/MadeOfMagicAndWires/qBit-plugins/master/engines/nyaasi.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.4.3.1 / python 3.10.5
+|-
+| [[https://github.com/caiocinel/onlinefix-qbittorrent-plugin/raw/main/onlinefix.png]] [https://online-fix.me/ Online-Fix]
+| [https://github.com/caiocinel/onlinefix-qbittorrent-plugin caiocinel]
+| 1.0
+| 10/Aug<br />2024
+| [https://raw.githubusercontent.com/caiocinel/onlinefix-qbittorrent-plugin/main/onlinefix.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br />
+| ✔ qbt 4.6.5 / python 3.12.4
+|-
+| [[https://pediatorrent.com/images/pelispedia/icon-109x109.png]] [https://pediatorrent.com/ PediaTorrent]
+| [https://github.com/dangar16/pediatorrent-plugin dangar16]
+| 1.0
+| 24/Sep<br />2024
+| [https://raw.githubusercontent.com/dangar16/pediatorrent-plugin/refs/heads/main/pediatorrent.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br />
+| ✔ qbt 4.6.5 / python 3.x
+|-
+| [[https://www.google.com/s2/favicons?domain=pediatorrent.com#.png]] [https://pediatorrent.com/ PediaTorrent]
+| [https://github.com/BurningMop/qBittorrent-Search-Plugins BurningMop]
+| 1.0
+| 24/Nov/2024
+| [https://raw.githubusercontent.com/BurningMop/qBittorrent-Search-Plugins/refs/heads/main/pediatorrent.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 5.0.x / python 3.9.x
+|-
+| [[https://github.com/LightDestory/qBittorrent-Search-Plugins/raw/master/src/engines/pirateiro.png]] [https://pirateiro.com/  Pirateiro]
+| [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
+| 1.0
+| 28/Jul<br />2022
+| [https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/pirateiro.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.3.x / python 3.8.5
+|-
+| [[https://raw.githubusercontent.com/Larsluph/qbittorrent-search-plugins/prt/nova3/engines/pornrips.png]] [https://pornrips.to/  Pornrips]
+| [https://github.com/Larsluph/qbittorrent-search-plugins Larsluph]
+| 1.0
+| 20/Oct<br />2023
+| [https://raw.githubusercontent.com/Larsluph/qbittorrent-search-plugins/prt/nova3/engines/pornrips.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.5.x / python 3.11.6
+|-
+| [[https://github.com/Pireo/hello-world/blob/master/rockbox.png]] [https://rawkbawx.rocks/ RockBox]
+| [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
+| 1.0
+| 17/Jun<br />2021
+| [https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/rockbox.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.3.x / python 3.8.5
+|-
+| [[https://github.com/imDMG/qBt_SE/blob/master/engines/rutor.png]] [http://rutor.info/ Rutor]
+| [https://github.com/imDMG/qBt_SE imDMG]
+| 1.8
+| 10/Sep<br />2023
+| [https://raw.githubusercontent.com/imDMG/qBt_SE/master/engines/rutor.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/imDMG/qBt_SE/blob/master/README.md#rutrackerorg [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
+| ✔ qbt 4.2.x / python 3.7+
+|-
+| [[https://raw.githubusercontent.com/hannsen/qbittorrent_search_plugins/master/smallgames.png]] [http://small-games.info/ small-games.info]
+| [https://github.com/hannsen/qbittorrent_search_plugins/ hannsen]
+| 1.00
+| 25/Dec<br />2017
+| [https://raw.githubusercontent.com/hannsen/qbittorrent_search_plugins/master/smallgames.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/hannsen/qbittorrent_search_plugins#user-content-small-gamesinfo--smallgamespy [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
+| ✔ qbt 4.0.x / python 3.5.0
+|-
+|[[https://www.google.com/s2/favicons?domain=snowfl.com#.png]] [https://snowfl.com Snowfl]
+|[https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
+|1.3
+|28/Jul<br />2022
+|[https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/snowfl.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+|✔ qbt 4.3.x / python 3.8.5 <br />**READ REPOSITORY NOTES**
+|-
+| [[https://www.google.com/s2/favicons?domain=solidtorrents.to#.png]] [https://solidtorrents.to/ SolidTorrents.to]
+| [https://github.com/BurningMop/qBittorrent-Search-Plugins BurningMop]
+| 1.0
+| 05/Jan/2024
+| [https://raw.githubusercontent.com/BurningMop/qBittorrent-Search-Plugins/refs/heads/main/solidtorrents.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.6.x / python 3.9.x
+|-
+| [[https://www.google.com/s2/favicons?domain=subsplease.org#.png]] [https://subsplease.org/ SubsPlease.org]
+| [https://github.com/kli885/qBittorent-SubsPlease-Search-Plugin PlutoMonkey (kli885)]
+| 1.0
+| 07/Sep<br />2024
+| [https://raw.githubusercontent.com/kli885/qBittorent-SubsPlease-Search-Plugin/main/subsplease.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.5.0 / python 3.8.x
+|-
+| [[https://raw.githubusercontent.com/MadeOfMagicAndWires/qBit-plugins/master/engines/nyaasi.png]] [https://sukebei.nyaa.si/ Sukebei (Nyaa)]
+| [https://github.com/vt-idiot/qBit-SukebeiNyaa-plugin vt-idiot]
+| 1.11
+| 21/Jun<br />2022
+| [https://github.com/vt-idiot/qBit-SukebeiNyaa-plugin/raw/master/engines/sukebeisi.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.4.3.1 / python 3.10.5
+|-
+| [[https://raw.githubusercontent.com/MadeOfMagicAndWires/qBit-plugins/master/engines/nyaasi.png]] [https://sukebei.nyaa.si/ Sukebei Nyaa]
+| [https://github.com/phuongtailtranminh/qBittorrent-Nyaa-Search-Plugin/ phuongtail<br />tranminh]
+| 1.01
+| 19/May<br />2017
+| [https://raw.githubusercontent.com/phuongtailtranminh/qBittorrent-Nyaa-Search-Plugin/master/nyaa.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.0.x / python 3.5.0
+|-
+| [[https://raw.githubusercontent.com/4chenz/pantsu-plugin/master/pantsu.png]] [https://sukebei.pantsu.cat/ Sukebei.Pantsu]
+| [https://github.com/4chenz/pantsu-plugin/ 4chenz]
+| 1.21
+| 02/Jan<br />2021
+| [https://raw.githubusercontent.com/libellula/qbt-plugins/main/sukebei.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.0.x / python 3.5.0 <br />✖ qbt 4.1.3 (intermittent failure)
+|-
+| [[https://github.com/LightDestory/qBittorrent-Search-Plugins/raw/master/src/engines/thepiratebay.png]] [https://thepiratebay.org/  ThePirateBay]
+| [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
+| 1.0
+| 13/Nov<br />2021
+| [https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/thepiratebay.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.3.x / python 3.8.5
+|-
+| [[https://github.com/LightDestory/qBittorrent-Search-Plugins/raw/master/src/engines/thepiratebay.png]] [https://thepiratebay.org/  ThePirateBay with categories]
+| [https://Scare.ca/dl/qBittorrent Scare!]
+| 2.0
+| 1/Sep<br />2022
+| [https://Scare.ca/dl/qBittorrent/thepiratebay.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.4.4 / python 3.8.10
+|-
+| [[https://www.google.com/s2/favicons?domain=therarbg.com#.png]] [https://therarbg.com/ The RarBg]
+| [https://github.com/BurningMop/qBittorrent-Search-Plugins BurningMop]
+| 1.3
+| 20/Oct/2024
+| [https://raw.githubusercontent.com/BurningMop/qBittorrent-Search-Plugins/refs/heads/main/therarbg.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.6.x / python 3.9.x
+|-
+| [[https://www.google.com/s2/favicons?domain=tomadivx.net#.png]] [https://tomadivx.net/ TomaDivx]
+| [https://github.com/BurningMop/qBittorrent-Search-Plugins BurningMop]
+| 1.1
+| 07/Nov/2024
+| [https://raw.githubusercontent.com/BurningMop/qBittorrent-Search-Plugins/refs/heads/main/tomadivx.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 5.0.x / python 3.9.x
+|-
+| [[https://raw.githubusercontent.com/BrunoReX/qBittorrent-Search-Plugin-TokyoToshokan/master/tokyotoshokan.png]] [https://tokyotosho.info/index.php Tokyo Toshokan]
+| [https://github.com/BrunoReX/qBittorrent-Search-Plugin-TokyoToshokan BrunoReX]
+| 2.3
+| 18/Mar<br />2018
+| [https://raw.githubusercontent.com/BrunoReX/qBittorrent-Search-Plugin-TokyoToshokan/master/tokyotoshokan.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.0.x / python 3.5.0<br /> ❌qbt 4.6+ Will break the plugin system. [https://github.com/qbittorrent/search-plugins/issues/274#issuecomment-2312625898 #274] / [https://github.com/qbittorrent/search-plugins/issues/284#issuecomment-2312601684 #284]
+|-
+| [[https://github.com/menegop/qbfrench/blob/master/torrent9.png]] 
+[https://www.torrent9.fm  Torrent9]
+| [https://raw.githubusercontent.com/menegop/qbfrench menegop]
+| 2.0
+|01/Jan<br />2023
+| [https://raw.githubusercontent.com/menegop/qbfrench/master/torrent9.py [[https://github.com/menegop/qbfrench/blob/master/Download.gif]]]
+| ✔ qbt 4.3.6 / python 3.8
+|-
+| [[https://github.com/LightDestory/qBittorrent-Search-Plugins/raw/master/src/engines/torrentdownload.png]] [https://torrentdownload.info/  TorrentDownload]
+| [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
+| 1.0
+| 28/Jul<br />2022
+| [https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/torrentdownload.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.3.x / python 3.8.5
+|-
+| [[https://github.com/LightDestory/qBittorrent-Search-Plugins/raw/master/src/engines/torrentdownload.png]] [https://torrentdownload.info/  TorrentDownload with categories]
+| [https://Scare.ca/dl/qBittorrent/ Scare!]
+| 2.0
+| 7/Sep<br />2022
+| [https://Scare.ca/dl/qBittorrent/torrentdownload.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.4.4 / python 3.8.10 
+|-
+| [[https://www.google.com/s2/favicons?domain=torrentdownloads.pro#.png]] [https://torrentdownloads.pro/ Torrent Downloads Pro]
+| [https://github.com/BurningMop/qBittorrent-Search-Plugins BurningMop]
+| 1.1
+| 20/Oct/2024
+| [https://raw.githubusercontent.com/BurningMop/qBittorrent-Search-Plugins/refs/heads/main/torrentdownloads.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.6.x / python 3.9.x
+|-
+| [[https://www.google.com/s2/favicons?domain=torrenflix.com#.png]] [https://torrenflix.com/ Torrenflix]
+| [https://github.com/BurningMop/qBittorrent-Search-Plugins BurningMop]
+| 1.0
+| 23/Nov/2024
+| [https://raw.githubusercontent.com/BurningMop/qBittorrent-Search-Plugins/refs/heads/main/torrenflix.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 5.0.x / python 3.9.x
+|-
+| [[https://www.google.com/s2/favicons?domain=torrentgalaxy.to#.png]] [https://torrentgalaxy.to/ TorrentGalaxy]
+| [https://github.com/nindogo Ni Ndogo]
+| 0.08
+| 9/Nov<br />2024
+| [https://raw.githubusercontent.com/nindogo/qbtSearchScripts/master/torrentgalaxy.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.1.6+ / python 3.11.4
+|-
+| [[https://www.google.com/s2/favicons?domain=traht.org#.png]] [https://traht.org/ TrahT]
+| [https://github.com/BurningMop/qBittorrent-Search-Plugins BurningMop]
+| 1.0
+| 27/Dec/2023
+| [https://raw.githubusercontent.com/BurningMop/qBittorrent-Search-Plugins/refs/heads/main/traht.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.6.x / python 3.9.x
+|-
+| [[https://github.com/msagca/qbittorrent-plugins/blob/main/uniondht_icon.png]] [http://uniondht.org/ UnionDHT]
+| [https://github.com/msagca/qbittorrent-plugins/ msagca]
+| 1.2
+| 09/Oct<br />2024
+| [https://raw.githubusercontent.com/msagca/qbittorrent-plugins/main/uniondht.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 5.0 / python 3.12
+|-
+| [[https://www.google.com/s2/favicons?domain=xxxclub.to#.png]] [https://xxxclub.to/ XXXClub]
+| [https://github.com/BurningMop/qBittorrent-Search-Plugins BurningMop]
+| 1.3
+| 29/Oct/2024
+| [https://raw.githubusercontent.com/BurningMop/qBittorrent-Search-Plugins/refs/heads/main/xxxclubto.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 5.0.x / python 3.9.x
+|-
+| [[https://www.google.com/s2/favicons?domain=yourbittorrent.com#.png]] [https://yourbittorrent.com/ YourBittorrent]
+| [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
+| 1.0
+| 17/Jun<br />2021
+| [https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/yourbittorrent.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.3.x / python 3.8.5
+|-
+|[[https://github.com/Pireo/hello-world/blob/master/yts.png]] [http://yts.mx/ YTS.MX]
+|[https://github.com/khensolomon/leyts Lethil]
+|3.2
+|2/Nov<br />2018
+|[https://raw.githubusercontent.com/khensolomon/leyts/master/yts.py 
+[[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
+|✔ qbt 4.0.x / python 3.5.0
+|-
+| [[https://github.com/Pireo/hello-world/blob/master/yts.png]] [http://yts.mx/ YTS.MX]
+| [https://github.com/lazulyra/qbit-plugins lazulyra]
+| 1.2
+| 07/Jan<br />2024
+| [https://raw.githubusercontent.com/lazulyra/qbit-plugins/main/yts_mx/yts_mx.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
+| ✔ qbt 4.6.2 / python 3.12.0
+|-
+| 🔍
+[https://github.com/YGGverse/YGGtracker  YGGtracker]
+| [https://github.com/YGGverse/qbittorrent-yggtracker-search-plugin YGGverse]
+| 1.1.0
+| 19/Oct<br />2023
+| [https://raw.githubusercontent.com/YGGverse/qbittorrent-yggtracker-search-plugin/main/yggtracker.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.5.1 / v5.0.0alpha1 / python 3.11.4 <br />Requires [https://github.com/yggdrasil-network/ Yggdrasil] connection
+|-
+| [[https://i.imgur.com/EiYFI5M.png]] [https://zooqle.skin/ Zooqle]
+| [https://github.com/444995/qbit-search-plugins 444995]
+| 1.10
+| 07/Aug<br />2024
+| [https://raw.githubusercontent.com/444995/qbit-search-plugins/main/engines/zooqle.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt v4.6.5 / python 3.11.1
+|-
+|}
+
+
+= Plugins for Private Sites =
+* The plugin/script may require editing before you can use it.
+* Those sites may require registration and require adding your credentials to the plugin/script.
+
+{|
+|-
+!  Search Engine
+!  Author (Repository)
+!  Version
+!  Last update
+!  Download link
+!  Comments
+|-
+| [[https://raw.githubusercontent.com/MadeOfMagicAndWires/qBit-plugins/master/engines/bakabt.png]] [https://bakabt.me BakaBT]
+| [https://github.com/MadeOfMagicAndWires/qBit-plugins Made Of Magic<br />And Wires]
+| 1.30
+| 13/Apr<br />2017
+| [https://raw.githubusercontent.com/MadeOfMagicAndWires/qBit-plugins/master/engines/bakabt.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br />[https://github.com/MadeOfMagicAndWires/qBit-plugins/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
+| ✔ qbt 4.3.x / python 3.9.x
+|-
+| [[https://i.imgur.com/ien7TCt.png]] [https://danishbytes.club DanishBytes]
+| [https://github.com/444995/qbit-search-plugins 444995]
+| 1.50
+| 22/Jul<br />2024
+| [https://raw.githubusercontent.com/444995/qbit-search-plugins/main/engines/danishbytes.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt v4.6.5 / python 3.11.1
+|-
+| [[https://github.com/victorBuzdugan/QbittorrentFilelistSearchPlugin/blob/master/filelist.png]] [https://filelist.io FileList]
+| [https://github.com/victorBuzdugan/QbittorrentFilelistSearchPlugin victor]
+| 1.10
+| 07/Sep<br />2023
+| [https://raw.githubusercontent.com/victorBuzdugan/QbittorrentFilelistSearchPlugin/master/filelist.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br />[https://github.com/victorBuzdugan/QbittorrentFilelistSearchPlugin/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
+| ✔ qbt 4.5.x / python 3.8.x
+|-
+| [[https://github.com/Ooggle/qbittorrent-search-plugins/raw/master/engines/gazellegames.png]] [https://gazellegames.net GazelleGames]
+| [https://github.com/Ooggle/qbittorrent-search-plugins Ooggle]
+| 1.30
+| 07/Oct<br />2022
+| [https://raw.githubusercontent.com/Ooggle/qbittorrent-search-plugins/master/engines/gazellegames.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br />[https://github.com/Ooggle/qbittorrent-search-plugins/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
+| ✔ qbt 4.4.x / python 3.9+
+|-
+| [[https://github.com/txtsd/qB-IPT/raw/master/iptorrents.png]] [https://iptorrents.com IPTorrents]
+| [https://github.com/txtsd/qB-IPT txtsd (qB-IPT)]
+| 1.01
+| 22/Oct<br />2019
+| [https://raw.githubusercontent.com/txtsd/qB-IPT/master/iptorrents.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/txtsd/qB-IPT/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
+| ✔ qbt 4.1.x / python 3.5.0
+|-
+| [[https://raw.githubusercontent.com/imDMG/qBt_SE/master/engines/kinozal.png]] [http://kinozal.tv/ Kinozal]
+| [https://github.com/imDMG/qBt_SE imDMG]
+| 2.12
+| 10/Sep<br />2023
+| [https://raw.githubusercontent.com/imDMG/qBt_SE/master/engines/kinozal.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/imDMG/qBt_SE/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
+| ✔ qbt 4.2.x / python 3.7+
+|-
+| [[https://github.com/bugsbringer/qbit-plugins/blob/master/lostfilm.png]] [https://www.lostfilm.tv/ LostFilm.TV]
+| [https://github.com/bugsbringer/qbit-plugins Bugsbringer]
+| 0.14
+| 13/Jun<br />2020
+| [https://raw.githubusercontent.com/bugsbringer/qbit-plugins/master/lostfilm.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/bugsbringer/qbit-plugins/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
+| ✔ qbt 4.2.x / python 3.5.0
+|-
+| [[https://raw.githubusercontent.com/darktohka/qbittorrent-plugins/master/resources/ncore.png]] [https://ncore.pro/ nCore]
+| [https://github.com/darktohka/qbittorrent-plugins darktohka]
+| 1.3
+| 16/Feb<br />2021
+| [https://raw.githubusercontent.com/darktohka/qbittorrent-plugins/master/ncore.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/darktohka/qbittorrent-plugins/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
+| ✔ qbt 4.1.x / python 3.6+
+|-
+| [[https://raw.githubusercontent.com/imDMG/qBt_SE/master/engines/nnmclub.png]] [https://nnm-club.me/ NoNaMe-Club]
+| [https://github.com/imDMG/qBt_SE imDMG]
+| 2.12
+| 10/Sep<br />2023
+| [https://raw.githubusercontent.com/imDMG/qBt_SE/master/engines/nnmclub.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/imDMG/qBt_SE/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
+| ✔ qbt 4.2.x / python 3.7+
+|-
+| [[https://raw.githubusercontent.com/TainakaDrums/qbPornolab/master/pornolab.png]] [https://pornolab.net/ Pornolab]
+| [https://github.com/TainakaDrums/qbPornolab TainakaDrums]
+| 1.0
+| 09/Mar<br />2021
+| [https://raw.githubusercontent.com/TainakaDrums/qbPornolab/master/pornolab.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/TainakaDrums/qbPornolab/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
+| ✔ qbt 4.2.x / python 3.5.0
+|-
+| [[https://i.imgur.com/28j2OFz.png]] [https://redacted.ch Redacted]
+| [https://github.com/evyd13/search-plugins Evyd13]
+| 1.00
+| 10/Oct<br />2021
+| [https://raw.githubusercontent.com/evyd13/search-plugins/master/nova3/engines/redacted_ch.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.3.x / python 3.10.x
+|-
+| [[https://raw.githubusercontent.com/imDMG/qBt_SE/master/engines/rutracker.png]] [https://rutracker.org/ RuTracker]
+| [https://github.com/imDMG/qBt_SE imDMG]
+| 1.9
+| 10/Sep<br />2023
+| [https://raw.githubusercontent.com/imDMG/qBt_SE/master/engines/rutracker.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/imDMG/qBt_SE/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
+| ✔ qbt 4.2.x / python 3.7+
+|-
+| [[https://github.com/libellula/Official-search-engines-plugins-favicons/blob/bf2aaabe07ba94b993282d8dd888674469f2ab1e/favicon-16x16.png]] [https://rutracker.org/ RuTracker]
+| [https://github.com/nbusseneau/qBittorrent-rutracker-plugin nbusseneau]
+| 2.1.9
+| 11/Oct<br />2023
+| [https://raw.githubusercontent.com/nbusseneau/qBittorrent-rutracker-plugin/master/rutracker.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br />[https://github.com/nbusseneau/qBittorrent-rutracker-plugin/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
+| ✔ qbt 4.5.x / python 3.10.x<br/>
+|-
+| [[https://i.imgur.com/M5UA6tt.png]] [https://www.torrentleech.org/ TorrentLeech]
+| [https://github.com/444995/qbit-search-plugins 444995]
+| 1.00
+| 06/Aug<br />2024
+| [https://raw.githubusercontent.com/444995/qbit-search-plugins/main/engines/torrentleech.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt v4.6.5 / python 3.11.1
+|-
+| [[https://raw.githubusercontent.com/swannie-eire/prowlarr-qbittorrent-plugins/main/prowlarr-logo-lq.png]] [https://github.com/Prowlarr/Prowlarr Prowlarr]
+| [https://github.com/swannie-eire/prowlarr-qbittorrent-plugins swannie-eire]
+| 1.0
+| 17/Dec<br />2021
+| [https://raw.githubusercontent.com/swannie-eire/prowlarr-qbittorrent-plugins/main/prowlarr.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br />[https://github.com/swannie-eire/prowlarr-qbittorrent-plugins [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
+| ✔ qbt 4.3.x / python 3.+
+|-
+
+|-
+| [[https://www.google.com/s2/favicons?domain=speedapp.io#.png]] [https://speedapp.io SpeedApp.IO]
+| [https://github.com/miIiano/SpeedApp.io-qBittorent-search-plugin miIiano]
+| 1.1
+| 11/Aug<br />2023
+| [https://raw.githubusercontent.com/miIiano/SpeedApp.io-qBittorent-search-plugin/main/speedapp.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br />[https://github.com/miIiano/SpeedApp.io-qBittorent-search-plugin [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
+| ✔ qbt 4.5.x / python 3.+
+|-
+
+|-
+| [[https://www.google.com/s2/favicons?domain=unionfansub.com#.png]] [https://torrent.unionfansub.com/ UnionFansub]
+| [https://gitlab.com/CrimsonKoba/qb-search-plugin CrimsonKoba]
+| 1.2
+| 05/Jan<br />2024
+| [https://gitlab.com/CrimsonKoba/qb-search-plugin/-/raw/master/unionfansub.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://gitlab.com/CrimsonKoba/qb-search-plugin [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
+| ✔ qbt 4.5.x / python 3.+
+|-
+
+| [[https://raw.githubusercontent.com/CravateRouge/qBittorrentSearchPlugins/master/yggtorrent.png]] [https://yggtorrent.fi/ YggTorrent]
+| [https://github.com/CravateRouge/qBittorrentSearchPlugins CravateRouge]
+| 1.0
+| 25/Nov<br />2019
+| [https://raw.githubusercontent.com/CravateRouge/qBittorrentSearchPlugins/master/yggtorrent.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/CravateRouge/qBittorrentSearchPlugins/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
+| ❗ Working when DDOS cloudfare<br />protection is disabled
+|}

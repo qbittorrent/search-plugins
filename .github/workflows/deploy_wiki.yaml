@@ -1,0 +1,37 @@
+name: Deploy wiki
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'wiki/*'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: ${{ github.head_ref != '' }}
+
+jobs:
+  deploy:
+    name: Deploy wiki
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy
+        run: |
+          mv .git wiki
+          cd wiki
+          git config user.name "qbt_search-plugins_bot"
+          git config user.email "qbt_search-plugins_bot@example.com"
+          git checkout --orphan tmp
+          git add -A
+          git commit -m "Import"
+          git branch -D master
+          git branch -m master
+          git push https://github.com/qbittorrent/search-plugins.wiki.git --force
