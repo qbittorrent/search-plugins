@@ -11,7 +11,7 @@ concurrency:
 jobs:
   ci:
     name: Check
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04  # TODO: use `ubuntu-latest` when python 3.7 is dropped
     strategy:
       fail-fast: false
       matrix:
