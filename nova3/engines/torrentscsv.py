@@ -1,4 +1,4 @@
-#VERSION: 1.4
+# VERSION: 1.4
 # AUTHORS: Dessalines
 
 # Redistribution and use in source and binary forms, with or without

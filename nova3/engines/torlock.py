@@ -1,4 +1,4 @@
-#VERSION: 2.24
+# VERSION: 2.24
 # AUTHORS: Douman (custparasite@gmx.se)
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 

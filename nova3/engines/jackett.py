@@ -1,4 +1,4 @@
-#VERSION: 4.0
+# VERSION: 4.0
 # AUTHORS: Diego de las Heras (ngosang@hotmail.es)
 # CONTRIBUTORS: ukharley
 #               hannsen (github.com/hannsen)

@@ -1,5 +1,5 @@
-#VERSION: 1.5
-#AUTHORS: mauricci
+# VERSION: 1.5
+# AUTHORS: mauricci
 
 from helpers import retrieve_url
 from novaprinter import prettyPrinter
