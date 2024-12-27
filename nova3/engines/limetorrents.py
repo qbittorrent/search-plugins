@@ -1,4 +1,4 @@
-#VERSION: 4.9
+# VERSION: 4.10
 # AUTHORS: Lima66
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -9,10 +9,6 @@ from urllib.parse import quote
 
 from novaprinter import prettyPrinter
 from helpers import retrieve_url
-
-# Fix invalid certificate in Windows
-import ssl
-ssl._create_default_https_context = ssl._create_unverified_context
 
 
 class limetorrents(object):
