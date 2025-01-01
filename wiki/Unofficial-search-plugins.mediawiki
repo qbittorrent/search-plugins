@@ -100,6 +100,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/BurningMop/qBittorrent-Search-Plugins/refs/heads/main/calidadtorrent.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
 | ✔ qbt 5.0.x / python 3.9.x
 |-
+| [[https://www.google.com/s2/favicons?domain=cloudtorrents.com#.png]] [https://cloudtorrents.com/ CloudTorrents]
+| [https://github.com/elazar elazar]
+| 1.0
+| 31/Dec<br />2024
+| [https://raw.githubusercontent.com/elazar/qbittorrent-search-plugins/refs/heads/add-cloudtorrents-plugin/nova3/engines/cloudtorrents.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 5.0.3 / python 3.9.0
+|-
 | [[https://github.com/menegop/qbfrench/blob/master/cpasbien.png]]
 [http://www.cpasbien.moe  Cpasbien]
 | [https://github.com/MarcBresson/cpasbien MarcBresson]
