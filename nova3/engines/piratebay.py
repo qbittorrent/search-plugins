@@ -1,4 +1,4 @@
-# VERSION: 3.3
+# VERSION: 3.4
 # AUTHORS: Fabien Devaux (fab@gnux.info)
 # CONTRIBUTORS: Christophe Dumez (chris@qbittorrent.org)
 #               Arthur (custparasite@gmx.se)
@@ -30,9 +30,13 @@
 
 import json
 from urllib.parse import urlencode, unquote
+import urllib.request
+import io
+import gzip
+import html
 
 from novaprinter import prettyPrinter
-from helpers import retrieve_url
+from helpers import getBrowserUserAgent
 
 
 class piratebay(object):
@@ -70,8 +74,13 @@ class piratebay(object):
         params = {'q': what}
         if category != '0':
             params['cat'] = category
-        response = retrieve_url(base_url % urlencode(params))
-        response_json = json.loads(response)
+
+        url = base_url % urlencode(params)
+
+        data = self.retrieve_url(url)
+
+        # response = retrieve_url(base_url % urlencode(params))
+        response_json = json.loads(data)
 
         # check empty response
         if len(response_json) == 0:
@@ -96,3 +105,31 @@ class piratebay(object):
     def download_link(self, result):
         return "magnet:?xt=urn:btih:{}&{}&{}".format(
             result['info_hash'], urlencode({'dn': result['name']}), self.trackers)
+
+    def retrieve_url(self, url):
+        # Request data from API
+        request = urllib.request.Request(url, None, {'User-Agent': getBrowserUserAgent()})
+
+        try:
+            response = urllib.request.urlopen(request)
+        except:
+            return ""
+
+        data: bytes = response.read()
+
+        if data[:2] == b'\x1f\x8b':
+            # Data is gzip encoded, decode it
+            with io.BytesIO(data) as compressedStream, gzip.GzipFile(fileobj=compressedStream) as gzipper:
+                data = gzipper.read()
+
+        charset = 'utf-8'
+        try:
+            charset = response.getheader('Content-Type', '').split('charset=', 1)[1]
+        except IndexError:
+            pass
+
+        dataStr = data.decode(charset, 'replace')
+        dataStr = dataStr.replace('&quot;', '\\"')
+        dataStr = html.unescape(dataStr)
+
+        return dataStr
