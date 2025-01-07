@@ -129,7 +129,7 @@ class piratebay(object):
             pass
 
         dataStr = data.decode(charset, 'replace')
-        dataStr = dataStr.replace('&quot;', '\\"')
+        dataStr = dataStr.replace('&quot;', '\\"')  # Manually escape &quot; before
         dataStr = html.unescape(dataStr)
 
         return dataStr
