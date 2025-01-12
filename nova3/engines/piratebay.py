@@ -36,8 +36,8 @@ import urllib.error
 import urllib.request
 from urllib.parse import urlencode, unquote
 
-from novaprinter import prettyPrinter
 from helpers import getBrowserUserAgent
+from novaprinter import prettyPrinter
 
 
 class piratebay(object):
@@ -113,7 +113,7 @@ class piratebay(object):
         except urllib.error.HTTPError:
             return ""
 
-        data: bytes = response.read()
+        data = response.read()
 
         if data[:2] == b'\x1f\x8b':
             # Data is gzip encoded, decode it
