@@ -28,12 +28,13 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-import json
-from urllib.parse import urlencode, unquote
-import urllib.request
-import io
 import gzip
 import html
+import io
+import json
+import urllib.error
+import urllib.request
+from urllib.parse import urlencode, unquote
 
 from novaprinter import prettyPrinter
 from helpers import getBrowserUserAgent
@@ -75,11 +76,8 @@ class piratebay(object):
         if category != '0':
             params['cat'] = category
 
-        url = base_url % urlencode(params)
-
-        data = self.retrieve_url(url)
-
-        # response = retrieve_url(base_url % urlencode(params))
+        # Calling custom `retrieve_url` function with adequate escaping
+        data = self.retrieve_url(base_url % urlencode(params))
         response_json = json.loads(data)
 
         # check empty response
@@ -112,14 +110,14 @@ class piratebay(object):
 
         try:
             response = urllib.request.urlopen(request)
-        except:
+        except urllib.error.HTTPError:
             return ""
 
         data: bytes = response.read()
 
         if data[:2] == b'\x1f\x8b':
             # Data is gzip encoded, decode it
-            with io.BytesIO(data) as compressedStream, gzip.GzipFile(fileobj=compressedStream) as gzipper:
+            with io.BytesIO(data) as stream, gzip.GzipFile(fileobj=stream) as gzipper:
                 data = gzipper.read()
 
         charset = 'utf-8'
