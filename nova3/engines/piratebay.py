@@ -1,4 +1,4 @@
-# VERSION: 3.3
+# VERSION: 3.4
 # AUTHORS: Fabien Devaux (fab@gnux.info)
 # CONTRIBUTORS: Christophe Dumez (chris@qbittorrent.org)
 #               Arthur (custparasite@gmx.se)
@@ -28,11 +28,16 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
+import gzip
+import html
+import io
 import json
+import urllib.error
+import urllib.request
 from urllib.parse import urlencode, unquote
 
+from helpers import getBrowserUserAgent
 from novaprinter import prettyPrinter
-from helpers import retrieve_url
 
 
 class piratebay(object):
@@ -70,8 +75,10 @@ class piratebay(object):
         params = {'q': what}
         if category != '0':
             params['cat'] = category
-        response = retrieve_url(base_url % urlencode(params))
-        response_json = json.loads(response)
+
+        # Calling custom `retrieve_url` function with adequate escaping
+        data = self.retrieve_url(base_url % urlencode(params))
+        response_json = json.loads(data)
 
         # check empty response
         if len(response_json) == 0:
@@ -96,3 +103,31 @@ class piratebay(object):
     def download_link(self, result):
         return "magnet:?xt=urn:btih:{}&{}&{}".format(
             result['info_hash'], urlencode({'dn': result['name']}), self.trackers)
+
+    def retrieve_url(self, url):
+        # Request data from API
+        request = urllib.request.Request(url, None, {'User-Agent': getBrowserUserAgent()})
+
+        try:
+            response = urllib.request.urlopen(request)
+        except urllib.error.HTTPError:
+            return ""
+
+        data = response.read()
+
+        if data[:2] == b'\x1f\x8b':
+            # Data is gzip encoded, decode it
+            with io.BytesIO(data) as stream, gzip.GzipFile(fileobj=stream) as gzipper:
+                data = gzipper.read()
+
+        charset = 'utf-8'
+        try:
+            charset = response.getheader('Content-Type', '').split('charset=', 1)[1]
+        except IndexError:
+            pass
+
+        dataStr = data.decode(charset, 'replace')
+        dataStr = dataStr.replace('&quot;', '\\"')  # Manually escape &quot; before
+        dataStr = html.unescape(dataStr)
+
+        return dataStr
