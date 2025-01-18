@@ -46,3 +46,35 @@ jobs:
       - name: Build code
         run: |
           python -m compileall nova3/engines/*.py
+
+
+  zizmor:
+    name: Check workflow files
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Check GitHub Actions workflow
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pip install zizmor
+          zizmor \
+            --format sarif \
+            --pedantic \
+            ./ \
+            | jq '(.runs[].results |= map(select(.ruleId != "unpinned-uses")))
+              | (.runs[].tool.driver.rules |= map(select(.id != "unpinned-uses")))' \
+            > "${{ runner.temp }}/zizmor_results.sarif"
+
+      - name: Upload zizmor results
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          category: zizmor
+          sarif_file: "${{ runner.temp }}/zizmor_results.sarif"
