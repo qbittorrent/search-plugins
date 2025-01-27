@@ -1,4 +1,4 @@
-# VERSION: 1.4
+# VERSION: 1.5
 # AUTHORS: Dessalines
 
 # Redistribution and use in source and binary forms, with or without
@@ -53,7 +53,7 @@ class torrentscsv(object):
     trackers = '&'.join(urlencode({'tr': tracker}) for tracker in trackers_list)
 
     def search(self, what, cat='all'):
-        search_url = "{}/service/search?size=300&q={}".format(self.url, what)
+        search_url = "{}/service/search?size=100&q={}".format(self.url, what)
         desc_url = "{}/#/search/torrent/{}/1".format(self.url, what)
 
         # get response json
