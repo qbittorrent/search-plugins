@@ -1,8 +1,9 @@
-# VERSION: 4.0
+# VERSION: 4.1
 # AUTHORS: Diego de las Heras (ngosang@hotmail.es)
 # CONTRIBUTORS: ukharley
 #               hannsen (github.com/hannsen)
 #               Alexander Georgievskiy <galeksandrp@gmail.com>
+#               Ryan Meyers (github.com/sreyemnayr)
 
 import json
 import os
