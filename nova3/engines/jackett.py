@@ -21,12 +21,17 @@ from helpers import download_file
 # load configuration from file
 CONFIG_FILE = 'jackett.json'
 CONFIG_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), CONFIG_FILE)
-CONFIG_DATA = {
+CONFIG_DATA_DEFAULT = {
     'api_key': 'YOUR_API_KEY_HERE',  # jackett api
     'url': 'http://127.0.0.1:9117',  # jackett url
+    'tracker': True,                # (False/True) enable tracker name
     'tracker_first': False,          # (False/True) add tracker name to beginning of search result
     'thread_count': 20,              # number of threads to use for http requests
+    'freeleech': False,             # (False/True) enable freeleech flag
+    'freeleech_flag': '🆓',          # string to display for freeleech torrents
+    'freeleech_first': True,         # (False/True) add freeleech flag to beginning of search result
 }
+CONFIG_DATA = CONFIG_DATA_DEFAULT.copy()
 PRINTER_THREAD_LOCK = Lock()
 
 
@@ -48,9 +53,16 @@ def load_configuration():
         CONFIG_DATA['malformed'] = True
 
     # add missing keys
-    if 'thread_count' not in CONFIG_DATA:
-        CONFIG_DATA['thread_count'] = 20
+    updated_config = []
+    for key in CONFIG_DATA_DEFAULT.keys():
+        if key not in CONFIG_DATA:
+            CONFIG_DATA[key] = CONFIG_DATA_DEFAULT[key]
+            updated_config.append(key)
+
+    if updated_config:
+        print("Updated configuration file with default values for missing keys: " + ", ".join(updated_config))
         save_configuration()
+
 
 
 def save_configuration():
@@ -160,10 +172,29 @@ class jackett(object):
 
             tracker = result.find('jackettindexer')
             tracker = '' if tracker is None else tracker.text
-            if CONFIG_DATA['tracker_first']:
-                res['name'] = '[%s] %s' % (tracker, title)
+            if CONFIG_DATA['tracker']:
+                if CONFIG_DATA['tracker_first']:
+                    res['name'] = '[%s] %s' % (tracker, title)
+                else:
+                    res['name'] = '%s [%s]' % (title, tracker)
             else:
-                res['name'] = '%s [%s]' % (title, tracker)
+                res['name'] = title
+            
+            if CONFIG_DATA['freeleech']:
+                downloadVolumeFactor = 1.0
+                downloadVolumeFactorElement = result.find(self.generate_xpath('downloadvolumefactor'))
+                if downloadVolumeFactorElement is not None:
+                    downloadVolumeFactor = float(downloadVolumeFactorElement.attrib['value'])
+                else:
+                    downloadVolumeFactorElement = result.find('downloadvolumefactor')
+                    if downloadVolumeFactorElement is not None:
+                        downloadVolumeFactor = float(downloadVolumeFactorElement.text)
+                        
+                if downloadVolumeFactor <= 0:
+                    if CONFIG_DATA['freeleech_first']:
+                        res['name'] = '%s %s' % (CONFIG_DATA['freeleech_flag'], res['name'])
+                    else:
+                        res['name'] = '%s %s' % (res['name'], CONFIG_DATA['freeleech_flag'])
 
             res['link'] = result.find(self.generate_xpath('magneturl'))
             if res['link'] is not None:
