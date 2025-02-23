@@ -483,14 +483,6 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/yourbittorrent.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
 | ✔ qbt 4.3.x / python 3.8.5
 |-
-|[[https://github.com/Pireo/hello-world/blob/master/yts.png]] [http://yts.mx/ YTS.MX]
-|[https://github.com/khensolomon/leyts Lethil]
-|3.2
-|2/Nov<br />2018
-|[https://raw.githubusercontent.com/khensolomon/leyts/master/yts.py
-[[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
-|✔ qbt 4.0.x / python 3.5.0
-|-
 | [[https://github.com/Pireo/hello-world/blob/master/yts.png]] [http://yts.mx/ YTS.MX]
 | [https://github.com/lazulyra/qbit-plugins lazulyra]
 | 1.2
