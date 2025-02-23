@@ -634,16 +634,12 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/swannie-eire/prowlarr-qbittorrent-plugins/main/prowlarr.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br />[https://github.com/swannie-eire/prowlarr-qbittorrent-plugins [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
 | ✔ qbt 4.3.x / python 3.+
 |-
-
-|-
 | [[https://www.google.com/s2/favicons?domain=speedapp.io#.png]] [https://speedapp.io SpeedApp.IO]
 | [https://github.com/miIiano/SpeedApp.io-qBittorent-search-plugin miIiano]
 | 1.1
 | 11/Aug<br />2023
 | [https://raw.githubusercontent.com/miIiano/SpeedApp.io-qBittorent-search-plugin/main/speedapp.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br />[https://github.com/miIiano/SpeedApp.io-qBittorent-search-plugin [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
 | ✔ qbt 4.5.x / python 3.+
-|-
-
 |-
 | [[https://www.google.com/s2/favicons?domain=unionfansub.com#.png]] [https://torrent.unionfansub.com/ UnionFansub]
 | [https://gitlab.com/CrimsonKoba/qb-search-plugin CrimsonKoba]
@@ -652,11 +648,17 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://gitlab.com/CrimsonKoba/qb-search-plugin/-/raw/master/unionfansub.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://gitlab.com/CrimsonKoba/qb-search-plugin [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
 | ✔ qbt 4.5.x / python 3.+
 |-
-
-| [[https://raw.githubusercontent.com/CravateRouge/qBittorrentSearchPlugins/master/yggtorrent.png]] [https://yggtorrent.fi/ YggTorrent]
+| [[https://raw.githubusercontent.com/CravateRouge/qBittorrentSearchPlugins/master/yggtorrent.png]] [https://www.ygg.re/ YggTorrent]
 | [https://github.com/CravateRouge/qBittorrentSearchPlugins CravateRouge]
 | 1.0
 | 25/Nov<br />2019
 | [https://raw.githubusercontent.com/CravateRouge/qBittorrentSearchPlugins/master/yggtorrent.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/CravateRouge/qBittorrentSearchPlugins/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
 | ❗ Working when DDOS cloudfare<br />protection is disabled
+|-
+| [[https://raw.githubusercontent.com/Laiteux/YggAPI-qBitTorrent-Search-Plugin/main/yggapi.ico]] [https://yggapi.eu/ YggAPI]
+| [https://github.com/Laiteux/YggAPI-qBitTorrent-Search-Plugin Laiteux]
+| 1.1
+| 31/Jan<br />2025
+| [https://raw.githubusercontent.com/Laiteux/YggAPI-qBitTorrent-Search-Plugin/main/yggapi.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/Laiteux/YggAPI-qBittorrent-Search-Plugin/blob/main/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
+| ✔ qbt 4.1.x / python 3.+
 |}
