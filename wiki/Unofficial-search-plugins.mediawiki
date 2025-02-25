@@ -647,10 +647,10 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/CravateRouge/qBittorrentSearchPlugins/master/yggtorrent.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/CravateRouge/qBittorrentSearchPlugins/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
 | ❗ Working when DDOS cloudfare<br />protection is disabled
 |-
-| [[https://raw.githubusercontent.com/Laiteux/YggAPI-qBitTorrent-Search-Plugin/main/yggapi.ico]] [https://yggapi.eu/ YggAPI]
+| <img src="https://raw.githubusercontent.com/Laiteux/YggAPI-qBitTorrent-Search-Plugin/main/yggapi.ico" width="16" height="16" alt="Ygg"> [https://yggapi.eu/ YggAPI]
 | [https://github.com/Laiteux/YggAPI-qBitTorrent-Search-Plugin Laiteux]
 | 1.1
 | 31/Jan<br />2025
 | [https://raw.githubusercontent.com/Laiteux/YggAPI-qBitTorrent-Search-Plugin/main/yggapi.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/Laiteux/YggAPI-qBittorrent-Search-Plugin/blob/main/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
-| ✔ qbt 4.1.x / python 3.+
+| ✔ qbt 4.1.0+ / python 3.6+
 |}
