@@ -110,10 +110,14 @@ following contents:
 
 ```json
 {
-    "api_key": "YOUR_API_KEY_HERE",
-    "url": "http://127.0.0.1:9117",
-    "tracker_first": false,
-    "thread_count": 20
+  "api_key": "YOUR_API_KEY_HERE",
+  "url": "http://127.0.0.1:9117",
+  "tracker": true,
+  "tracker_first": false,
+  "thread_count": 20,
+  "freeleech": false,
+  "freeleech_first": true,
+  "freeleech_flag": "🆓"
 }
 ```
 
@@ -123,7 +127,7 @@ following contents:
 > (127.0.0.1) must be replaced with a routable address (for instance, using DDNS
 > or an IPv6 Global Unicast Address) to allow traffic to pass between it and
 > qBittorrent. Additional firewall rules or port forwarding may also be needed.
-> 
+>
 > The change must be made in both the Jackett UI and the plugin configuration
 > file, specifically its `url` key. For example:
 
@@ -139,12 +143,16 @@ following contents:
 
 ### Configuration file properties
 
-|  Property name  |      Initial value      |                                             Description                                             |
-|:----------------|:------------------------|:----------------------------------------------------------------------------------------------------|
-|    `api_key`    |   `YOUR_API_KEY_HERE`   | Jackett API Key, shown in the upper-right corner of the Jackett UI ([screenshot below][api-key-ss]) |
-|      `url`      | `http://127.0.0.1:9117` | Jackett service address (without a terminating forward slash)                                       |
-| `tracker_first` |         `false`         | Prepend indexer site name to each search result (takes Boolean value)                               |
-| `thread_count`  |          `20`           | Maximum number of concurrent requests to Jackett (to disable concurrent requests, set value to `1`) |
+| Property name     | Initial value           | Description                                                                                                        |
+| :---------------- | :---------------------- | :----------------------------------------------------------------------------------------------------------------- |
+| `api_key`         | `YOUR_API_KEY_HERE`     | Jackett API Key, shown in the upper-right corner of the Jackett UI ([screenshot below][api-key-ss])                |
+| `url`             | `http://127.0.0.1:9117` | Jackett service address (without a terminating forward slash)                                                      |
+| `tracker`         | `true`                  | Include tracker name in each search result (takes Boolean value)                                                   |
+| `tracker_first`   | `false`                 | If `tracker` is `true`, prepend (rather than append) indexer site name to each search result (takes Boolean value) |
+| `thread_count`    | `20`                    | Maximum number of concurrent requests to Jackett (to disable concurrent requests, set value to `1`)                |
+| `freeleech`       | `false`                 | Enable freeleech flag (takes Boolean value)                                                                        |
+| `freeleech_first` | `true`                  | If `freeleech` is `true`, prepend (rather than append) freeleech flag to each search result (takes Boolean value)  |
+| `freeleech_flag`  | `🆓`                    | String to display for freeleech torrents (takes string value)                                                      |
 
 ## Disabling/Removing the Jackett plugin
 
@@ -155,10 +163,13 @@ disable it or removing it entirely at any time by following these steps:
    bottom-right corner.
 1. Locate the entry named **Jackett** in the list.
 1. To disable the plugin:
+
    - Right-click the entry and clear the checkmark from the **Enabled** option.
 
    Or to uninstall the plugin:
+
    - Right-click the entry and select **Uninstall**.
+
 1. Click the **Close** button.
 
 ## Screenshots
