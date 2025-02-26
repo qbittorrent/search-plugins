@@ -65,12 +65,12 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/AlaaBrahim/qBitTorrent-animetosho-search-plugin/main/animetosho.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
 | ✔ qbt 4.5.x / python 3.x.x
 |-
-|[[https://raw.githubusercontent.com/nklido/qBittorrent_search_engines/master/engines/audiobookbay_icon_16x16.png]] [http://audiobookbay.fi AudioBook Bay (ABB) ]
+|[[https://raw.githubusercontent.com/nklido/qBittorrent_search_engines/master/engines/audiobookbay_icon_16x16.png]] [http://theaudiobookbay.se/ AudioBook Bay (ABB) ]
 |[https://github.com/nklido/qBittorrent_search_engines nKlido]
-|0.0.2
-|21/May<br />2022
+|0.4
+|22/Feb<br />2025
 |[https://raw.githubusercontent.com/nklido/qBittorrent_search_engines/master/engines/audiobookbay.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
-|✔ qbt 4.3.x / python 3.8.10 <br />
+|✔ qbt 5.0.x / python 3.12.x <br />
 |-
 | [[https://www.google.com/s2/favicons?domain=bitsearch.to#.png]] [https://bitsearch.to/ Bit Search]
 | [https://github.com/BurningMop/qBittorrent-Search-Plugins BurningMop]
