@@ -1,4 +1,4 @@
-# VERSION: 3.4
+# VERSION: 3.5
 # AUTHORS: Fabien Devaux (fab@gnux.info)
 # CONTRIBUTORS: Christophe Dumez (chris@qbittorrent.org)
 #               Arthur (custparasite@gmx.se)
@@ -28,6 +28,7 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
+import datetime
 import gzip
 import html
 import io
@@ -36,7 +37,6 @@ import urllib.error
 import urllib.request
 from urllib.parse import urlencode, unquote
 
-from helpers import getBrowserUserAgent
 from novaprinter import prettyPrinter
 
 
@@ -105,6 +105,21 @@ class piratebay(object):
             result['info_hash'], urlencode({'dn': result['name']}), self.trackers)
 
     def retrieve_url(self, url):
+        def getBrowserUserAgent():
+            """ Disguise as browser to circumvent website blocking """
+
+            # Firefox release calendar
+            # https://whattrainisitnow.com/calendar/
+            # https://wiki.mozilla.org/index.php?title=Release_Management/Calendar&redirect=no
+
+            baseDate = datetime.date(2024, 4, 16)
+            baseVersion = 125
+
+            nowDate = datetime.date.today()
+            nowVersion = baseVersion + ((nowDate - baseDate).days // 30)
+
+            return f"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:{nowVersion}.0) Gecko/20100101 Firefox/{nowVersion}.0"
+
         # Request data from API
         request = urllib.request.Request(url, None, {'User-Agent': getBrowserUserAgent()})
 
