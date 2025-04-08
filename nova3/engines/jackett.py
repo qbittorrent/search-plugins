@@ -1,4 +1,4 @@
-# VERSION: 4.0
+# VERSION: 4.1
 # AUTHORS: Diego de las Heras (ngosang@hotmail.es)
 # CONTRIBUTORS: ukharley
 #               hannsen (github.com/hannsen)
@@ -31,7 +31,7 @@ PRINTER_THREAD_LOCK = Lock()
 
 
 def load_configuration():
-    global CONFIG_PATH, CONFIG_DATA
+    global CONFIG_DATA
     try:
         # try to load user data from file
         with open(CONFIG_PATH) as f:
@@ -54,7 +54,6 @@ def load_configuration():
 
 
 def save_configuration():
-    global CONFIG_PATH, CONFIG_DATA
     with open(CONFIG_PATH, 'w') as f:
         f.write(json.dumps(CONFIG_DATA, indent=4, sort_keys=True))
 
@@ -231,7 +230,6 @@ class jackett(object):
         })
 
     def pretty_printer_thread_safe(self, dictionary):
-        global PRINTER_THREAD_LOCK
         with PRINTER_THREAD_LOCK:
             prettyPrinter(self.escape_pipe(dictionary))
 
