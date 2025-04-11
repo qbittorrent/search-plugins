@@ -1,4 +1,4 @@
-# VERSION: 3.5
+# VERSION: 3.6
 # AUTHORS: Fabien Devaux (fab@gnux.info)
 # CONTRIBUTORS: Christophe Dumez (chris@qbittorrent.org)
 #               Arthur (custparasite@gmx.se)
@@ -37,7 +37,10 @@ import urllib.error
 import urllib.request
 from urllib.parse import urlencode, unquote
 
+import helpers  # for setting SOCKS proxy side-effect
 from novaprinter import prettyPrinter
+
+helpers.htmlentitydecode  # dirty workaround to surpress static checkers
 
 
 class piratebay(object):
