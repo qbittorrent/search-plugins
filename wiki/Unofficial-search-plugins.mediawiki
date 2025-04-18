@@ -7,7 +7,7 @@ Here you can find unofficial search engine plugins for qBittorrent that are made
 * To write your own search plugins, please follow [[How-to-write-a-search-plugin|this tutorial]].
 * If you wrote one, you're welcome to add it to these tables. Please keep the list sorted by <code>Search Engine</code> name.
 * '''If you experience issues with any of the plugins posted here, please report to the author directly.''' In case the author is unresponsive, you can try to fix it yourself. Then you can edit this wiki page and update the link to your fixed plugin.
-* The plugins shown as ✖ or ❗ will result in the slowdown and malfunction of other plugins as well, hence the use of these plugins is strongly discouraged.
+* The plugins shown as ✖, ❗, or ❌ will result in the slowdown and malfunction of other plugins as well, hence the use of these plugins is strongly discouraged.
 
 ⚠️ We removed support for Python 2. Please upgrade to Python 3 to continue using the search function.
 The minimum supported Python version (across all platforms) is specified at [https://github.com/qbittorrent/qBittorrent/blob/master/INSTALL#L21-L23 here].
