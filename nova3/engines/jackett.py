@@ -1,4 +1,4 @@
-# VERSION: 4.1
+# VERSION: 4.2
 # AUTHORS: Diego de las Heras (ngosang@hotmail.es)
 # CONTRIBUTORS: ukharley
 #               hannsen (github.com/hannsen)
@@ -6,15 +6,46 @@
 
 import json
 import os
+import urllib.request
 import xml.etree.ElementTree
-from urllib.parse import urlencode, unquote
-from urllib import request as urllib_request
 from http.cookiejar import CookieJar
 from multiprocessing.dummy import Pool
 from threading import Lock
+from urllib.parse import unquote, urlencode
 
+import helpers
 from novaprinter import prettyPrinter
-from helpers import download_file
+
+
+###############################################################################
+class ProxyManager:
+    HTTP_PROXY_KEY = "http_proxy"
+    HTTPS_PROXY_KEY = "https_proxy"
+
+    def __init__(self) -> None:
+        self.http_proxy = os.environ.get(self.HTTP_PROXY_KEY, "")
+        self.https_proxy = os.environ.get(self.HTTPS_PROXY_KEY, "")
+
+    def enable_proxy(self, enable: bool) -> None:
+        # http proxy
+        if enable:
+            os.environ[self.HTTP_PROXY_KEY] = self.http_proxy
+            os.environ[self.HTTPS_PROXY_KEY] = self.https_proxy
+        else:
+            os.environ.pop(self.HTTP_PROXY_KEY, None)
+            os.environ.pop(self.HTTPS_PROXY_KEY, None)
+
+        # SOCKS proxy
+        # best effort and avoid breaking older qbt versions
+        try:
+            helpers.enable_socks_proxy(enable)
+        except AttributeError:
+            pass
+
+
+# initialize it early to ensure env vars were not tampered
+proxy_manager = ProxyManager()
+proxy_manager.enable_proxy(False)  # off by default
 
 
 ###############################################################################
@@ -82,11 +113,13 @@ class jackett(object):
         # fix for some indexers with magnet link inside .torrent file
         if download_url.startswith('magnet:?'):
             print(download_url + " " + download_url)
+        proxy_manager.enable_proxy(True)
         response = self.get_response(download_url)
+        proxy_manager.enable_proxy(False)
         if response is not None and response.startswith('magnet:?'):
             print(response + " " + download_url)
         else:
-            print(download_file(download_url))
+            print(helpers.download_file(download_url))
 
     def search(self, what, cat='all'):
         what = unquote(what)
@@ -206,9 +239,9 @@ class jackett(object):
         try:
             # we can't use helpers.retrieve_url because of redirects
             # we need the cookie processor to handle redirects
-            opener = urllib_request.build_opener(urllib_request.HTTPCookieProcessor(CookieJar()))
+            opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(CookieJar()))
             response = opener.open(query).read().decode('utf-8')
-        except urllib_request.HTTPError as e:
+        except urllib.request.HTTPError as e:
             # if the page returns a magnet redirect, used in download_torrent
             if e.code == 302:
                 response = e.url
