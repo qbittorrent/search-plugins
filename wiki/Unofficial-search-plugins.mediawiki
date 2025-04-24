@@ -627,7 +627,7 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | ✔ qbt 4.3.x / python 3.+
 |-
 | [[https://www.google.com/s2/favicons?domain=sharewood.tv#.png]] [https://sharewood.tv Sharewood]
-| [https://github.com/miIiano/SpeedApp.io-qBittorent-search-plugin miIiano]
+| [https://gist.github.com/etn406/2300dd7e8d97ea39442fcdf44c244fe2 etn]
 | 1.0
 | 24/Apr<br />2025
 | [https://gist.githubusercontent.com/etn406/2300dd7e8d97ea39442fcdf44c244fe2/raw/21f1fb783da4ea516b44091fda1fd749d8f5eef3/sharewood.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
