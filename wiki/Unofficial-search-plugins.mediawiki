@@ -147,10 +147,10 @@ The minimum supported Python version (across all platforms) is specified at [htt
 |-
 | [[https://github.com/Bioux1/qbtSearchPlugins/blob/main/dodi_repacks.png]] [https://dodi-repacks.site/ DODI Repacks]
 | [https://github.com/Bioux1/qbtSearchPlugins Bioux1]
-| 1.0
-| 27/Jun<br />2024
+| 1.1
+| 01/May<br />2025
 | [https://raw.githubusercontent.com/Bioux1/qbtSearchPlugins/main/dodi_repacks.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br />
-| ✔ qbt 4.6.5 / python 3.12.4
+| ✔ qbt 5.1.0 / python 3.13.3
 |-
 | [[https://github.com/dangar16/dontorrent-plugin/blob/main/icono%20dontorrent.png]] [https://dontorrent.cologne/ Dontorrent]
 | [https://github.com/dangar16/dontorrent-plugin dangar16]
@@ -182,10 +182,10 @@ The minimum supported Python version (across all platforms) is specified at [htt
 |-
 | [[https://github.com/Bioux1/qbtSearchPlugins/blob/main/fitgirl_repacks.jpg]] [https://fitgirl-repacks.site/ FitGirl Repacks]
 | [https://github.com/Bioux1/qbtSearchPlugins Bioux1]
-| 1.0
-| 27/Jun<br />2024
+| 1.1
+| 01/May<br />2025
 | [https://raw.githubusercontent.com/Bioux1/qbtSearchPlugins/main/fitgirl_repacks.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br />
-| ✔ qbt 4.6.5 / python 3.12.4
+| ✔ qbt 5.1.0 / python 3.13.3
 |-
 | [[https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/glotorrents.png]] [https://glodls.to/  GloTorrents]
 | [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
