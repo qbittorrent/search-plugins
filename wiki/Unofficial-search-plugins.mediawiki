@@ -605,12 +605,12 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/imDMG/qBt_SE/master/engines/rutracker.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/imDMG/qBt_SE/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
 | ✔ qbt 4.2.x / python 3.7+
 |-
-| [[https://github.com/libellula/Official-search-engines-plugins-favicons/blob/bf2aaabe07ba94b993282d8dd888674469f2ab1e/favicon-16x16.png]] [https://rutracker.org/ RuTracker]
+| [[https://github.com/user-attachments/assets/30a3bfc2-5c4b-4a94-96d5-35750dfd45e2]] [https://rutracker.org/ RuTracker]
 | [https://github.com/nbusseneau/qBittorrent-rutracker-plugin nbusseneau]
-| 2.1.9
-| 11/Oct<br />2023
+| 2.2.0
+| 01/May<br />2025
 | [https://raw.githubusercontent.com/nbusseneau/qBittorrent-rutracker-plugin/master/rutracker.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br />[https://github.com/nbusseneau/qBittorrent-rutracker-plugin/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
-| ✔ qbt 4.5.x / python 3.10.x<br/>
+| ✔ qbt 5.1.x / python 3.10.x<br/>
 |-
 | [[https://i.imgur.com/M5UA6tt.png]] [https://www.torrentleech.org/ TorrentLeech]
 | [https://github.com/444995/qbit-search-plugins 444995]
