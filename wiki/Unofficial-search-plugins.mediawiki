@@ -237,6 +237,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/iordic/qbittorrent-search-plugins/master/engines/mejortorrent.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
 |  ✔ qbt 4.6.7 / python 3.9.5
 |-
+| [[https://www.google.com/s2/favicons?domain=mikanime.tv#.png]] [https://mikanime.tv Mikan Project]
+| [https://github.com/Cycloctane/qBittorrent-plugins Cycloctane]
+| 0.4
+| 08/May<br />/2025
+| [https://raw.githubusercontent.com/Cycloctane/qBittorrent-plugins/master/engines/mikan.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
+| ✔ qbt 4.5.x / python 3.9.x
+|-
 |[[https://raw.githubusercontent.com/Cc050511/qBit-search-plugins/main/mikan-pic.png]] [https://mikanani.me mikanani]
 |[https://github.com/Cc050511/qBit-search-plugins Yun]
 |1.2
