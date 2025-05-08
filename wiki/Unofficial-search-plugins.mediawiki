@@ -626,6 +626,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/swannie-eire/prowlarr-qbittorrent-plugins/main/prowlarr.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br />[https://github.com/swannie-eire/prowlarr-qbittorrent-plugins [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
 | ✔ qbt 4.3.x / python 3.+
 |-
+| [[https://www.google.com/s2/favicons?domain=sharewood.tv#.png]] [https://sharewood.tv Sharewood]
+| [https://gist.github.com/etn406/2300dd7e8d97ea39442fcdf44c244fe2 etn]
+| 1.1
+| 24/Apr<br />2025
+| [https://gist.githubusercontent.com/etn406/2300dd7e8d97ea39442fcdf44c244fe2/raw/48eba68c0e32f9321ef2e47f4f8ecb437b093a61/sharewood.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 5.0.3 / python 3.+
+|-
 | [[https://www.google.com/s2/favicons?domain=speedapp.io#.png]] [https://speedapp.io SpeedApp.IO]
 | [https://github.com/miIiano/SpeedApp.io-qBittorent-search-plugin miIiano]
 | 1.1
