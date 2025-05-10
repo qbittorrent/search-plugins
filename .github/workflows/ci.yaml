@@ -69,10 +69,10 @@ jobs:
           pip install zizmor
           zizmor \
             --format sarif \
-            --pedantic \
+            --persona auditor \
             ./ \
-            | jq '(.runs[].results |= map(select(.ruleId != "unpinned-uses")))
-              | (.runs[].tool.driver.rules |= map(select(.id != "unpinned-uses")))' \
+            | jq '(.runs[].results |= map(select(.ruleId != "zizmor/unpinned-uses")))
+              | (.runs[].tool.driver.rules |= map(select(.id != "zizmor/unpinned-uses")))' \
             > "${{ runner.temp }}/zizmor_results.sarif"
 
       - name: Upload zizmor results
