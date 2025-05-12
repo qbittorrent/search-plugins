@@ -330,8 +330,8 @@ The minimum supported Python version (across all platforms) is specified at [htt
 |-
 | [[https://github.com/imDMG/qBt_SE/blob/master/engines/rutor.png]] [http://rutor.info/ Rutor]
 | [https://github.com/imDMG/qBt_SE imDMG]
-| 1.8
-| 10/Sep<br />2023
+| 1.11
+| 13/May<br />2025
 | [https://raw.githubusercontent.com/imDMG/qBt_SE/master/engines/rutor.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/imDMG/qBt_SE/blob/master/README.md#rutrackerorg [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
 | ✔ qbt 4.2.x / python 3.7+
 |-
@@ -565,8 +565,8 @@ The minimum supported Python version (across all platforms) is specified at [htt
 |-
 | [[https://raw.githubusercontent.com/imDMG/qBt_SE/master/engines/kinozal.png]] [http://kinozal.tv/ Kinozal]
 | [https://github.com/imDMG/qBt_SE imDMG]
-| 2.12
-| 10/Sep<br />2023
+| 2.15
+| 13/May<br />2025
 | [https://raw.githubusercontent.com/imDMG/qBt_SE/master/engines/kinozal.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/imDMG/qBt_SE/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
 | ✔ qbt 4.2.x / python 3.7+
 |-
@@ -586,8 +586,8 @@ The minimum supported Python version (across all platforms) is specified at [htt
 |-
 | [[https://raw.githubusercontent.com/imDMG/qBt_SE/master/engines/nnmclub.png]] [https://nnm-club.me/ NoNaMe-Club]
 | [https://github.com/imDMG/qBt_SE imDMG]
-| 2.12
-| 10/Sep<br />2023
+| 2.16
+| 13/May<br />2025
 | [https://raw.githubusercontent.com/imDMG/qBt_SE/master/engines/nnmclub.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/imDMG/qBt_SE/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
 | ✔ qbt 4.2.x / python 3.7+
 |-
@@ -607,8 +607,8 @@ The minimum supported Python version (across all platforms) is specified at [htt
 |-
 | [[https://raw.githubusercontent.com/imDMG/qBt_SE/master/engines/rutracker.png]] [https://rutracker.org/ RuTracker]
 | [https://github.com/imDMG/qBt_SE imDMG]
-| 1.9
-| 10/Sep<br />2023
+| 1.12
+| 13/May<br />2025
 | [https://raw.githubusercontent.com/imDMG/qBt_SE/master/engines/rutracker.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/imDMG/qBt_SE/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
 | ✔ qbt 4.2.x / python 3.7+
 |-
