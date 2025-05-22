@@ -11,11 +11,11 @@ concurrency:
 jobs:
   ci:
     name: Check
-    runs-on: ubuntu-22.04  # TODO: use `ubuntu-latest` when python 3.7 is dropped
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['3.7', '3.8', '3.9', '3.10', '3.11', '3.12', '3.13', '3.14-dev']
+        python-version: ['3.9', '3.10', '3.11', '3.12', '3.13', '3.14-dev']
 
     steps:
       - name: Checkout repository
