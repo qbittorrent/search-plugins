@@ -1,12 +1,12 @@
-# VERSION: 2.25
+# VERSION: 2.26
 # AUTHORS: Douman (custparasite@gmx.se)
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
-from html.parser import HTMLParser
 from datetime import datetime, timedelta
+from html.parser import HTMLParser
 
+from helpers import download_file, retrieve_url
 from novaprinter import prettyPrinter
-from helpers import retrieve_url, download_file
 
 
 class torlock(object):

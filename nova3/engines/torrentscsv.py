@@ -1,4 +1,4 @@
-# VERSION: 1.5
+# VERSION: 1.6
 # AUTHORS: Dessalines
 
 # Redistribution and use in source and binary forms, with or without
@@ -28,8 +28,8 @@
 import json
 from urllib.parse import urlencode
 
-from novaprinter import prettyPrinter
 from helpers import retrieve_url
+from novaprinter import prettyPrinter
 
 
 class torrentscsv(object):

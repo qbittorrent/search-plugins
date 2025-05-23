@@ -29,7 +29,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install tools
-        run: pip install bandit pycodestyle pyflakes
+        run: pip install bandit isort pycodestyle pyflakes
 
       - name: Lint code
         run: |
@@ -44,6 +44,10 @@ jobs:
             --max-line-length=1000 \
             --statistics \
             nova3/engines/*.py
+          isort \
+             --check \
+             --diff \
+             nova3/engines/*.py
 
       - name: Build code
         run: |

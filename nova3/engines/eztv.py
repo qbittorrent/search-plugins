@@ -1,4 +1,4 @@
-# VERSION: 1.16
+# VERSION: 1.17
 # AUTHORS: nindogo
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -9,8 +9,8 @@ import urllib.request
 from datetime import datetime, timedelta
 from html.parser import HTMLParser
 
-from novaprinter import prettyPrinter
 from helpers import retrieve_url
+from novaprinter import prettyPrinter
 
 
 class eztv(object):

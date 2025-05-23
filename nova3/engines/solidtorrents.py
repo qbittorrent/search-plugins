@@ -1,4 +1,4 @@
-# VERSION: 2.4
+# VERSION: 2.5
 # AUTHORS: nKlido
 
 # LICENSING INFORMATION
@@ -20,10 +20,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+from datetime import datetime
+from html.parser import HTMLParser
+
 from helpers import retrieve_url
 from novaprinter import prettyPrinter
-from html.parser import HTMLParser
-from datetime import datetime
 
 
 class solidtorrents(object):

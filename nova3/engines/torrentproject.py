@@ -1,13 +1,13 @@
-# VERSION: 1.5
+# VERSION: 1.6
 # AUTHORS: mauricci
 
-from helpers import retrieve_url
-from novaprinter import prettyPrinter
 import re
-
 from datetime import datetime
 from html.parser import HTMLParser
 from urllib.parse import unquote
+
+from helpers import retrieve_url
+from novaprinter import prettyPrinter
 
 
 class torrentproject(object):

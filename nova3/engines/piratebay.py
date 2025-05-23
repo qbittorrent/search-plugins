@@ -1,4 +1,4 @@
-# VERSION: 3.6
+# VERSION: 3.7
 # AUTHORS: Fabien Devaux (fab@gnux.info)
 # CONTRIBUTORS: Christophe Dumez (chris@qbittorrent.org)
 #               Arthur (custparasite@gmx.se)
@@ -35,7 +35,7 @@ import io
 import json
 import urllib.error
 import urllib.request
-from urllib.parse import urlencode, unquote
+from urllib.parse import unquote, urlencode
 
 import helpers  # for setting SOCKS proxy side-effect
 from novaprinter import prettyPrinter

@@ -1,4 +1,4 @@
-# VERSION: 4.10
+# VERSION: 4.11
 # AUTHORS: Lima66
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -7,8 +7,8 @@ from datetime import datetime, timedelta
 from html.parser import HTMLParser
 from urllib.parse import quote
 
-from novaprinter import prettyPrinter
 from helpers import retrieve_url
+from novaprinter import prettyPrinter
 
 
 class limetorrents(object):
