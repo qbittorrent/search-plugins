@@ -1,8 +1,9 @@
-# VERSION: 1.17
+# VERSION: 1.18
 # AUTHORS: nindogo
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
 import re
+import sys
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -94,7 +95,7 @@ class eztv(object):
                 response = urllib.request.urlopen(req)  # nosec B310
                 return response.read().decode('utf-8')
             except urllib.error.URLError as errno:
-                print(f"Connection error: {errno.reason}")
+                print(f"Connection error: {errno.reason}", file=sys.stderr)
             return ""
 
     def search(self, what, cat='all'):

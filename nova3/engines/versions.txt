@@ -1,4 +1,4 @@
-eztv: 1.17
+eztv: 1.18
 jackett: 4.3
 limetorrents: 4.11
 piratebay: 3.7
