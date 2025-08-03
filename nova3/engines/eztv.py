@@ -1,4 +1,4 @@
-# VERSION: 1.18
+# VERSION: 1.19
 # AUTHORS: nindogo
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -104,8 +104,3 @@ class eztv(object):
         eztv_parser = self.MyHtmlParser(self.url)
         eztv_parser.feed(eztv_html)
         eztv_parser.close()
-
-
-if __name__ == '__main__':
-    eztv_se = eztv()
-    eztv_se.search('Acre', 'all')

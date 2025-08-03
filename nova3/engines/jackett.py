@@ -1,4 +1,4 @@
-# VERSION: 4.3
+# VERSION: 4.4
 # AUTHORS: Diego de las Heras (ngosang@hotmail.es)
 # CONTRIBUTORS: ukharley
 #               hannsen (github.com/hannsen)
@@ -279,8 +279,3 @@ class jackett(object):
             if isinstance(dictionary[key], str):
                 dictionary[key] = dictionary[key].replace('|', '%7C')
         return dictionary
-
-
-if __name__ == "__main__":
-    jackett_se = jackett()
-    jackett_se.search("ubuntu server", 'software')
