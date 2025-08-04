@@ -1,4 +1,4 @@
-# VERSION: 2.5
+# VERSION: 2.6
 # AUTHORS: nKlido
 
 # LICENSING INFORMATION
@@ -22,19 +22,20 @@
 
 from datetime import datetime
 from html.parser import HTMLParser
+from typing import Any, Dict, List, Mapping, Tuple, Union
 
 from helpers import retrieve_url
 from novaprinter import prettyPrinter
 
 
-class solidtorrents(object):
+class solidtorrents:
     url = 'https://solidtorrents.to'
     name = 'Solid Torrents'
     supported_categories = {'all': 'all', 'music': 'Audio', 'books': 'eBook'}
 
     class TorrentInfoParser(HTMLParser):
 
-        def __init__(self, url):
+        def __init__(self, url: str) -> None:
             HTMLParser.__init__(self)
             self.url = url
             self.foundResult = False
@@ -51,7 +52,7 @@ class solidtorrents(object):
 
             self.torrent_info = self.empty_torrent_info()
 
-        def empty_torrent_info(self):
+        def empty_torrent_info(self) -> Dict[str, Any]:
             return {
                 'link': '',
                 'name': '',
@@ -63,21 +64,25 @@ class solidtorrents(object):
                 'pub_date': -1,
             }
 
-        def handle_starttag(self, tag, attrs):
+        def handle_starttag(self, tag: str, attrs: List[Tuple[str, Union[str, None]]]) -> None:
+            def getStr(d: Mapping[str, Any], key: str) -> str:
+                value = d.get(key, '')
+                return value if value is not None else ''
+
             params = dict(attrs)
 
-            if 'search-result' in params.get('class', ''):
+            if 'search-result' in getStr(params, 'class'):
                 self.foundResult = True
                 return
 
-            if (self.foundResult and 'title' in params.get('class', '') and tag == 'h5'):
+            if (self.foundResult and 'title' in getStr(params, 'class') and tag == 'h5'):
                 self.foundTitle = True
 
             if (self.foundTitle and tag == 'a'):
-                self.torrent_info['desc_link'] = self.url + params.get('href')
+                self.torrent_info['desc_link'] = self.url + getStr(params, 'href')
                 self.parseTitle = True
 
-            if (self.foundResult and 'stats' in params.get('class', '')):
+            if (self.foundResult and 'stats' in getStr(params, 'class')):
                 self.foundStats = True
                 self.column = -1
 
@@ -96,19 +101,19 @@ class solidtorrents(object):
             if (self.foundStats and tag == 'div' and self.column == 5):
                 self.parseDate = True
 
-            if (self.foundResult and 'dl-magnet' in params.get('class', '') and tag == 'a'):
+            if (self.foundResult and 'dl-magnet' in getStr(params, 'class') and tag == 'a'):
                 self.torrent_info['link'] = params.get('href')
                 self.foundResult = False
                 self.torrentReady = True
 
-        def handle_endtag(self, tag):
+        def handle_endtag(self, tag: str) -> None:
             if (self.torrentReady):
-                prettyPrinter(self.torrent_info)
+                prettyPrinter(self.torrent_info)  # type: ignore[arg-type] # refactor later
                 self.torrentReady = False
                 self.torrent_info = self.empty_torrent_info()
                 self.totalResults += 1
 
-        def handle_data(self, data):
+        def handle_data(self, data: str) -> None:
 
             if (self.parseTitle):
                 if (bool(data.strip()) and data != '\n'):
@@ -141,12 +146,12 @@ class solidtorrents(object):
                 self.parseDate = False
                 self.foundStats = False
 
-    def request(self, searchTerm, category, page=1):
+    def request(self, searchTerm: str, category: str, page: int = 1) -> str:
         return retrieve_url(
             self.url + '/search?q=' + searchTerm + '&category=' + category
             + '&sort=seeders&sort=desc&page=' + str(page))
 
-    def search(self, what, cat='all'):
+    def search(self, what: str, cat: str = 'all') -> None:
         category = self.supported_categories[cat]
 
         for page in range(1, 5):

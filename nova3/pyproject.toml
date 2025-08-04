@@ -1,8 +1,12 @@
 [tool.mypy]
 mypy_path = "aux"
 
+[[tool.mypy.overrides]]
+module = ["helpers", "socks"]
+ignore_errors = true
+
 [tool.pyright]
-include = ["aux"]
+extraPaths = ["aux"]
 
 [tool.pytest.ini_options]
 pythonpath = "aux"

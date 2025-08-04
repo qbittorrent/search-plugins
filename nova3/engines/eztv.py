@@ -1,7 +1,8 @@
-# VERSION: 1.19
+# VERSION: 1.20
 # AUTHORS: nindogo
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
+import http.client
 import re
 import sys
 import urllib.error
@@ -9,12 +10,13 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta
 from html.parser import HTMLParser
+from typing import Any, Callable, Dict, List, Mapping, Match, Tuple, Union
 
 from helpers import retrieve_url
 from novaprinter import prettyPrinter
 
 
-class eztv(object):
+class eztv:
     name = "EZTV"
     url = 'https://eztvx.to/'
     supported_categories = {'all': 'all', 'tv': 'tv'}
@@ -23,12 +25,12 @@ class eztv(object):
         A, TD, TR, TABLE = ('a', 'td', 'tr', 'table')
 
         """ Sub-class for parsing results """
-        def __init__(self, url):
+        def __init__(self, url: str) -> None:
             HTMLParser.__init__(self)
             self.url = url
 
             now = datetime.now()
-            self.date_parsers = {
+            self.date_parsers: Mapping[str, Callable[[Match[str]], datetime]] = {
                 r"(\d+)h\s+(\d+)m": lambda m: now - timedelta(hours=int(m[1]), minutes=int(m[2])),
                 r"(\d+)d\s+(\d+)h": lambda m: now - timedelta(days=int(m[1]), hours=int(m[2])),
                 r"(\d+)\s+weeks?": lambda m: now - timedelta(weeks=int(m[1])),
@@ -36,9 +38,13 @@ class eztv(object):
                 r"(\d+)\s+years?": lambda m: now - timedelta(days=int(m[1]) * 365),
             }
             self.in_table_row = False
-            self.current_item = {}
+            self.current_item: Dict[str, Any] = {}
 
-        def handle_starttag(self, tag, attrs):
+        def handle_starttag(self, tag: str, attrs: List[Tuple[str, Union[str, None]]]) -> None:
+            def getStr(d: Mapping[str, Any], key: str) -> str:
+                value = d.get(key, '')
+                return value if value is not None else ''
+
             params = dict(attrs)
 
             if (params.get('class') == 'forum_header_border'
@@ -57,10 +63,10 @@ class eztv(object):
 
             if (tag == self.A
                     and self.in_table_row and params.get('class') == 'epinfo'):
-                self.current_item['desc_link'] = self.url + params.get('href')
-                self.current_item['name'] = params.get('title').split(' (')[0]
+                self.current_item['desc_link'] = self.url + getStr(params, 'href')
+                self.current_item['name'] = getStr(params, 'title').split(' (')[0]
 
-        def handle_data(self, data):
+        def handle_data(self, data: str) -> None:
             data = data.replace(',', '')
             if (self.in_table_row
                     and (data.endswith(' KB') or data.endswith(' MB') or data.endswith(' GB'))):
@@ -76,12 +82,12 @@ class eztv(object):
                         self.current_item["pub_date"] = int(calc(m).timestamp())
                         break
 
-        def handle_endtag(self, tag):
+        def handle_endtag(self, tag: str) -> None:
             if self.in_table_row and tag == self.TR:
-                prettyPrinter(self.current_item)
+                prettyPrinter(self.current_item)  # type: ignore[arg-type] # refactor later
                 self.in_table_row = False
 
-    def do_query(self, what):
+    def do_query(self, what: str) -> str:
         url = f"{self.url}/search/{what.replace('%20', '-')}"
         data = b"layout=def_wlinks"
         try:
@@ -92,13 +98,13 @@ class eztv(object):
             user_agent = 'Mozilla/5.0 (X11; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0'
             req = urllib.request.Request(url, data, {'User-Agent': user_agent})
             try:
-                response = urllib.request.urlopen(req)  # nosec B310
+                response: http.client.HTTPResponse = urllib.request.urlopen(req)  # nosec B310
                 return response.read().decode('utf-8')
             except urllib.error.URLError as errno:
                 print(f"Connection error: {errno.reason}", file=sys.stderr)
             return ""
 
-    def search(self, what, cat='all'):
+    def search(self, what: str, cat: str = 'all') -> None:
         eztv_html = self.do_query(what)
 
         eztv_parser = self.MyHtmlParser(self.url)

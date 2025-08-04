@@ -29,26 +29,29 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install tools
-        run: pip install bandit isort mypy pycodestyle pyflakes pyright pytest
+        run: |
+          pip install bandit isort mypy pycodestyle pyflakes pyright pytest
+          ./nova3/aux/fetch_aux.sh
 
       - name: Run tests
         if: matrix.python-version == '3.10' # avoid hammering the sites
         continue-on-error: true
         run: |
-          ./nova3/aux/fetch_aux.sh
+          cd nova3
           pytest \
             --showlocals \
-            nova3/tests/*.py
+            tests/*.py
 
       - name: Check typings
         run: |
+          cd nova3
           mypy \
-            --follow-imports skip \
             --strict \
-            nova3/tests/*.py
+            engines/*.py \
+            tests/*.py
           pyright \
-            --skipunannotated \
-            nova3/tests/*.py
+            engines/*.py \
+            tests/*.py
 
       - name: Lint code
         run: |
@@ -72,6 +75,7 @@ jobs:
           isort \
              --check \
              --diff \
+             --line-length 1000 \
              nova3/engines/*.py \
              nova3/tests/*.py
 

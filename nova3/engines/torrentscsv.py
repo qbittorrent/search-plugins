@@ -1,4 +1,4 @@
-# VERSION: 1.6
+# VERSION: 1.7
 # AUTHORS: Dessalines
 
 # Redistribution and use in source and binary forms, with or without
@@ -26,13 +26,14 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 import json
+from typing import Mapping
 from urllib.parse import urlencode
 
 from helpers import retrieve_url
 from novaprinter import prettyPrinter
 
 
-class torrentscsv(object):
+class torrentscsv:
     url = 'https://torrents-csv.com'
     name = 'torrents-csv'
     supported_categories = {'all': ''}
@@ -52,7 +53,7 @@ class torrentscsv(object):
     ]
     trackers = '&'.join(urlencode({'tr': tracker}) for tracker in trackers_list)
 
-    def search(self, what, cat='all'):
+    def search(self, what: str, cat: str = 'all') -> None:
         search_url = "{}/service/search?size=100&q={}".format(self.url, what)
         desc_url = "{}/#/search/torrent/{}/1".format(self.url, what)
 
@@ -62,16 +63,17 @@ class torrentscsv(object):
 
         # parse results
         for result in response_json["torrents"]:
-            res = {'link': self.download_link(result),
-                   'name': result['name'],
-                   'size': str(result['size_bytes']) + " B",
-                   'seeds': result['seeders'],
-                   'leech': result['leechers'],
-                   'engine_url': self.url,
-                   'desc_link': desc_url,
-                   'pub_date': result['created_unix']}
-            prettyPrinter(res)
+            prettyPrinter({
+                'link': self.download_link(result),
+                'name': result['name'],
+                'size': str(result['size_bytes']) + " B",
+                'seeds': result['seeders'],
+                'leech': result['leechers'],
+                'engine_url': self.url,
+                'desc_link': desc_url,
+                'pub_date': result['created_unix']
+            })
 
-    def download_link(self, result):
+    def download_link(self, result: Mapping[str, str]) -> str:
         return "magnet:?xt=urn:btih:{}&{}&{}".format(
             result['infohash'], urlencode({'dn': result['name']}), self.trackers)
