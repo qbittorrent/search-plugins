@@ -1,4 +1,4 @@
-# VERSION: 4.5
+# VERSION: 4.6
 # AUTHORS: Diego de las Heras (ngosang@hotmail.es)
 # CONTRIBUTORS: ukharley
 #               hannsen (github.com/hannsen)
@@ -170,7 +170,7 @@ class jackett:
         def toStr(s: Union[str, None]) -> str:
             return s if s is not None else ''
 
-        def getTextProp(e: Union[xml.etree.ElementTree.Element[str], None]) -> str:
+        def getTextProp(e: Union[xml.etree.ElementTree.Element, None]) -> str:
             return toStr(e.text if e is not None else '')
 
         # prepare jackett url
