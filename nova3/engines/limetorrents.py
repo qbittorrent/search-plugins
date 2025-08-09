@@ -48,6 +48,7 @@ class limetorrents:
                 r"last\s+month": lambda m: now - timedelta(days=30),
                 r"(\d+)\s+years?": lambda m: now - timedelta(days=int(m[1]) * 365),
                 r"(\d+)\s+months?": lambda m: now - timedelta(days=int(m[1]) * 30),
+                r"(\d+)\s+weeks?": lambda m: now - timedelta(weeks=int(m[1])),
                 r"(\d+)\s+days?": lambda m: now - timedelta(days=int(m[1])),
                 r"(\d+)\s+hours?": lambda m: now - timedelta(hours=int(m[1])),
                 r"(\d+)\s+minutes?": lambda m: now - timedelta(minutes=int(m[1])),

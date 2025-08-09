@@ -31,7 +31,7 @@ from novaprinter import prettyPrinter
 class solidtorrents:
     url = 'https://solidtorrents.to'
     name = 'Solid Torrents'
-    supported_categories = {'all': 'all', 'music': 'Audio', 'books': 'eBook'}
+    supported_categories = {'all': 'all', 'music': 'Audio', 'books': 'eBook', 'movies': 'Video', 'games': 'Games', 'software': 'Applications'}
 
     class TorrentInfoParser(HTMLParser):
 
@@ -135,12 +135,16 @@ class solidtorrents:
 
             if (self.parseDate):
                 try:
-                    # I chose not to use strptime here because it depends on user's locale
+                    # Try to parse as 'MMM DD, YYYY' or fallback
                     months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun',
                               'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
-                    [month, day, year] = data.replace(',', '').lower().split()
-                    date = datetime(int(year), int(months.index(month) + 1), int(day))
-                    self.torrent_info['pub_date'] = int(date.timestamp())
+                    parts = data.replace(',', '').lower().split()
+                    if len(parts) == 3:
+                        month, day, year = parts
+                        date = datetime(int(year), int(months.index(month) + 1), int(day))
+                        self.torrent_info['pub_date'] = int(date.timestamp())
+                    else:
+                        self.torrent_info['pub_date'] = -1
                 except Exception:
                     self.torrent_info['pub_date'] = -1
                 self.parseDate = False

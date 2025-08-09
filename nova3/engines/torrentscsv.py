@@ -36,7 +36,7 @@ from novaprinter import prettyPrinter
 class torrentscsv:
     url = 'https://torrents-csv.com'
     name = 'torrents-csv'
-    supported_categories = {'all': ''}
+    supported_categories = {'all': '', 'movies': 'movies', 'tv': 'tv', 'music': 'music', 'games': 'games', 'software': 'software'}
 
     # initialize trackers for magnet links
     trackers_list = [
@@ -58,20 +58,23 @@ class torrentscsv:
         desc_url = "{}/#/search/torrent/{}/1".format(self.url, what)
 
         # get response json
-        response = retrieve_url(search_url)
-        response_json = json.loads(response)
+        try:
+            response = retrieve_url(search_url)
+            response_json = json.loads(response)
+        except Exception:
+            return  # Handle API failure gracefully
 
         # parse results
-        for result in response_json["torrents"]:
+        for result in response_json.get("torrents", []):
             prettyPrinter({
                 'link': self.download_link(result),
-                'name': result['name'],
-                'size': str(result['size_bytes']) + " B",
-                'seeds': result['seeders'],
-                'leech': result['leechers'],
+                'name': result.get('name', ''),
+                'size': str(result.get('size_bytes', 0)) + " B",
+                'seeds': result.get('seeders', 0),
+                'leech': result.get('leechers', 0),
                 'engine_url': self.url,
                 'desc_link': desc_url,
-                'pub_date': result['created_unix']
+                'pub_date': result.get('created_unix', -1)
             })
 
     def download_link(self, result: Mapping[str, str]) -> str:

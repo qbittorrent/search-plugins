@@ -20,7 +20,8 @@ class torlock:
                             'movies': 'movie',
                             'music': 'music',
                             'tv': 'television',
-                            'books': 'ebooks'}
+                            'books': 'ebooks',
+                            'documentary': 'documentary'}
 
     def download_torrent(self, info: str) -> None:
         print(download_file(info))
@@ -83,12 +84,18 @@ class torlock:
                 if not self.item_bad:
                     try:
                         # Date seems like it can be Today, Yesterday, or M/D/YYYY (Timezone unknown)
-                        if self.current_item["pub_date"] == "Today":
+                        pub_date = self.current_item["pub_date"]
+                        if pub_date == "Today":
                             date = datetime.now()
-                        elif self.current_item["pub_date"] == "Yesterday":
+                        elif pub_date == "Yesterday":
                             date = datetime.now() - timedelta(days=1)
+                        elif re.match(r"\d{1,2}/\d{1,2}/\d{4}", pub_date):
+                            date = datetime.strptime(pub_date, '%m/%d/%Y')
+                        elif re.match(r"\d+\s+days?\s+ago", pub_date):
+                            days_ago = int(re.match(r"(\d+)", pub_date).group(1))
+                            date = datetime.now() - timedelta(days=days_ago)
                         else:
-                            date = datetime.strptime(self.current_item["pub_date"], '%m/%d/%Y')
+                            date = datetime.now()
                         date = date.replace(hour=0, minute=0, second=0, microsecond=0)
                         self.current_item["pub_date"] = int(date.timestamp())
                     except Exception:
