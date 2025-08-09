@@ -18,7 +18,9 @@ from novaprinter import prettyPrinter
 
 class eztv:
     name = "EZTV"
-    url = 'https://eztvx.to/'
+    # Updated domain (as of 2025, eztv.re is more reliable)
+    url = 'https://eztv.re/'
+    # Add more categories if available in the future
     supported_categories = {'all': 'all', 'tv': 'tv'}
 
     class MyHtmlParser(HTMLParser):
@@ -36,6 +38,8 @@ class eztv:
                 r"(\d+)\s+weeks?": lambda m: now - timedelta(weeks=int(m[1])),
                 r"(\d+)\s+mo": lambda m: now - timedelta(days=int(m[1]) * 30),
                 r"(\d+)\s+years?": lambda m: now - timedelta(days=int(m[1]) * 365),
+                r"(\d+)m": lambda m: now - timedelta(minutes=int(m[1])),
+                r"(\d+)d": lambda m: now - timedelta(days=int(m[1])),
             }
             self.in_table_row = False
             self.current_item: Dict[str, Any] = {}

@@ -84,10 +84,18 @@ class torrentproject:
                                     or self.singleResData['link'] != '-1':
                                 try:
                                     date_string = self.singleResData['pub_date']
-                                    date = datetime.strptime(date_string, '%Y-%m-%d %H:%M:%S')
-                                    self.singleResData['pub_date'] = int(date.timestamp())
+                                    # Try multiple date formats
+                                    for fmt in ('%Y-%m-%d %H:%M:%S', '%d-%m-%Y %H:%M:%S', '%Y/%m/%d %H:%M:%S'):
+                                        try:
+                                            date = datetime.strptime(date_string, fmt)
+                                            self.singleResData['pub_date'] = int(date.timestamp())
+                                            break
+                                        except Exception:
+                                            continue
+                                    else:
+                                        self.singleResData['pub_date'] = -1
                                 except Exception:
-                                    pass
+                                    self.singleResData['pub_date'] = -1
                                 try:
                                     prettyPrinter(self.singleResData)  # type: ignore[arg-type] # refactor later
                                 except Exception:

@@ -46,14 +46,17 @@ helpers.htmlentitydecode  # dirty workaround to surpress static checkers
 
 
 class piratebay:
-    url = 'https://thepiratebay.org'
+    # Updated to a more reliable mirror and added TV category
+    url = 'https://thepiratebay.party'
     name = 'The Pirate Bay'
     supported_categories = {
         'all': '0',
         'music': '100',
         'movies': '200',
         'games': '400',
-        'software': '300'
+        'software': '300',
+        'tv': '500',
+        'anime': '600',
     }
 
     # initialize trackers for magnet links
@@ -72,7 +75,9 @@ class piratebay:
     trackers = '&'.join(urlencode({'tr': tracker}) for tracker in trackers_list)
 
     def search(self, what: str, cat: str = 'all') -> None:
+        # Use a fallback API if apibay.org is down
         base_url = "https://apibay.org/q.php?%s"
+        fallback_url = "https://apibay2.org/q.php?%s"
 
         # get response json
         what = unquote(what)
@@ -83,10 +88,17 @@ class piratebay:
 
         # Calling custom `retrieve_url` function with adequate escaping
         data = self.retrieve_url(base_url % urlencode(params))
-        response_json = json.loads(data)
-
+        try:
+            response_json = json.loads(data)
+        except Exception:
+            # Try fallback API
+            data = self.retrieve_url(fallback_url % urlencode(params))
+            try:
+                response_json = json.loads(data)
+            except Exception:
+                return
         # check empty response
-        if len(response_json) == 0:
+        if not response_json or len(response_json) == 0:
             return
 
         # parse results
