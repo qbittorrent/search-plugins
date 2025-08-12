@@ -612,6 +612,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/imDMG/qBt_SE/master/engines/rutracker.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/imDMG/qBt_SE/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
 | ✔ qbt 4.2.x / python 3.7+
 |-
+| [[https://www.google.com/s2/favicons?domain=tapochek.net#.png]] [https://tapochek.net/ Tapochek]
+| [https://github.com/MjKey/qBT-SE MjKey]
+| 1.1
+| 13/Aug<br />2025
+| [https://raw.githubusercontent.com/MjKey/qBT-SE/refs/heads/master/enigines/tapochek.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/imDMG/qBt_SE/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
+| ✔ qbt 4.2.x / python 3.7+
+|-
 | [[https://raw.githubusercontent.com/nbusseneau/qBittorrent-RuTracker-plugin/master/rutracker.png]] [https://rutracker.org/ RuTracker]
 | [https://github.com/nbusseneau/qBittorrent-rutracker-plugin nbusseneau]
 | 2.2.0
