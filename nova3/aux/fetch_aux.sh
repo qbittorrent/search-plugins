@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/sh
 
 cd "$(dirname "$0")" || exit
 git clone --depth 1 https://github.com/qbittorrent/qBittorrent.git

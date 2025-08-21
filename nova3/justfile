@@ -1,4 +1,4 @@
-# show available recipes to run
+# Show available recipes to run
 default:
     just --list
 
@@ -21,7 +21,7 @@ build files='engines/*.py':
 fetch_aux:
     #!/usr/bin/sh
     if [ ! -f aux/helpers.py ]; then
-        ./aux/fetch_aux.sh
+        aux/fetch_aux.sh
     fi
 
 # Apply formatting

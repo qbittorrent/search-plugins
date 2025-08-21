@@ -8,7 +8,7 @@ nova3 Plugins
 
    Make sure you have [Python](https://www.python.org/) installed.
 
-1. Setup Development Environment
+1. Setup development environment
 
    Note that it is recommended to setup a [virtual environment][venv_guide] for development.
 
