@@ -1,4 +1,4 @@
-# VERSION: 1.20
+# VERSION: 1.21
 # AUTHORS: nindogo
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -10,7 +10,7 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta
 from html.parser import HTMLParser
-from typing import Any, Callable, Dict, List, Mapping, Match, Tuple, Union
+from typing import Callable, Dict, List, Mapping, Match, Tuple, Union
 
 from helpers import retrieve_url
 from novaprinter import prettyPrinter
@@ -38,10 +38,10 @@ class eztv:
                 r"(\d+)\s+years?": lambda m: now - timedelta(days=int(m[1]) * 365),
             }
             self.in_table_row = False
-            self.current_item: Dict[str, Any] = {}
+            self.current_item: Dict[str, object] = {}
 
         def handle_starttag(self, tag: str, attrs: List[Tuple[str, Union[str, None]]]) -> None:
-            def getStr(d: Mapping[str, Any], key: str) -> str:
+            def getStr(d: Mapping[str, Union[str, None]], key: str) -> str:
                 value = d.get(key, '')
                 return value if value is not None else ''
 

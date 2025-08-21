@@ -1,8 +1,8 @@
-eztv: 1.20
+eztv: 1.21
 jackett: 4.6
-limetorrents: 4.12
+limetorrents: 4.13
 piratebay: 3.8
-solidtorrents: 2.6
+solidtorrents: 2.7
 torlock: 2.27
-torrentproject: 1.7
+torrentproject: 1.8
 torrentscsv: 1.7

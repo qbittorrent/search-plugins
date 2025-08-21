@@ -1,4 +1,4 @@
-# VERSION: 2.6
+# VERSION: 2.7
 # AUTHORS: nKlido
 
 # LICENSING INFORMATION
@@ -22,7 +22,7 @@
 
 from datetime import datetime
 from html.parser import HTMLParser
-from typing import Any, Dict, List, Mapping, Tuple, Union
+from typing import Dict, List, Mapping, Tuple, Union
 
 from helpers import retrieve_url
 from novaprinter import prettyPrinter
@@ -52,7 +52,7 @@ class solidtorrents:
 
             self.torrent_info = self.empty_torrent_info()
 
-        def empty_torrent_info(self) -> Dict[str, Any]:
+        def empty_torrent_info(self) -> Dict[str, object]:
             return {
                 'link': '',
                 'name': '',
@@ -65,7 +65,7 @@ class solidtorrents:
             }
 
         def handle_starttag(self, tag: str, attrs: List[Tuple[str, Union[str, None]]]) -> None:
-            def getStr(d: Mapping[str, Any], key: str) -> str:
+            def getStr(d: Mapping[str, Union[str, None]], key: str) -> str:
                 value = d.get(key, '')
                 return value if value is not None else ''
 

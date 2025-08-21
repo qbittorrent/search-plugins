@@ -1,4 +1,4 @@
-# VERSION: 1.7
+# VERSION: 1.8
 # AUTHORS: mauricci
 
 import re
@@ -33,8 +33,8 @@ class torrentproject:
                 "pub_date": 4,
                 "size": 5,
             }
-            self.fullResData: List[Any] = []
-            self.pageRes: List[Any] = []
+            self.fullResData: List[object] = []
+            self.pageRes: List[object] = []
             self.singleResData = self.get_single_data()
 
         def get_single_data(self) -> Dict[str, Any]:
@@ -50,7 +50,7 @@ class torrentproject:
             }
 
         def handle_starttag(self, tag: str, attrs: List[Tuple[str, Union[str, None]]]) -> None:
-            def getStr(d: Mapping[str, Any], key: str) -> str:
+            def getStr(d: Mapping[str, Union[str, None]], key: str) -> str:
                 value = d.get(key, '')
                 return value if value is not None else ''
 

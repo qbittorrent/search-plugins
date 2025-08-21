@@ -1,11 +1,11 @@
-# VERSION: 4.12
+# VERSION: 4.13
 # AUTHORS: Lima66
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
 import re
 from datetime import datetime, timedelta
 from html.parser import HTMLParser
-from typing import Any, Callable, Dict, List, Mapping, Match, Tuple, Union
+from typing import Callable, Dict, List, Mapping, Match, Tuple, Union
 from urllib.parse import quote
 
 from helpers import retrieve_url
@@ -34,7 +34,7 @@ class limetorrents:
         def __init__(self, url: str) -> None:
             HTMLParser.__init__(self)
             self.url = url
-            self.current_item: Dict[str, Any] = {}  # dict for found item
+            self.current_item: Dict[str, object] = {}  # dict for found item
             self.page_items = 0
             self.inside_table = False
             self.inside_tr = False
