@@ -34,55 +34,26 @@ jobs:
       - name: Install tools
         run: |
           pip install -r requirements_dev.txt
-          ./aux/fetch_aux.sh
 
       - name: Run tests
         if: matrix.python-version == '3.10' # avoid hammering the sites
         continue-on-error: true
-        run: |
-          pytest \
-            --showlocals \
-            tests/*.py
+        run: just test
 
-      - name: Check typings
-        run: |
-          mypy \
-            --strict \
-            engines/*.py \
-            tests/*.py
-          pyright \
-            engines/*.py \
-            tests/*.py
+      - name: Run type check
+        run: just check
 
       - name: Lint code
-        run: |
-          pyflakes \
-            engines/*.py \
-            tests/*.py
-          bandit \
-            --skip B101,B110,B310,B314,B405 \
-            engines/*.py \
-            tests/*.py
+        run: just lint
 
       - name: Format code
         run: |
-          # skipping E265, fixing it will break plugin usage on older qbt instances (< v4.1.2)
-          pycodestyle \
-            --ignore=E265,W503 \
-            --max-line-length=1000 \
-            --statistics \
-            engines/*.py \
-            tests/*.py
-          isort \
-             --check \
-             --diff \
-             --line-length 1000 \
-             engines/*.py \
-             tests/*.py
+          just format
+          just --fmt --unstable
+          git diff --exit-code
 
       - name: Build code
-        run: |
-          python -m compileall engines/*.py
+        run: just build
 
 
   zizmor:

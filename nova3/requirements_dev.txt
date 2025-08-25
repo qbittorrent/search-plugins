@@ -5,3 +5,4 @@ pycodestyle
 pyflakes
 pyright
 pytest
+rust-just
