@@ -16,6 +16,9 @@ jobs:
       fail-fast: false
       matrix:
         python-version: ['3.9', '3.10', '3.11', '3.12', '3.13', '3.14-dev']
+    defaults:
+      run:
+        working-directory: nova3
 
     steps:
       - name: Checkout repository
@@ -30,21 +33,19 @@ jobs:
 
       - name: Install tools
         run: |
-          pip install bandit isort mypy pycodestyle pyflakes pyright pytest
-          ./nova3/aux/fetch_aux.sh
+          pip install -r requirements_dev.txt
+          ./aux/fetch_aux.sh
 
       - name: Run tests
         if: matrix.python-version == '3.10' # avoid hammering the sites
         continue-on-error: true
         run: |
-          cd nova3
           pytest \
             --showlocals \
             tests/*.py
 
       - name: Check typings
         run: |
-          cd nova3
           mypy \
             --strict \
             engines/*.py \
@@ -56,12 +57,12 @@ jobs:
       - name: Lint code
         run: |
           pyflakes \
-            nova3/engines/*.py \
-            nova3/tests/*.py
+            engines/*.py \
+            tests/*.py
           bandit \
             --skip B101,B110,B310,B314,B405 \
-            nova3/engines/*.py \
-            nova3/tests/*.py
+            engines/*.py \
+            tests/*.py
 
       - name: Format code
         run: |
@@ -70,18 +71,18 @@ jobs:
             --ignore=E265,W503 \
             --max-line-length=1000 \
             --statistics \
-            nova3/engines/*.py \
-            nova3/tests/*.py
+            engines/*.py \
+            tests/*.py
           isort \
              --check \
              --diff \
              --line-length 1000 \
-             nova3/engines/*.py \
-             nova3/tests/*.py
+             engines/*.py \
+             tests/*.py
 
       - name: Build code
         run: |
-          python -m compileall nova3/engines/*.py
+          python -m compileall engines/*.py
 
 
   zizmor:

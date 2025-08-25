@@ -1,0 +1,7 @@
+bandit
+isort
+mypy
+pycodestyle
+pyflakes
+pyright
+pytest
