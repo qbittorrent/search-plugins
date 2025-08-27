@@ -20,8 +20,12 @@ build files='engines/*.py':
 [private]
 fetch_aux:
     #!/usr/bin/sh
-    if [ ! -f aux/helpers.py ]; then
-        aux/fetch_aux.sh
+    if [ ! -d "aux" ]; then
+        mkdir aux
+        cd aux
+        git clone --depth 1 https://github.com/qbittorrent/qBittorrent.git
+        mv qBittorrent/src/searchengine/nova3/* ./
+        rm -rf qBittorrent __init__.py
     fi
 
 # Apply formatting
