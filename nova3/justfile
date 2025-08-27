@@ -26,6 +26,7 @@ fetch_aux:
         git clone --depth 1 https://github.com/qbittorrent/qBittorrent.git
         mv qBittorrent/src/searchengine/nova3/* ./
         rm -rf qBittorrent __init__.py
+        curl -L -o socks.pyi "https://github.com/python/typeshed/raw/refs/heads/main/stubs/PySocks/socks.pyi"
     fi
 
 # Apply formatting
