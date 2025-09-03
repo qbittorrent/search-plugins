@@ -38,10 +38,11 @@ format files='engines/*.py tests/*.py':
         --statistics \
         {{ files }}
     isort \
-        --check \
-        --diff \
         --line-length 1000 \
         {{ files }}
+    just \
+        --fmt \
+        --unstable
 
 # Run static analyzer
 lint files='engines/*.py tests/*.py':
