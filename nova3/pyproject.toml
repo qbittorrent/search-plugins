@@ -26,6 +26,7 @@ dev = [
 
 [tool.mypy]
 mypy_path = "_aux"
+strict = true
 
 [tool.pyright]
 extraPaths = ["_aux"]

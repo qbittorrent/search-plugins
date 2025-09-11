@@ -5,7 +5,6 @@ default:
 # Run type check
 check files='engines/*.py tests/*.py': fetch_aux
     mypy \
-        --strict \
         {{ files }}
     pyright \
         {{ files }}
