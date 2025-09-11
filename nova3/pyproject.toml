@@ -1,5 +1,5 @@
 [project]
-name = "nova3-plugins"
+name = "qBittorrent-search-plugins"
 description = "Search plugins for qBittorrent search feature"
 license = "GPL-2.0-or-later"
 requires-python = ">= 3.7"
