@@ -25,10 +25,10 @@ dev = [
 ]
 
 [tool.mypy]
-mypy_path = "aux"
+mypy_path = "_aux"
 
 [tool.pyright]
-extraPaths = ["aux"]
+extraPaths = ["_aux"]
 
 [tool.pytest.ini_options]
-pythonpath = "aux"
+pythonpath = "_aux"

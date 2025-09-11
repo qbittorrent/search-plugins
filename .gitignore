@@ -6,4 +6,4 @@
 nova3/engines/jackett.json
 
 # Auxiliary files for testing
-nova3/aux
+nova3/_aux
