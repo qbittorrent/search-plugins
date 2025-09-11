@@ -1,3 +1,29 @@
+[project]
+name = "nova3-plugins"
+description = "Search plugins for qBittorrent search feature"
+license = "GPL-2.0-or-later"
+requires-python = ">= 3.7"
+readme = "README.md"
+dynamic = ["version"]
+
+[project.urls]
+homepage = "https://github.com/qbittorrent/search-plugins"
+source = "https://github.com/qbittorrent/search-plugins.git"
+documentation = "https://github.com/qbittorrent/search-plugins/wiki"
+issues = "https://github.com/qbittorrent/search-plugins/issues"
+
+[dependency-groups]
+dev = [
+    "bandit",
+    "isort",
+    "mypy",
+    "pycodestyle",
+    "pyflakes",
+    "pyright",
+    "pytest",
+    "rust-just",
+]
+
 [tool.mypy]
 mypy_path = "aux"
 

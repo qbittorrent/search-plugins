@@ -1,8 +1,5 @@
-# Editors
-.vscode/
-.idea/
-
-# Python
+*.egg-info
+*.lock
 *.pyc
 
 # Plugin config

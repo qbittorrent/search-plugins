@@ -1,8 +1,0 @@
-bandit
-isort
-mypy
-pycodestyle
-pyflakes
-pyright
-pytest
-rust-just
