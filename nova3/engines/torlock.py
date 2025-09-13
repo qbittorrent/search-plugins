@@ -76,7 +76,7 @@ class torlock:
         def handle_endtag(self, tag: str) -> None:
             if tag == "article":
                 self.article_found = False
-            elif self.item_name and (tag == "a" or tag == "td"):
+            elif self.item_name and (tag in ('a', 'td')):
                 self.item_name = None
             elif self.item_found and tag == "tr":
                 self.item_found = False
