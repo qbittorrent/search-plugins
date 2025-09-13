@@ -119,7 +119,7 @@ class limetorrents:
         if magnet_match and magnet_match.groups():
             print(magnet_match.groups()[0] + " " + info)
         else:
-            raise Exception('Error, please fill a bug report!')
+            raise ValueError('Error, please fill a bug report!')
 
     def search(self, query: str, cat: str = 'all') -> None:
         """ Performs search """
