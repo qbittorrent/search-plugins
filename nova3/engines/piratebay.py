@@ -128,7 +128,7 @@ class piratebay:
         request = urllib.request.Request(url, None, {'User-Agent': getBrowserUserAgent()})
 
         try:
-            response: http.client.HTTPResponse = urllib.request.urlopen(request)
+            response: http.client.HTTPResponse = urllib.request.urlopen(request)  # pylint: disable=consider-using-with
         except urllib.error.HTTPError:
             return ""
 

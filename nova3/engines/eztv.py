@@ -98,7 +98,7 @@ class eztv:
             user_agent = 'Mozilla/5.0 (X11; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0'
             req = urllib.request.Request(url, data, {'User-Agent': user_agent})
             try:
-                response: http.client.HTTPResponse = urllib.request.urlopen(req)  # nosec B310
+                response: http.client.HTTPResponse = urllib.request.urlopen(req)  # nosec B310 # pylint: disable=consider-using-with
                 return response.read().decode('utf-8')
             except urllib.error.URLError as errno:
                 print(f"Connection error: {errno.reason}", file=sys.stderr)
