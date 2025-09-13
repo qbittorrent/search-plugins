@@ -50,6 +50,8 @@ lint files='engines/*.py tests/*.py':
     bandit \
         --skip B101,B110,B310,B314,B405 \
         {{ files }}
+    pylint \
+        {{ files }}
 
 # Run tests
 test files='tests/*.py': fetch_aux
