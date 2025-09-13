@@ -141,7 +141,7 @@ class solidtorrents:
                     [month, day, year] = data.replace(',', '').lower().split()
                     date = datetime(int(year), int(months.index(month) + 1), int(day))
                     self.torrent_info['pub_date'] = int(date.timestamp())
-                except Exception:
+                except Exception:  # pylint: disable=broad-exception-caught
                     self.torrent_info['pub_date'] = -1
                 self.parseDate = False
                 self.foundStats = False

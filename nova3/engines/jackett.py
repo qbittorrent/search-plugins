@@ -72,7 +72,7 @@ def load_configuration() -> None:
     except ValueError:
         # if file exists, but it's malformed we load add a flag
         CONFIG_DATA['malformed'] = True
-    except Exception:
+    except Exception:  # pylint: disable=broad-exception-caught
         # if file doesn't exist, we create it
         save_configuration()
 
@@ -241,7 +241,7 @@ class jackett:
             try:
                 date = datetime.strptime(getTextProp(result.find('pubDate')), '%a, %d %b %Y %H:%M:%S %z')
                 res['pub_date'] = int(date.timestamp())
-            except Exception:
+            except Exception:  # pylint: disable=broad-exception-caught
                 res['pub_date'] = -1
 
             self.pretty_printer_thread_safe(res)
@@ -260,7 +260,7 @@ class jackett:
             # if the page returns a magnet redirect, used in download_torrent
             if e.code == 302:
                 response = e.url
-        except Exception:
+        except Exception:  # pylint: disable=broad-exception-caught
             pass
         return response
 

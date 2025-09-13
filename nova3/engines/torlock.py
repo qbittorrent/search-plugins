@@ -91,7 +91,7 @@ class torlock:
                             date = datetime.strptime(self.current_item["pub_date"], '%m/%d/%Y')
                         date = date.replace(hour=0, minute=0, second=0, microsecond=0)
                         self.current_item["pub_date"] = int(date.timestamp())
-                    except Exception:
+                    except Exception:  # pylint: disable=broad-exception-caught
                         self.current_item["pub_date"] = -1
                     prettyPrinter(self.current_item)  # type: ignore[arg-type] # refactor later
                     self.page_items += 1
