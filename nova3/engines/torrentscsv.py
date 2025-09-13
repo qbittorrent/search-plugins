@@ -54,8 +54,8 @@ class torrentscsv:
     trackers = '&'.join(urlencode({'tr': tracker}) for tracker in trackers_list)
 
     def search(self, what: str, cat: str = 'all') -> None:
-        search_url = "{}/service/search?size=100&q={}".format(self.url, what)
-        desc_url = "{}/#/search/torrent/{}/1".format(self.url, what)
+        search_url = f"{self.url}/service/search?size=100&q={what}"
+        desc_url = f"{self.url}/#/search/torrent/{what}/1"
 
         # get response json
         response = retrieve_url(search_url)
@@ -75,5 +75,5 @@ class torrentscsv:
             })
 
     def download_link(self, result: Mapping[str, str]) -> str:
-        return "magnet:?xt=urn:btih:{}&{}&{}".format(
-            result['infohash'], urlencode({'dn': result['name']}), self.trackers)
+        dn = urlencode({'dn': result['name']})
+        return f"magnet:?xt=urn:btih:{result['infohash']}&{dn}&{self.trackers}"

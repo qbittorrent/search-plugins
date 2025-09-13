@@ -154,7 +154,7 @@ class jackett:
             ('t', 'indexers'),
             ('configured', 'true')
         ])
-        jacket_url = self.url + "/api/v2.0/indexers/all/results/torznab/api?%s" % params
+        jacket_url = f"{self.url}/api/v2.0/indexers/all/results/torznab/api?{params}"
         response = self.get_response(jacket_url)
         if response is None:
             self.handle_error("connection error getting indexer list", what)
@@ -181,7 +181,7 @@ class jackett:
         if category is not None:
             params_tmp.append(('cat', ','.join(category)))
         params = urlencode(params_tmp)
-        jacket_url = self.url + "/api/v2.0/indexers/" + indexer_id + "/results/torznab/api?%s" % params  # noqa
+        jacket_url = f"{self.url}/api/v2.0/indexers/{indexer_id}/results/torznab/api?{params}"
         response = self.get_response(jacket_url)
         if response is None:
             self.handle_error("connection error for indexer: " + indexer_id, what)
@@ -202,9 +202,9 @@ class jackett:
 
             tracker = getTextProp(result.find('jackettindexer'))
             if CONFIG_DATA['tracker_first']:
-                res['name'] = '[%s] %s' % (tracker, title)
+                res['name'] = f"[{tracker}] {title}"
             else:
-                res['name'] = '%s [%s]' % (title, tracker)
+                res['name'] = f"{title} [{tracker}]"
 
             res['link'] = result.find(self.generate_xpath('magneturl'))
             if res['link'] is not None:
@@ -269,7 +269,7 @@ class jackett:
         # 'Torrent names only' is enabled
         self.pretty_printer_thread_safe({
             'link': self.url,
-            'name': "Jackett: %s! Right-click this row and select 'Open description page' to open help. Configuration file: '%s' Search: '%s'" % (error_msg, CONFIG_PATH, what),  # noqa
+            'name': f"Jackett: {error_msg}! Right-click this row and select 'Open description page' to open help. Configuration file: '{CONFIG_PATH}' Search: '{what}'",
             'size': -1,
             'seeds': -1,
             'leech': -1,

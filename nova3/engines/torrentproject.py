@@ -112,7 +112,7 @@ class torrentproject:
         what = what.replace('%20', '+')
         # analyze first 5 pages of results
         for currPage in range(0, 5):
-            url = self.url + '/browse?t={0}&p={1}'.format(what, currPage)
+            url = f"{self.url}/browse?t={what}&p={currPage}"
             html = retrieve_url(url)
             parser = self.MyHTMLParser(self.url)
             parser.feed(html)

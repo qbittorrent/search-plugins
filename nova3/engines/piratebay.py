@@ -105,8 +105,8 @@ class piratebay:
             })
 
     def download_link(self, result: Mapping[str, str]) -> str:
-        return "magnet:?xt=urn:btih:{}&{}&{}".format(
-            result['info_hash'], urlencode({'dn': result['name']}), self.trackers)
+        dn = urlencode({'dn': result['name']})
+        return f"magnet:?xt=urn:btih:{result['info_hash']}&{dn}&{self.trackers}"
 
     def retrieve_url(self, url: str) -> str:
         def getBrowserUserAgent() -> str:
