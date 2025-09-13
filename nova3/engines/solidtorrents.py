@@ -75,39 +75,39 @@ class solidtorrents:
                 self.foundResult = True
                 return
 
-            if (self.foundResult and 'title' in getStr(params, 'class') and tag == 'h5'):
+            if self.foundResult and ('title' in getStr(params, 'class')) and (tag == 'h5'):
                 self.foundTitle = True
 
-            if (self.foundTitle and tag == 'a'):
+            if self.foundTitle and (tag == 'a'):
                 self.torrent_info['desc_link'] = self.url + getStr(params, 'href')
                 self.parseTitle = True
 
-            if (self.foundResult and 'stats' in getStr(params, 'class')):
+            if self.foundResult and ('stats' in getStr(params, 'class')):
                 self.foundStats = True
                 self.column = -1
 
-            if (self.foundStats and tag == 'div'):
+            if self.foundStats and (tag == 'div'):
                 self.column = self.column + 1
 
-                if (self.column == 2):
+                if self.column == 2:
                     self.parseSize = True
 
-            if (self.foundStats and tag == 'font' and self.column == 3):
+            if self.foundStats and (tag == 'font') and (self.column == 3):
                 self.parseSeeders = True
 
-            if (self.foundStats and tag == 'font' and self.column == 4):
+            if self.foundStats and (tag == 'font') and (self.column == 4):
                 self.parseLeechers = True
 
-            if (self.foundStats and tag == 'div' and self.column == 5):
+            if self.foundStats and (tag == 'div') and (self.column == 5):
                 self.parseDate = True
 
-            if (self.foundResult and 'dl-magnet' in getStr(params, 'class') and tag == 'a'):
+            if self.foundResult and ('dl-magnet' in getStr(params, 'class')) and (tag == 'a'):
                 self.torrent_info['link'] = params.get('href')
                 self.foundResult = False
                 self.torrentReady = True
 
         def handle_endtag(self, tag: str) -> None:
-            if (self.torrentReady):
+            if self.torrentReady:
                 prettyPrinter(self.torrent_info)  # type: ignore[arg-type] # refactor later
                 self.torrentReady = False
                 self.torrent_info = self.empty_torrent_info()
@@ -115,25 +115,25 @@ class solidtorrents:
 
         def handle_data(self, data: str) -> None:
 
-            if (self.parseTitle):
+            if self.parseTitle:
                 if (bool(data.strip()) and data != '\n'):
                     self.torrent_info['name'] = data
                 self.parseTitle = False
                 self.foundTitle = False
 
-            if (self.parseSize):
+            if self.parseSize:
                 self.torrent_info['size'] = data
                 self.parseSize = False
 
-            if (self.parseSeeders):
+            if self.parseSeeders:
                 self.torrent_info['seeds'] = data
                 self.parseSeeders = False
 
-            if (self.parseLeechers):
+            if self.parseLeechers:
                 self.torrent_info['leech'] = data
                 self.parseLeechers = False
 
-            if (self.parseDate):
+            if self.parseDate:
                 try:
                     # I chose not to use strptime here because it depends on user's locale
                     months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun',
