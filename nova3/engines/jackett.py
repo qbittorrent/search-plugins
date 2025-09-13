@@ -67,7 +67,7 @@ def load_configuration() -> None:
     global CONFIG_DATA
     try:
         # try to load user data from file
-        with open(CONFIG_PATH) as f:
+        with open(CONFIG_PATH, encoding='utf-8') as f:
             CONFIG_DATA = json.load(f)
     except ValueError:
         # if file exists, but it's malformed we load add a flag
@@ -87,7 +87,7 @@ def load_configuration() -> None:
 
 
 def save_configuration() -> None:
-    with open(CONFIG_PATH, 'w') as f:
+    with open(CONFIG_PATH, 'w', encoding='utf-8') as f:
         f.write(json.dumps(CONFIG_DATA, indent=4, sort_keys=True))
 
 
