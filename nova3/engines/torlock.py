@@ -1,4 +1,4 @@
-# VERSION: 2.27
+# VERSION: 2.28
 # AUTHORS: Douman (custparasite@gmx.se)
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 

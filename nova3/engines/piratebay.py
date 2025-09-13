@@ -1,4 +1,4 @@
-# VERSION: 3.8
+# VERSION: 3.9
 # AUTHORS: Fabien Devaux (fab@gnux.info)
 # CONTRIBUTORS: Christophe Dumez (chris@qbittorrent.org)
 #               Arthur (custparasite@gmx.se)

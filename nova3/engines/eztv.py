@@ -1,4 +1,4 @@
-# VERSION: 1.21
+# VERSION: 1.22
 # AUTHORS: nindogo
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
