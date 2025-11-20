@@ -1,4 +1,4 @@
-# VERSION: 4.2
+# VERSION: 4.7
 # AUTHORS: Diego de las Heras (ngosang@hotmail.es)
 # CONTRIBUTORS: ukharley
 #               hannsen (github.com/hannsen)
@@ -8,9 +8,11 @@ import json
 import os
 import urllib.request
 import xml.etree.ElementTree
+from datetime import datetime
 from http.cookiejar import CookieJar
 from multiprocessing.dummy import Pool
 from threading import Lock
+from typing import Any, Dict, List, Union
 from urllib.parse import unquote, urlencode
 
 import helpers
@@ -52,7 +54,7 @@ proxy_manager.enable_proxy(False)  # off by default
 # load configuration from file
 CONFIG_FILE = 'jackett.json'
 CONFIG_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), CONFIG_FILE)
-CONFIG_DATA = {
+CONFIG_DATA: Dict[str, Any] = {
     'api_key': 'YOUR_API_KEY_HERE',  # jackett api
     'url': 'http://127.0.0.1:9117',  # jackett url
     'tracker_first': False,          # (False/True) add tracker name to beginning of search result
@@ -61,16 +63,16 @@ CONFIG_DATA = {
 PRINTER_THREAD_LOCK = Lock()
 
 
-def load_configuration():
+def load_configuration() -> None:
     global CONFIG_DATA
     try:
         # try to load user data from file
-        with open(CONFIG_PATH) as f:
+        with open(CONFIG_PATH, encoding='utf-8') as f:
             CONFIG_DATA = json.load(f)
     except ValueError:
         # if file exists, but it's malformed we load add a flag
         CONFIG_DATA['malformed'] = True
-    except Exception:
+    except Exception:  # pylint: disable=broad-exception-caught
         # if file doesn't exist, we create it
         save_configuration()
 
@@ -84,8 +86,8 @@ def load_configuration():
         save_configuration()
 
 
-def save_configuration():
-    with open(CONFIG_PATH, 'w') as f:
+def save_configuration() -> None:
+    with open(CONFIG_PATH, 'w', encoding='utf-8') as f:
         f.write(json.dumps(CONFIG_DATA, indent=4, sort_keys=True))
 
 
@@ -93,7 +95,7 @@ load_configuration()
 ###############################################################################
 
 
-class jackett(object):
+class jackett:
     name = 'Jackett'
     url = CONFIG_DATA['url'] if CONFIG_DATA['url'][-1] != '/' else CONFIG_DATA['url'][:-1]
     api_key = CONFIG_DATA['api_key']
@@ -109,7 +111,7 @@ class jackett(object):
         'tv': ['5000'],
     }
 
-    def download_torrent(self, download_url):
+    def download_torrent(self, download_url: str) -> None:
         # fix for some indexers with magnet link inside .torrent file
         if download_url.startswith('magnet:?'):
             print(download_url + " " + download_url)
@@ -121,7 +123,7 @@ class jackett(object):
         else:
             print(helpers.download_file(download_url))
 
-    def search(self, what, cat='all'):
+    def search(self, what: str, cat: str = 'all') -> None:
         what = unquote(what)
         category = self.supported_categories[cat.lower()]
 
@@ -146,18 +148,17 @@ class jackett(object):
         else:
             self.search_jackett_indexer(what, category, 'all')
 
-    def get_jackett_indexers(self, what):
-        params = [
+    def get_jackett_indexers(self, what: str) -> List[str]:
+        params = urlencode([
             ('apikey', self.api_key),
             ('t', 'indexers'),
             ('configured', 'true')
-        ]
-        params = urlencode(params)
-        jacket_url = self.url + "/api/v2.0/indexers/all/results/torznab/api?%s" % params
+        ])
+        jacket_url = f"{self.url}/api/v2.0/indexers/all/results/torznab/api?{params}"
         response = self.get_response(jacket_url)
         if response is None:
             self.handle_error("connection error getting indexer list", what)
-            return
+            return []
         # process results
         response_xml = xml.etree.ElementTree.fromstring(response)
         indexers = []
@@ -165,37 +166,45 @@ class jackett(object):
             indexers.append(indexer.attrib['id'])
         return indexers
 
-    def search_jackett_indexer(self, what, category, indexer_id):
+    def search_jackett_indexer(self, what: str, category: Union[List[str], None], indexer_id: str) -> None:
+        def toStr(s: Union[str, None]) -> str:
+            return s if s is not None else ''
+
+        def getTextProp(e: Union[xml.etree.ElementTree.Element, None]) -> str:
+            return toStr(e.text if e is not None else '')
+
         # prepare jackett url
-        params = [
+        params_tmp = [
             ('apikey', self.api_key),
             ('q', what)
         ]
         if category is not None:
-            params.append(('cat', ','.join(category)))
-        params = urlencode(params)
-        jacket_url = self.url + "/api/v2.0/indexers/" + indexer_id + "/results/torznab/api?%s" % params  # noqa
+            params_tmp.append(('cat', ','.join(category)))
+        params = urlencode(params_tmp)
+        jacket_url = f"{self.url}/api/v2.0/indexers/{indexer_id}/results/torznab/api?{params}"
         response = self.get_response(jacket_url)
         if response is None:
             self.handle_error("connection error for indexer: " + indexer_id, what)
             return
         # process search results
         response_xml = xml.etree.ElementTree.fromstring(response)
-        for result in response_xml.find('channel').findall('item'):
-            res = {}
+        channel = response_xml.find('channel')
+        if channel is None:
+            return
+        for result in channel.findall('item'):
+            res: Dict[str, Any] = {}
 
-            title = result.find('title')
-            if title is not None:
-                title = title.text
+            title_tmp = result.find('title')
+            if title_tmp is not None:
+                title = title_tmp.text
             else:
                 continue
 
-            tracker = result.find('jackettindexer')
-            tracker = '' if tracker is None else tracker.text
+            tracker = getTextProp(result.find('jackettindexer'))
             if CONFIG_DATA['tracker_first']:
-                res['name'] = '[%s] %s' % (tracker, title)
+                res['name'] = f"[{tracker}] {title}"
             else:
-                res['name'] = '%s [%s]' % (title, tracker)
+                res['name'] = f"{title} [{tracker}]"
 
             res['link'] = result.find(self.generate_xpath('magneturl'))
             if res['link'] is not None:
@@ -208,7 +217,7 @@ class jackett(object):
                     continue
 
             res['size'] = result.find('size')
-            res['size'] = -1 if res['size'] is None else (res['size'].text + ' B')
+            res['size'] = -1 if res['size'] is None else (toStr(res['size'].text) + ' B')
 
             res['seeds'] = result.find(self.generate_xpath('seeders'))
             res['seeds'] = -1 if res['seeds'] is None else int(res['seeds'].attrib['value'])
@@ -229,12 +238,18 @@ class jackett(object):
             # note: engine_url can't be changed, torrent download stops working
             res['engine_url'] = self.url
 
+            try:
+                date = datetime.strptime(getTextProp(result.find('pubDate')), '%a, %d %b %Y %H:%M:%S %z')
+                res['pub_date'] = int(date.timestamp())
+            except Exception:  # pylint: disable=broad-exception-caught
+                res['pub_date'] = -1
+
             self.pretty_printer_thread_safe(res)
 
-    def generate_xpath(self, tag):
+    def generate_xpath(self, tag: str) -> str:
         return './{http://torznab.com/schemas/2015/feed}attr[@name="%s"]' % tag
 
-    def get_response(self, query):
+    def get_response(self, query: str) -> Union[str, None]:
         response = None
         try:
             # we can't use helpers.retrieve_url because of redirects
@@ -245,35 +260,32 @@ class jackett(object):
             # if the page returns a magnet redirect, used in download_torrent
             if e.code == 302:
                 response = e.url
-        except Exception:
+        except Exception:  # pylint: disable=broad-exception-caught
             pass
         return response
 
-    def handle_error(self, error_msg, what):
+    def handle_error(self, error_msg: str, what: str) -> None:
         # we need to print the search text to be displayed in qBittorrent when
         # 'Torrent names only' is enabled
         self.pretty_printer_thread_safe({
-            'seeds': -1,
+            'link': self.url,
+            'name': f"Jackett: {error_msg}! Right-click this row and select 'Open description page' to open help. Configuration file: '{CONFIG_PATH}' Search: '{what}'",
             'size': -1,
+            'seeds': -1,
             'leech': -1,
             'engine_url': self.url,
-            'link': self.url,
             'desc_link': 'https://github.com/qbittorrent/search-plugins/wiki/How-to-configure-Jackett-plugin',  # noqa
-            'name': "Jackett: %s! Right-click this row and select 'Open description page' to open help. Configuration file: '%s' Search: '%s'" % (error_msg, CONFIG_PATH, what)  # noqa
+            'pub_date': -1
         })
 
-    def pretty_printer_thread_safe(self, dictionary):
+    def pretty_printer_thread_safe(self, dictionary: Dict[str, Any]) -> None:
+        escaped_dict = self.escape_pipe(dictionary)
         with PRINTER_THREAD_LOCK:
-            prettyPrinter(self.escape_pipe(dictionary))
+            prettyPrinter(escaped_dict)  # type: ignore[arg-type] # refactor later
 
-    def escape_pipe(self, dictionary):
+    def escape_pipe(self, dictionary: Dict[str, Any]) -> Dict[str, Any]:
         # Safety measure until it's fixed in prettyPrinter
         for key in dictionary.keys():
             if isinstance(dictionary[key], str):
                 dictionary[key] = dictionary[key].replace('|', '%7C')
         return dictionary
-
-
-if __name__ == "__main__":
-    jackett_se = jackett()
-    jackett_se.search("ubuntu server", 'software')

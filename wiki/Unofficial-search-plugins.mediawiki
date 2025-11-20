@@ -491,10 +491,10 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | ✔ qbt 4.3.x / python 3.8.5
 |-
 | [[https://github.com/Pireo/hello-world/blob/master/yts.png]] [http://yts.mx/ YTS.MX]
-| [https://github.com/lazulyra/qbit-plugins lazulyra]
+| [https://codeberg.org/lazulyra/qbit-plugins lazulyra]
 | 1.2
 | 07/Jan<br />2024
-| [https://raw.githubusercontent.com/lazulyra/qbit-plugins/main/yts_mx/yts_mx.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
+| [https://codeberg.org/lazulyra/qbit-plugins/raw/branch/main/yts_mx/yts_mx.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 4.6.2 / python 3.12.0
 |-
 | 🔍
@@ -646,6 +646,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | 11/Aug<br />2023
 | [https://raw.githubusercontent.com/miIiano/SpeedApp.io-qBittorent-search-plugin/main/speedapp.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br />[https://github.com/miIiano/SpeedApp.io-qBittorent-search-plugin [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
 | ✔ qbt 4.5.x / python 3.+
+|-
+| [[https://www.google.com/s2/favicons?domain=tapochek.net#.png]] [https://tapochek.net/ Tapochek]
+| [https://github.com/MjKey/qBT-SE MjKey]
+| 1.1
+| 13/Aug<br />2025
+| [https://raw.githubusercontent.com/MjKey/qBT-SE/refs/heads/master/enigines/tapochek.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/imDMG/qBt_SE/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
+| ✔ qbt 4.2.x / python 3.7+
 |-
 | [[https://www.google.com/s2/favicons?domain=unionfansub.com#.png]] [https://torrent.unionfansub.com/ UnionFansub]
 | [https://gitlab.com/CrimsonKoba/qb-search-plugin CrimsonKoba]

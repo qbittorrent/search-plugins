@@ -1,4 +1,4 @@
-# VERSION: 3.6
+# VERSION: 3.9
 # AUTHORS: Fabien Devaux (fab@gnux.info)
 # CONTRIBUTORS: Christophe Dumez (chris@qbittorrent.org)
 #               Arthur (custparasite@gmx.se)
@@ -31,19 +31,21 @@
 import datetime
 import gzip
 import html
+import http.client
 import io
 import json
 import urllib.error
 import urllib.request
-from urllib.parse import urlencode, unquote
+from typing import Mapping
+from urllib.parse import unquote, urlencode
 
 import helpers  # for setting SOCKS proxy side-effect
 from novaprinter import prettyPrinter
 
-helpers.htmlentitydecode  # dirty workaround to surpress static checkers
+helpers.htmlentitydecode  # pylint: disable=pointless-statement # dirty workaround to surpress static checkers
 
 
-class piratebay(object):
+class piratebay:
     url = 'https://thepiratebay.org'
     name = 'The Pirate Bay'
     supported_categories = {
@@ -69,7 +71,7 @@ class piratebay(object):
     ]
     trackers = '&'.join(urlencode({'tr': tracker}) for tracker in trackers_list)
 
-    def search(self, what, cat='all'):
+    def search(self, what: str, cat: str = 'all') -> None:
         base_url = "https://apibay.org/q.php?%s"
 
         # get response json
@@ -91,7 +93,7 @@ class piratebay(object):
         for result in response_json:
             if result['info_hash'] == '0000000000000000000000000000000000000000':
                 continue
-            res = {
+            prettyPrinter({
                 'link': self.download_link(result),
                 'name': result['name'],
                 'size': str(result['size']) + " B",
@@ -100,15 +102,14 @@ class piratebay(object):
                 'engine_url': self.url,
                 'desc_link': self.url + '/description.php?id=' + result['id'],
                 'pub_date': result['added'],
-            }
-            prettyPrinter(res)
+            })
 
-    def download_link(self, result):
-        return "magnet:?xt=urn:btih:{}&{}&{}".format(
-            result['info_hash'], urlencode({'dn': result['name']}), self.trackers)
+    def download_link(self, result: Mapping[str, str]) -> str:
+        dn = urlencode({'dn': result['name']})
+        return f"magnet:?xt=urn:btih:{result['info_hash']}&{dn}&{self.trackers}"
 
-    def retrieve_url(self, url):
-        def getBrowserUserAgent():
+    def retrieve_url(self, url: str) -> str:
+        def getBrowserUserAgent() -> str:
             """ Disguise as browser to circumvent website blocking """
 
             # Firefox release calendar
@@ -127,7 +128,7 @@ class piratebay(object):
         request = urllib.request.Request(url, None, {'User-Agent': getBrowserUserAgent()})
 
         try:
-            response = urllib.request.urlopen(request)
+            response: http.client.HTTPResponse = urllib.request.urlopen(request)  # pylint: disable=consider-using-with
         except urllib.error.HTTPError:
             return ""
 

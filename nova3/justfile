@@ -1,0 +1,60 @@
+# Show available recipes to run
+default:
+    just --list
+
+# Run type check
+check files='engines/*.py tests/*.py': fetch_aux
+    mypy \
+        {{ files }}
+    pyright \
+        {{ files }}
+
+# Byte-compile files
+build files='engines/*.py':
+    python \
+        -m compileall \
+        {{ files }}
+
+# Fetch auxiliary files
+[private]
+fetch_aux:
+    #!/usr/bin/sh
+    if [ ! -d "_aux" ]; then
+        mkdir _aux
+        cd _aux
+        git clone --depth 1 https://github.com/qbittorrent/qBittorrent.git
+        mv qBittorrent/src/searchengine/nova3/* ./
+        rm -rf qBittorrent __init__.py
+        curl -L -o socks.pyi "https://github.com/python/typeshed/raw/refs/heads/main/stubs/PySocks/socks.pyi"
+    fi
+
+# Apply formatting
+format files='engines/*.py tests/*.py':
+    # skipping E265, fixing it will break plugin usage on older qbt instances (< v4.1.2)
+    pycodestyle \
+        --ignore=E265,W503 \
+        --max-line-length=1000 \
+        --statistics \
+        {{ files }}
+    isort \
+        --line-length 1000 \
+        {{ files }}
+    just \
+        --fmt \
+        --unstable
+
+# Run static analyzer
+lint files='engines/*.py tests/*.py':
+    pyflakes \
+        {{ files }}
+    bandit \
+        --skip B101,B110,B310,B314,B405 \
+        {{ files }}
+    pylint \
+        {{ files }}
+
+# Run tests
+test files='tests/*.py': fetch_aux
+    pytest \
+        --showlocals \
+        {{ files }}

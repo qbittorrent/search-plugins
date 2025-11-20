@@ -1,15 +1,16 @@
-# VERSION: 2.25
+# VERSION: 2.28
 # AUTHORS: Douman (custparasite@gmx.se)
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
-from html.parser import HTMLParser
 from datetime import datetime, timedelta
+from html.parser import HTMLParser
+from typing import Any, Dict, List, Tuple, Union
 
+from helpers import download_file, retrieve_url
 from novaprinter import prettyPrinter
-from helpers import retrieve_url, download_file
 
 
-class torlock(object):
+class torlock:
     url = "https://www.torlock.com"
     name = "TorLock"
     supported_categories = {'all': 'all',
@@ -21,37 +22,39 @@ class torlock(object):
                             'tv': 'television',
                             'books': 'ebooks'}
 
-    def download_torrent(self, info):
+    def download_torrent(self, info: str) -> None:
         print(download_file(info))
 
     class MyHtmlParser(HTMLParser):
         """ Sub-class for parsing results """
-        def __init__(self, url):
+        def __init__(self, url: str) -> None:
             HTMLParser.__init__(self)
             self.url = url
             self.article_found = False  # true when <article> with results is found
             self.item_found = False
             self.item_bad = False  # set to True for malicious links
-            self.current_item = None  # dict for found item
-            self.item_name = None  # key's name in current_item dict
+            self.current_item: Dict[str, Any] = {}  # dict for found item
+            self.item_name: Union[str, None] = None  # key's name in current_item dict
             self.page_items = 0
             self.parser_class = {"td": "pub_date",
                                  "ts": "size",
                                  "tul": "seeds",
                                  "tdl": "leech"}
 
-        def handle_starttag(self, tag, attrs):
+        def handle_starttag(self, tag: str, attrs: List[Tuple[str, Union[str, None]]]) -> None:
             params = dict(attrs)
+
             if self.item_found:
                 if tag == "td":
-                    if "class" in params:
-                        self.item_name = self.parser_class.get(params["class"], None)
+                    param_class = params["class"]
+                    if param_class is not None:
+                        self.item_name = self.parser_class.get(param_class)
                         if self.item_name:
                             self.current_item[self.item_name] = ""
 
             elif self.article_found and tag == "a":
-                if "href" in params:
-                    link = params["href"]
+                link = params.get("href")
+                if link is not None:
                     if link.startswith("/torrent"):
                         self.current_item["desc_link"] = "".join((self.url, link))
                         self.current_item["link"] = "".join((self.url, "/tor/",
@@ -66,14 +69,14 @@ class torlock(object):
                 self.article_found = True
                 self.current_item = {}
 
-        def handle_data(self, data):
+        def handle_data(self, data: str) -> None:
             if self.item_name:
                 self.current_item[self.item_name] += data
 
-        def handle_endtag(self, tag):
+        def handle_endtag(self, tag: str) -> None:
             if tag == "article":
                 self.article_found = False
-            elif self.item_name and (tag == "a" or tag == "td"):
+            elif self.item_name and (tag in ('a', 'td')):
                 self.item_name = None
             elif self.item_found and tag == "tr":
                 self.item_found = False
@@ -88,13 +91,13 @@ class torlock(object):
                             date = datetime.strptime(self.current_item["pub_date"], '%m/%d/%Y')
                         date = date.replace(hour=0, minute=0, second=0, microsecond=0)
                         self.current_item["pub_date"] = int(date.timestamp())
-                    except Exception:
+                    except Exception:  # pylint: disable=broad-exception-caught
                         self.current_item["pub_date"] = -1
-                    prettyPrinter(self.current_item)
+                    prettyPrinter(self.current_item)  # type: ignore[arg-type] # refactor later
                     self.page_items += 1
                 self.current_item = {}
 
-    def search(self, query, cat='all'):
+    def search(self, query: str, cat: str = 'all') -> None:
         """ Performs search """
         query = query.replace("%20", "-")
         category = self.supported_categories[cat]

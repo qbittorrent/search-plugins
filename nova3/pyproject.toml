@@ -1,0 +1,41 @@
+[project]
+name = "qBittorrent-search-plugins"
+description = "Search plugins for qBittorrent search feature"
+license = "GPL-2.0-or-later"
+requires-python = ">= 3.7"
+readme = "README.md"
+dynamic = ["version"]
+
+[project.urls]
+homepage = "https://github.com/qbittorrent/search-plugins"
+source = "https://github.com/qbittorrent/search-plugins.git"
+documentation = "https://github.com/qbittorrent/search-plugins/wiki"
+issues = "https://github.com/qbittorrent/search-plugins/issues"
+
+[dependency-groups]
+dev = [
+    "bandit",
+    "isort",
+    "mypy",
+    "pycodestyle",
+    "pyflakes",
+    "pylint",
+    "pyright",
+    "pytest",
+    "rust-just",
+]
+
+[tool.mypy]
+mypy_path = "_aux"
+strict = true
+
+[tool.pylint]
+disable = "C0103,C0114,C0115,C0116,E0401,R0801,R0902,R0903,R0912,R0914,R0915,R1702,W0223,W0511,W0603,W0613"
+jobs = 0
+max-line-length = 1000
+
+[tool.pyright]
+extraPaths = ["_aux"]
+
+[tool.pytest.ini_options]
+pythonpath = "_aux"

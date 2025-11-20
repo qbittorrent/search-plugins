@@ -1,17 +1,18 @@
-# VERSION: 4.10
+# VERSION: 4.14
 # AUTHORS: Lima66
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
 import re
 from datetime import datetime, timedelta
 from html.parser import HTMLParser
+from typing import Callable, Dict, List, Mapping, Match, Tuple, Union
 from urllib.parse import quote
 
-from novaprinter import prettyPrinter
 from helpers import retrieve_url
+from novaprinter import prettyPrinter
 
 
-class limetorrents(object):
+class limetorrents:
     url = "https://www.limetorrents.lol"
     name = "LimeTorrents"
     supported_categories = {'all': 'all',
@@ -25,24 +26,24 @@ class limetorrents(object):
     class MyHtmlParser(HTMLParser):
         """ Sub-class for parsing results """
 
-        def error(self, message):
+        def error(self, message: str) -> None:
             pass
 
         A, TD, TR, HREF = ('a', 'td', 'tr', 'href')
 
-        def __init__(self, url):
+        def __init__(self, url: str) -> None:
             HTMLParser.__init__(self)
             self.url = url
-            self.current_item = {}  # dict for found item
+            self.current_item: Dict[str, object] = {}  # dict for found item
             self.page_items = 0
             self.inside_table = False
             self.inside_tr = False
             self.column_index = -1
-            self.column_name = None  # key's name in current_item dict
+            self.column_name: Union[str, None] = None  # key's name in current_item dict
             self.columns = ["name", "pub_date", "size", "seeds", "leech"]
 
             now = datetime.now()
-            self.date_parsers = {
+            self.date_parsers: Mapping[str, Callable[[Match[str]], datetime]] = {
                 r"yesterday": lambda m: now - timedelta(days=1),
                 r"last\s+month": lambda m: now - timedelta(days=30),
                 r"(\d+)\s+years?": lambda m: now - timedelta(days=int(m[1]) * 365),
@@ -52,7 +53,7 @@ class limetorrents(object):
                 r"(\d+)\s+minutes?": lambda m: now - timedelta(minutes=int(m[1])),
             }
 
-        def handle_starttag(self, tag, attrs):
+        def handle_starttag(self, tag: str, attrs: List[Tuple[str, Union[str, None]]]) -> None:
             params = dict(attrs)
 
             if params.get('class') == 'table2':
@@ -76,7 +77,7 @@ class limetorrents(object):
 
             if self.column_name == "name" and tag == self.A and self.HREF in params:
                 link = params["href"]
-                if link.endswith(".html"):
+                if link is not None and link.endswith(".html"):
                     try:
                         safe_link = quote(self.url + link, safe='/:')
                     except KeyError:
@@ -84,7 +85,7 @@ class limetorrents(object):
                     self.current_item["link"] = safe_link
                     self.current_item["desc_link"] = safe_link
 
-        def handle_data(self, data):
+        def handle_data(self, data: str) -> None:
             if self.column_name:
                 if self.column_name in ["size", "seeds", "leech"]:
                     data = data.replace(',', '')
@@ -99,7 +100,7 @@ class limetorrents(object):
                 self.current_item[self.column_name] = data.strip()
                 self.column_name = None
 
-        def handle_endtag(self, tag):
+        def handle_endtag(self, tag: str) -> None:
             if tag == 'table':
                 self.inside_table = False
 
@@ -107,10 +108,10 @@ class limetorrents(object):
                 self.inside_tr = False
                 self.column_name = None
                 if "link" in self.current_item:
-                    prettyPrinter(self.current_item)
+                    prettyPrinter(self.current_item)  # type: ignore[arg-type] # refactor later
                     self.page_items += 1
 
-    def download_torrent(self, info):
+    def download_torrent(self, info: str) -> None:
         # since limetorrents provides torrent links in itorrent (cloudflare protected),
         # we have to fetch the info page and extract the magnet link
         info_page = retrieve_url(info)
@@ -118,9 +119,9 @@ class limetorrents(object):
         if magnet_match and magnet_match.groups():
             print(magnet_match.groups()[0] + " " + info)
         else:
-            raise Exception('Error, please fill a bug report!')
+            raise ValueError('Error, please fill a bug report!')
 
-    def search(self, query, cat='all'):
+    def search(self, query: str, cat: str = 'all') -> None:
         """ Performs search """
         query = query.replace("%20", "-")
         category = self.supported_categories[cat]

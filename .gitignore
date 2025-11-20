@@ -1,9 +1,9 @@
-# Editors
-.vscode/
-.idea/
-
-# Python
+*.egg-info
+*.lock
 *.pyc
 
 # Plugin config
-/nova3/engines/jackett.json
+nova3/engines/jackett.json
+
+# Auxiliary files for testing
+nova3/_aux
