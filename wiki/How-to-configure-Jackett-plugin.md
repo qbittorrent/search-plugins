@@ -5,7 +5,7 @@ sufficient for most users, those who wish to perform searches at a wider array
 of indexing sites have the option of installing **[Jackett][jackett]** and
 running it in tandem with qBittorrent to take advantage of its much larger
 catalog of indexers (575, as of June 2024) and efficiency in retrieving results
-from them.configure the **Jackett qBittorrent plugin** (essentially, set the API key).
+from them. Configure the **Jackett qBittorrent plugin** (essentially, set the API key).
 
 ## What is Jackett?
 
