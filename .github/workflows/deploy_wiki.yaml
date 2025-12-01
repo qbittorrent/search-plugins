@@ -30,9 +30,8 @@ jobs:
       - name: Deploy
         run: |
           find . -maxdepth 1 -type f -delete
-          find . -maxdepth 1 -type d ! -name '.' ! -name '.git' ! -name 'wiki' -exec rm -r {} +
           mv wiki/* ./
-          rm -r wiki
+          find . -maxdepth 1 -type d ! -name '.' ! -name '.git' -exec rm -r {} +
           git config user.name "qbt_search-plugins_bot"
           git config user.email "qbt_search-plugins_bot@example.com"
           git checkout --orphan tmp
