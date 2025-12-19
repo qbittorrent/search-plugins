@@ -53,7 +53,7 @@ Please keep the list sorted alphabetically by `Site` column
 | [tamilblasters.com](https://tamilblasters.com) | NO | N/A | latest movies fast uploads, indian movies/tv shows, login not required, [rss-feed](https://tamilblasters.com/index.php?/discover/all.xml/) |
 | thepiratebay.org | NO | N/A | |
 | [TheRarBg](https://therarbg.com) | DONE | [BurningMop](https://github.com/BurningMop/qBittorrent-Search-Plugins/blob/main/therarbg.py) | Great torrent indexer, RarBg successor |
-| [toloka.to](https://toloka.to) | NO | N/A | The most popular Ukrainian tracker. Have the biggest content library in the Ukrainian language. Requires Login. Behind Cloudflare protection |
+| [toloka.to](https://toloka.to) | DONE | [PlayDay](https://gist.github.com/playday3008/ae5e4f5a7f1f8f14054a39cda452b413) | The most popular Ukrainian tracker. Have the biggest content library in the Ukrainian language. Requires Login. Behind Cloudflare protection |
 | torrent-paradise.ml | NO | N/A | This is no longer working |
 | torrentday.com | NO | N/A | have invite |
 | torrentdownloads.me | DONE | [BurningMop](https://raw.githubusercontent.com/BurningMop/qBittorrent-Search-Plugins/main/torrentdownloads.py) | Huge torrent indexer, moved to https://torrentdownloads.pro |
