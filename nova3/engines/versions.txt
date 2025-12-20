@@ -1,5 +1,5 @@
-eztv: 1.22
-jackett: 4.7
+eztv: 1.23
+jackett: 4.8
 limetorrents: 4.14
 piratebay: 3.9
 solidtorrents: 2.8
