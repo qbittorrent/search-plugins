@@ -658,7 +658,7 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://github.com/playday3008 PlayDay]
 | 1.01
 | 19/Dec<br />2025
-| [https://gist.github.com/playday3008/ae5e4f5a7f1f8f14054a39cda452b413/raw/toloka_to.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
+| [https://raw.githubusercontent.com/playday3008/qBittorrent-plugins/refs/heads/main/plugins/search/toloka_to.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 5.1.x / python 3.11+
 |-
 | [[https://www.google.com/s2/favicons?domain=unionfansub.com#.png]] [https://torrent.unionfansub.com/ UnionFansub]
