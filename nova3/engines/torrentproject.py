@@ -1,4 +1,4 @@
-# VERSION: 1.9
+# VERSION: 1.91
 # AUTHORS: mauricci
 
 import re
@@ -12,7 +12,7 @@ from novaprinter import prettyPrinter
 
 
 class torrentproject:
-    url = 'https://torrentproject.cc'
+    url = 'https://torrentproject.com.se'
     name = 'TorrentProject'
     supported_categories = {'all': '0'}
 
