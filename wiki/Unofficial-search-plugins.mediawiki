@@ -349,6 +349,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 |[https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/snowfl.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
 |✔ qbt 4.3.x / python 3.8.5 <br />**READ REPOSITORY NOTES**
 |-
+|[[https://www.google.com/s2/favicons?domain=sktorrent.eu#.png]] [https://sktorrent.eu SkTorrent]
+|[https://github.com/Ashalda/sktorrent-qbt Ashalda]
+|1.1
+|27/Dec<br />2025
+|[https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/snowfl.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+|✔ qbt 5.1.x / python 3.9.x <br />WORKING WITHOUT LOGIN - EVERYTHING EXCEPT XXX AND SOFTWARE
+|-
 | [[https://www.google.com/s2/favicons?domain=solidtorrents.to#.png]] [https://solidtorrents.to/ SolidTorrents.to]
 | [https://github.com/BurningMop/qBittorrent-Search-Plugins BurningMop]
 | 1.0
