@@ -15,19 +15,19 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['3.9', '3.10', '3.11', '3.12', '3.13', '3.14-dev']
+        python-version: ['3.9', '3.10', '3.11', '3.12', '3.13', '3.14', '3.15-dev']
     defaults:
       run:
         working-directory: nova3
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           persist-credentials: false
 
       - name: Setup python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -64,7 +64,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           persist-credentials: false
 
@@ -82,7 +82,7 @@ jobs:
             > "${{ runner.temp }}/zizmor_results.sarif"
 
       - name: Upload zizmor results
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         with:
           category: zizmor
           sarif_file: "${{ runner.temp }}/zizmor_results.sarif"

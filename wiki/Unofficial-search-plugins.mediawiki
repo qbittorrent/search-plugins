@@ -490,11 +490,11 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/yourbittorrent.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
 | ✔ qbt 4.3.x / python 3.8.5
 |-
-| [[https://github.com/Pireo/hello-world/blob/master/yts.png]] [http://yts.mx/ YTS.MX]
+| [[https://github.com/Pireo/hello-world/blob/master/yts.png]] [http://yts.lt/ YTS]
 | [https://codeberg.org/lazulyra/qbit-plugins lazulyra]
-| 1.2
-| 07/Jan<br />2024
-| [https://codeberg.org/lazulyra/qbit-plugins/raw/branch/main/yts_mx/yts_mx.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
+| 1.6
+| 25/Nov<br />2025
+| [https://codeberg.org/lazulyra/qbit-plugins/raw/branch/main/yts/yts.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 4.6.2 / python 3.12.0
 |-
 | 🔍
@@ -653,6 +653,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | 13/Aug<br />2025
 | [https://raw.githubusercontent.com/MjKey/qBT-SE/refs/heads/master/enigines/tapochek.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/imDMG/qBt_SE/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
 | ✔ qbt 4.2.x / python 3.7+
+|-
+| [[https://www.google.com/s2/favicons?domain=toloka.to#.png]] [https://toloka.to/ Гуртом — торрент-толока]
+| [https://github.com/playday3008 PlayDay]
+| 1.01
+| 19/Dec<br />2025
+| [https://raw.githubusercontent.com/playday3008/qBittorrent-plugins/refs/heads/main/plugins/search/toloka_to.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
+| ✔ qbt 5.1.x / python 3.11+
 |-
 | [[https://www.google.com/s2/favicons?domain=unionfansub.com#.png]] [https://torrent.unionfansub.com/ UnionFansub]
 | [https://gitlab.com/CrimsonKoba/qb-search-plugin CrimsonKoba]

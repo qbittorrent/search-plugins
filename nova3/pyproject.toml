@@ -36,6 +36,7 @@ max-line-length = 1000
 
 [tool.pyright]
 extraPaths = ["_aux"]
+typeCheckingMode = "strict"
 
 [tool.pytest.ini_options]
 pythonpath = "_aux"

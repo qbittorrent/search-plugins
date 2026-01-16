@@ -6,6 +6,7 @@ on:
       - master
     paths:
       - 'wiki/*'
+  workflow_dispatch:
 
 permissions: {}
 
@@ -22,14 +23,15 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           persist-credentials: true
 
       - name: Deploy
         run: |
-          mv .git wiki
-          cd wiki
+          find . -maxdepth 1 -type f -delete
+          mv wiki/* ./
+          find . -maxdepth 1 -type d ! -name '.' ! -name '.git' -exec rm -r {} +
           git config user.name "qbt_search-plugins_bot"
           git config user.email "qbt_search-plugins_bot@example.com"
           git checkout --orphan tmp

@@ -1,4 +1,4 @@
-# VERSION: 4.7
+# VERSION: 4.9
 # AUTHORS: Diego de las Heras (ngosang@hotmail.es)
 # CONTRIBUTORS: ukharley
 #               hannsen (github.com/hannsen)
@@ -12,7 +12,7 @@ from datetime import datetime
 from http.cookiejar import CookieJar
 from multiprocessing.dummy import Pool
 from threading import Lock
-from typing import Any, Dict, List, Union
+from typing import Any, Dict, List, Tuple, Union
 from urllib.parse import unquote, urlencode
 
 import helpers
@@ -68,7 +68,7 @@ def load_configuration() -> None:
     try:
         # try to load user data from file
         with open(CONFIG_PATH, encoding='utf-8') as f:
-            CONFIG_DATA = json.load(f)
+            CONFIG_DATA = json.load(f)  # pyright: ignore [reportConstantRedefinition]
     except ValueError:
         # if file exists, but it's malformed we load add a flag
         CONFIG_DATA['malformed'] = True
@@ -139,7 +139,7 @@ class jackett:
 
         # search in Jackett API
         if self.thread_count > 1:
-            args = []
+            args: List[Tuple[str, Union[List[str], None], str]] = []
             indexers = self.get_jackett_indexers(what)
             for indexer in indexers:
                 args.append((what, category, indexer))
@@ -161,7 +161,7 @@ class jackett:
             return []
         # process results
         response_xml = xml.etree.ElementTree.fromstring(response)
-        indexers = []
+        indexers: List[str] = []
         for indexer in response_xml.findall('indexer'):
             indexers.append(indexer.attrib['id'])
         return indexers
