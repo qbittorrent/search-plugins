@@ -23,13 +23,6 @@ The minimum supported Python version (across all platforms) is specified at [htt
 !  Download link
 !  Comments
 |-
-| [[https://www.google.com/s2/favicons?domain=1337x.to#.png]] [http://1337x.to/ 1337x]
-| [https://github.com/sa3dany sa3dany], [https://github.com/Alyetama Alyetama], [https://github.com/BurningMop BurningMop], [https://github.com/scadams scadams]
-| 2.2
-| 20/Aug<br />2023
-| [https://gist.githubusercontent.com/scadams/56635407b8dfb8f5f7ede6873922ac8b/raw/f654c10468a0b9945bec9bf31e216993c9b7a961/one337x.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
-| ✔ qbt 4.4.x / python 3.6.0
-|-
 |[[https://www.google.com/s2/favicons?domain=academictorrents.com#.png]] [https://academictorrents.com/ Academic Torrents]
 |[https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
 |1.2
