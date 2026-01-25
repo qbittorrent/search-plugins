@@ -332,7 +332,7 @@ The minimum supported Python version (across all platforms) is specified at [htt
 |[https://github.com/Ashalda/sktorrent-qbt Ashalda]
 |1.1
 |27/Dec<br />2025
-|[https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/snowfl.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+|[https://raw.githubusercontent.com/Ashalda/sktorrent-qbt/refs/heads/main/sktorrent.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
 |✔ qbt 5.1.x / python 3.9.x <br />WORKING WITHOUT LOGIN - EVERYTHING EXCEPT XXX AND SOFTWARE
 |-
 | [[https://raw.githubusercontent.com/hannsen/qbittorrent_search_plugins/master/smallgames.png]] [http://small-games.info/ small-games.info]
