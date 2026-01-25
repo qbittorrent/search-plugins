@@ -17,7 +17,7 @@ concurrency:
 jobs:
   deploy:
     name: Deploy wiki
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     permissions:
       contents: write
 

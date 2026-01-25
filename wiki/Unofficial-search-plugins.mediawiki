@@ -314,13 +314,6 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/pirateiro.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
 | ✔ qbt 4.3.x / python 3.8.5
 |-
-| [[https://raw.githubusercontent.com/Larsluph/qbittorrent-search-plugins/prt/nova3/engines/pornrips.png]] [https://pornrips.to/  Pornrips]
-| [https://github.com/Larsluph/qbittorrent-search-plugins Larsluph]
-| 1.0
-| 20/Oct<br />2023
-| [https://raw.githubusercontent.com/Larsluph/qbittorrent-search-plugins/prt/nova3/engines/pornrips.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
-| ✔ qbt 4.5.x / python 3.11.6
-|-
 | [[https://github.com/Pireo/hello-world/blob/master/rockbox.png]] [https://rawkbawx.rocks/ RockBox]
 | [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
 | 1.0
@@ -330,7 +323,7 @@ The minimum supported Python version (across all platforms) is specified at [htt
 |-
 | [[https://github.com/imDMG/qBt_SE/blob/master/engines/rutor.png]] [http://rutor.info/ Rutor]
 | [https://github.com/imDMG/qBt_SE imDMG]
-| 1.16
+| 1.17
 | 20/Nov<br />2025
 | [https://raw.githubusercontent.com/imDMG/qBt_SE/master/engines/rutor.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/imDMG/qBt_SE/blob/master/README.md#rutrackerorg [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
 | ✔ qbt 4.2.x / python 3.7+
@@ -572,7 +565,7 @@ The minimum supported Python version (across all platforms) is specified at [htt
 |-
 | [[https://raw.githubusercontent.com/imDMG/qBt_SE/master/engines/kinozal.png]] [http://kinozal.tv/ Kinozal]
 | [https://github.com/imDMG/qBt_SE imDMG]
-| 2.19
+| 2.20
 | 20/Nov<br />2025
 | [https://raw.githubusercontent.com/imDMG/qBt_SE/master/engines/kinozal.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/imDMG/qBt_SE/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
 | ✔ qbt 4.2.x / python 3.7+
@@ -593,7 +586,7 @@ The minimum supported Python version (across all platforms) is specified at [htt
 |-
 | [[https://raw.githubusercontent.com/imDMG/qBt_SE/master/engines/nnmclub.png]] [https://nnm-club.me/ NoNaMe-Club]
 | [https://github.com/imDMG/qBt_SE imDMG]
-| 2.20
+| 2.22
 | 20/Nov<br />2025
 | [https://raw.githubusercontent.com/imDMG/qBt_SE/master/engines/nnmclub.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/imDMG/qBt_SE/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
 | ✔ qbt 4.2.x / python 3.7+
@@ -614,7 +607,7 @@ The minimum supported Python version (across all platforms) is specified at [htt
 |-
 | [[https://raw.githubusercontent.com/imDMG/qBt_SE/master/engines/rutracker.png]] [https://rutracker.org/ RuTracker]
 | [https://github.com/imDMG/qBt_SE imDMG]
-| 1.16
+| 1.17
 | 20/Nov<br />2025
 | [https://raw.githubusercontent.com/imDMG/qBt_SE/master/engines/rutracker.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/imDMG/qBt_SE/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
 | ✔ qbt 4.2.x / python 3.7+

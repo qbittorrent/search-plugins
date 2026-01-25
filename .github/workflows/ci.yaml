@@ -1,6 +1,12 @@
 name: CI
 
-on: [pull_request, push]
+on:
+  pull_request:
+    paths-ignore::
+      - 'wiki/**'
+  push:
+    paths-ignore::
+      - 'wiki/**'
 
 permissions: {}
 
@@ -58,7 +64,7 @@ jobs:
 
   zizmor:
     name: Check workflow files
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     permissions:
       security-events: write
 
