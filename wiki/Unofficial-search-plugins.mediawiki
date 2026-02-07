@@ -498,6 +498,14 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/YGGverse/qbittorrent-yggtracker-search-plugin/main/yggtracker.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
 | ✔ qbt 4.5.1 / v5.0.0alpha1 / python 3.11.4 <br />Requires [https://github.com/yggdrasil-network/ Yggdrasil] connection
 |-
+| [[https://i.imgur.com/NtpyOCP.png]] [https://zamunda.rip/ Zamunda.RIP]
+| [https://github.com/codeobfuscation/qBittorrent-ZamundaRIP-plugin Necrosis]
+| 1.0
+| 07/Feb<br />2026
+| [https://raw.githubusercontent.com/codeobfuscation/qBittorrent-ZamundaRIP-plugin/main/engines/zamundarip.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 5.1.x / python 3.9.x
+|-
+|-
 | [[https://i.imgur.com/EiYFI5M.png]] [https://zooqle.skin/ Zooqle]
 | [https://github.com/444995/qbit-search-plugins 444995]
 | 1.10
