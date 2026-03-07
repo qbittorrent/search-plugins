@@ -258,6 +258,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/BurningMop/qBittorrent-Search-Plugins/refs/heads/main/naranjatorrent.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
 | ✔ qbt 5.0.x / python 3.9.x
 |-
+| [[https://raw.githubusercontent.com/tolotp/qbittorrent-search-plugins-de-busqueda/refs/heads/main/Images/nekobt.png]] [https://nekobt.to/ nekoBT]
+| [https://github.com/tolotp/qbittorrent-search-plugins-de-busqueda tolotp]
+| 1.0
+| 06/Mar/2026
+| [https://raw.githubusercontent.com/tolotp/qbittorrent-search-plugins-de-busqueda/refs/heads/main/Plugins/nekobt.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 4.5.x+ / python 3.9.x+
+|-
 | [[https://raw.githubusercontent.com/4chenz/pantsu-plugin/master/pantsu.png]] [https://nyaa.pantsu.cat/ Nyaa.Pantsu]
 | [https://github.com/4chenz/pantsu-plugin/ 4chenz]
 | 1.21
@@ -462,6 +469,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/BurningMop/qBittorrent-Search-Plugins/refs/heads/main/traht.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
 | ✔ qbt 4.6.x / python 3.9.x
 |-
+| [[https://www.google.com/s2/favicons?domain=uindex.org#.png]] [https://uindex.org/ UIndex}
+| [https://github.com/tolotp/qbittorrent-search-plugins-de-busqueda tolotp]
+| 1.0
+| 05/Mar/2026
+| [https://raw.githubusercontent.com/tolotp/qbittorrent-search-plugins-de-busqueda/refs/heads/main/Plugins/uindex.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔️ qbt 4.5.x+ / python 3.9.x+
+|-
 | [[https://github.com/msagca/qbittorrent-plugins/blob/main/uniondht_icon.png]] [http://uniondht.org/ UnionDHT]
 | [https://github.com/msagca/qbittorrent-plugins/ msagca]
 | 1.2
@@ -563,6 +577,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/imDMG/qBt_SE/master/engines/kinozal.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/imDMG/qBt_SE/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
 | ✔ qbt 4.2.x / python 3.7+
 |-
+| [[https://www.google.com/s2/favicons?domain=lat-team.com#.png]] [https://lat-team.com Lat-Team]
+| [https://github.com/tolotp/qbittorrent-search-plugins-de-busqueda tolotp]
+| 1.0
+| 06/Mar/2026
+| [https://raw.githubusercontent.com/tolotp/qbittorrent-search-plugins-de-busqueda/refs/heads/main/Plugins/latteam.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/tolotp/qbittorrent-search-plugins-de-busqueda/wiki/Gu%C3%ADa-para-plugin-Lat%E2%80%90team [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
+| ✔️ qbt 4.5.x+ / python 3.9.x+<br />  ❗ Pls read the guide
+|-
 | [[https://github.com/bugsbringer/qbit-plugins/blob/master/lostfilm.png]] [https://www.lostfilm.tv/ LostFilm.TV]
 | [https://github.com/bugsbringer/qbit-plugins Bugsbringer]
 | 0.14
@@ -653,6 +674,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | 19/Dec<br />2025
 | [https://raw.githubusercontent.com/playday3008/qBittorrent-plugins/refs/heads/main/plugins/search/toloka_to.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 5.1.x / python 3.11+
+|-
+| [[https://www.google.com/s2/favicons?domain=unionfansub.com#.png]] [https://torrent.unionfansub.com/ UnionFansub]
+| [https://github.com/tolotp/qbittorrent-search-plugins-de-busqueda tolotp]
+| 2.0
+| 05/Mar/2026
+| [https://raw.githubusercontent.com/tolotp/qbittorrent-search-plugins-de-busqueda/refs/heads/main/Plugins/unionfansub.py  [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]<br /> [https://github.com/tolotp/qbittorrent-search-plugins-de-busqueda/wiki/Gu%C3%ADa-para-plugin-Uni%C3%B3n-fansub [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
+| ✔️ qbt 4.5.x+ / python 3.9.x+<br />  ❗ Pls read the guide
 |-
 | [[https://www.google.com/s2/favicons?domain=unionfansub.com#.png]] [https://torrent.unionfansub.com/ UnionFansub]
 | [https://gitlab.com/CrimsonKoba/qb-search-plugin CrimsonKoba]
