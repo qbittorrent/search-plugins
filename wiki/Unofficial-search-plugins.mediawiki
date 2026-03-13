@@ -187,6 +187,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/glotorrents.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
 | ✔ qbt 4.3.5 / python 3.8.5
 |-
+| [[https://gog-games.to/favicon-16x16.png]] [https://gog-games.to/ Gog-games]
+| [https://github.com/tolotp/qbittorrent-search-plugins-de-busqueda tolotp]
+| 1.0
+| 10/Mar/2026
+| [https://raw.githubusercontent.com/tolotp/qbittorrent-search-plugins-de-busqueda/refs/heads/main/Plugins/goggames.py] [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔️ qbt 4.5.x+ / python 3.9.x+<br />  ❗ Pls read this [https://github.com/tolotp/qbittorrent-search-plugins-de-busqueda/wiki/Plugin-gog%E2%80%90games-(ESPA%C3%91OL-%7C-ENGLISH) INFO]
+|-
 | [[https://github.com/LightDestory/qBittorrent-Search-Plugins/raw/master/src/engines/kickasstorrents.png]] [https://katcr.to/  Kickass Torrent]
 | [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
 | 1.0
@@ -590,6 +597,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | 13/Jun<br />2020
 | [https://raw.githubusercontent.com/bugsbringer/qbit-plugins/master/lostfilm.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/bugsbringer/qbit-plugins/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
 | ✔ qbt 4.2.x / python 3.5.0
+|-
+| [[https://www.google.com/s2/favicons?domain=milkie.cc]] [https://milkie.cc Milkie]
+| [https://github.com/tolotp/qbittorrent-search-plugins-de-busqueda tolotp]
+| 1.0
+| 10/Mar/2026 
+| [https://raw.githubusercontent.com/tolotp/qbittorrent-search-plugins-de-busqueda/refs/heads/main/Plugins/milkie.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br /> [https://github.com/tolotp/qbittorrent-search-plugins-de-busqueda/wiki/Guia-plugin-Milkie [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
+| ✔️ qbt 4.5.x+ / python 3.9.x+<br />  ❗ Pls read the guide
 |-
 | [[https://raw.githubusercontent.com/darktohka/qbittorrent-plugins/master/resources/ncore.png]] [https://ncore.pro/ nCore]
 | [https://github.com/darktohka/qbittorrent-plugins darktohka]
