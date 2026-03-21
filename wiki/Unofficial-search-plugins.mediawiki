@@ -528,6 +528,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/MadeOfMagicAndWires/qBit-plugins/master/engines/bakabt.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br />[https://github.com/MadeOfMagicAndWires/qBit-plugins/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
 | ✔ qbt 4.3.x / python 3.9.x
 |-
+| [[https://www.google.com/s2/favicons?domain=c411.org#.png]] [https://c411.org/ C411]
+| [https://github.com/OptimusKoala/qbittorrent-c411-plugin OptimusKoala]
+| 1.00
+| 21/Mar<br />2026
+| [https://raw.githubusercontent.com/OptimusKoala/qbittorrent-c411-plugin/refs/heads/main/c411.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br />[https://github.com/OptimusKoala/qbittorrent-c411-plugin/blob/main/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
+| ✔ qbt 5.0.x / python 3.9+<br />Private tracker, requires API key
+|-
 | [[https://i.imgur.com/ien7TCt.png]] [https://danishbytes.club DanishBytes]
 | [https://github.com/444995/qbit-search-plugins 444995]
 | 1.50
