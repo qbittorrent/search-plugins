@@ -535,12 +535,12 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/444995/qbit-search-plugins/main/engines/danishbytes.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
 | ✔ qbt v4.6.5 / python 3.11.1
 |-
-| [[https://github.com/victorBuzdugan/QbittorrentFilelistSearchPlugin/blob/master/filelist.png]] [https://filelist.io FileList]
-| [https://github.com/victorBuzdugan/QbittorrentFilelistSearchPlugin victor]
-| 1.10
-| 07/Sep<br />2023
-| [https://raw.githubusercontent.com/victorBuzdugan/QbittorrentFilelistSearchPlugin/master/filelist.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br />[https://github.com/victorBuzdugan/QbittorrentFilelistSearchPlugin/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
-| ✔ qbt 4.5.x / python 3.8.x
+| [[https://www.google.com/s2/favicons?domain=filelist.io#.png]] [https://filelist.io FileList]
+| [https://github.com/RaresPNet/filelist_search_plugin RaresPNet]
+| 1.2
+| 25/Mar<br />2026
+| [https://raw.githubusercontent.com/RaresPNet/filelist_search_plugin/main/filelist.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]<br />[https://github.com/RaresPNet/filelist_search_plugin/blob/main/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]] ]
+| ✔ qbt 5.1.x / python 3.x
 |-
 | [[https://github.com/Ooggle/qbittorrent-search-plugins/raw/master/engines/gazellegames.png]] [https://gazellegames.net GazelleGames]
 | [https://github.com/Ooggle/qbittorrent-search-plugins Ooggle]
