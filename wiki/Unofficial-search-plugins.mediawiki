@@ -58,6 +58,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/AlaaBrahim/qBitTorrent-animetosho-search-plugin/main/animetosho.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
 | ✔ qbt 4.5.x / python 3.x.x
 |-
+| [[https://apachetorrent.com/icon.png]] [https://apachetorrent.com/ apachetorrent.com]
+| [https://github.com/bebetoh bebetoh]
+| 1.0.0
+| 05/Apr<br />2026
+| [https://gist.githubusercontent.com/bebetoh/3bb49cdf2b3718937b5446db1e4a4915/raw/1819e3ed75faa0da1571173a677081dc107054aa/apachetorrent.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 5.1.x / python 3.11.x
+|-
 |[[https://raw.githubusercontent.com/nklido/qBittorrent_search_engines/master/engines/audiobookbay_icon_16x16.png]] [http://theaudiobookbay.se/ AudioBook Bay (ABB) ]
 |[https://github.com/nklido/qBittorrent_search_engines nKlido]
 |0.4
@@ -306,6 +313,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | 28/Jul<br />2022
 | [https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/pirateiro.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
 | ✔ qbt 4.3.x / python 3.8.5
+|-
+| [[https://redetorrent.com/icone_site.png]] [https://redetorrent.com/ redetorrent.com]
+| [https://github.com/bebetoh bebetoh]
+| 1.0.0
+| 05/Apr<br />2026
+| [https://gist.githubusercontent.com/bebetoh/b5e1f4731462de9b837f5026617b1d4a/raw/e71d0020078d56d3f7e9a903ca7b4d44774e10f7/redetorrent.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+| ✔ qbt 5.1.x / python 3.11.x
 |-
 | [[https://github.com/Pireo/hello-world/blob/master/rockbox.png]] [https://rawkbawx.rocks/ RockBox]
 | [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
