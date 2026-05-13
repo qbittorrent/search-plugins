@@ -177,7 +177,7 @@ The minimum supported Python version (across all platforms) is specified at [htt
 |[https://github.com/DrPurp/eztvx-qbittorrent-plugin DrPurp]
 | 2.00
 | 18/Apr<br />2026
-|[https://raw.githubusercontent.com/DrPurp/eztvx-qbittorrent-plugin/main/eztv.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
+|[https://raw.githubusercontent.com/DrPurp/eztvx-qbittorrent-plugin/main/eztvx.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]] ]
 | ✔ qbt 5.x / python 3.x — Uses official EZTV JSON API
 |-
 | [[https://github.com/Bioux1/qbtSearchPlugins/blob/main/fitgirl_repacks.jpg]] [https://fitgirl-repacks.site/ FitGirl Repacks]
