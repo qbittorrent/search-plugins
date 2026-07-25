@@ -3,9 +3,16 @@
 # LICENSE: MIT
 """Fast, configurable metasearch plugin for qBittorrent.
 
-This file is intentionally self-contained because qBittorrent installs search
-plugins one Python file at a time. Configuration is read from
-``torrenthunter.json`` next to this file.
+The plugin works immediately after installing this file and uses its embedded
+defaults, which enable the public Torrents.csv source. No JSON file is included
+or required.
+
+Optional settings and additional sources such as Prowlarr and Jackett can be
+configured by creating ``torrenthunter.json`` beside the installed
+``torrenthunter.py`` file. The JSON values override the embedded defaults; in
+particular, copy the relevant source entry from ``DEFAULT_CONFIG`` below and
+replace ``YOUR_API_KEY_HERE`` with the API key for your own local service.
+Never publish a configuration containing a real API key.
 """
 
 from __future__ import annotations
