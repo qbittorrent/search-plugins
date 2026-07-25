@@ -208,6 +208,64 @@ class TorrentHunterTests(unittest.TestCase):
         self.assertTrue(any("1080p" not in variant and "x265" not in variant for variant in variants))
         self.assertTrue(any("2025" not in variant for variant in variants))
 
+    def test_query_variants_remove_low_information_title_words(self) -> None:
+        variants = plugin._query_variants("The Incredibles")
+        self.assertEqual(variants[0], "The Incredibles")
+        self.assertIn("Incredibles", variants)
+
+    def test_fuzzy_title_similarity_tolerates_misspellings(self) -> None:
+        self.assertGreater(
+            plugin._fuzzy_title_similarity(
+                "The Incredibls 2004 1080p BluRay", "The Incredibles"
+            ),
+            0.9,
+        )
+        self.assertGreater(
+            plugin._fuzzy_title_similarity(
+                "Incredables 2004 WEB-DL", "The Incredibles"
+            ),
+            0.8,
+        )
+        self.assertLess(
+            plugin._fuzzy_title_similarity("Finding Nemo 2003", "The Incredibles"),
+            0.5,
+        )
+
+    def test_adaptive_search_requeries_inferred_spelling(self) -> None:
+        calls: List[str] = []
+
+        def adapter(
+            _source: Mapping[str, Any],
+            query: str,
+            _category: str,
+            _timeout: float,
+        ) -> List[Dict[str, Any]]:
+            calls.append(query)
+            if query == "The Incredibls":
+                return [
+                    {
+                        "link": f"magnet:?xt=urn:btih:{number:040x}",
+                        "name": f"The Incredibles 2004 release {number}",
+                        "size": "1 B",
+                        "seeds": 1,
+                        "pub_date": 1,
+                    }
+                    for number in range(2)
+                ]
+            return []
+
+        source = {
+            "_adaptive": {
+                "enabled": True,
+                "target_unique_results": 10,
+                "max_extra_queries": 1,
+            }
+        }
+        plugin._search_with_expansion(
+            adapter, source, "The Incredibls", "movies", 5
+        )
+        self.assertEqual(calls, ["The Incredibls", "The Incredibles"])
+
     def test_adaptive_search_stops_when_exact_query_meets_target(self) -> None:
         calls: List[str] = []
 

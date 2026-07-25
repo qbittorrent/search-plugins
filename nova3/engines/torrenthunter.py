@@ -11,6 +11,7 @@ plugins one Python file at a time. Configuration is read from
 from __future__ import annotations
 
 import datetime
+import difflib
 import email.utils
 import hashlib
 import json
@@ -51,7 +52,12 @@ DEFAULT_CONFIG: Dict[str, Any] = {
     "circuit_breaker_seconds": 300,
     "minimum_seeders": 0,
     "maximum_age_days": 0,
-    "ranking": {"relevance": 1000, "seeders": 10, "freshness": 1},
+    "ranking": {
+        "relevance": 1000,
+        "fuzzy_similarity": 500,
+        "seeders": 10,
+        "freshness": 1,
+    },
     "adaptive_search": {
         "enabled": True,
         "target_unique_results": 75,
@@ -250,6 +256,21 @@ TECHNICAL_QUERY_TOKENS = re.compile(
     r")$",
     re.IGNORECASE,
 )
+TITLE_STOP_WORDS = {
+    "a",
+    "an",
+    "and",
+    "of",
+    "the",
+}
+
+
+def _meaningful_tokens(text: str) -> List[str]:
+    return [
+        token
+        for token in _normal_name(text).split()
+        if token not in TITLE_STOP_WORDS and not TECHNICAL_QUERY_TOKENS.match(token)
+    ]
 
 
 def _query_variants(query: str) -> List[str]:
@@ -263,6 +284,16 @@ def _query_variants(query: str) -> List[str]:
         variants.append(normalized)
 
     tokens = normalized.split()
+    without_stop_words = " ".join(
+        token for token in tokens if token.casefold() not in TITLE_STOP_WORDS
+    )
+    if (
+        len(without_stop_words.split()) >= 1
+        and without_stop_words.casefold()
+        not in {item.casefold() for item in variants}
+    ):
+        variants.append(without_stop_words)
+
     relaxed_tokens = [token for token in tokens if not TECHNICAL_QUERY_TOKENS.match(token)]
     relaxed = " ".join(relaxed_tokens)
     if (
@@ -292,6 +323,66 @@ def _query_variants(query: str) -> List[str]:
     return variants
 
 
+def _fuzzy_title_similarity(name: str, query: str) -> float:
+    query_tokens = _meaningful_tokens(urllib.parse.unquote_plus(query))
+    name_tokens = _meaningful_tokens(name)
+    if not query_tokens or not name_tokens:
+        return 0.0
+    window_size = len(query_tokens)
+    candidate_windows = [
+        name_tokens[start: start + window_size]
+        for start in range(max(1, len(name_tokens) - window_size + 1))
+    ]
+    phrase = " ".join(query_tokens)
+    return max(
+        difflib.SequenceMatcher(None, phrase, " ".join(window)).ratio()
+        for window in candidate_windows
+    )
+
+
+def _fuzzy_correction(
+    query: str, results: Iterable[Mapping[str, Any]]
+) -> Optional[str]:
+    normalized = re.sub(
+        r"\s+", " ", re.sub(r"[._]+", " ", urllib.parse.unquote_plus(query))
+    ).strip()
+    query_tokens = normalized.split()
+    candidate_counts: Dict[str, int] = {}
+    for result in results:
+        for token in set(_meaningful_tokens(str(result.get("name", "")))):
+            candidate_counts[token] = candidate_counts.get(token, 0) + 1
+
+    replacements: Dict[str, str] = {}
+    for token in query_tokens:
+        folded = token.casefold()
+        if (
+            len(folded) < 5
+            or folded in TITLE_STOP_WORDS
+            or TECHNICAL_QUERY_TOKENS.match(folded)
+        ):
+            continue
+        candidates = [
+            candidate
+            for candidate, count in candidate_counts.items()
+            if count >= 2 and candidate != folded
+        ]
+        if not candidates:
+            continue
+        scored_candidates = [
+            (difflib.SequenceMatcher(None, folded, candidate).ratio(), candidate)
+            for candidate in candidates
+        ]
+        best = max(scored_candidates)[1]
+        if difflib.SequenceMatcher(None, folded, best).ratio() >= 0.82:
+            replacements[folded] = best.capitalize() if token[:1].isupper() else best
+    if not replacements:
+        return None
+    corrected = " ".join(
+        replacements.get(token.casefold(), token) for token in query_tokens
+    )
+    return corrected if corrected.casefold() != normalized.casefold() else None
+
+
 def _dedupe_key(result: Mapping[str, Any]) -> str:
     info_hash = _info_hash(str(result.get("link", "")))
     if info_hash:
@@ -315,6 +406,8 @@ def _score(result: Mapping[str, Any], query: str, config: Mapping[str, Any]) -> 
         freshness_days = max(0.0, (time.time() - published) / 86400)
     return (
         relevance * float(weights.get("relevance", 1000))
+        + _fuzzy_title_similarity(str(result.get("name", "")), query)
+        * float(weights.get("fuzzy_similarity", 500))
         + max(0, seeds) * float(weights.get("seeders", 10))
         - freshness_days * float(weights.get("freshness", 1))
     )
@@ -485,21 +578,38 @@ def _search_with_expansion(
     category: str,
     timeout: float,
 ) -> List[Dict[str, Any]]:
-    variants = _query_variants(query)
     adaptive = source.get("_adaptive", {})
     enabled = bool(adaptive.get("enabled", True))
     target = max(1, _integer(adaptive.get("target_unique_results"), 75))
     extras = max(0, _integer(adaptive.get("max_extra_queries"), 3))
-    selected = variants[: 1 + extras] if enabled else variants[:1]
     unique: Dict[str, Dict[str, Any]] = {}
-    for number, variant in enumerate(selected):
-        if number > 0 and len(unique) >= target:
-            break
+
+    def add_variant(variant: str) -> None:
         for result in adapter(source, variant, category, timeout):
             key = _dedupe_key(result)
             previous = unique.get(key)
             if previous is None or _quality(result, query) > _quality(previous, query):
                 unique[key] = result
+
+    add_variant(urllib.parse.unquote_plus(query).strip())
+    if not enabled or len(unique) >= target:
+        return list(unique.values())
+
+    candidates: List[str] = []
+    correction = _fuzzy_correction(query, unique.values())
+    if correction:
+        candidates.append(correction)
+    candidates.extend(_query_variants(query)[1:])
+    seen = {urllib.parse.unquote_plus(query).strip().casefold()}
+    extra_count = 0
+    for variant in candidates:
+        if extra_count >= extras or len(unique) >= target:
+            break
+        if not variant or variant.casefold() in seen:
+            continue
+        seen.add(variant.casefold())
+        add_variant(variant)
+        extra_count += 1
     return list(unique.values())
 
 
