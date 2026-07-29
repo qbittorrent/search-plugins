@@ -1,4 +1,4 @@
-# VERSION: 4.9
+# VERSION: 4.10
 # AUTHORS: Diego de las Heras (ngosang@hotmail.es)
 # CONTRIBUTORS: ukharley
 #               hannsen (github.com/hannsen)
@@ -141,6 +141,10 @@ class jackett:
         if self.thread_count > 1:
             args: List[Tuple[str, Union[List[str], None], str]] = []
             indexers = self.get_jackett_indexers(what)
+            if not indexers:
+                # get_jackett_indexers() already reported the error (or there
+                # are simply no configured indexers); nothing left to search.
+                return
             for indexer in indexers:
                 args.append((what, category, indexer))
             with Pool(min(len(indexers), self.thread_count)) as pool:
