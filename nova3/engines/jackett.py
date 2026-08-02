@@ -1,4 +1,4 @@
-# VERSION: 4.9
+# VERSION: 4.10
 # AUTHORS: Diego de las Heras (ngosang@hotmail.es)
 # CONTRIBUTORS: ukharley
 #               hannsen (github.com/hannsen)
@@ -12,7 +12,7 @@ from datetime import datetime
 from http.cookiejar import CookieJar
 from multiprocessing.dummy import Pool
 from threading import Lock
-from typing import Any, Dict, List, Tuple, Union
+from typing import Any, Dict, List, Union
 from urllib.parse import unquote, urlencode
 
 import helpers
@@ -139,12 +139,11 @@ class jackett:
 
         # search in Jackett API
         if self.thread_count > 1:
-            args: List[Tuple[str, Union[List[str], None], str]] = []
             indexers = self.get_jackett_indexers(what)
             if not indexers:
                 return
-            for indexer in indexers:
-                args.append((what, category, indexer))
+
+            args = ((what, category, indexer) for indexer in indexers)
             with Pool(min(len(indexers), self.thread_count)) as pool:
                 pool.starmap(self.search_jackett_indexer, args)
         else:
