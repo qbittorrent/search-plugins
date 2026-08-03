@@ -93,6 +93,8 @@ class torlock:
                         self.current_item["pub_date"] = int(date.timestamp())
                     except Exception:  # pylint: disable=broad-exception-caught
                         self.current_item["pub_date"] = -1
+                    if "seeds" not in self.current_item:
+                        self.current_item["seeds"] = -1
                     prettyPrinter(self.current_item)  # type: ignore[arg-type] # refactor later
                     self.page_items += 1
                 self.current_item = {}
