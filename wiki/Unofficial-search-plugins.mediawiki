@@ -31,12 +31,12 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/academictorrents.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 4.3.x / Python 3.8.5 <br>**READ REPOSITORY NOTES**
 |-
-| [[https://raw.githubusercontent.com/Cc050511/qBit-search-plugins/main/favicon.png]] [https://acg.rip/ acgrip]
-| [https://github.com/Cc050511/qBit-search-plugins Yun]
-| 1.0
-| 24/Apr<br>2023
-| [https://raw.githubusercontent.com/Cc050511/qBit-search-plugins/main/acgrip.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
-| ✔ qbt 4.5.2 / Python 3.10
+| [[https://raw.githubusercontent.com/nishizhen/qBit-search-plugins/main/favicon.png]] [https://acg.rip/ acgrip]
+| [https://github.com/nishizhen/qBit-search-plugins nishizhen]
+| 2.1
+| 4/Aug<br>2026
+| [https://raw.githubusercontent.com/nishizhen/qBit-search-plugins/main/acgrip.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
+| ✔ qbt 5.0.x / Python 3.10+
 |-
 | [[https://raw.githubusercontent.com/hannsen/qbittorrent_search_plugins/master/ali213.png]] [http://down.ali213.net/ ali213.net]
 | [https://github.com/hannsen/qbittorrent_search_plugins/ hannsen]
