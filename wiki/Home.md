@@ -1,6 +1,6 @@
-Welcome to the search-plugins wiki!
+# Welcome to the Search Plugins Wiki!
 
-The wiki source code is hosted at https://github.com/qbittorrent/search-plugins/tree/master/wiki and is accepting Pull Requests.
+The wiki source code is hosted at <https://github.com/qbittorrent/search-plugins/tree/master/wiki> and is accepting Pull Requests.
 
 * [List of unofficial search plugins](https://github.com/qbittorrent/search-plugins/wiki/Unofficial-search-plugins)
 * [Request unofficial search plugin](https://github.com/qbittorrent/search-plugins/wiki/Request-unofficial-search-plugin)

@@ -7,6 +7,9 @@ running it in tandem with qBittorrent to take advantage of its much larger
 catalog of indexers (584, as of November 2025) and efficiency in retrieving results
 from them. Configure the **Jackett qBittorrent plugin** (essentially, set the API key).
 
+> [!NOTE]
+> Use only indexers and content you are legally authorized to access in your jurisdiction.
+
 ## What is Jackett?
 
 As explained in the project's [README.md file][jackett-readme] (emphasis added):
@@ -25,17 +28,17 @@ software designed for performing those same searches on a much larger scale. An
 application such as qBittorrent can present the searches it's asked to perform
 to Jackett, which broadcasts them to a user-defined list of potentially hundreds
 of indexing sites all at once, and then feeds the results back as they come in.
-The primary advantages to this arragement are threefold:
+The main advantages of this arrangement are:
 
 - As performing searches is its only function, it is much faster at conducting
   them and processing the results.
-- The ability to perform searches at a much wider list indexes that is quick to
-  add new sites and remove dead ones.
+- Access to a much wider and frequently updated list of indexers, with new sites
+  added quickly and dead ones removed promptly.
 - It is much better at reacting to the frequent changes that occur on the
   indexer sites that arise as they work to mitigate attempts to interrupt their
   operation.
 
-Updates to their catalog of indexers take place almost daily and it includes
+Updates to the indexer catalog happen almost daily, and it includes
 hundreds of sites which never had nor were ever likely to get their own
 qBittorrent search plugin.
 
@@ -46,7 +49,7 @@ qBittorrent search plugin.
 Jackett is built using the .NET framework and requires that you have the .NET 8
 Runtime present on your system prior to installation. Microsoft provides
 installer files for the runtime for [Windows][dotnet-windows-support],
-[macOS][dotnet-macos-support] and [GNU/Linux][dotnet-linux-support] (click the
+[macOS][dotnet-macos-support] and [Linux][dotnet-linux-support] (click the
 preceding links to see the minimum requirements for each operating system).
 
 **[Microsoft .NET Downloads][dotnet-downloads]**
@@ -70,7 +73,7 @@ below to install and configure Jackett.
 
 ### qBittorrent plugin
 
-> [!NOTE]  
+> [!NOTE]
 > The full download URL for the plugin file is
 > `https://raw.githubusercontent.com/qbittorrent/search-plugins/master/nova3/engines/jackett.py`
 
@@ -78,11 +81,11 @@ Follow these steps to manually install the plugin:
 
 1. Launch qBittorrent and click on the Search tab (only shown when "Search
    Engine" is active in the View menu)
-1. Highlight the URL shown above or right-click [this link][plugin-file] and
+2. Highlight the URL shown above or right-click [this link][plugin-file] and
    **copy** it to the clipboard
-1. Click the **Search plugins…** button in the bottom-right corner, then click
+3. Click the **Search plugins…** button in the bottom-right corner, then click
    **Install a new one**, and finally **Web link** as the "Search plugin source"
-1. qBittorrent tries to automatically fill the input field if a URL is found on
+4. qBittorrent tries to automatically fill the input field if a URL is found on
    the clipboard, but if not, manually paste the URL there
 
 ## Configuration
@@ -123,7 +126,11 @@ following contents:
 > (127.0.0.1) must be replaced with a routable address (for instance, using DDNS
 > or an IPv6 Global Unicast Address) to allow traffic to pass between it and
 > qBittorrent. Additional firewall rules or port forwarding may also be needed.
-> 
+>
+> Avoid exposing Jackett directly to the public internet.
+> Prefer private connectivity (for example, VPN/Tailscale/WireGuard) or a reverse proxy
+> with TLS and authentication.
+>
 > The change must be made in both the Jackett UI and the plugin configuration
 > file, specifically its `url` key. For example:
 
@@ -146,20 +153,20 @@ following contents:
 | `tracker_first` |         `false`         | Prepend indexer site name to each search result (takes Boolean value)                               |
 | `thread_count`  |          `20`           | Maximum number of concurrent requests to Jackett (to disable concurrent requests, set value to `1`) |
 
-## Disabling/Removing the Jackett plugin
+## Disable or remove the Jackett plugin
 
 The Jackett plugin is enabled by default in qBittorrent. However, you can
-disable it or removing it entirely at any time by following these steps:
+disable it or remove it entirely at any time by following these steps:
 
 1. In the **Search** tab, click the **Search plugins…** button in the
    bottom-right corner.
-1. Locate the entry named **Jackett** in the list.
-1. To disable the plugin:
+2. Locate the entry named **Jackett** in the list.
+3. To disable the plugin:
    - Right-click the entry and clear the checkmark from the **Enabled** option.
 
    Or to uninstall the plugin:
    - Right-click the entry and select **Uninstall**.
-1. Click the **Close** button.
+4. Click the **Close** button.
 
 ## Screenshots
 

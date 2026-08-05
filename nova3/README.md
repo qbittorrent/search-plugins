@@ -1,5 +1,5 @@
-nova3 Plugins
-===
+# nova3 Plugins
+
 [![GitHub Actions CI status]][GitHub Actions link]
 
 [GitHub Actions CI status]: https://github.com/qbittorrent/search-plugins/workflows/CI/badge.svg
@@ -16,11 +16,13 @@ nova3 Plugins
 1. Setup development environment
 
    1. Setup virtual environment and dependencies
+
       ```shell
       uv sync
       ```
 
    2. Activate virtual environment
+
       ```shell
       source .venv/bin/activate
       ```

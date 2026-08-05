@@ -85,7 +85,7 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | 2.0
 | 27/Aug<br>2023
 | [https://raw.githubusercontent.com/TuckerWarlock/qbittorrent-search-plugins/main/bt4gprx.com/bt4gprx.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
-| ✔ qbt 4.5.x / Python 3.10.x<br>❗ Working when DDOS cloudfare<br>protection is disabled
+| ✔ qbt 4.5.x / Python 3.10.x<br>❗ Working when DDOS Cloudflare<br>protection is disabled
 |-
 | [[https://www.google.com/s2/favicons?domain=btdig.com#.png]] [https://btdig.com/ btdig]
 | [https://github.com/galaris/BTDigg-qBittorrent-plugin galaris]
@@ -732,7 +732,7 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | 1.0
 | 25/Nov<br>2019
 | [https://raw.githubusercontent.com/CravateRouge/qBittorrentSearchPlugins/master/yggtorrent.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]<br> [https://github.com/CravateRouge/qBittorrentSearchPlugins/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]]]
-| ❗ Working when DDOS cloudfare<br>protection is disabled
+| ❗ Working when DDOS Cloudflare<br>protection is disabled
 |-
 | [[https://www.google.com/s2/favicons?domain=zamunda.rip#.png]] [https://zamunda.rip/ Zamunda.RIP]
 | [https://github.com/codeobfuscation/qBittorrent-ZamundaRIP-plugin Necrosis]
