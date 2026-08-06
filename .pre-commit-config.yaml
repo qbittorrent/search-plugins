@@ -1,0 +1,33 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks.git
+    rev: v6.0.0
+    hooks:
+    - id: check-json
+      name: Check JSON files
+
+    - id: check-yaml
+      name: Check YAML files
+
+    - id: end-of-file-fixer
+      name: Check trailing newlines
+
+  - repo: https://github.com/igorshubovych/markdownlint-cli.git
+    rev: v0.49.1
+    hooks:
+    - id: markdownlint
+      name: Check Markdown files
+      args: ["--config", ".github/workflows/helpers/pre-commit/.markdownlint.yaml"]
+
+  - repo: https://github.com/codespell-project/codespell.git
+    rev: v2.4.3
+    hooks:
+    - id: codespell
+      name: Check spelling (codespell)
+      args: ["--ignore-words-list", ""]
+
+  - repo: https://github.com/crate-ci/typos.git
+    rev: v1.48.0
+    hooks:
+    - id: typos
+      name: Check spelling (typos)
+      args: ["--config", ".github/workflows/helpers/pre-commit/.typos.toml"]

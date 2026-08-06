@@ -9,3 +9,12 @@ updates:
           - "*"
     schedule:
       interval: "monthly"
+
+  - package-ecosystem: "pre-commit"
+    directory: "/"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+    schedule:
+      interval: "monthly"

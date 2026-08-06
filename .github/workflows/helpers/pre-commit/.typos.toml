@@ -1,0 +1,9 @@
+# https://github.com/crate-ci/typos/blob/master/docs/reference.md
+# https://github.com/crate-ci/typos/blob/master/docs/design.md#identifiers-and-words
+
+# Try adding to the `extend-identifiers` list first; if that doesn't work, then try the `extend-words` list
+
+[default.extend-identifiers]
+LightDestory = "LightDestory"
+
+[default.extend-words]

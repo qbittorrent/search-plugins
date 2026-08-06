@@ -1,0 +1,48 @@
+name: CI - File health
+
+on: [pull_request, push]
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: ${{ github.head_ref != '' }}
+
+jobs:
+  ci:
+    name: Check
+    runs-on: ubuntu-slim
+    permissions:
+      security-events: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Setup python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "*"
+
+      - name: Check files
+        uses: j178/prek-action@v2
+
+      - name: Check GitHub Actions workflow
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pip install zizmor
+          zizmor \
+            --format sarif \
+            --persona auditor \
+            ./ \
+            | jq '(.runs[].results |= map(select(.ruleId != "zizmor/unpinned-uses")))
+              | (.runs[].tool.driver.rules |= map(select(.id != "zizmor/unpinned-uses")))' \
+            > "${{ runner.temp }}/zizmor_results.sarif"
+
+      - name: Upload zizmor results
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          category: zizmor
+          sarif_file: "${{ runner.temp }}/zizmor_results.sarif"
