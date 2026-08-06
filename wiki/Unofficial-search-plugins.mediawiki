@@ -494,7 +494,7 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/BurningMop/qBittorrent-Search-Plugins/refs/heads/main/traht.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 4.6.x / Python 3.9.x
 |-
-| [[https://github.com/user-attachments/assets/2218982d-2959-4615-bfe2-2d32276344ea]] [https://tsukihime.org/ TsukiHime]
+| [[https://github.com/dominc8/qbittorrent-tsukihime-search-plugin/blob/master/tsukihime_icon.png]] [https://tsukihime.org/ TsukiHime]
 | [https://github.com/dominc8/qbittorrent-tsukihime-search-plugin dominc8]
 | 1.0
 | 02/Aug/2026
