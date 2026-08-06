@@ -1,4 +1,4 @@
-# VERSION: 2.28
+# VERSION: 2.29
 # AUTHORS: Douman (custparasite@gmx.se)
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -63,6 +63,7 @@ class torlock:
                         self.item_found = True
                         self.item_name = "name"
                         self.current_item["name"] = ""
+                        self.current_item["seeds"] = -1  # value may not be present
                         self.item_bad = "rel" in params and params["rel"] == "nofollow"
 
             elif tag == "article":
