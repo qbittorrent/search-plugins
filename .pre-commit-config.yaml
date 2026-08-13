@@ -18,6 +18,15 @@ repos:
       name: Check Markdown files
       args: ["--config", ".github/workflows/helpers/pre-commit/.markdownlint.yaml"]
 
+  - repo: local
+    hooks:
+    - id: wikilint
+      name: Check MediaWiki files
+      entry: wikilint --strict --lint-config wikilint.json
+      language: node
+      additional_dependencies: ['wikilint']
+      files: \.mediawiki$
+
   - repo: https://github.com/codespell-project/codespell.git
     rev: v2.4.3
     hooks:
