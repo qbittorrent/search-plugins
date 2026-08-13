@@ -22,7 +22,8 @@ repos:
     hooks:
     - id: wikilint
       name: Check MediaWiki files
-      entry: wikilint --strict --lint-config wikilint.json
+      entry: wikilint
+      args: ["--lint-config", ".github/workflows/helpers/pre-commit/.wikilint.json", "--strict", "--fix"]
       language: node
       additional_dependencies: ['wikilint']
       files: \.mediawiki$
