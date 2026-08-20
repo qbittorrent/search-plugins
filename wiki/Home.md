@@ -7,4 +7,3 @@ The wiki source code is hosted at <https://github.com/qbittorrent/search-plugins
 * [How to configure Jackett plugin](https://github.com/qbittorrent/search-plugins/wiki/How-to-configure-Jackett-plugin)
 * [How to install search plugins](https://github.com/qbittorrent/search-plugins/wiki/Install-search-plugins)
 * [How to write a search plugin](https://github.com/qbittorrent/search-plugins/wiki/How-to-write-a-search-plugin)
-* [New Torznab search engine](https://github.com/qbittorrent/search-plugins/wiki/New-Torznab-search-engine)
