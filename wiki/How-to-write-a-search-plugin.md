@@ -13,33 +13,33 @@ Thanks to this, you can *easily* write your own plugins to look for torrents in 
 
 ## INDEX
 
-### [Plugins Specification](https://github.com/qbittorrent/search-plugins/wiki/How-to-write-a-search-plugin#plugins-specification-1)
+### [Plugins Specification](#plugins-specification-1)
 
-#### 1.1 [Search Results Format](https://github.com/qbittorrent/search-plugins/wiki/How-to-write-a-search-plugin/#search-results-format)
+#### 1.1 [Search Results Format](#search-results-format)
 
-#### 1.2 [Python Class File Structure](https://github.com/qbittorrent/search-plugins/wiki/How-to-write-a-search-plugin/#python-class-file-structure)
+#### 1.2 [Python Class File Structure](#python-class-file-structure)
 
-#### 1.3 [Parsing Results From Web Pages](https://github.com/qbittorrent/search-plugins/wiki/How-to-write-a-search-plugin/#parsing-results-from-web-pages)
+#### 1.3 [Parsing Results From Web Pages](#parsing-results-from-web-pages)
 
-### [Understanding The Code](https://github.com/qbittorrent/search-plugins/wiki/How-to-write-a-search-plugin#understanding-the-code-1)
+### [Understanding The Code](#understanding-the-code-1)
 
-#### 2.1 [PrettyPrinter Helper Function](https://github.com/qbittorrent/search-plugins/wiki/How-to-write-a-search-plugin#prettyprinter-helper-function)
+#### 2.1 [PrettyPrinter Helper Function](#prettyprinter-helper-function)
 
-#### 2.2 [Retrieve_URL Helper Function](https://github.com/qbittorrent/search-plugins/wiki/How-to-write-a-search-plugin#retrieve_url-helper-function)
+#### 2.2 [Retrieve_URL Helper Function](#retrieve_url-helper-function)
 
-#### 2.3 [Download_File helper Function](https://github.com/qbittorrent/search-plugins/wiki/How-to-write-a-search-plugin#download_file-helper-function)
+#### 2.3 [Download_File helper Function](#download_file-helper-function)
 
-### [Testing & Finalizing Your Code](https://github.com/qbittorrent/search-plugins/wiki/How-to-write-a-search-plugin#testing--finalizing-your-code-1)
+### [Testing & Finalizing Your Code](#testing--finalizing-your-code-1)
 
-#### 3.1 [Code Examples](https://github.com/qbittorrent/search-plugins/wiki/How-to-write-a-search-plugin/#code-examples)
+#### 3.1 [Code Examples](#code-examples)
 
-#### 3.2 [Testing Your Plugin](https://github.com/qbittorrent/search-plugins/wiki/How-to-write-a-search-plugin#testing-your-plugin)
+#### 3.2 [Testing Your Plugin](#testing-your-plugin)
 
-#### 3.3 [Install Your Plugin](https://github.com/qbittorrent/search-plugins/wiki/How-to-write-a-search-plugin#install-your-plugin)
+#### 3.3 [Install Your Plugin](#install-your-plugin)
 
-#### 3.4 [Publish Your Plugin](https://github.com/qbittorrent/search-plugins/wiki/How-to-write-a-search-plugin#publish-your-plugin)
+#### 3.4 [Publish Your Plugin](#publish-your-plugin)
 
-#### 3.5 [Notes](https://github.com/qbittorrent/search-plugins/wiki/How-to-write-a-search-plugin#notes)
+#### 3.5 [Notes](#notes)
 
 ## Plugins Specification
 
@@ -256,7 +256,11 @@ link|name|size|seeds|leech|engine_url|desc_link|pub_date
 
 ### Publish Your Plugin
 
-Once you managed to write a search engine plugin for qBittorrent that works, feel free to post it on [this](https://plugins.qbittorrent.org) wiki page so that the other users can use it too.
+Once you manage to write a working search engine plugin for qBittorrent, feel free to submit a Pull Request to the
+[wiki page][unofficial-plugins-wiki] so that other users can use it too. \
+How to submit a Pull Request: <https://docs.github.com/en/pull-requests/how-tos/create-pull-requests/creating-a-pull-request>
+
+[unofficial-plugins-wiki]: https://github.com/qbittorrent/search-plugins/blob/master/wiki/Unofficial-search-plugins.mediawiki
 
 ### Notes
 
