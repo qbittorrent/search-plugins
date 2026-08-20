@@ -1,17 +1,23 @@
-# Request Unofficial Search Plugin
+# Unofficial Search Plugins
 
 In qBittorrent there are two kinds of search plugins:
 
 * Official: maintained by qBittorrent developers and can be updated through qBittorrent client: <https://github.com/qbittorrent/search-plugins/tree/master/nova3/engines>
 * Unofficial: maintained by third parties: <https://github.com/qbittorrent/search-plugins/wiki/Unofficial-search-plugins>
 
-If you know of a torrent site that is not on the official or unofficial list, you can code it yourself using the [tutorial](https://github.com/qbittorrent/search-plugins/wiki/How-to-write-a-search-plugin)
-and remember to update the following table.
+## Request a New Unofficial Search Plugin
 
-**Developers:** You can work on any plugin. Doing so would make the person who made the request very happy.
-Sites marked as in progress are already being worked on by someone.It is advisable to contact them and offer to help if you want to work on the same site.
+* Submit a request: \
+  If you know of a torrent site not on the unofficial list, submit a Pull Request to [this wiki page](https://github.com/qbittorrent/search-plugins/blob/master/wiki/Request-unofficial-search-plugin.md)
+  and add it to the table below. \
+  How to submit a Pull Request: <https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files#editing-files-in-another-users-repository>
+* Develop a plugin: \
+  If you are a developer, then consider coding a plugin using this [tutorial](https://github.com/qbittorrent/search-plugins/wiki/How-to-write-a-search-plugin).
+  Remember to update the table with your submission. \
+  You can work on any plugin. Doing so would make the person who made the request very happy.
+  Sites marked as in progress are already being worked on by someone. It is advisable to contact them and offer to help if you want to work on the same site.
 
-## Requested plugins
+## Request List
 
 Please keep the list sorted alphabetically by the `Site` column.
 
