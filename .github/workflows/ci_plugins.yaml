@@ -2,11 +2,11 @@ name: CI - Plugins
 
 on:
   pull_request:
-    paths-ignore:
-      - 'wiki/**'
+    paths:
+      - 'nova3/**'
   push:
-    paths-ignore:
-      - 'wiki/**'
+    paths:
+      - 'nova3/**'
 
 permissions: {}
 
