@@ -459,6 +459,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/menegop/qbfrench/master/torrent9.py [[https://github.com/menegop/qbfrench/blob/master/Download.gif]]]
 | ✔ qbt 4.3.6 / Python 3.8
 |-
+| [[https://github.com/LightDestory/qBittorrent-Search-Plugins/raw/master/src/engines/torrentclaw.png]] [https://torrentclaw.com/ TorrentClaw]
+| [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
+| 1.0
+| 16/Aug<br>2026
+| [https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/torrentclaw.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
+| ✔ qbt 4.x / Python 3.10+ <br>Torznab aggregator (~10 sources). Free API key optional via TORRENTCLAW_API_KEY env var.
+|-
 | [[https://github.com/LightDestory/qBittorrent-Search-Plugins/raw/master/src/engines/torrentdownload.png]] [https://torrentdownload.info/ TorrentDownload]
 | [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
 | 1.0
