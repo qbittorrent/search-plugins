@@ -80,6 +80,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/BurningMop/qBittorrent-Search-Plugins/refs/heads/main/bitsearch.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 4.6.x / Python 3.9.x
 |-
+| [[https://bitporn.eu/favicon.ico]] [https://bitporn.eu/ BitPorn]
+| [https://github.com/PumpkinPounder/search-plugins PumpkinPounder]
+| 1.00
+| 22/Aug<br>2026
+| [https://raw.githubusercontent.com/PumpkinPounder/search-plugins/fix-bitporn-search/nova3/engines/bitporn.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
+| ✔ qbt 5.1.4 / Python 3.14.x
+|-
 | [[https://www.google.com/s2/favicons?domain=bt4gprx.com#.png]] [https://bt4gprx.com/ bt4gprx]
 | [https://github.com/TuckerWarlock/qbittorrent-search-plugins TuckerWarlock]
 | 2.0
