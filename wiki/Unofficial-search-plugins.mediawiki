@@ -587,6 +587,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/MadeOfMagicAndWires/qBit-plugins/master/engines/bakabt.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]<br>[https://github.com/MadeOfMagicAndWires/qBit-plugins/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]]]
 | ✔ qbt 4.3.x / Python 3.9.x
 |-
+| [[https://bitporn.eu/favicon.ico]] [https://bitporn.eu/ BitPorn]
+| [https://github.com/PumpkinPounder/Random-Useful PumpkinPounder]
+| 1.00
+| 23/Aug<br>2026
+| [https://raw.githubusercontent.com/PumpkinPounder/Random-Useful/main/bitporn.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
+| ✔ qbt 5.1.4 / Python 3.14.x<br>Private tracker, requires login/cookies
+|-
 | [[https://www.google.com/s2/favicons?domain=c411.org#.png]] [https://c411.org/ C411]
 | [https://github.com/OptimusKoala/qbittorrent-c411-plugin OptimusKoala]
 | 1.00
