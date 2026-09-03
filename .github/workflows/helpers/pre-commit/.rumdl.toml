@@ -1,0 +1,11 @@
+# https://rumdl.dev/global-settings/
+# https://rumdl.dev/rules/
+
+[global]
+enable = ["ALL"]
+disable = [
+    "MD013",
+    "MD026",
+    "MD060",
+    "MD082"
+]
