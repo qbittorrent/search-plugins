@@ -4,42 +4,28 @@ qBittorrent provides a search engine plugins management system.
 Thanks to this, you can *easily* write your own plugins to look for torrents in your favorite Bittorrent search engines and extend qBittorrent integrated search engine.
 
 * All you need is some motivation and some knowledge of [Python language](https://www.python.org).
-
 * **The minimum supported python version is specified in [this file](https://github.com/qbittorrent/qBittorrent/blob/master/INSTALL#L21-L23), make sure your plugin can work with it and every later version.**
 * **Only import libraries from [Python Standard Library](https://docs.python.org/3/library/index.html)**. \
   Third party libraries (such as those installed from [PyPI](https://pypi.org/)) are ***not*** guaranteed to be present in the user's environment.
 * You are encouraged to ensure good quality of your plugin: [Python Code Quality: Tools & Best Practices](https://realpython.com/python-code-quality/). \
   For example, here is how the official plugins are checked: [ci.yaml](https://github.com/qbittorrent/search-plugins/blob/60a3f4d9c97a5d1f94e75789a72ee054044c5802/.github/workflows/ci.yaml#L29-L44).
 
-## INDEX
+## Table of Contents
 
-### [Plugins Specification](#plugins-specification-1)
-
-#### 1.1 [Search Results Format](#search-results-format)
-
-#### 1.2 [Python Class File Structure](#python-class-file-structure)
-
-#### 1.3 [Parsing Results From Web Pages](#parsing-results-from-web-pages)
-
-### [Understanding The Code](#understanding-the-code-1)
-
-#### 2.1 [PrettyPrinter Helper Function](#prettyprinter-helper-function)
-
-#### 2.2 [Retrieve_URL Helper Function](#retrieve_url-helper-function)
-
-#### 2.3 [Download_File helper Function](#download_file-helper-function)
-
-### [Testing & Finalizing Your Code](#testing--finalizing-your-code-1)
-
-#### 3.1 [Code Examples](#code-examples)
-
-#### 3.2 [Testing Your Plugin](#testing-your-plugin)
-
-#### 3.3 [Install Your Plugin](#install-your-plugin)
-
-#### 3.4 [Publish Your Plugin](#publish-your-plugin)
-
-#### 3.5 [Notes](#notes)
+* [Plugins Specification](#plugins-specification)
+  * [Search Results Format](#search-results-format)
+  * [Python Class File Structure](#python-class-file-structure)
+  * [Parsing Results from Web Pages](#parsing-results-from-web-pages)
+* [Understanding the Code](#understanding-the-code)
+  * [PrettyPrinter Helper Function](#prettyprinter-helper-function)
+  * [Retrieve_URL Helper Function](#retrieve_url-helper-function)
+  * [Download_File Helper Function](#download_file-helper-function)
+* [Testing & Finalizing Your Code](#testing--finalizing-your-code)
+  * [Code Examples](#code-examples)
+  * [Testing Your Plugin](#testing-your-plugin)
+  * [Install Your Plugin](#install-your-plugin)
+  * [Publish Your Plugin](#publish-your-plugin)
+  * [Notes](#notes)
 
 ## Plugins Specification
 
@@ -155,9 +141,9 @@ Note that size is provided in bytes.
 
 To achieve this task we provide several helper functions such as `prettyPrinter()`.
 
-## Understanding The Code
+## Understanding the Code
 
-### `prettyPrinter()` helper function
+### `prettyPrinter()` Helper Function
 
 In fact, you don't really need to pay attention to the output syntax because we provide a function for this called `prettyPrinter(dictionary)`. You can import it using the following command:
 
@@ -176,7 +162,7 @@ You must pass to this function a dictionary containing the following keys (value
 * `desc_link` => A string corresponding to the description page for the torrent
 * `pub_date` => A unix timestamp corresponding to published date of the torrent (i.e: 1696870394)
 
-### `retrieve_url()` helper function
+### `retrieve_url()` Helper Function
 
 The `retrieve_url()` method takes an URL as parameter and returns the content of the URL as a string. \
 This function is useful to get the search results from a Bittorrent search engine site. All you need to do is to pass the properly formatted URL to the function (the URL usually include GET parameters relative to search tokens, category, sorting, page number).
@@ -186,7 +172,7 @@ from helpers import retrieve_url
 dat = retrieve_url(self.url + '/search?q=%s&c=%s&o=52&p=%d' % (what, self.supported_categories[cat], i))
 ```
 
-### `download_file()` helper function
+### `download_file()` Helper Function
 
 The `download_file()` functions takes as a parameter the URL to a torrent file. This function will download the torrent to a temporary location and print on stdout:
 

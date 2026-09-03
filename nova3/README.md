@@ -1,4 +1,4 @@
-# nova3 Plugins
+# Nova3 Plugins
 
 [![GitHub Actions CI status]][GitHub Actions link]
 

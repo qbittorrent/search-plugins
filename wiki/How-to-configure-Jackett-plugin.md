@@ -1,4 +1,4 @@
-# Jackett integration for qBittorrent
+# Jackett Integration for qBittorrent
 
 **qBittorrent** comes with a few search plugins. Although these are often
 sufficient for most users, those who wish to perform searches at a wider array
@@ -10,7 +10,7 @@ from them. Configure the **Jackett qBittorrent plugin** (essentially, set the AP
 > [!NOTE]
 > Use only indexers and content you are legally authorized to access in your jurisdiction.
 
-## What is Jackett?
+## What Is Jackett?
 
 As explained in the project's [README.md file][jackett-readme] (emphasis added):
 
@@ -71,7 +71,7 @@ below to install and configure Jackett.
   - [ARMv7 and newer][install-linux-armv7]
   - [ARMv6 and older][install-linux-armv6]
 
-### qBittorrent plugin
+### qBittorrent Plugin
 
 > [!NOTE]
 > The full download URL for the plugin file is
@@ -144,7 +144,7 @@ following contents:
  }
 ```
 
-### Configuration file properties
+### Configuration File Properties
 
 |  Property name  |      Initial value      |                                             Description                                             |
 |:----------------|:------------------------|:----------------------------------------------------------------------------------------------------|
@@ -153,7 +153,7 @@ following contents:
 | `tracker_first` |         `false`         | Prepend indexer site name to each search result (takes Boolean value)                               |
 | `thread_count`  |          `20`           | Maximum number of concurrent requests to Jackett (to disable concurrent requests, set value to `1`) |
 
-## Disable or remove the Jackett plugin
+## Disable or Remove the Jackett Plugin
 
 The Jackett plugin is enabled by default in qBittorrent. However, you can
 disable it or remove it entirely at any time by following these steps:
@@ -174,7 +174,7 @@ disable it or remove it entirely at any time by following these steps:
 
 ![Jackett UI screenshot showing API Key location][api-key]
 
-### Search results
+### Search Results
 
 After successfully installing Jackett and integrating it with qBittorrent, the
 results it provides appear as seen below.

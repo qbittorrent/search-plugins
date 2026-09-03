@@ -6,7 +6,7 @@ This repository contains search plugins used by the search feature in [qBittorre
 > Use the plugins and the websites they connect to at your own risk. \
 > You are personally responsible for following the copyright laws and other applicable laws in your country.
 
-## Start here
+## Start Here
 
 For most users, start with the [wiki](https://github.com/qbittorrent/search-plugins/wiki):
 
