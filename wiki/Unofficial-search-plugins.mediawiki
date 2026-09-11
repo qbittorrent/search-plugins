@@ -727,6 +727,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/444995/qbit-search-plugins/main/engines/torrentleech.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt v4.6.5 / Python 3.11.1
 |-
+| [[https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://tr4ker.net&size=32#.png]] [https://tr4ker.net/ TR4KER]
+| [https://github.com/Apologieze/qbittorrent-tr4ket-plugin Apologieze]
+| 1.00
+| 11/Sep<br>2026
+| [https://raw.githubusercontent.com/Apologieze/qbittorrent-tr4ket-plugin/refs/heads/main/tr4ker.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]<br>[https://github.com/Apologieze/qbittorrent-tr4ket-plugin/blob/main/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]]]
+| ✔ qbt 5.x / Python 3.9+<br>Semi-private tracker, requires API key
+|-
 | [[https://www.google.com/s2/favicons?domain=toloka.to#.png]] [https://toloka.to/ Гуртом — торрент-толока]
 | [https://github.com/playday3008 PlayDay]
 | 1.01
