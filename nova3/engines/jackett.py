@@ -1,14 +1,14 @@
-# VERSION: 4.10
+# VERSION: 4.11
 # AUTHORS: Diego de las Heras (ngosang@hotmail.es)
 # CONTRIBUTORS: ukharley
 #               hannsen (github.com/hannsen)
 #               Alexander Georgievskiy <galeksandrp@gmail.com>
 
+import datetime
 import json
 import os
 import urllib.request
 import xml.etree.ElementTree
-from datetime import datetime
 from http.cookiejar import CookieJar
 from multiprocessing.dummy import Pool
 from threading import Lock
@@ -63,7 +63,7 @@ CONFIG_DATA: Dict[str, Any] = {
 PRINTER_THREAD_LOCK = Lock()
 
 
-def load_configuration() -> None:
+def _load_configuration() -> None:
     global CONFIG_DATA
     try:
         # try to load user data from file
@@ -74,7 +74,7 @@ def load_configuration() -> None:
         CONFIG_DATA['malformed'] = True
     except Exception:  # pylint: disable=broad-exception-caught
         # if file doesn't exist, we create it
-        save_configuration()
+        _save_configuration()
 
     # do some checks
     if any(item not in CONFIG_DATA for item in ['api_key', 'tracker_first', 'url']):
@@ -83,16 +83,26 @@ def load_configuration() -> None:
     # add missing keys
     if 'thread_count' not in CONFIG_DATA:
         CONFIG_DATA['thread_count'] = 20
-        save_configuration()
+        _save_configuration()
 
 
-def save_configuration() -> None:
+def _save_configuration() -> None:
     with open(CONFIG_PATH, 'w', encoding='utf-8') as f:
         f.write(json.dumps(CONFIG_DATA, indent=4, sort_keys=True))
 
 
-load_configuration()
+_load_configuration()
 ###############################################################################
+
+
+def _getBrowserUserAgent() -> str:
+    baseDate = datetime.date(2024, 4, 16)
+    baseVersion = 125
+
+    nowDate = datetime.date.today()
+    nowVersion = baseVersion + ((nowDate - baseDate).days // 30)
+
+    return f"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:{nowVersion}.0) Gecko/20100101 Firefox/{nowVersion}.0"
 
 
 class jackett:
@@ -240,7 +250,7 @@ class jackett:
             res['engine_url'] = self.url
 
             try:
-                date = datetime.strptime(getTextProp(result.find('pubDate')), '%a, %d %b %Y %H:%M:%S %z')
+                date = datetime.datetime.strptime(getTextProp(result.find('pubDate')), '%a, %d %b %Y %H:%M:%S %z')
                 res['pub_date'] = int(date.timestamp())
             except Exception:  # pylint: disable=broad-exception-caught
                 res['pub_date'] = -1
@@ -253,9 +263,9 @@ class jackett:
     def get_response(self, query: str) -> Union[str, None]:
         response = None
         try:
-            # we can't use helpers.retrieve_url because of redirects
-            # we need the cookie processor to handle redirects
+            # TODO: Switch back to `helpers.retrieve_url()`, as version 1.58+ preserves cookies during HTTP redirects
             opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(CookieJar()))
+            opener.addheaders = [('User-Agent', _getBrowserUserAgent())]
             response = opener.open(query).read().decode('utf-8')
         except urllib.request.HTTPError as e:
             # if the page returns a magnet redirect, used in download_torrent
