@@ -256,6 +256,9 @@ class jackett:
             # we can't use helpers.retrieve_url because of redirects
             # we need the cookie processor to handle redirects
             opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(CookieJar()))
+            opener.addheaders = [
+                ('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/131.0 Safari/537.36')
+            ]
             response = opener.open(query).read().decode('utf-8')
         except urllib.request.HTTPError as e:
             # if the page returns a magnet redirect, used in download_torrent
