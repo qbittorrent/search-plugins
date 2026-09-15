@@ -333,11 +333,11 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/pirateiro.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 4.3.x / Python 3.8.5
 |-
-| [[https://redetorrent.com/icone_site.png]] [https://redetorrent.com/ Rede Torrent]
+| [[https://redestorrents.com/favicon.svg]] [https://redestorrents.com/ Rede Torrent]
 | [https://github.com/bebetoh bebetoh]
 | 1.0.0
-| 05/Apr<br>2026
-| [https://gist.githubusercontent.com/bebetoh/b5e1f4731462de9b837f5026617b1d4a/raw/e71d0020078d56d3f7e9a903ca7b4d44774e10f7/redetorrent.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
+| 15/set<br>2026
+| [https://gist.githubusercontent.com/bebetoh/b5e1f4731462de9b837f5026617b1d4a/raw/1ce80ad7c60212891f56d8fa4975287e6dd89a43/redetorrent.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 5.1.x / Python 3.11.x
 |-
 | [[https://github.com/Pireo/hello-world/blob/master/rockbox.png]] [https://rawkbawx.rocks/ RockBox]
