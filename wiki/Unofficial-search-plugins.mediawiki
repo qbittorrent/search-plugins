@@ -186,12 +186,12 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/DrPurp/eztvx-qbittorrent-plugin/main/eztvx.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 5.x / Python 3.x — Uses official EZTV JSON API
 |-
-| [[https://github.com/Bioux1/qbtSearchPlugins/blob/main/fitgirl_repacks.jpg]] [https://fitgirl-repacks.site/ FitGirl Repacks]
-| [https://github.com/Bioux1/qbtSearchPlugins Bioux1]
-| 1.1
-| 01/May<br>2025
-| [https://raw.githubusercontent.com/Bioux1/qbtSearchPlugins/main/fitgirl_repacks.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
-| ✔ qbt 5.1.0 / Python 3.13.3
+| [[https://github.com/afalvarezsite/qbtFitGirl-search/blob/main/fitgirl_repacks.jpg]] [https://fitgirl-repacks.site/ FitGirl Repacks]
+| [https://github.com/afalvarezsite/qbtFitGirl-search afalvarezsite]
+| 3.3
+| 16/Sep<br>2026
+| [https://raw.githubusercontent.com/afalvarezsite/qbtFitGirl-search/main/fitgirl_repacks.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
+| ✔ qbt 4.1.0+ / Python 3.7+
 |-
 | [[https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/glotorrents.png]] [https://glodls.to/ GloTorrents]
 | [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
