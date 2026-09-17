@@ -1,4 +1,4 @@
-# VERSION: 4.11
+# VERSION: 4.12
 # AUTHORS: Diego de las Heras (ngosang@hotmail.es)
 # CONTRIBUTORS: ukharley
 #               hannsen (github.com/hannsen)
@@ -20,7 +20,7 @@ from novaprinter import prettyPrinter
 
 
 ###############################################################################
-class ProxyManager:
+class _ProxyManager:
     HTTP_PROXY_KEY = "http_proxy"
     HTTPS_PROXY_KEY = "https_proxy"
 
@@ -46,49 +46,49 @@ class ProxyManager:
 
 
 # initialize it early to ensure env vars were not tampered
-proxy_manager = ProxyManager()
-proxy_manager.enable_proxy(False)  # off by default
+_proxy_manager = _ProxyManager()
+_proxy_manager.enable_proxy(False)  # off by default
 
 
 ###############################################################################
 # load configuration from file
-CONFIG_FILE = 'jackett.json'
-CONFIG_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), CONFIG_FILE)
-CONFIG_DATA: Dict[str, Any] = {
+_CONFIG_FILE = 'jackett.json'
+_CONFIG_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), _CONFIG_FILE)
+_CONFIG_DATA: Dict[str, Any] = {
     'api_key': 'YOUR_API_KEY_HERE',  # jackett api
     'url': 'http://127.0.0.1:9117',  # jackett url
     'tracker_first': False,          # (False/True) add tracker name to beginning of search result
     'thread_count': 20,              # number of threads to use for http requests
 }
-PRINTER_THREAD_LOCK = Lock()
+_PRINTER_THREAD_LOCK = Lock()
 
 
 def _load_configuration() -> None:
-    global CONFIG_DATA
+    global _CONFIG_DATA
     try:
         # try to load user data from file
-        with open(CONFIG_PATH, encoding='utf-8') as f:
-            CONFIG_DATA = json.load(f)  # pyright: ignore [reportConstantRedefinition]
+        with open(_CONFIG_PATH, encoding='utf-8') as f:
+            _CONFIG_DATA = json.load(f)  # pyright: ignore [reportConstantRedefinition]
     except ValueError:
         # if file exists, but it's malformed we load add a flag
-        CONFIG_DATA['malformed'] = True
+        _CONFIG_DATA['malformed'] = True
     except Exception:  # pylint: disable=broad-exception-caught
         # if file doesn't exist, we create it
         _save_configuration()
 
     # do some checks
-    if any(item not in CONFIG_DATA for item in ['api_key', 'tracker_first', 'url']):
-        CONFIG_DATA['malformed'] = True
+    if any(item not in _CONFIG_DATA for item in ['api_key', 'tracker_first', 'url']):
+        _CONFIG_DATA['malformed'] = True
 
     # add missing keys
-    if 'thread_count' not in CONFIG_DATA:
-        CONFIG_DATA['thread_count'] = 20
+    if 'thread_count' not in _CONFIG_DATA:
+        _CONFIG_DATA['thread_count'] = 20
         _save_configuration()
 
 
 def _save_configuration() -> None:
-    with open(CONFIG_PATH, 'w', encoding='utf-8') as f:
-        f.write(json.dumps(CONFIG_DATA, indent=4, sort_keys=True))
+    with open(_CONFIG_PATH, 'w', encoding='utf-8') as f:
+        f.write(json.dumps(_CONFIG_DATA, indent=4, sort_keys=True))
 
 
 _load_configuration()
@@ -107,9 +107,9 @@ def _getBrowserUserAgent() -> str:
 
 class jackett:
     name = 'Jackett'
-    url = CONFIG_DATA['url'] if CONFIG_DATA['url'][-1] != '/' else CONFIG_DATA['url'][:-1]
-    api_key = CONFIG_DATA['api_key']
-    thread_count = CONFIG_DATA['thread_count']
+    url = _CONFIG_DATA['url'] if _CONFIG_DATA['url'][-1] != '/' else _CONFIG_DATA['url'][:-1]
+    api_key = _CONFIG_DATA['api_key']
+    thread_count = _CONFIG_DATA['thread_count']
     supported_categories = {
         'all': None,
         'anime': ['5070'],
@@ -125,9 +125,11 @@ class jackett:
         # fix for some indexers with magnet link inside .torrent file
         if download_url.startswith('magnet:?'):
             print(download_url + " " + download_url)
-        proxy_manager.enable_proxy(True)
-        response = self.get_response(download_url)
-        proxy_manager.enable_proxy(False)
+        _proxy_manager.enable_proxy(True)
+        try:
+            response = self.get_response(download_url)
+        finally:
+            _proxy_manager.enable_proxy(False)
         if response is not None and response.startswith('magnet:?'):
             print(response + " " + download_url)
         else:
@@ -138,7 +140,7 @@ class jackett:
         category = self.supported_categories[cat.lower()]
 
         # check for malformed configuration
-        if 'malformed' in CONFIG_DATA:
+        if 'malformed' in _CONFIG_DATA:
             self.handle_error("malformed configuration file", what)
             return
 
@@ -212,7 +214,7 @@ class jackett:
                 continue
 
             tracker = getTextProp(result.find('jackettindexer'))
-            if CONFIG_DATA['tracker_first']:
+            if _CONFIG_DATA['tracker_first']:
                 res['name'] = f"[{tracker}] {title}"
             else:
                 res['name'] = f"{title} [{tracker}]"
@@ -280,7 +282,7 @@ class jackett:
         # 'Torrent names only' is enabled
         self.pretty_printer_thread_safe({
             'link': self.url,
-            'name': f"Jackett: {error_msg}! Right-click this row and select 'Open description page' to open help. Configuration file: '{CONFIG_PATH}' Search: '{what}'",
+            'name': f"Jackett: {error_msg}! Right-click this row and select 'Open description page' to open help. Configuration file: '{_CONFIG_PATH}' Search: '{what}'",
             'size': -1,
             'seeds': -1,
             'leech': -1,
@@ -291,7 +293,7 @@ class jackett:
 
     def pretty_printer_thread_safe(self, dictionary: Dict[str, Any]) -> None:
         escaped_dict = self.escape_pipe(dictionary)
-        with PRINTER_THREAD_LOCK:
+        with _PRINTER_THREAD_LOCK:
             prettyPrinter(escaped_dict)  # type: ignore[arg-type] # refactor later
 
     def escape_pipe(self, dictionary: Dict[str, Any]) -> Dict[str, Any]:
