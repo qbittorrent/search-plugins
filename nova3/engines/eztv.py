@@ -1,15 +1,13 @@
-# VERSION: 1.24
+# VERSION: 1.25
 # AUTHORS: nindogo
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
+# LOCAL FIX: use the public TVmaze and EZTV APIs because the EZTV HTML search
+# endpoint is protected by a Cloudflare challenge that Nova plugins cannot run.
 
-import http.client
+import json
 import re
-import sys
-import urllib.error
-import urllib.request
-from datetime import datetime, timedelta
-from html.parser import HTMLParser
-from typing import Callable, Dict, List, Mapping, Match, Tuple, Union
+from typing import Any, Dict, Optional, Tuple
+from urllib.parse import quote, unquote
 
 from helpers import retrieve_url
 from novaprinter import prettyPrinter
@@ -17,94 +15,129 @@ from novaprinter import prettyPrinter
 
 class eztv:
     name = "EZTV"
-    url = 'https://eztvx.to/'
-    supported_categories = {'all': 'all', 'tv': 'tv'}
+    url = "https://eztvx.to/"
+    supported_categories = {"all": "all", "tv": "tv"}
 
-    class MyHtmlParser(HTMLParser):
-        A, TD, TR, TABLE = ('a', 'td', 'tr', 'table')
+    _episode_pattern = re.compile(
+        r"\b(?:s(\d{1,2})e(\d{1,2})|s(\d{1,2})|(\d{1,2})x(\d{1,2}))\b",
+        re.IGNORECASE,
+    )
+    _release_tags = re.compile(
+        r"\b(?:2160p|1080p|720p|480p|4k|x264|x265|hevc|avc|bluray|"
+        r"webrip|web[- .]?dl|hdtv|dvdrip|proper|repack|remux)\b",
+        re.IGNORECASE,
+    )
 
-        """ Sub-class for parsing results """
-        def __init__(self, url: str) -> None:
-            HTMLParser.__init__(self)
-            self.url = url
+    @staticmethod
+    def _json(url: str) -> Dict[str, Any]:
+        payload = retrieve_url(url, unescape_html_entities=False)
+        result: Dict[str, Any] = json.loads(payload) if payload else {}
+        return result
 
-            now = datetime.now().astimezone()
-            self.date_parsers: Mapping[str, Callable[[Match[str]], datetime]] = {
-                r"(\d+)h\s+(\d+)m": lambda m: now - timedelta(hours=int(m[1]), minutes=int(m[2])),
-                r"(\d+)d\s+(\d+)h": lambda m: now - timedelta(days=int(m[1]), hours=int(m[2])),
-                r"(\d+)\s+weeks?": lambda m: now - timedelta(weeks=int(m[1])),
-                r"(\d+)\s+mo": lambda m: now - timedelta(days=int(m[1]) * 30),
-                r"(\d+)\s+years?": lambda m: now - timedelta(days=int(m[1]) * 365),
-            }
-            self.in_table_row = False
-            self.current_item: Dict[str, object] = {}
+    def _parse_query(self, query: str) -> Tuple[str, Optional[int], Optional[int]]:
+        text = unquote(query).replace(".", " ").replace("-", " ")
+        text = re.sub(r"\s+", " ", text).strip()
+        match = self._episode_pattern.search(text)
 
-        def handle_starttag(self, tag: str, attrs: List[Tuple[str, Union[str, None]]]) -> None:
-            def getStr(d: Mapping[str, Union[str, None]], key: str) -> str:
-                value = d.get(key, '')
-                return value if value is not None else ''
+        season = episode = None
+        if match:
+            groups = match.groups()
+            if groups[0] and groups[1]:
+                season, episode = int(groups[0]), int(groups[1])
+            elif groups[2]:
+                season = int(groups[2])
+            elif groups[3] and groups[4]:
+                season, episode = int(groups[3]), int(groups[4])
 
-            params = dict(attrs)
+        title = self._episode_pattern.sub(" ", text)
+        title = self._release_tags.sub(" ", title)
+        title = re.sub(r"\s+", " ", title).strip()
+        return title, season, episode
 
-            if (params.get('class') == 'forum_header_border'
-                    and params.get('name') == 'hover'):
-                self.in_table_row = True
-                self.current_item = {}
-                self.current_item['seeds'] = -1
-                self.current_item['leech'] = -1
-                self.current_item['size'] = -1
-                self.current_item['engine_url'] = self.url
-                self.current_item['pub_date'] = -1
-
-            if (tag == self.A
-                    and self.in_table_row and params.get('class') == 'magnet'):
-                self.current_item['link'] = params.get('href')
-
-            if (tag == self.A
-                    and self.in_table_row and params.get('class') == 'epinfo'):
-                self.current_item['desc_link'] = self.url + getStr(params, 'href')
-                self.current_item['name'] = getStr(params, 'title').split(' (')[0]
-
-        def handle_data(self, data: str) -> None:
-            data = data.replace(',', '')
-            if self.in_table_row and data.endswith((' KB', ' MB', ' GB')):
-                self.current_item['size'] = data
-
-            elif self.in_table_row and data.isnumeric():
-                self.current_item['seeds'] = int(data)
-
-            elif self.in_table_row:  # Check for a relative time
-                for pattern, calc in self.date_parsers.items():
-                    m = re.match(pattern, data)
-                    if m:
-                        self.current_item["pub_date"] = int(calc(m).timestamp())
-                        break
-
-        def handle_endtag(self, tag: str) -> None:
-            if self.in_table_row and tag == self.TR:
-                prettyPrinter(self.current_item)  # type: ignore[arg-type] # refactor later
-                self.in_table_row = False
-
-    def do_query(self, what: str) -> str:
-        url = f"{self.url}/search/{what.replace('%20', '-')}"
-        data = b"layout=def_wlinks"
+    def _lookup_imdb_id(self, title: str) -> Optional[str]:
+        if not title:
+            return None
         try:
-            return retrieve_url(url, request_data=data)
-        except TypeError:
-            # Older versions of retrieve_url did not support request_data/POST, se we must do the
-            # request ourselves...
-            user_agent = 'Mozilla/5.0 (X11; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0'
-            req = urllib.request.Request(url, data, {'User-Agent': user_agent})
+            show = self._json(
+                "https://api.tvmaze.com/singlesearch/shows?q="
+                + quote(title, safe="")
+            )
+            imdb_id = (show.get("externals") or {}).get("imdb")
+            if imdb_id:
+                imdb_id = str(imdb_id)
+                return imdb_id[2:] if imdb_id.startswith("tt") else imdb_id
+        except (KeyError, TypeError, ValueError, json.JSONDecodeError):
+            pass
+        return None
+
+    @staticmethod
+    def _matches_episode(
+        title: str, season: Optional[int], episode: Optional[int]
+    ) -> bool:
+        if season is None and episode is None:
+            return True
+
+        patterns = [
+            re.compile(r"\bS(\d{1,2})E(\d{1,2})\b", re.IGNORECASE),
+            re.compile(r"\b(\d{1,2})x(\d{1,2})\b", re.IGNORECASE),
+        ]
+        found_season = found_episode = None
+        for pattern in patterns:
+            match = pattern.search(title)
+            if match:
+                found_season, found_episode = map(int, match.groups())
+                break
+
+        if season is not None and found_season != season:
+            return False
+        return episode is None or found_episode == episode
+
+    def _emit(self, torrent: Dict[str, Any]) -> None:
+        link = torrent.get("magnet_url") or torrent.get("torrent_url")
+        if not link:
+            return
+
+        torrent_id = torrent.get("id")
+        desc_link = self.url
+        if torrent_id:
+            desc_link = f"{self.url}ep/{torrent_id}/"
+
+        prettyPrinter(
+            {
+                "link": link,
+                "name": torrent.get("title") or torrent.get("filename") or "Unknown",
+                "size": f"{torrent.get('size_bytes', -1)} B",
+                "seeds": torrent.get("seeds", -1),
+                "leech": torrent.get("peers", -1),
+                "engine_url": self.url,
+                "desc_link": desc_link,
+                "pub_date": torrent.get("date_released_unix", -1),
+            }
+        )
+
+    def search(self, what: str, cat: str = "all") -> None:
+        title, season, episode = self._parse_query(what)
+        imdb_id = self._lookup_imdb_id(title)
+        if not imdb_id:
+            return
+
+        page = 1
+        while page <= 10:
             try:
-                response: http.client.HTTPResponse = urllib.request.urlopen(req)  # nosec B310 # pylint: disable=consider-using-with
-                return response.read().decode('utf-8')
-            except urllib.error.URLError as errno:
-                print(f"Connection error: {errno.reason}", file=sys.stderr)
-            return ""
+                data = self._json(
+                    f"{self.url}api/get-torrents?limit=100&page={page}"
+                    f"&imdb_id={quote(imdb_id, safe='')}"
+                )
+            except (TypeError, ValueError, json.JSONDecodeError):
+                return
 
-    def search(self, what: str, cat: str = 'all') -> None:
-        eztv_html = self.do_query(what)
+            torrents = data.get("torrents") or []
+            for torrent in torrents:
+                torrent_title = torrent.get("title") or torrent.get("filename") or ""
+                if self._matches_episode(torrent_title, season, episode):
+                    self._emit(torrent)
 
-        eztv_parser = self.MyHtmlParser(self.url)
-        eztv_parser.feed(eztv_html)
-        eztv_parser.close()
+            total = int(data.get("torrents_count") or 0)
+            if not torrents or page * 100 >= total:
+                break
+            page += 1
