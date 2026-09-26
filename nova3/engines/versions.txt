@@ -4,5 +4,5 @@ limetorrents: 4.15
 piratebay: 3.10
 solidtorrents: 2.9
 torlock: 2.30
-torrentproject: 1.92
+torrentproject: 1.93
 torrentscsv: 1.8
