@@ -7,6 +7,7 @@
 import datetime
 import json
 import os
+import sys
 import urllib.request
 import xml.etree.ElementTree
 from http.cookiejar import CookieJar
@@ -175,13 +176,11 @@ class jackett:
         # process results
         try:
             response_xml = xml.etree.ElementTree.fromstring(response)
-        except xml.etree.ElementTree.ParseError:
-            self.handle_error("invalid response from Jackett", what)
-            return []
+        except xml.etree.ElementTree.ParseError as error:
+            raise RuntimeError(f"Invalid response from Jackett. {what}") from error
         if response_xml.tag == 'error':
             description = response_xml.attrib.get('description', 'unknown error')
-            self.handle_error(f"Jackett API error: {description}", what)
-            return []
+            raise RuntimeError(f"Jackett API error: {description}. {what}")
         indexers: List[str] = []
         for indexer in response_xml.findall('indexer'):
             indexers.append(indexer.attrib['id'])
@@ -288,6 +287,7 @@ class jackett:
         return response
 
     def handle_error(self, error_msg: str, what: str) -> None:
+        print(f"Jackett: {error_msg}. Search: {what}", file=sys.stderr)
         # we need to print the search text to be displayed in qBittorrent when
         # 'Torrent names only' is enabled
         self.pretty_printer_thread_safe({

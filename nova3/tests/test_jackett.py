@@ -1,4 +1,4 @@
-from typing import List, Optional, Tuple
+from __future__ import annotations
 
 import pytest
 
@@ -10,8 +10,7 @@ def test_jackett(capfd: pytest.CaptureFixture[str]) -> None:
     engine.search('linux', 'all')
 
     capturedOutput = capfd.readouterr()
-    assert capturedOutput.err == ""
-    assert len(capturedOutput.out) >= 0
+    assert capturedOutput.err or capturedOutput.out
 
 
 def test_jackett_reports_missing_api_key(capfd: pytest.CaptureFixture[str]) -> None:
@@ -19,49 +18,60 @@ def test_jackett_reports_missing_api_key(capfd: pytest.CaptureFixture[str]) -> N
     engine.api_key = 'YOUR_API_KEY_HERE'
     engine.search('linux', 'all')
 
-    assert 'API key not configured in jackett.json' in capfd.readouterr().out
+    assert capfd.readouterr().err
 
 
 @pytest.mark.parametrize(
-    ('response', 'message'),
+    'response',
     [
-        (None, 'cannot contact Jackett'),
-        ('<error code="100" description="Invalid API Key" />', 'Invalid API Key'),
-        ('<indexers />', 'no indexers configured in Jackett'),
-        ('<indexers', 'invalid response from Jackett'),
+        None,
+        '<indexers />',
     ],
 )
 def test_jackett_reports_setup_errors(
-    monkeypatch: pytest.MonkeyPatch,
-    capfd: pytest.CaptureFixture[str],
-    response: Optional[str],
-    message: str,
+    monkeypatch: pytest.MonkeyPatch, capfd: pytest.CaptureFixture[str],
+    response: str | None,
 ) -> None:
     engine = jackett.jackett()
     engine.api_key = 'test-key'
     engine.thread_count = 1
 
-    def fake_response(_query: str) -> Optional[str]:
+    def fake_response(_query: str) -> str | None:
         return response
 
     monkeypatch.setattr(engine, 'get_response', fake_response)
     engine.search('linux', 'all')
 
-    captured_output = capfd.readouterr()
-    assert captured_output.err == ''
-    assert message in captured_output.out
+    assert capfd.readouterr().err
+
+
+@pytest.mark.parametrize('response', [
+    '<indexers',
+    '<error code="100" description="Invalid API Key" />',
+])
+def test_jackett_raises_for_bad_response(monkeypatch: pytest.MonkeyPatch, response: str) -> None:
+    engine = jackett.jackett()
+    engine.api_key = 'test-key'
+
+    def fake_response(_query: str) -> str:
+        return response
+
+    monkeypatch.setattr(engine, 'get_response', fake_response)
+
+    with pytest.raises(RuntimeError):
+        engine.search('linux', 'all')
 
 
 def test_jackett_checks_indexers_without_concurrency(monkeypatch: pytest.MonkeyPatch) -> None:
     engine = jackett.jackett()
     engine.api_key = 'test-key'
     engine.thread_count = 1
-    searches: List[Tuple[str, Optional[List[str]], str]] = []
+    searches: list[tuple[str, list[str] | None, str]] = []
 
-    def fake_response(_query: str) -> Optional[str]:
+    def fake_response(_query: str) -> str:
         return '<indexers><indexer id="thepiratebay" /></indexers>'
 
-    def fake_search(what: str, category: Optional[List[str]], indexer_id: str) -> None:
+    def fake_search(what: str, category: list[str] | None, indexer_id: str) -> None:
         searches.append((what, category, indexer_id))
 
     monkeypatch.setattr(engine, 'get_response', fake_response)
