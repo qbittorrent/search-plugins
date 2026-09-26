@@ -1,110 +1,159 @@
-# VERSION: 1.24
+# VERSION: 1.25
 # AUTHORS: nindogo
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
-import http.client
+import json
 import re
-import sys
-import urllib.error
-import urllib.request
-from datetime import datetime, timedelta
-from html.parser import HTMLParser
-from typing import Callable, Dict, List, Mapping, Match, Tuple, Union
+from typing import Dict, List, Optional, Tuple, cast
+from urllib.parse import unquote
 
 from helpers import retrieve_url
 from novaprinter import prettyPrinter
 
+_EPISODE_PATTERN = re.compile(
+    r"\b(?:s(\d{1,2})e(\d{1,2})|s(\d{1,2})|(\d{1,2})x(\d{1,2}))\b",
+    re.IGNORECASE,
+)
+_IMDB_PATTERN = re.compile(r"\b(?:tt)?(\d{7,9})\b", re.IGNORECASE)
+
+
+def _json(url: str) -> object:
+    payload = retrieve_url(url, unescape_html_entities=False)
+    return json.loads(payload) if payload else {}
+
+
+def _parse_query(query: str) -> Tuple[str, Optional[int], Optional[int], Optional[str]]:
+    text = unquote(query).replace(".", " ").replace("-", " ")
+    text = re.sub(r"\s+", " ", text).strip()
+    imdb_match = _IMDB_PATTERN.search(text)
+    if imdb_match:
+        return "", None, None, imdb_match.group(1)
+
+    match = _EPISODE_PATTERN.search(text)
+    season = episode = None
+    if match:
+        groups = match.groups()
+        if groups[0] and groups[1]:
+            season, episode = int(groups[0]), int(groups[1])
+        elif groups[2]:
+            season = int(groups[2])
+        elif groups[3] and groups[4]:
+            season, episode = int(groups[3]), int(groups[4])
+
+    title = _EPISODE_PATTERN.sub(" ", text)
+    title = re.sub(r"\s+", " ", title).strip()
+    return title, season, episode, None
+
+
+def _matches_title(title: str, query: str) -> bool:
+    words = re.findall(r"[^\W_]+", query.casefold())
+    if not words:
+        return True
+    title_words = re.findall(r"[^\W_]+", title.casefold())
+    iterator = iter(title_words)
+    return all(any(word == candidate for candidate in iterator) for word in words)
+
+
+def _int(value: object) -> int:
+    try:
+        return int(value) if isinstance(value, (int, str)) else -1
+    except ValueError:
+        return -1
+
+
+def _matches_episode(torrent: Dict[str, object], season: Optional[int], episode: Optional[int]) -> bool:
+    if season is None and episode is None:
+        return True
+
+    torrent_season = torrent.get("season")
+    torrent_episode = torrent.get("episode")
+    if torrent_season is None or torrent_episode is None:
+        title = torrent.get("title") or torrent.get("filename")
+        if not isinstance(title, str):
+            return False
+        match = _EPISODE_PATTERN.search(title)
+        if not match:
+            return False
+        groups = match.groups()
+        if groups[0] and groups[1]:
+            torrent_season, torrent_episode = groups[0], groups[1]
+        elif groups[3] and groups[4]:
+            torrent_season, torrent_episode = groups[3], groups[4]
+        else:
+            return False
+
+    return (season is None or _int(torrent_season) == season) and (
+        episode is None or _int(torrent_episode) == episode
+    )
+
+
+def _emit(torrent: Dict[str, object], url: str) -> None:
+    link = torrent.get("magnet_url") or torrent.get("torrent_url")
+    if not isinstance(link, str) or not link:
+        return
+
+    torrent_id = torrent.get("id")
+    desc_link = f"{url}ep/{torrent_id}/" if torrent_id else url
+    name = torrent.get("title") or torrent.get("filename")
+    if not isinstance(name, str):
+        name = "Unknown"
+    prettyPrinter(
+        {
+            "link": link,
+            "name": name,
+            "size": f"{_int(torrent.get('size_bytes'))} B",
+            "seeds": _int(torrent.get("seeds")),
+            "leech": _int(torrent.get("peers")),
+            "engine_url": url,
+            "desc_link": desc_link,
+            "pub_date": _int(torrent.get("date_released_unix")),
+        }
+    )
+
 
 class eztv:
     name = "EZTV"
-    url = 'https://eztvx.to/'
-    supported_categories = {'all': 'all', 'tv': 'tv'}
+    url = "https://eztvx.to/"
+    supported_categories = {"all": "all", "tv": "tv"}
 
-    class MyHtmlParser(HTMLParser):
-        A, TD, TR, TABLE = ('a', 'td', 'tr', 'table')
+    def search(self, what: str, cat: str = "all") -> None:
+        title, season, episode, imdb_id = _parse_query(what)
+        if not title and imdb_id is None and season is None:
+            return
 
-        """ Sub-class for parsing results """
-        def __init__(self, url: str) -> None:
-            HTMLParser.__init__(self)
-            self.url = url
-
-            now = datetime.now().astimezone()
-            self.date_parsers: Mapping[str, Callable[[Match[str]], datetime]] = {
-                r"(\d+)h\s+(\d+)m": lambda m: now - timedelta(hours=int(m[1]), minutes=int(m[2])),
-                r"(\d+)d\s+(\d+)h": lambda m: now - timedelta(days=int(m[1]), hours=int(m[2])),
-                r"(\d+)\s+weeks?": lambda m: now - timedelta(weeks=int(m[1])),
-                r"(\d+)\s+mo": lambda m: now - timedelta(days=int(m[1]) * 30),
-                r"(\d+)\s+years?": lambda m: now - timedelta(days=int(m[1]) * 365),
-            }
-            self.in_table_row = False
-            self.current_item: Dict[str, object] = {}
-
-        def handle_starttag(self, tag: str, attrs: List[Tuple[str, Union[str, None]]]) -> None:
-            def getStr(d: Mapping[str, Union[str, None]], key: str) -> str:
-                value = d.get(key, '')
-                return value if value is not None else ''
-
-            params = dict(attrs)
-
-            if (params.get('class') == 'forum_header_border'
-                    and params.get('name') == 'hover'):
-                self.in_table_row = True
-                self.current_item = {}
-                self.current_item['seeds'] = -1
-                self.current_item['leech'] = -1
-                self.current_item['size'] = -1
-                self.current_item['engine_url'] = self.url
-                self.current_item['pub_date'] = -1
-
-            if (tag == self.A
-                    and self.in_table_row and params.get('class') == 'magnet'):
-                self.current_item['link'] = params.get('href')
-
-            if (tag == self.A
-                    and self.in_table_row and params.get('class') == 'epinfo'):
-                self.current_item['desc_link'] = self.url + getStr(params, 'href')
-                self.current_item['name'] = getStr(params, 'title').split(' (')[0]
-
-        def handle_data(self, data: str) -> None:
-            data = data.replace(',', '')
-            if self.in_table_row and data.endswith((' KB', ' MB', ' GB')):
-                self.current_item['size'] = data
-
-            elif self.in_table_row and data.isnumeric():
-                self.current_item['seeds'] = int(data)
-
-            elif self.in_table_row:  # Check for a relative time
-                for pattern, calc in self.date_parsers.items():
-                    m = re.match(pattern, data)
-                    if m:
-                        self.current_item["pub_date"] = int(calc(m).timestamp())
-                        break
-
-        def handle_endtag(self, tag: str) -> None:
-            if self.in_table_row and tag == self.TR:
-                prettyPrinter(self.current_item)  # type: ignore[arg-type] # refactor later
-                self.in_table_row = False
-
-    def do_query(self, what: str) -> str:
-        url = f"{self.url}/search/{what.replace('%20', '-')}"
-        data = b"layout=def_wlinks"
-        try:
-            return retrieve_url(url, request_data=data)
-        except TypeError:
-            # Older versions of retrieve_url did not support request_data/POST, se we must do the
-            # request ourselves...
-            user_agent = 'Mozilla/5.0 (X11; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0'
-            req = urllib.request.Request(url, data, {'User-Agent': user_agent})
+        # The API supports IMDb filtering, but title queries require a scan of
+        # recent results. Its documented maximum page number is 100.
+        max_pages = 100 if imdb_id is not None else 10
+        for page in range(1, max_pages + 1):
+            url = f"{self.url}api/get-torrents?limit=100&page={page}"
+            if imdb_id is not None:
+                url += f"&imdb_id={imdb_id}"
             try:
-                response: http.client.HTTPResponse = urllib.request.urlopen(req)  # nosec B310 # pylint: disable=consider-using-with
-                return response.read().decode('utf-8')
-            except urllib.error.URLError as errno:
-                print(f"Connection error: {errno.reason}", file=sys.stderr)
-            return ""
+                response = _json(url)
+            except (TypeError, ValueError):
+                return
+            if not isinstance(response, dict):
+                return
+            data = cast(Dict[str, object], response)
+            raw_torrents = data.get("torrents")
+            if not isinstance(raw_torrents, list) or not raw_torrents:
+                return
+            torrents = cast(List[object], raw_torrents)
+            for raw_torrent in torrents:
+                if not isinstance(raw_torrent, dict):
+                    continue
+                torrent = cast(Dict[str, object], raw_torrent)
+                torrent_title = torrent.get("title") or torrent.get("filename")
+                if not isinstance(torrent_title, str):
+                    continue
+                if _matches_title(torrent_title, title) and _matches_episode(
+                    torrent, season, episode
+                ):
+                    _emit(torrent, self.url)
 
-    def search(self, what: str, cat: str = 'all') -> None:
-        eztv_html = self.do_query(what)
-
-        eztv_parser = self.MyHtmlParser(self.url)
-        eztv_parser.feed(eztv_html)
-        eztv_parser.close()
+            total = data.get("torrents_count")
+            try:
+                if page * 100 >= int(cast(str, total)):
+                    return
+            except (TypeError, ValueError):
+                return
