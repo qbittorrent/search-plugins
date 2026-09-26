@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from unittest.mock import Mock
+
 import pytest
 
 from ..engines import jackett
@@ -28,18 +30,12 @@ def test_jackett_reports_missing_api_key(capfd: pytest.CaptureFixture[str]) -> N
         '<indexers />',
     ],
 )
-def test_jackett_reports_setup_errors(
-    monkeypatch: pytest.MonkeyPatch, capfd: pytest.CaptureFixture[str],
-    response: str | None,
-) -> None:
+def test_jackett_reports_setup_errors(monkeypatch: pytest.MonkeyPatch, capfd: pytest.CaptureFixture[str], response: str | None) -> None:
     engine = jackett.jackett()
     engine.api_key = 'test-key'
     engine.thread_count = 1
 
-    def fake_response(_query: str) -> str | None:
-        return response
-
-    monkeypatch.setattr(engine, 'get_response', fake_response)
+    monkeypatch.setattr(engine, 'get_response', Mock(return_value=response))
     engine.search('linux', 'all')
 
     assert capfd.readouterr().err
@@ -53,10 +49,7 @@ def test_jackett_raises_for_bad_response(monkeypatch: pytest.MonkeyPatch, respon
     engine = jackett.jackett()
     engine.api_key = 'test-key'
 
-    def fake_response(_query: str) -> str:
-        return response
-
-    monkeypatch.setattr(engine, 'get_response', fake_response)
+    monkeypatch.setattr(engine, 'get_response', Mock(return_value=response))
 
     with pytest.raises(RuntimeError):
         engine.search('linux', 'all')
@@ -66,16 +59,9 @@ def test_jackett_checks_indexers_without_concurrency(monkeypatch: pytest.MonkeyP
     engine = jackett.jackett()
     engine.api_key = 'test-key'
     engine.thread_count = 1
-    searches: list[tuple[str, list[str] | None, str]] = []
-
-    def fake_response(_query: str) -> str:
-        return '<indexers><indexer id="thepiratebay" /></indexers>'
-
-    def fake_search(what: str, category: list[str] | None, indexer_id: str) -> None:
-        searches.append((what, category, indexer_id))
-
-    monkeypatch.setattr(engine, 'get_response', fake_response)
-    monkeypatch.setattr(engine, 'search_jackett_indexer', fake_search)
+    search_mock = Mock()
+    monkeypatch.setattr(engine, 'get_response', Mock(return_value='<indexers><indexer id="thepiratebay" /></indexers>'))
+    monkeypatch.setattr(engine, 'search_jackett_indexer', search_mock)
     engine.search('linux', 'all')
 
-    assert searches == [('linux', None, 'all')]
+    search_mock.assert_called_once_with('linux', None, 'all')
