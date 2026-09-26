@@ -1,4 +1,4 @@
-# VERSION: 4.14
+# VERSION: 4.13
 # AUTHORS: Diego de las Heras (ngosang@hotmail.es)
 # CONTRIBUTORS: ukharley
 #               hannsen (github.com/hannsen)
@@ -146,15 +146,15 @@ class jackett:
 
         # check api_key
         if self.api_key == "YOUR_API_KEY_HERE":
-            self.handle_error("API key not configured in jackett.json", what)
+            self.handle_error("api key error", what)
             return
 
         # search in Jackett API
-        indexers = self.get_jackett_indexers(what)
-        if not indexers:
-            return
-
         if self.thread_count > 1:
+            indexers = self.get_jackett_indexers(what)
+            if not indexers:
+                return
+
             args = ((what, category, indexer) for indexer in indexers)
             with Pool(min(len(indexers), self.thread_count)) as pool:
                 pool.starmap(self.search_jackett_indexer, args)
@@ -170,23 +170,13 @@ class jackett:
         jacket_url = f"{self.url}/api/v2.0/indexers/all/results/torznab/api?{params}"
         response = self.get_response(jacket_url)
         if response is None:
-            self.handle_error("cannot contact Jackett; check that it is running and the API key is correct", what)
+            self.handle_error("connection error getting indexer list", what)
             return []
         # process results
-        try:
-            response_xml = xml.etree.ElementTree.fromstring(response)
-        except xml.etree.ElementTree.ParseError:
-            self.handle_error("invalid response from Jackett", what)
-            return []
-        if response_xml.tag == 'error':
-            description = response_xml.attrib.get('description', 'unknown error')
-            self.handle_error(f"Jackett API error: {description}", what)
-            return []
+        response_xml = xml.etree.ElementTree.fromstring(response)
         indexers: List[str] = []
         for indexer in response_xml.findall('indexer'):
             indexers.append(indexer.attrib['id'])
-        if not indexers:
-            self.handle_error("no indexers configured in Jackett; add one in the Jackett UI", what)
         return indexers
 
     def search_jackett_indexer(self, what: str, category: Union[List[str], None], indexer_id: str) -> None:

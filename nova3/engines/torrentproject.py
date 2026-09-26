@@ -1,4 +1,4 @@
-# VERSION: 1.93
+# VERSION: 1.92
 # AUTHORS: mauricci
 
 import re
@@ -12,9 +12,7 @@ from novaprinter import prettyPrinter
 
 
 class torrentproject:
-    # The .com.se endpoint currently fails its TLS handshake. The project's
-    # working mirror serves the same result format over .cc.
-    url = 'https://torrentproject.cc'
+    url = 'https://torrentproject.com.se'
     name = 'TorrentProject'
     supported_categories = {'all': '0'}
 
