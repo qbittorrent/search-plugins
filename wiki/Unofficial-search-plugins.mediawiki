@@ -59,6 +59,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/AlaaBrahim/qBitTorrent-animetosho-search-plugin/main/animetosho.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 4.5.x / Python 3.x.x
 |-
+| [[https://raw.githubusercontent.com/Phlexis96/qBitTorrent-animetosho-search-plugin/main/screenshots/animetosho.png]][https://animetosho.xyz/ Anime Tosho]
+| [https://github.com/Phlexis96/qBitTorrent-animetosho-search-plugin Phlexis96]
+| 1.2.1
+| 26/Sep<br>2026
+| [https://raw.githubusercontent.com/Phlexis96/qBitTorrent-animetosho-search-plugin/main/animetosho.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
+| ✔ qbt 4.x / 5.x / Python 3.x
+|-
 | [[https://apachetorrent.com/icon.png]] [https://apachetorrent.com/ Apache Torrent]
 | [https://github.com/bebetoh bebetoh]
 | 1.0.0
