@@ -685,12 +685,12 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/TainakaDrums/qbPornolab/master/pornolab.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]<br> [https://github.com/TainakaDrums/qbPornolab/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]]]
 | ✔ qbt 4.2.x / Python 3.5.0
 |-
-| [[https://raw.githubusercontent.com/swannie-eire/prowlarr-qbittorrent-plugins/main/prowlarr-logo-lq.png]] [https://github.com/Prowlarr/Prowlarr Prowlarr]
-| [https://github.com/swannie-eire/prowlarr-qbittorrent-plugins swannie-eire]
-| 1.0
-| 17/Dec<br>2021
-| [https://raw.githubusercontent.com/swannie-eire/prowlarr-qbittorrent-plugins/main/prowlarr.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]<br>[https://github.com/swannie-eire/prowlarr-qbittorrent-plugins [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]]]
-| ✔ qbt 4.3.x / Python 3.+
+| [[https://raw.githubusercontent.com/MANCrimSon/prowlarr-qbittorrent-plugin/main/prowlarr.ico]] [https://github.com/Prowlarr/Prowlarr Prowlarr]
+| [https://github.com/MANCrimSon/prowlarr-qbittorrent-plugin MANCrimSon]
+| 2.0.0
+| 01/Oct<br>2026
+| [https://raw.githubusercontent.com/MANCrimSon/prowlarr-qbittorrent-plugin/main/prowlarr.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]<br>[https://github.com/MANCrimSon/prowlarr-qbittorrent-plugin [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]]]
+| ✔ qbt 4.x / 5.x / Python 3.10+
 |-
 | [[https://i.imgur.com/28j2OFz.png]] [https://redacted.ch Redacted]
 | [https://github.com/evyd13/search-plugins Evyd13]
