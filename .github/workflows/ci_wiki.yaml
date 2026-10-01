@@ -28,4 +28,4 @@ jobs:
       - name: Check MediaWiki files
         uses: j178/prek-action@v2
         with:
-          extra-args: wikilint
+          extra-args: '--all-files wikilint'
