@@ -46,8 +46,6 @@ class torlock:
 
             if self.item_found:
                 if tag == "td":
-                    # A layout cell can carry no class at all, so read the
-                    # attribute optionally instead of raising KeyError.
                     param_class = params.get("class")
                     if param_class is not None:
                         self.item_name = self.parser_class.get(param_class)
