@@ -1,4 +1,4 @@
-# VERSION: 2.30
+# VERSION: 2.31
 # AUTHORS: Douman (custparasite@gmx.se)
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -46,7 +46,7 @@ class torlock:
 
             if self.item_found:
                 if tag == "td":
-                    param_class = params["class"]
+                    param_class = params.get("class")
                     if param_class is not None:
                         self.item_name = self.parser_class.get(param_class)
                         if self.item_name:
