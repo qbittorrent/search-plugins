@@ -9,3 +9,6 @@ disable = [
     "MD060",
     "MD082"
 ]
+
+[MD093]
+code = false
