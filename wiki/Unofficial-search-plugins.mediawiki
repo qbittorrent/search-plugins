@@ -685,7 +685,7 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/TainakaDrums/qbPornolab/master/pornolab.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]<br> [https://github.com/TainakaDrums/qbPornolab/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]]]
 | ✔ qbt 4.2.x / Python 3.5.0
 |-
-| [[https://raw.githubusercontent.com/MANCrimSon/prowlarr-qbittorrent-plugin/main/prowlarr.ico]] [https://github.com/Prowlarr/Prowlarr Prowlarr]
+| [[https://raw.githubusercontent.com/MANCrimSon/prowlarr-qbittorrent-plugin/main/prowlarr.png]] [https://github.com/Prowlarr/Prowlarr Prowlarr]
 | [https://github.com/MANCrimSon/prowlarr-qbittorrent-plugin MANCrimSon]
 | 2.2
 | 01/Oct<br>2026
