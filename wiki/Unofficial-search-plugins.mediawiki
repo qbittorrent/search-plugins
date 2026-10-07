@@ -36,7 +36,7 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | 1.4
 | 09/Apr<br>2026
 | [https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/academictorrents.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
-| ✔ qbt 4.3.x / Python 3.8.5 <br>**READ REPOSITORY NOTES**
+| ✔ qbt 4.3.x / Python 3.8.5 <br>**READ REPOSITORY NOTES**<br>✓ live search checked 08/Oct/2026 (MNIST)
 |-
 | [[https://raw.githubusercontent.com/nishizhen/qBit-search-plugins/main/favicon.png]] [https://acg.rip/ acgrip]
 | [https://github.com/nishizhen/qBit-search-plugins nishizhen]
