@@ -33,8 +33,8 @@ The minimum supported Python version (across all platforms) is specified at [htt
 |-
 | [[https://www.google.com/s2/favicons?domain=academictorrents.com#.png]] [https://academictorrents.com/ Academic Torrents]
 | [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
-| 1.2
-| 19/Mar<br>2023
+| 1.4
+| 09/Apr<br>2026
 | [https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/academictorrents.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 4.3.x / Python 3.8.5 <br>**READ REPOSITORY NOTES**
 |-
@@ -209,8 +209,8 @@ The minimum supported Python version (across all platforms) is specified at [htt
 |-
 | [[https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/glotorrents.png]] [https://glodls.to/ GloTorrents]
 | [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
-| 1.5
-| 28/Jul<br>2022
+| 1.7
+| 10/Apr<br>2026
 | [https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/glotorrents.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 4.3.5 / Python 3.8.5
 |-
@@ -223,8 +223,8 @@ The minimum supported Python version (across all platforms) is specified at [htt
 |-
 | [[https://github.com/LightDestory/qBittorrent-Search-Plugins/raw/master/src/engines/kickasstorrents.png]] [https://katcr.to/ Kickass Torrent]
 | [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
-| 1.0
-| 28/Jul<br>2022
+| 1.2
+| 10/Apr<br>2026
 | [https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/kickasstorrents.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 4.3.x / Python 3.8.5
 |-
@@ -342,8 +342,8 @@ The minimum supported Python version (across all platforms) is specified at [htt
 |-
 | [[https://github.com/LightDestory/qBittorrent-Search-Plugins/raw/master/src/engines/pirateiro.png]] [https://pirateiro.com/ Pirateiro]
 | [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
-| 1.0
-| 28/Jul<br>2022
+| 1.4
+| 16/Aug<br>2026
 | [https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/pirateiro.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 4.3.x / Python 3.8.5
 |-
@@ -356,8 +356,8 @@ The minimum supported Python version (across all platforms) is specified at [htt
 |-
 | [[https://github.com/Pireo/hello-world/blob/master/rockbox.png]] [https://rawkbawx.rocks/ RockBox]
 | [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
-| 1.0
-| 17/Jun<br>2021
+| 1.2
+| 10/Apr<br>2026
 | [https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/rockbox.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 4.3.x / Python 3.8.5
 |-
@@ -385,7 +385,7 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [[https://www.google.com/s2/favicons?domain=snowfl.com#.png]] [https://snowfl.com Snowfl]
 | [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
 | 1.3
-| 28/Jul<br>2022
+| 10/Apr<br>2026
 | [https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/snowfl.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 4.3.x / Python 3.8.5 <br>**READ REPOSITORY NOTES**
 |-
@@ -433,8 +433,8 @@ The minimum supported Python version (across all platforms) is specified at [htt
 |-
 | [[https://github.com/LightDestory/qBittorrent-Search-Plugins/raw/master/src/engines/thepiratebay.png]] [https://thepiratebay.org/ ThePirateBay]
 | [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
-| 1.0
-| 13/Nov<br>2021
+| 1.1
+| 10/Apr<br>2026
 | [https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/thepiratebay.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 4.3.x / Python 3.8.5
 |-
@@ -482,16 +482,16 @@ The minimum supported Python version (across all platforms) is specified at [htt
 |-
 | [[https://github.com/LightDestory/qBittorrent-Search-Plugins/raw/master/src/engines/torrentdownload.png]] [https://torrentdownload.info/ TorrentDownload]
 | [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
-| 1.0
-| 28/Jul<br>2022
+| 1.2
+| 16/Aug<br>2026
 | [https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/torrentdownload.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 4.3.x / Python 3.8.5
 |-
-| [[https://github.com/LightDestory/qBittorrent-Search-Plugins/raw/master/src/engines/torrentdownload.png]] [https://torrentdownload.info/ TorrentDownload with categories]
+| [[https://raw.githubusercontent.com/hannsen/qbittorrent_search_plugins/00e876a51f2cb45ee22071c56fc7ba52dc117721/magnetdl.png]] [http://www.magnetdl.com/ MagnetDL with categories]
 | [https://Scare.ca/dl/qBittorrent/ Scare!]
 | 2.0
-| 7/Sep<br>2022
-| [https://Scare.ca/dl/qBittorrent/torrentdownload.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
+| 8/Sep<br>2022
+| [https://Scare.ca/dl/qBittorrent/magnetdl.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 4.4.4 / Python 3.8.10
 |-
 | [[https://www.google.com/s2/favicons?domain=torrentdownloads.pro#.png]] [https://torrentdownloads.pro/ Torrent Downloads Pro]
@@ -552,8 +552,8 @@ The minimum supported Python version (across all platforms) is specified at [htt
 |-
 | [[https://www.google.com/s2/favicons?domain=yourbittorrent.com#.png]] [https://yourbittorrent.com/ YourBittorrent]
 | [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
-| 1.0
-| 17/Jun<br>2021
+| 1.3
+| 10/Apr<br>2026
 | [https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/yourbittorrent.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 4.3.x / Python 3.8.5
 |-
