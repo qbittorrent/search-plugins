@@ -536,13 +536,6 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/briswegian/uindex-qbittorrent-plugin/main/uindex.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 4.5.x+ / Python 3.9.x+
 |-
-| [[https://github.com/msagca/qbittorrent-plugins/blob/main/uniondht_icon.png]] [http://uniondht.org/ UnionDHT]
-| [https://github.com/msagca/qbittorrent-plugins/ msagca]
-| 1.2
-| 09/Oct<br>2024
-| [https://raw.githubusercontent.com/msagca/qbittorrent-plugins/main/uniondht.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
-| ⚠ download link currently returns 404; replacement not found during 07/Oct/2026 audit
-|-
 | [[https://www.google.com/s2/favicons?domain=xxxclub.to#.png]] [https://xxxclub.to/ XXXClub]
 | [https://github.com/BurningMop/qBittorrent-Search-Plugins BurningMop]
 | 1.3
@@ -685,13 +678,6 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/imDMG/qBt_SE/master/engines/nnmclub.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]<br> [https://github.com/imDMG/qBt_SE/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]]]
 | ✔ qbt 4.2.x / Python 3.7+
 |-
-| [[https://raw.githubusercontent.com/TainakaDrums/qbPornolab/master/pornolab.png]] [https://pornolab.net/ Pornolab]
-| [https://github.com/TainakaDrums/qbPornolab TainakaDrums]
-| 1.0
-| 09/Mar<br>2021
-| [https://raw.githubusercontent.com/TainakaDrums/qbPornolab/master/pornolab.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]<br> [https://github.com/TainakaDrums/qbPornolab/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]]]
-| ⚠ download link currently returns 404; replacement not found during 07/Oct/2026 audit
-|-
 | [[https://raw.githubusercontent.com/MANCrimSon/prowlarr-qbittorrent-plugin/main/prowlarr.png]] [https://github.com/Prowlarr/Prowlarr Prowlarr]
 | [https://github.com/MANCrimSon/prowlarr-qbittorrent-plugin MANCrimSon]
 | 2.2
@@ -796,4 +782,33 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | 22/May<br>2026
 | [https://raw.githubusercontent.com/codeobfuscation/qBittorrent-ZamundaRIP-plugin/main/zamundarip.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 5.1.x / Python 3.9+
+|}
+
+
+== Deprecated plugins / replacement not found ==
+
+These records are kept for history and future replacement work. They are not current download recommendations.
+
+{|class="sortable"
+|-
+! Search Engine
+! Author (Repository)
+! Version
+! Last update
+! Last known download link
+! Status
+|-
+| [[https://github.com/msagca/qbittorrent-plugins/blob/main/uniondht_icon.png]] [http://uniondht.org/ UnionDHT]
+| [https://github.com/msagca/qbittorrent-plugins/ msagca]
+| 1.2
+| 09/Oct<br>2024
+| [https://raw.githubusercontent.com/msagca/qbittorrent-plugins/main/uniondht.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
+| ⚠ download link currently returns 404; replacement not found during 07/Oct/2026 audit
+|-
+| [[https://raw.githubusercontent.com/TainakaDrums/qbPornolab/master/pornolab.png]] [https://pornolab.net/ Pornolab]
+| [https://github.com/TainakaDrums/qbPornolab TainakaDrums]
+| 1.0
+| 09/Mar<br>2021
+| [https://raw.githubusercontent.com/TainakaDrums/qbPornolab/master/pornolab.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]<br> [https://github.com/TainakaDrums/qbPornolab/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]]]
+| ⚠ download link currently returns 404; replacement not found during 07/Oct/2026 audit
 |}
