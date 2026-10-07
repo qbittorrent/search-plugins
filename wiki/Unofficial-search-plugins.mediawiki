@@ -24,6 +24,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 !  Download link
 !  Comments
 |-
+| [[https://www.google.com/s2/favicons?domain=1337x.la#.png]] [https://1337x.la/ 1337x]
+| [https://github.com/kalpakprod/search-plugins kalpakprod]
+| 1.0
+| 07/Oct<br>2026
+| [https://raw.githubusercontent.com/kalpakprod/search-plugins/add-rutracker-public-plugin/x1337x.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
+| ⚠ tested on 1337x.la; mirror-dependent, no account required
+|-
 | [[https://www.google.com/s2/favicons?domain=academictorrents.com#.png]] [https://academictorrents.com/ Academic Torrents]
 | [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
 | 1.2
