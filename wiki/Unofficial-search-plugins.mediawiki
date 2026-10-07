@@ -291,6 +291,20 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/tolotp/qbittorrent-search-plugins-de-busqueda/refs/heads/main/Plugins/nekobt.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 4.5.x+ / Python 3.9.x+
 |-
+| [[https://raw.githubusercontent.com/4chenz/pantsu-plugin/master/pantsu.png]] [https://nyaa.pantsu.cat/ Nyaa.Pantsu]
+| [https://github.com/4chenz/pantsu-plugin/ 4chenz]
+| 1.21
+| 02/Jan<br>2021
+| [https://raw.githubusercontent.com/MadeOfMagicAndWires/qBit-plugins/refs/heads/main/engines/nyaapantsu.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
+| ✔ qbt 4.0.x / Python 3.5.0 <br>✖ qbt 4.1.3 (intermittent failure)
+|-
+| [[https://raw.githubusercontent.com/MadeOfMagicAndWires/qBit-plugins/master/engines/nyaapantsu.png]] [https://nyaa.pantsu.cat/ Nyaa.pantsu]
+| [https://github.com/MadeOfMagicAndWires/qBit-plugins Made Of Magic<br>And Wires]
+| 1.3
+| 02/Jan<br>2021
+| [https://raw.githubusercontent.com/MadeOfMagicAndWires/qBit-plugins/refs/heads/main/engines/nyaapantsu.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
+| ✔ qbt 4.0.x / Python 3.5.0
+|-
 | [[https://raw.githubusercontent.com/MadeOfMagicAndWires/qBit-plugins/master/engines/nyaasi.png]] [https://nyaa.si/ Nyaa.si]
 | [https://github.com/MadeOfMagicAndWires/qBit-plugins Made Of Magic<br>And Wires]
 | 1.1
@@ -403,6 +417,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/phuongtailtranminh/qBittorrent-Nyaa-Search-Plugin/master/nyaa.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 4.0.x / Python 3.5.0
 |-
+| [[https://raw.githubusercontent.com/4chenz/pantsu-plugin/master/pantsu.png]] [https://sukebei.pantsu.cat/ Sukebei.Pantsu]
+| [https://github.com/4chenz/pantsu-plugin/ 4chenz]
+| 1.21
+| 02/Jan<br>2021
+| [https://raw.githubusercontent.com/vt-idiot/qBit-SukebeiNyaa-plugin/master/engines/sukebeisi.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
+| ✔ qbt 4.0.x / Python 3.5.0 <br>✖ qbt 4.1.3 (intermittent failure)
+|-
 | [[https://github.com/LightDestory/qBittorrent-Search-Plugins/raw/master/src/engines/thepiratebay.png]] [https://thepiratebay.org/ ThePirateBay]
 | [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
 | 1.0
@@ -473,6 +494,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/BurningMop/qBittorrent-Search-Plugins/refs/heads/main/torrentdownloads.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 4.6.x / Python 3.9.x
 |-
+| [[https://www.google.com/s2/favicons?domain=torrenflix.com#.png]] [https://torrenflix.com/ Torrenflix]
+| [https://github.com/BurningMop/qBittorrent-Search-Plugins BurningMop]
+| 1.0
+| 23/Nov/2024
+| [https://raw.githubusercontent.com/BurningMop/qBittorrent-Search-Plugins/main/deprecated/torrenflix.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
+| ✔ qbt 5.0.x / Python 3.9.x
+|-
 | [[https://www.google.com/s2/favicons?domain=torrentgalaxy.to#.png]] [https://torrentgalaxy.to/ TorrentGalaxy]
 | [https://github.com/nindogo Ni Ndogo]
 | 0.08
@@ -493,6 +521,20 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | 02/Aug/2026
 | [https://raw.githubusercontent.com/dominc8/qbittorrent-tsukihime-search-plugin/refs/heads/master/tsukihime.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 5.2.3 / Python 3.14.6
+|-
+| [[https://www.google.com/s2/favicons?domain=uindex.org#.png]] [https://uindex.org/ UIndex]
+| [https://github.com/tolotp/qbittorrent-search-plugins-de-busqueda tolotp]
+| 1.0
+| 05/Mar/2026
+| [https://raw.githubusercontent.com/briswegian/uindex-qbittorrent-plugin/main/uindex.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
+| ✔ qbt 4.5.x+ / Python 3.9.x+
+|-
+| [[https://github.com/msagca/qbittorrent-plugins/blob/main/uniondht_icon.png]] [http://uniondht.org/ UnionDHT]
+| [https://github.com/msagca/qbittorrent-plugins/ msagca]
+| 1.2
+| 09/Oct<br>2024
+| [https://raw.githubusercontent.com/msagca/qbittorrent-plugins/main/uniondht.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
+| ⚠ download link currently returns 404; replacement not found during 07/Oct/2026 audit
 |-
 | [[https://www.google.com/s2/favicons?domain=xxxclub.to#.png]] [https://xxxclub.to/ XXXClub]
 | [https://github.com/BurningMop/qBittorrent-Search-Plugins BurningMop]
@@ -551,6 +593,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | 13/Apr<br>2017
 | [https://raw.githubusercontent.com/MadeOfMagicAndWires/qBit-plugins/master/engines/bakabt.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]<br>[https://github.com/MadeOfMagicAndWires/qBit-plugins/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]]]
 | ✔ qbt 4.3.x / Python 3.9.x
+|-
+| [[https://bitporn.eu/favicon.ico]] [https://bitporn.eu/ BitPorn]
+| [https://github.com/PumpkinPounder/Random-Useful PumpkinPounder]
+| 1.00
+| 23/Aug<br>2026
+| [https://raw.githubusercontent.com/PumpkinPounder/Random-Useful/main/Bitporn%20Qbit/bitporn.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
+| ✔ qbt 5.1.4 / Python 3.14.x<br>Private tracker, requires login/cookies
 |-
 | [[https://www.google.com/s2/favicons?domain=c411.org#.png]] [https://c411.org/ C411]
 | [https://github.com/OptimusKoala/qbittorrent-c411-plugin OptimusKoala]
@@ -628,6 +677,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | 20/Nov<br>2025
 | [https://raw.githubusercontent.com/imDMG/qBt_SE/master/engines/nnmclub.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]<br> [https://github.com/imDMG/qBt_SE/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]]]
 | ✔ qbt 4.2.x / Python 3.7+
+|-
+| [[https://raw.githubusercontent.com/TainakaDrums/qbPornolab/master/pornolab.png]] [https://pornolab.net/ Pornolab]
+| [https://github.com/TainakaDrums/qbPornolab TainakaDrums]
+| 1.0
+| 09/Mar<br>2021
+| [https://raw.githubusercontent.com/TainakaDrums/qbPornolab/master/pornolab.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]<br> [https://github.com/TainakaDrums/qbPornolab/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]]]
+| ⚠ download link currently returns 404; replacement not found during 07/Oct/2026 audit
 |-
 | [[https://raw.githubusercontent.com/MANCrimSon/prowlarr-qbittorrent-plugin/main/prowlarr.png]] [https://github.com/Prowlarr/Prowlarr Prowlarr]
 | [https://github.com/MANCrimSon/prowlarr-qbittorrent-plugin MANCrimSon]
