@@ -657,6 +657,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/nbusseneau/qBittorrent-rutracker-plugin/master/rutracker.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]<br>[https://github.com/nbusseneau/qBittorrent-rutracker-plugin/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]]]
 | ✔ qbt 5.1.x / Python 3.10.x<br/>
 |-
+| [[https://rutracker.org/ RuTracker Public]]
+| [https://github.com/kalpakprod/search-plugins kalpakprod]
+| 0.5
+| 07/Oct<br>2026
+| [https://raw.githubusercontent.com/kalpakprod/search-plugins/add-rutracker-public-plugin/rutracker_public.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]<br> [https://github.com/kalpakprod/search-plugins/blob/add-rutracker-public-plugin/rutracker_public.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]]]
+| ⚠ qBittorrent 5.x / Python standard library; first run downloads native Camoufox runtime (~1.3 GB), no RuTracker login required
+|-
 | [[https://www.google.com/s2/favicons?domain=speedapp.io#.png]] [https://speedapp.io SpeedApp.IO]
 | [https://github.com/miIiano/SpeedApp.io-qBittorent-search-plugin miIiano]
 | 1.1
