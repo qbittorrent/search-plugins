@@ -485,7 +485,7 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | 1.2
 | 16/Aug<br>2026
 | [https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/torrentdownload.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
-| ✔ qbt 4.3.x / Python 3.8.5
+| ✔ qbt 4.3.x / Python 3.8.5<br>✓ live search checked 08/Oct/2026 (Dream Scenario)
 |-
 | [[https://raw.githubusercontent.com/hannsen/qbittorrent_search_plugins/00e876a51f2cb45ee22071c56fc7ba52dc117721/magnetdl.png]] [http://www.magnetdl.com/ MagnetDL with categories]
 | [https://Scare.ca/dl/qBittorrent/ Scare!]
