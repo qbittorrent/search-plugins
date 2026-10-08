@@ -1,12 +1,14 @@
-# VERSION: 2.31
+# VERSION: 2.32
 # AUTHORS: Douman (custparasite@gmx.se)
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
 from datetime import datetime, timedelta
 from html.parser import HTMLParser
 from typing import Any, Dict, List, Tuple, Union
+from urllib.error import URLError
+from urllib.request import Request, urlopen
 
-from helpers import download_file, retrieve_url
+from helpers import download_file
 from novaprinter import prettyPrinter
 
 
@@ -105,7 +107,16 @@ class torlock:
         for page in range(1, 5):
             parser = self.MyHtmlParser(self.url)
             page_url = f"{self.url}/{category}/torrents/{query}.html?sort=seeds&page={page}"
-            html = retrieve_url(page_url)
+            # Torlock currently rejects browser User-Agents from urllib,
+            # but accepts the curl client identity with this same HTTP stack.
+            request = Request(page_url, headers={"User-Agent": "curl/8.18.0"})
+            try:
+                with urlopen(request, timeout=30) as response:
+                    html = response.read().decode(response.headers.get_content_charset() or "utf-8", errors="replace")
+            except URLError as error:
+                import sys
+                print(f"Torlock: search request failed ({type(error).__name__})", file=sys.stderr)
+                return
             parser.feed(html)
             parser.close()
             if parser.page_items < 20:
