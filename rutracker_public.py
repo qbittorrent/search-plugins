@@ -1,4 +1,4 @@
-# VERSION: 0.5
+# VERSION: 0.6
 # AUTHORS: qbit-search-plugins contributors
 # SPDX-License-Identifier: AGPL-3.0-or-later
 """Single-file qBittorrent plugin with private, automatic Camoufox bootstrap.
@@ -9,13 +9,11 @@ import contextlib
 import datetime
 import hashlib
 import html
-import io
 import json
 import os
 import platform
 import queue
 import re
-import shutil
 import signal
 import sqlite3
 import subprocess
@@ -77,7 +75,7 @@ def parse_listing(document):
         rows.append((int(title[1]), name, size_bytes(field("dl-stub")),
                      int(seeds) if seeds.isdigit() else -1,
                      int(leech) if leech.isdigit() else -1))
-    if not rows and not re.search(r'(?:id=["\']main_content["\']|class=["\'][^"\']*forumline)', document):
+    if not rows and not re.search(r'<table\b[^>]*class=["\'][^"\']*\bvf-table\b[^"\']*\bvf-tor\b', document, re.I):
         raise ValueError("Not a RuTracker forum page (challenge or login page)")
     return rows
 
@@ -123,8 +121,6 @@ def install_uv(directory, timeout):
             digest = hashlib.sha256(source.read()).hexdigest()
         if digest != checksum:
             raise ValueError("Cached uv archive SHA-256 mismatch")
-        if executable.is_file():
-            return executable
     else:
         print("RuTracker: first launch downloads a private browser runtime; this can take several minutes", file=sys.stderr)
         with tempfile.NamedTemporaryFile(dir=str(runtime), delete=False) as output:
@@ -157,6 +153,8 @@ def install_uv(directory, timeout):
         with tarfile.open(archive, "r:gz") as package:
             member = next(item for item in package.getmembers() if Path(item.name).name == "uv" and item.isfile())
             payload = package.extractfile(member).read()
+    if executable.is_file() and executable.read_bytes() == payload:
+        return executable
     with tempfile.NamedTemporaryFile(dir=str(runtime), delete=False) as output:
         temporary = Path(output.name)
         output.write(payload)
@@ -224,7 +222,12 @@ class CamoufoxBrowser:
             self.process.stdin.flush()
         except (OSError, ValueError):
             raise OSError("Camoufox worker disconnected") from None
-        return self.receive(timeout + 5)["html"]
+        try:
+            return self.receive(timeout + 5)["html"]
+        except TimeoutError:
+            # A late reply must never be used for a different torrent topic.
+            self.close()
+            raise
 
     def close(self):
         if self.process is None:
@@ -369,7 +372,11 @@ class rutracker_public:
         remaining = self.deadline - time.monotonic() - 1
         if remaining <= 0:
             raise TimeoutError("Search time budget exhausted")
-        return self.browser.fetch(url, min(timeout, remaining))
+        try:
+            return self.browser.fetch(url, min(timeout, remaining))
+        except (OSError, TimeoutError):
+            self.stop_solver()
+            raise
 
     def fetch(self, path):
         remaining = self.deadline - time.monotonic()

@@ -1,18 +1,20 @@
-# VERSION: 1.24
+# VERSION: 1.25
 # AUTHORS: nindogo
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
 import http.client
+import json
 import re
 import sys
 import urllib.error
 import urllib.request
 from datetime import datetime, timedelta
 from html.parser import HTMLParser
-from typing import Callable, Dict, List, Mapping, Match, Tuple, Union
+from typing import Any, Callable, Dict, List, Mapping, Match, Tuple, Union
+from urllib.parse import unquote, urlencode
 
 from helpers import retrieve_url
-from novaprinter import prettyPrinter
+from novaprinter import SearchResults, prettyPrinter
 
 
 class eztv:
@@ -102,9 +104,65 @@ class eztv:
                 print(f"Connection error: {errno.reason}", file=sys.stderr)
             return ""
 
+    def api_json(self, url: str) -> Any:
+        request = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0', 'Accept': 'application/json'})
+        with urllib.request.urlopen(request, timeout=20) as response:
+            return json.load(response)
+
+    def search_api(self, what: str) -> None:
+        query = unquote(what).strip()
+        episode = re.search(r'\bs(\d{1,2})(?:e(\d{1,2}))?\b', query, re.IGNORECASE)
+        quality = re.search(r'\b(?:480|720|1080|2160)p\b', query, re.IGNORECASE)
+        title = re.sub(r'\bs\d{1,2}(?:e\d{1,2})?\b|\b(?:480|720|1080|2160)p\b', '', query, flags=re.IGNORECASE).strip()
+        if re.fullmatch(r'tt\d+', title):
+            imdb = title[2:]
+        else:
+            matches = self.api_json('https://api.tvmaze.com/search/shows?' + urlencode({'q': title}))
+            if not matches:
+                return
+            # TVmaze relevance resolves the title; EZTV requires an IMDb ID.
+            imdb = matches[0]['show'].get('externals', {}).get('imdb')
+            if not imdb:
+                return
+            imdb = imdb.removeprefix('tt')
+        results: List[SearchResults] = []
+        for page in range(1, 21):
+            payload = self.api_json(self.url.rstrip('/') + '/api/get-torrents?' + urlencode({
+                'imdb_id': imdb, 'limit': 100, 'page': page,
+            }))
+            torrents = payload.get('torrents', [])
+            for item in torrents:
+                if str(item.get('imdb_id')) != imdb:
+                    continue
+                if episode and int(item.get('season', -1)) != int(episode[1]):
+                    continue
+                if episode and episode[2] and int(item.get('episode', -1)) != int(episode[2]):
+                    continue
+                if quality and quality[0].casefold() not in item.get('title', '').casefold():
+                    continue
+                magnet = item.get('magnet_url', '')
+                if not re.search(r'^magnet:\?xt=urn:btih:(?:[a-f0-9]{40}|[a-z2-7]{32})(?:&|$)', magnet, re.IGNORECASE):
+                    continue
+                results.append({
+                    'link': magnet, 'name': item['title'],
+                    'size': item.get('size_bytes', -1), 'seeds': item.get('seeds', -1),
+                    'leech': item.get('peers', -1), 'engine_url': self.url,
+                    'desc_link': self.url.rstrip('/') + '/ep/' + str(item['id']) + '/',
+                    'pub_date': item.get('date_released_unix', -1),
+                })
+            if not torrents or page * 100 >= int(payload.get('torrents_count', 0)):
+                break
+        for result in sorted(results, key=lambda item: int(item['seeds']), reverse=True):
+            prettyPrinter(result)
+
     def search(self, what: str, cat: str = 'all') -> None:
         eztv_html = self.do_query(what)
-
+        if not eztv_html:
+            try:
+                self.search_api(what)
+            except (urllib.error.URLError, ValueError, KeyError, TypeError) as error:
+                print(f'EZTV: API fallback failed ({type(error).__name__})', file=sys.stderr)
+            return
         eztv_parser = self.MyHtmlParser(self.url)
         eztv_parser.feed(eztv_html)
         eztv_parser.close()

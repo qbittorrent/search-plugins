@@ -26,8 +26,8 @@ The minimum supported Python version (across all platforms) is specified at [htt
 |-
 | [[https://www.google.com/s2/favicons?domain=1337x.la#.png]] [https://1337x.la/ 1337x]
 | [https://github.com/kalpakprod/search-plugins kalpakprod]
-| 1.0
-| 07/Oct<br>2026
+| 1.1
+| 08/Oct<br>2026
 | [https://raw.githubusercontent.com/kalpakprod/search-plugins/add-rutracker-public-plugin/x1337x.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ⚠ tested on 1337x.la; mirror-dependent, no account required
 |-
@@ -298,13 +298,6 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/tolotp/qbittorrent-search-plugins-de-busqueda/refs/heads/main/Plugins/nekobt.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 4.5.x+ / Python 3.9.x+
 |-
-| [[https://raw.githubusercontent.com/4chenz/pantsu-plugin/master/pantsu.png]] [https://nyaa.pantsu.cat/ Nyaa.Pantsu]
-| [https://github.com/4chenz/pantsu-plugin/ 4chenz]
-| 1.21
-| 02/Jan<br>2021
-| [https://raw.githubusercontent.com/MadeOfMagicAndWires/qBit-plugins/refs/heads/main/engines/nyaapantsu.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
-| ✔ qbt 4.0.x / Python 3.5.0 <br>✖ qbt 4.1.3 (intermittent failure)
-|-
 | [[https://raw.githubusercontent.com/MadeOfMagicAndWires/qBit-plugins/master/engines/nyaapantsu.png]] [https://nyaa.pantsu.cat/ Nyaa.pantsu]
 | [https://github.com/MadeOfMagicAndWires/qBit-plugins Made Of Magic<br>And Wires]
 | 1.3
@@ -424,13 +417,6 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/phuongtailtranminh/qBittorrent-Nyaa-Search-Plugin/master/nyaa.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 4.0.x / Python 3.5.0
 |-
-| [[https://raw.githubusercontent.com/4chenz/pantsu-plugin/master/pantsu.png]] [https://sukebei.pantsu.cat/ Sukebei.Pantsu]
-| [https://github.com/4chenz/pantsu-plugin/ 4chenz]
-| 1.21
-| 02/Jan<br>2021
-| [https://raw.githubusercontent.com/vt-idiot/qBit-SukebeiNyaa-plugin/master/engines/sukebeisi.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
-| ✔ qbt 4.0.x / Python 3.5.0 <br>✖ qbt 4.1.3 (intermittent failure)
-|-
 | [[https://github.com/LightDestory/qBittorrent-Search-Plugins/raw/master/src/engines/thepiratebay.png]] [https://thepiratebay.org/ ThePirateBay]
 | [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
 | 1.1
@@ -487,12 +473,12 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/torrentdownload.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 4.3.x / Python 3.8.5<br>✓ live search checked 08/Oct/2026 (Dream Scenario)
 |-
-| [[https://raw.githubusercontent.com/hannsen/qbittorrent_search_plugins/00e876a51f2cb45ee22071c56fc7ba52dc117721/magnetdl.png]] [http://www.magnetdl.com/ MagnetDL with categories]
+| [[https://github.com/LightDestory/qBittorrent-Search-Plugins/raw/master/src/engines/torrentdownload.png]] [https://torrentdownload.info/ TorrentDownload with categories]
 | [https://Scare.ca/dl/qBittorrent/ Scare!]
-| 2.0
-| 8/Sep<br>2022
-| [https://Scare.ca/dl/qBittorrent/magnetdl.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
-| ✔ qbt 4.4.4 / Python 3.8.10
+| 2.2
+| —
+| [https://Scare.ca/dl/qBittorrent/torrentdownload.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
+| Historical compatibility: qbt 4.4.4 / Python 3.8.10; current version read from source, live compatibility not rechecked
 |-
 | [[https://www.google.com/s2/favicons?domain=torrentdownloads.pro#.png]] [https://torrentdownloads.pro/ Torrent Downloads Pro]
 | [https://github.com/BurningMop/qBittorrent-Search-Plugins BurningMop]
@@ -708,8 +694,8 @@ The minimum supported Python version (across all platforms) is specified at [htt
 |-
 | [[https://rutracker.org/ RuTracker Public]]
 | [https://github.com/kalpakprod/search-plugins kalpakprod]
-| 0.5
-| 07/Oct<br>2026
+| 0.6
+| 08/Oct<br>2026
 | [https://raw.githubusercontent.com/kalpakprod/search-plugins/add-rutracker-public-plugin/rutracker_public.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]<br> [https://github.com/kalpakprod/search-plugins/blob/add-rutracker-public-plugin/rutracker_public.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]]]
 | ⚠ qBittorrent 5.x / Python standard library; first run downloads native Camoufox runtime (~1.3 GB), no RuTracker login required
 |-
@@ -811,4 +797,18 @@ These records are kept for history and future replacement work. They are not cur
 | 09/Mar<br>2021
 | [https://raw.githubusercontent.com/TainakaDrums/qbPornolab/master/pornolab.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]<br> [https://github.com/TainakaDrums/qbPornolab/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]]]
 | ⚠ download link currently returns 404; replacement not found during 07/Oct/2026 audit
+|-
+| [https://nyaa.pantsu.cat/ Nyaa.Pantsu]
+| [https://github.com/4chenz/pantsu-plugin/ 4chenz]
+| 1.21
+| 02/Jan<br>2021
+| [https://raw.githubusercontent.com/libellula/qbt-plugins/main/pantsu.py Last known original download]
+| Original download unavailable. Do not substitute another author's plugin under this name.
+|-
+| [https://sukebei.pantsu.cat/ Sukebei.Pantsu]
+| [https://github.com/4chenz/pantsu-plugin/ 4chenz]
+| 1.21
+| 02/Jan<br>2021
+| [https://raw.githubusercontent.com/libellula/qbt-plugins/main/sukebei.py Last known original download]
+| Original download unavailable. Sukebei Nyaa is a different source, listed separately.
 |}
