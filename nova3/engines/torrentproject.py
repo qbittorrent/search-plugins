@@ -1,4 +1,4 @@
-# VERSION: 1.92
+# VERSION: 1.93
 # AUTHORS: mauricci
 
 import re
@@ -12,7 +12,7 @@ from novaprinter import prettyPrinter
 
 
 class torrentproject:
-    url = 'https://torrentproject.com.se'
+    url = 'https://torrentproject.cc'
     name = 'TorrentProject'
     supported_categories = {'all': '0'}
 
@@ -125,5 +125,6 @@ class torrentproject:
         html = retrieve_url(info)
         m = re.search('href=[\'\"].*?(magnet.+?)[\'\"]', html)
         if m and len(m.groups()) > 0:
-            magnet = unquote(m.group(1))
+            raw = m.group(1)
+            magnet = raw if raw.startswith('magnet:') else unquote(raw)
             print(magnet + ' ' + info)

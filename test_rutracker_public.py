@@ -161,7 +161,7 @@ class PluginTests(unittest.TestCase):
         diagnostics = self.search()
         self.assertEqual(OUTPUT, [])
         self.assertIn("refresh failed", diagnostics)
-        with sqlite3.connect(str(self.engine.directory / "rutracker_public.sqlite3")) as db:
+        with contextlib.closing(sqlite3.connect(str(self.engine.directory / "rutracker_public.sqlite3"))) as db:
             self.assertEqual(db.execute("SELECT count(*) FROM cursors").fetchone()[0], 0)
 
     def test_external_solver_never_launches_a_local_browser(self):
@@ -172,8 +172,9 @@ class PluginTests(unittest.TestCase):
     def test_changed_torrent_never_emits_cached_old_magnet_on_fetch_failure(self):
         self.search()
         OUTPUT.clear()
-        with sqlite3.connect(str(self.engine.directory / "rutracker_public.sqlite3")) as db:
+        with contextlib.closing(sqlite3.connect(str(self.engine.directory / "rutracker_public.sqlite3"))) as db:
             db.execute("UPDATE torrents SET checked=0 WHERE id=6375095")
+            db.commit()
         self.server.fail = True
         diagnostics = self.search()
         self.assertEqual(OUTPUT, [])

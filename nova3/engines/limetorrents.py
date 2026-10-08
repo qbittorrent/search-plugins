@@ -1,4 +1,4 @@
-# VERSION: 4.15
+# VERSION: 4.16
 # AUTHORS: Lima66
 # CONTRIBUTORS: Diego de las Heras (ngosang@hotmail.es)
 
@@ -13,7 +13,7 @@ from novaprinter import prettyPrinter
 
 
 class limetorrents:
-    url = "https://www.limetorrents.lol"
+    url = "https://www.limetorrents.fun"
     name = "LimeTorrents"
     supported_categories = {'all': 'all',
                             'anime': 'anime',

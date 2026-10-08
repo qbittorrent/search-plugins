@@ -6,6 +6,7 @@ on:
       - 'nova3/**'
       - 'rutracker_public.py'
       - 'x1337x.py'
+      - 'unofficial/**'
       - 'test_*.py'
       - 'forum_1950.html'
       - '.github/workflows/ci_plugins.yaml'
@@ -14,6 +15,7 @@ on:
       - 'nova3/**'
       - 'rutracker_public.py'
       - 'x1337x.py'
+      - 'unofficial/**'
       - 'test_*.py'
       - 'forum_1950.html'
       - '.github/workflows/ci_plugins.yaml'
@@ -38,7 +40,7 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
-      - run: python -m unittest test_rutracker_public test_x1337x -v
+      - run: python -m unittest test_rutracker_public test_x1337x test_unofficial_updates -v
 
   ci:
     name: Check
@@ -69,7 +71,7 @@ jobs:
 
       - name: Run offline regression tests
         if: matrix.python-version == '3.10'
-        run: uv run just test files='tests/test_eztv.py tests/test_torlock.py'
+        run: uv run just test files='tests/test_eztv.py tests/test_torlock.py tests/test_limetorrents.py tests/test_torrentproject.py tests/test_piratebay.py tests/test_torrentscsv.py tests/test_jackett.py'
 
       - name: Run type check
         run: uv run just check

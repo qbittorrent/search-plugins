@@ -1,4 +1,4 @@
-# VERSION: 3.10
+# VERSION: 3.11
 # AUTHORS: Fabien Devaux (fab@gnux.info)
 # CONTRIBUTORS: Christophe Dumez (chris@qbittorrent.org)
 #               Arthur (custparasite@gmx.se)
@@ -31,12 +31,12 @@
 import datetime
 import gzip
 import html
-import http.client
 import io
 import json
+import sys
 import urllib.error
 import urllib.request
-from typing import Mapping
+from typing import Dict, List, Mapping, cast
 from urllib.parse import unquote, urlencode
 
 import helpers  # for setting SOCKS proxy side-effect
@@ -83,7 +83,18 @@ class piratebay:
 
         # Calling custom `retrieve_url` function with adequate escaping
         data = self.retrieve_url(base_url % urlencode(params))
-        response_json = json.loads(data)
+        if not data:
+            print('The Pirate Bay: search API unavailable', file=sys.stderr)
+            return
+        try:
+            payload: object = json.loads(data)
+        except ValueError:
+            print('The Pirate Bay: invalid API response', file=sys.stderr)
+            return
+        if not isinstance(payload, list):
+            print('The Pirate Bay: invalid API response', file=sys.stderr)
+            return
+        response_json = cast(List[Dict[str, str]], payload)
 
         # check empty response
         if len(response_json) == 0:
@@ -97,11 +108,11 @@ class piratebay:
                 'link': self.download_link(result),
                 'name': result['name'],
                 'size': str(result['size']) + " B",
-                'seeds': result['seeders'],
-                'leech': result['leechers'],
+                'seeds': int(result['seeders']),
+                'leech': int(result['leechers']),
                 'engine_url': self.url,
                 'desc_link': self.url + '/description.php?id=' + result['id'],
-                'pub_date': result['added'],
+                'pub_date': int(result['added']),
             })
 
     def download_link(self, result: Mapping[str, str]) -> str:
@@ -128,11 +139,11 @@ class piratebay:
         request = urllib.request.Request(url, None, {'User-Agent': getBrowserUserAgent()})
 
         try:
-            response: http.client.HTTPResponse = urllib.request.urlopen(request)  # pylint: disable=consider-using-with
-        except urllib.error.HTTPError:
+            with urllib.request.urlopen(request, timeout=20) as response:
+                data = response.read()
+                content_type = response.getheader('Content-Type', '')
+        except (urllib.error.URLError, TimeoutError):
             return ""
-
-        data = response.read()
 
         if data[:2] == b'\x1f\x8b':
             # Data is gzip encoded, decode it
@@ -141,7 +152,7 @@ class piratebay:
 
         charset = 'utf-8'
         try:
-            charset = response.getheader('Content-Type', '').split('charset=', 1)[1]
+            charset = content_type.split('charset=', 1)[1]
         except IndexError:
             pass
 
