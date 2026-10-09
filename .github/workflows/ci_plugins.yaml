@@ -40,7 +40,7 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
-      - run: python -m unittest test_rutracker_public test_x1337x test_unofficial_updates -v
+      - run: python -m unittest test_rutracker_public test_x1337x test_unofficial_updates test_public_indexes -v
 
   ci:
     name: Check

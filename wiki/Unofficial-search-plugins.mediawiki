@@ -159,11 +159,11 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | ✔ qbt 5.0.x / Python 3.9.x
 |-
 | [[https://github.com/iordic/qbittorrent-search-plugins/raw/master/images/icons/elitetorrent.png]] [https://www.elitetorrent.com/ Elitetorrent]
-| [https://github.com/iordic/qbittorrent-search-plugins iordic]
-| 1.5
-| 21/Sep<br>2024
-| [https://raw.githubusercontent.com/iordic/qbittorrent-search-plugins/master/engines/elitetorrent.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
-| ✔ qbt 4.6.7 / Python 3.9.5
+| [https://github.com/iordic/qbittorrent-search-plugins iordic], repairs by [https://github.com/kalpakprod/search-plugins kalpakprod]
+| 1.7
+| 08/Oct<br>2026
+| [https://raw.githubusercontent.com/kalpakprod/search-plugins/add-rutracker-public-plugin/unofficial/elitetorrent.py Download]
+| Corrected encoded magnet selection, current transport and missing-date handling
 |-
 | [[https://www.google.com/s2/favicons?domain=esmeraldatorrent.com#.png]] [https://esmeraldatorrent.com/ esmeraldatorrent]
 | [https://github.com/BurningMop/qBittorrent-Search-Plugins BurningMop]
@@ -277,12 +277,12 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/MadeOfMagicAndWires/qBit-plugins/refs/heads/main/engines/nyaapantsu.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 4.0.x / Python 3.5.0
 |-
-| [[https://raw.githubusercontent.com/MadeOfMagicAndWires/qBit-plugins/master/engines/nyaasi.png]] [https://nyaa.si/ Nyaa.si]
-| [https://github.com/MadeOfMagicAndWires/qBit-plugins Made Of Magic<br>And Wires]
-| 1.1
-| 01/Mar<br>2019
-| [https://raw.githubusercontent.com/MadeOfMagicAndWires/qBit-plugins/master/engines/nyaasi.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
-| ✔ qbt 4.4.3.1 / Python 3.10.5
+| [https://nyaa.si/ Nyaa.si (Tsukihime public index)]
+| [https://github.com/dominc8/qbittorrent-tsukihime-search-plugin dominc8], public-index variant by [https://github.com/kalpakprod/search-plugins kalpakprod]
+| 0.1
+| 08/Oct<br>2026
+| [https://raw.githubusercontent.com/kalpakprod/search-plugins/add-rutracker-public-plugin/unofficial/nyaasi_public.py Download]
+| Indexed Nyaa-origin releases, not live Nyaa search; positive Nyaa ID required
 |-
 | [[https://github.com/caiocinel/onlinefix-qbittorrent-plugin/raw/main/onlinefix.png]] [https://online-fix.me/ Online-Fix]
 | [https://github.com/caiocinel/onlinefix-qbittorrent-plugin caiocinel]
@@ -362,11 +362,11 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | ✔ qbt 4.3.x / Python 3.8.5 <br>**READ REPOSITORY NOTES**
 |-
 | [[https://www.google.com/s2/favicons?domain=snowfl.com#.png]] [https://snowfl.com Snowfl]
-| [https://github.com/ChocoTonic/snowfl ChocoTonic]
-| 2.1
-| 29/Jun<br>2026
-| [https://github.com/ChocoTonic/snowfl/releases/latest/download/snowfl.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
-| ✔ qbt 5.2.x / Python 3.x
+| [https://github.com/ChocoTonic/snowfl ChocoTonic], transport fixes by [https://github.com/kalpakprod/search-plugins kalpakprod]
+| 2.2
+| 08/Oct<br>2026
+| [https://raw.githubusercontent.com/kalpakprod/search-plugins/add-rutracker-public-plugin/unofficial/snowfl.py Download]
+| Standalone corrected request headers/query encoding; valid magnet-only results
 |-
 | [[https://www.google.com/s2/favicons?domain=subsplease.org#.png]] [https://subsplease.org/ SubsPlease.org]
 | [https://github.com/kli885/qBittorent-SubsPlease-Search-Plugin PlutoMonkey (kli885)]
@@ -467,11 +467,11 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | ✔ qbt 4.6.x / Python 3.9.x
 |-
 | [[https://github.com/dominc8/qbittorrent-tsukihime-search-plugin/blob/master/tsukihime_icon.png]] [https://tsukihime.org/ TsukiHime]
-| [https://github.com/dominc8/qbittorrent-tsukihime-search-plugin dominc8]
-| 1.0
-| 02/Aug/2026
-| [https://raw.githubusercontent.com/dominc8/qbittorrent-tsukihime-search-plugin/refs/heads/master/tsukihime.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
-| ✔ qbt 5.2.3 / Python 3.14.6
+| [https://github.com/dominc8/qbittorrent-tsukihime-search-plugin dominc8], repairs by [https://github.com/kalpakprod/search-plugins kalpakprod]
+| 1.01
+| 08/Oct<br>2026
+| [https://raw.githubusercontent.com/kalpakprod/search-plugins/add-rutracker-public-plugin/unofficial/tsukihime.py Download]
+| Missing optional tracker stats no longer abort valid search hashes; Python 3.9 compatible
 |-
 | [[https://www.google.com/s2/favicons?domain=uindex.org#.png]] [https://uindex.org/ UIndex]
 | [https://github.com/tolotp/qbittorrent-search-plugins-de-busqueda tolotp]
@@ -487,12 +487,12 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/BurningMop/qBittorrent-Search-Plugins/refs/heads/main/xxxclubto.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 5.0.x / Python 3.9.x
 |-
-| [[https://www.google.com/s2/favicons?domain=yourbittorrent.com#.png]] [https://yourbittorrent.com/ YourBittorrent]
-| [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
-| 1.3
-| 10/Apr<br>2026
-| [https://raw.githubusercontent.com/LightDestory/qBittorrent-Search-Plugins/master/src/engines/yourbittorrent.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
-| ✔ qbt 4.3.x / Python 3.8.5
+| [https://yourbittorrent.com/ YourBittorrent]
+| [https://github.com/kalpakprod/search-plugins kalpakprod] (rewritten obsolete LightDestory adapter)
+| 1.4
+| 08/Oct<br>2026
+| [https://raw.githubusercontent.com/kalpakprod/search-plugins/add-rutracker-public-plugin/unofficial/yourbittorrent.py Download]
+| Current single-table layout, external ad rows excluded, corrected torrent-download host
 |-
 | [[https://github.com/Pireo/hello-world/blob/master/yts.png]] [http://yts.lt/ YTS]
 | [https://codeberg.org/lazulyra/qbit-plugins lazulyra]
@@ -517,6 +517,40 @@ The minimum supported Python version (across all platforms) is specified at [htt
 |-
 |}
 
+
+== Anonymous public-index alternatives ==
+
+These use the existing public Lampac/JacRed index. No personal tracker login or local server is needed. This is indexed movie/TV search, not full live tracker search; the upstream default currently uses unencrypted HTTP. See [https://github.com/kalpakprod/search-plugins/blob/add-rutracker-public-plugin/unofficial/README.md implementation and transport limits].
+
+{| class="wikitable sortable"
+! Name
+! Author
+! Version
+! Last update
+! Download
+! Notes
+|-
+| [https://kinozal.guru/ Kinozal (public index)]
+| [https://github.com/kalpakprod/search-plugins kalpakprod]
+| 0.1
+| 08/Oct<br>2026
+| [https://raw.githubusercontent.com/kalpakprod/search-plugins/add-rutracker-public-plugin/unofficial/kinozal_public.py Download]
+| Public Lampac index; no tracker account needed
+|-
+| [https://toloka.to/ Toloka (public index)]
+| [https://github.com/kalpakprod/search-plugins kalpakprod]
+| 0.1
+| 08/Oct<br>2026
+| [https://raw.githubusercontent.com/kalpakprod/search-plugins/add-rutracker-public-plugin/unofficial/toloka_public.py Download]
+| Public Lampac index; no tracker account needed
+|-
+| [https://nnmclub.to/ NNM-Club (public index)]
+| [https://github.com/kalpakprod/search-plugins kalpakprod]
+| 0.1
+| 08/Oct<br>2026
+| [https://raw.githubusercontent.com/kalpakprod/search-plugins/add-rutracker-public-plugin/unofficial/nnmclub_public.py Download]
+| Public Lampac index; no tracker account needed
+|}
 
 == Plugins for Private Sites ==
 * The plugin/script may require editing before you can use it.
@@ -818,4 +852,11 @@ These historical or currently blocked records are kept for replacement work, not
 | 05/Jan/2024
 | [https://raw.githubusercontent.com/BurningMop/qBittorrent-Search-Plugins/refs/heads/main/solidtorrents.py Last known source]
 | .to, .net and .eu timed out on the verification network; no working replacement confirmed.
+|-
+| [https://nyaa.si/ Nyaa.si (original direct-site variant)]
+| [https://github.com/MadeOfMagicAndWires/qBit-plugins Made Of Magic And Wires]
+| 1.3
+| 01/Mar<br>2019
+| [https://raw.githubusercontent.com/MadeOfMagicAndWires/qBit-plugins/master/engines/nyaasi.py Last known source]
+| Direct HTTP and native-browser requests returned gateway timeout on this network; separately labelled indexed alternative remains above.
 |}
