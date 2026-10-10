@@ -4,9 +4,11 @@ on:
   pull_request:
     paths:
       - 'nova3/**'
+      - '.github/workflows/ci_plugins.yaml'
   push:
     paths:
       - 'nova3/**'
+      - '.github/workflows/ci_plugins.yaml'
 
 permissions: {}
 
@@ -21,7 +23,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['3.9', '3.10', '3.11', '3.12', '3.13', '3.14', '3.15-dev']
+        # Python 3.15 excluded until the dill/pylint compatibility fix is released.
+        python-version: ['3.9', '3.10', '3.11', '3.12', '3.13', '3.14']
     defaults:
       run:
         working-directory: nova3
