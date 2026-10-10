@@ -29,8 +29,8 @@ Thanks to this, you can *easily* write your own plugins to look for torrents in 
 
 ## Plugins Specification
 
-⚠️ **The plugin communicates data back to qBittorrent via `stdout` and that means you must NOT print debug/error messages to `stdout` under any circumstances.** \
-You can print the debug/error messages to `stderr` instead.
+⚠️ **The plugin communicates data back to qBittorrent via `stdout`, which means you must NOT print debug or error messages to `stdout` under any circumstances.** \
+You can print debug or error messages to `stderr` instead, or even better, use the Python [`logging`](https://docs.python.org/3/howto/logging.html) facility.
 
 ### Search Results Format
 
