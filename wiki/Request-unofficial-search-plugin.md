@@ -29,7 +29,6 @@ Please keep the list sorted alphabetically by the `Site` column.
 | [animetosho.org](https://animetosho.org) | DONE | [AlaaBrahim](https://github.com/AlaaBrahim/qBitTorrent-animetosho-search-plugin) | |
 | Archive.org | NO | N/A | Jackett already supports archive, use jackett plugin |
 | audiobookbay.nl | NO | N/A | |
-| beyond-hd.me | NO | N/A | Amazing tracker for good quality movies/tv shows. Private tracker & requires login. |
 | bit-titan.net | NO | N/A | good german tracker |
 | [bitsearch.to](https://bitsearch.to/) | DONE | [BurningMop](https://raw.githubusercontent.com/BurningMop/qBittorrent-Search-Plugins/main/bitsearch.py) | BitSearch is a DHT based torrent search engine. |
 | Btdb.eu | NO | N/A | |
