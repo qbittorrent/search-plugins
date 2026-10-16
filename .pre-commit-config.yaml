@@ -2,6 +2,13 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks.git
     rev: v6.0.0
     hooks:
+    - id: fix-byte-order-marker
+      name: Check file encoding (UTF-8 without BOM)
+
+    - id: mixed-line-ending
+      name: Check line ending character (LF)
+      args: ["--fix=lf"]
+
     - id: check-json
       name: Check JSON files
 
@@ -10,6 +17,9 @@ repos:
 
     - id: end-of-file-fixer
       name: Check trailing newlines
+
+    - id: trailing-whitespace
+      name: Check trailing whitespaces
 
   - repo: https://github.com/rvben/rumdl-pre-commit.git
     rev: v0.2.77
