@@ -195,8 +195,8 @@ The minimum supported Python version (across all platforms) is specified at [htt
 |-
 | [[https://github.com/afalvarezsite/qbtFitGirl-search/blob/main/fitgirl_repacks.jpg]] [https://fitgirl-repacks.site/ FitGirl Repacks]
 | [https://github.com/afalvarezsite/qbtFitGirl-search afalvarezsite]
-| 3.3
-| 16/Sep<br>2026
+| 3.5
+| 14/Oct<br>2026
 | [https://raw.githubusercontent.com/afalvarezsite/qbtFitGirl-search/main/fitgirl_repacks.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 4.1.0+ / Python 3.7+
 |-
