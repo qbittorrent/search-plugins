@@ -594,6 +594,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/MadeOfMagicAndWires/qBit-plugins/master/engines/bakabt.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]<br>[https://github.com/MadeOfMagicAndWires/qBit-plugins/blob/master/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]]]
 | ✔ qbt 4.3.x / Python 3.9.x
 |-
+| [[https://raw.githubusercontent.com/swannie-eire/beyondhd-qbittorrent-plugin/main/favicon.png]] [https://beyond-hd.me/ Beyond-HD]
+| [https://github.com/swannie-eire/BeyondHD-Qbittorrent-plugin swannie-eire]
+| 1.1
+| 15/Oct<br>2026
+| [https://raw.githubusercontent.com/swannie-eire/BeyondHD-Qbittorrent-plugin/main/beyondhd.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]<br>[https://github.com/swannie-eire/BeyondHD-Qbittorrent-plugin/blob/main/README.md [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]]]
+| ✔ qbt 5.x / Python 3.12+<br>Private tracker, requires API key + RSS key
+|-
 | [[https://bitporn.eu/favicon.ico]] [https://bitporn.eu/ BitPorn]
 | [https://github.com/PumpkinPounder/Random-Useful PumpkinPounder]
 | 1.00
