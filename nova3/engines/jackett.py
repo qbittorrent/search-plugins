@@ -1,4 +1,4 @@
-# VERSION: 4.13
+# VERSION: 4.14
 # AUTHORS: Diego de las Heras (ngosang@hotmail.es)
 # CONTRIBUTORS: ukharley
 #               hannsen (github.com/hannsen)
@@ -13,7 +13,7 @@ from http.cookiejar import CookieJar
 from multiprocessing.dummy import Pool
 from threading import Lock
 from typing import Any, Dict, List, Union
-from urllib.parse import unquote, urlencode
+from urllib.parse import unquote, urlencode, urlsplit
 
 import helpers
 from novaprinter import prettyPrinter
@@ -107,7 +107,7 @@ def _getBrowserUserAgent() -> str:
 
 class jackett:
     name = 'Jackett'
-    url = _CONFIG_DATA['url'] if _CONFIG_DATA['url'][-1] != '/' else _CONFIG_DATA['url'][:-1]
+    url: str = _CONFIG_DATA['url'] if _CONFIG_DATA['url'][-1] != '/' else _CONFIG_DATA['url'][:-1]
     api_key = _CONFIG_DATA['api_key']
     thread_count = _CONFIG_DATA['thread_count']
     supported_categories = {
@@ -125,15 +125,16 @@ class jackett:
         # fix for some indexers with magnet link inside .torrent file
         if download_url.startswith('magnet:?'):
             print(download_url + " " + download_url)
-        _proxy_manager.enable_proxy(True)
+        # links served by the Jackett server skip the proxy, like searches do
+        _proxy_manager.enable_proxy(urlsplit(download_url).netloc != urlsplit(self.url).netloc)
         try:
             response = self.get_response(download_url)
+            if response is not None and response.startswith('magnet:?'):
+                print(response + " " + download_url)
+            else:
+                print(helpers.download_file(download_url))
         finally:
             _proxy_manager.enable_proxy(False)
-        if response is not None and response.startswith('magnet:?'):
-            print(response + " " + download_url)
-        else:
-            print(helpers.download_file(download_url))
 
     def search(self, what: str, cat: str = 'all') -> None:
         what = unquote(what)
