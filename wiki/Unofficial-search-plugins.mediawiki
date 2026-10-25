@@ -214,6 +214,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/tolotp/qbittorrent-search-plugins-de-busqueda/refs/heads/main/Plugins/goggames.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 4.5.x+ / Python 3.9.x+<br>❗ Pls read this [https://github.com/tolotp/qbittorrent-search-plugins-de-busqueda/wiki/Plugin-gog%E2%80%90games-(ESPA%C3%91OL-%7C-ENGLISH) INFO]
 |-
+| [[https://raw.githubusercontent.com/OyunErbabi/qBittorrent-Internet-Archive-Search-Plugin/main/internetarchive.png]] [https://archive.org/ Internet Archive]
+| [https://github.com/OyunErbabi/qBittorrent-Internet-Archive-Search-Plugin OyunErbabi]
+| 1.1
+| 26/Oct/2026
+| [https://raw.githubusercontent.com/OyunErbabi/qBittorrent-Internet-Archive-Search-Plugin/main/internetarchive.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
+| ✔ qbt 5.0.4 / Python 3.12<br>Only items with an archive.org torrent; seeds/leechers not available
+|-
 | [[https://github.com/LightDestory/qBittorrent-Search-Plugins/raw/master/src/engines/kickasstorrents.png]] [https://katcr.to/ Kickass Torrent]
 | [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
 | 1.0
