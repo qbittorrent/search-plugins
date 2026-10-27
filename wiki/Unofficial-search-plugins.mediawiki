@@ -214,6 +214,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/tolotp/qbittorrent-search-plugins-de-busqueda/refs/heads/main/Plugins/goggames.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 4.5.x+ / Python 3.9.x+<br>❗ Pls read this [https://github.com/tolotp/qbittorrent-search-plugins-de-busqueda/wiki/Plugin-gog%E2%80%90games-(ESPA%C3%91OL-%7C-ENGLISH) INFO]
 |-
+| [https://github.com/arihan-1560795/jackettdedup jackettdedup]
+| [https://github.com/arihan-1560795/jackettdedup arihan-1560795]
+| 2.12
+| 27/Oct<br>2026
+| [https://raw.githubusercontent.com/arihan-1560795/jackettdedup/main/jackettdedup.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]<br>[https://github.com/arihan-1560795/jackettdedup#readme [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]]]
+| ✔ qbt 5.1.x / Python 3.9+ <br>Needs [https://github.com/Jackett/Jackett Jackett]. Replaces the official Jackett plugin. Merges torrent search results + trackers that share the same infohash into one row. Also dedupes torrents with matching names+sizes 
+|-
 | [[https://github.com/LightDestory/qBittorrent-Search-Plugins/raw/master/src/engines/kickasstorrents.png]] [https://katcr.to/ Kickass Torrent]
 | [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
 | 1.0
