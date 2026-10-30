@@ -221,6 +221,13 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | [https://raw.githubusercontent.com/OyunErbabi/qBittorrent-Internet-Archive-Search-Plugin/main/internetarchive.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]
 | ✔ qbt 5.0.4 / Python 3.12<br>Only items with an archive.org torrent; seeds/leechers not available
 |-
+| [[https://raw.githubusercontent.com/arihan-1560795/jackettdedup/main/docs/images/icon.png]] [https://github.com/arihan-1560795/jackettdedup jackettdedup]
+| [https://github.com/arihan-1560795/jackettdedup arihan-1560795]
+| 2.12
+| 27/Oct<br>2026
+| [https://raw.githubusercontent.com/arihan-1560795/jackettdedup/main/jackettdedup.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]<br>[https://github.com/arihan-1560795/jackettdedup#readme [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]]]
+| ✔ qbt 5.1.x / Python 3.9+ <br>Needs [https://github.com/Jackett/Jackett Jackett]. Replaces the official Jackett plugin. Merges torrent search results + trackers that share the same infohash into one row. Also dedupes torrents with matching names+sizes
+|-
 | [[https://github.com/LightDestory/qBittorrent-Search-Plugins/raw/master/src/engines/kickasstorrents.png]] [https://katcr.to/ Kickass Torrent]
 | [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
 | 1.0
