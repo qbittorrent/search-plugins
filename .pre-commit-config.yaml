@@ -22,7 +22,7 @@ repos:
       name: Check trailing whitespaces
 
   - repo: https://github.com/rvben/rumdl-pre-commit.git
-    rev: v0.2.77
+    rev: v0.3.2
     hooks:
     - id: rumdl
       name: Check Markdown files
@@ -46,7 +46,7 @@ repos:
       args: ["--ignore-words-list", ""]
 
   - repo: https://github.com/crate-ci/typos.git
-    rev: v1.50.3
+    rev: v1.51.1
     hooks:
     - id: typos
       name: Check spelling (typos)
