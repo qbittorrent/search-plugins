@@ -1,0 +1,25 @@
+name: Stale bot
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+permissions: {}
+
+jobs:
+  stale:
+    runs-on: ubuntu-slim
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Mark and close stale PRs
+        uses: actions/stale@v11
+        with:
+          stale-pr-message: "This PR is stale because it has been 14 days with no activity. It will be automatically closed in 1 day if there is no further activity."
+          close-pr-message: "This PR was closed because it has been stale for some time with no activity."
+          days-before-stale: -1 # avoid marking issues
+          days-before-pr-stale: 14
+          days-before-close: -1 # avoid closing issues
+          days-before-pr-close: 1
+          exempt-all-pr-assignees: true  # avoid stale for PRs with assignees
+          operations-per-run: 200
