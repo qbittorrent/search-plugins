@@ -23,6 +23,8 @@ dev = [
     "pytest",
     "ruff",
     "rust-just",
+    # workaround for https://github.com/uqfoundation/dill/issues/753
+    "dill @ git+https://github.com/uqfoundation/dill.git@37d2bf717ac7ac110f06be5210f989847959c2cd ; python_version >= '3.15'"
 ]
 
 [tool.bandit]
@@ -50,3 +52,10 @@ line-length = 1000
 
 [tool.ruff.lint]
 ignore = ["FA100", "RUF012", "SIM102", "S110"]
+
+# workaround for https://github.com/uqfoundation/dill/issues/753
+[[tool.uv.dependency-metadata]]
+name = "dill"
+version = "0.4.2.dev0"
+requires-python = ">=3.10"
+requires-dist = []
