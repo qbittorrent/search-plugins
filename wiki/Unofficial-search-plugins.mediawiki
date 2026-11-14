@@ -230,7 +230,7 @@ The minimum supported Python version (across all platforms) is specified at [htt
 |-
 | [[https://raw.githubusercontent.com/gusperroni/jackettless/main/icon.png]] [https://github.com/gusperroni/jackettless Jackettless]
 | [https://github.com/gusperroni/jackettless gusperroni]
-| 1.00
+| 1.01
 | 14/Nov<br>2026
 | [https://raw.githubusercontent.com/gusperroni/jackettless/main/jackettless.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]<br>[https://github.com/gusperroni/jackettless#readme [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]]]
 | ✔ qbt 5.3.x / Python 3.9+ <br>Runs [https://github.com/Jackett/Jackett Jackett]'s indexer definitions directly, without a Jackett server. Indexers and private tracker logins are set in <code>jackettless.json</code>. Optional merging of duplicate results by infohash, as done by [https://github.com/arihan-1560795/jackettdedup jackettdedup]
