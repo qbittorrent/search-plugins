@@ -233,7 +233,7 @@ The minimum supported Python version (across all platforms) is specified at [htt
 | 1.10
 | 21/Nov<br>2026
 | [https://raw.githubusercontent.com/gusperroni/jackettless/main/jackettless.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]<br>[https://github.com/gusperroni/jackettless#readme [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]]]
-| ✔ qbt 5.3.x / Python 3.9+ <br>Runs [https://github.com/Jackett/Jackett Jackett]'s indexer definitions directly, without a Jackett server. Indexers and private tracker logins are set in <code>jackettless.json</code>. Optional merging of duplicate results by infohash, as done by [https://github.com/arihan-1560795/jackettdedup jackettdedup]
+| ✔ qbt 5.3.x / Python 3.9+ <br>Runs [https://github.com/Jackett/Jackett Jackett]'s indexer definitions directly, without a Jackett server. Searches every public indexer by default. Settings, as private trackers and logins, are set in <code>jackettless.json</code>. Merge duplicate results by infohash, as done by [https://github.com/arihan-1560795/jackettdedup jackettdedup]
 |-
 | [[https://github.com/LightDestory/qBittorrent-Search-Plugins/raw/master/src/engines/kickasstorrents.png]] [https://katcr.to/ Kickass Torrent]
 | [https://github.com/LightDestory/qBittorrent-Search-Plugins LightDestory]
