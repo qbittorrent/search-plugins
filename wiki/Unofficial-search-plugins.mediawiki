@@ -715,8 +715,8 @@ The minimum supported Python version (across all platforms) is specified at [htt
 |-
 | [[https://raw.githubusercontent.com/MANCrimSon/prowlarr-qbittorrent-plugin/main/prowlarr.png]] [https://github.com/Prowlarr/Prowlarr Prowlarr]
 | [https://github.com/MANCrimSon/prowlarr-qbittorrent-plugin MANCrimSon]
-| 2.2
-| 01/Oct<br>2026
+| 2.3
+| 22/Nov<br>2026
 | [https://raw.githubusercontent.com/MANCrimSon/prowlarr-qbittorrent-plugin/main/prowlarr.py [[https://raw.githubusercontent.com/Pireo/hello-world/master/Download.gif]]]<br>[https://github.com/MANCrimSon/prowlarr-qbittorrent-plugin [[https://github.com/Pireo/hello-world/blob/master/Help%20book.gif]]]
 | ✔ qbt 4.x / 5.x / Python 3.10+
 |-
